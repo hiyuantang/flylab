@@ -1,0 +1,54 @@
+{
+  "dataset": "FlyWire female v630 (Shiu 2024)",
+  "neurons": 127400,
+  "connection_rows": 14687178,
+  "synapses": 52793639,
+  "source_commit": "91bdd1e7dcf193f3e7ca5a8933497fcef63b7960",
+  "source_sha256": {
+    "2023_03_23_completeness_630_final.csv": "e6b71e17671a9bdb05f55e4bc6774640a1418cb7a05125e0fc994ad40f9bfdfb",
+    "2023_03_23_connectivity_630_final.parquet": "94db8c650533bc36ffa3223f2e62325d5648b8d6bd31c3a4e1c804628c7557b3"
+  },
+  "dynamics_version": "shiu-2024-linear-delay-v1",
+  "selection": "Every source neuron and connection row; no pruning or weight threshold.",
+  "transmitters": "Uses published signed counts verbatim, including the paper convention for modulatory transmitters.",
+  "seed": 42,
+  "duration_ms": 1000,
+  "trials_per_condition": 1,
+  "results": [
+    {
+      "condition": "no-input",
+      "sugar_hz": 0,
+      "bitter_hz": 0,
+      "mn9_hz": [
+        0.0,
+        0.0
+      ],
+      "total_spikes": 0,
+      "wall_seconds": 13.30236045800848
+    },
+    {
+      "condition": "sugar",
+      "sugar_hz": 100,
+      "bitter_hz": 0,
+      "mn9_hz": [
+        73.0,
+        58.0
+      ],
+      "total_spikes": 10214,
+      "wall_seconds": 16.04470237501664
+    },
+    {
+      "condition": "sugar+bitter",
+      "sugar_hz": 100,
+      "bitter_hz": 100,
+      "mn9_hz": [
+        6.0,
+        11.0
+      ],
+      "total_spikes": 9146,
+      "wall_seconds": 16.507814417011105
+    }
+  ],
+  "trained_parameters": 0,
+  "limits": "A single-seed protocol smoke test, not a replication of all published predictions or trial statistics. MN9 spikes are not validated muscle motion. MaleCNS is a different specimen."
+}

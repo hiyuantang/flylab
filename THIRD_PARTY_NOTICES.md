@@ -38,3 +38,11 @@ The frontend obtains these assets through npm. Installed packages and built font
 ## Software dependencies
 
 Python and npm dependencies are installed separately under their own licenses. `uv.lock` and `frontend/package-lock.json` record the resolved versions. PyTorch, MuJoCo, FastAPI, NumPy, PyArrow, React, Three.js, React Three Fiber, and Drei are dependencies, not original FlyLab code. Vite emits an additional `frontend/dist/assets/THIRD_PARTY_LICENSES.md` containing the bundled JavaScript dependencies’ license texts at build time. Preserve applicable upstream copyright, license, and notice files when redistributing dependencies or application bundles. The notices above identify the assets directly included in this source repository and the fonts and icons used by its interface; they are not an exhaustive inventory of transitive software dependencies.
+
+## Shiu computational brain reference
+
+Equations, experiment parameters and receptor ID lists are adapted from [Philip Shiu and Nico Spiller's Drosophila brain model](https://github.com/philshiu/Drosophila_brain_model), commit `91bdd1e7dcf193f3e7ca5a8933497fcef63b7960`, accompanying [Shiu et al., Nature 2024](https://www.nature.com/articles/s41586-024-07763-9). Copyright 2023 Philip Shiu and Nico Spiller. The [complete upstream MIT license](backend/flylab/assets/SHIU-MIT-LICENSE.txt) is included. FlyLab implements the equations in PyTorch, adds explicit scheduling and continuation tests, and separately applies them to MaleCNS. The paper's full FlyWire female v630 tables are downloaded separately, checksum-pinned, and excluded from Git; their provenance is included in experiment results. This model is distinct from the MaleCNS specimen and is not an endorsement or a replication of every published result.
+
+## Compound-eye numerical reference
+
+The derived numerical asset `backend/flylab/assets/retina/eye-directions.json` uses Reiser Lab's [eyemap_T4](https://github.com/reiserlab/eyemap_T4), commit `99d2a43123db636cedb55af9ff31a59657e7d17e`, accompanying Zhao et al., Nature (2025), DOI `10.1038/s41586-025-09276-5`. The upstream GPL v3 license is retained in `backend/flylab/assets/retina/SOURCE-LICENSE.txt`. See that directory's README for source files, extraction, attribution and registration limits. This asset's license is distinct from FlyLab's own code license.

@@ -1,0 +1,71 @@
+{
+  "created_utc": "2026-09-12T19:56:52.153215+00:00",
+  "torch": "2.14.0",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "neurons": 166700,
+  "edges": 25582938,
+  "gpu_edges": 25582938,
+  "graph_sha256": "2be8452f9f4c02d26b71a821277b1e6513cdefbecf32b735c2dba3af62f6dbab",
+  "duration_ms": 40.0,
+  "dt_ms": 0.1,
+  "stimulus": "14.7 mV equivalent current to all olfactory-class and ol_sensory neurons; zero to others",
+  "stimulated_neurons": 8737,
+  "runs": {
+    "cpu": {
+      "device": "cpu",
+      "precision": "torch.float64",
+      "kernel": "cpu-event-f64-v1",
+      "experimental": false,
+      "history": [
+        {
+          "from": "cpu",
+          "to": "mps",
+          "tick": 400
+        }
+      ],
+      "note": "CPU float64 reference. Prior float32 rounding, if any, is not reversible.",
+      "wall_seconds": 0.892112250032369,
+      "spikes": 28997,
+      "ticks": 400
+    },
+    "mps": {
+      "device": "mps",
+      "precision": "torch.float32",
+      "kernel": "metal-csr-f32-v1",
+      "experimental": true,
+      "history": [],
+      "note": "MPS float32 may change spike timing; not equivalent to the float64 reference. All neurons, edges and ticks retained.",
+      "wall_seconds": 1.9881575829931535,
+      "spikes": 28985,
+      "ticks": 400
+    }
+  },
+  "endpoint_errors": {
+    "voltage": {
+      "max_absolute_error": 6.996519374744352,
+      "mean_absolute_error": 0.003555233108468779,
+      "different_elements": 119482
+    },
+    "current": {
+      "max_absolute_error": 522.75244140625,
+      "mean_absolute_error": 0.05228667388560315,
+      "different_elements": 113461
+    },
+    "rates": {
+      "max_absolute_error": 19.980064925888115,
+      "mean_absolute_error": 0.003571652086807261,
+      "different_elements": 15324
+    },
+    "spike_counts": {
+      "max_absolute_error": 1.0,
+      "mean_absolute_error": 0.00016796640671865626,
+      "different_elements": 28
+    },
+    "delay_queue": {
+      "max_absolute_error": 1.0,
+      "mean_absolute_error": 0.00022574432481924667,
+      "different_elements": 715
+    }
+  },
+  "limits": "Endpoint comparison on one short fixed stimulus, not a full spike-train or biological fidelity validation. Float32 can change long-run trajectories."
+}

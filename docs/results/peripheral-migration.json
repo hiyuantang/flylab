@@ -1,0 +1,53 @@
+{
+  "from": "muscle-routing-v3",
+  "to": "muscle-routing-v4",
+  "time": 0.0,
+  "neural_tensor_equality": {
+    "voltage": true,
+    "current": true,
+    "spikes": true,
+    "rates": true,
+    "output_gain": true,
+    "last_spike_tick": true,
+    "refractory_ticks": true,
+    "delay_queue": true,
+    "spike_counts": true
+  },
+  "rng_equal": true,
+  "tick_equal": true,
+  "clocks_equal": true,
+  "muscle_parameters_equal": true,
+  "graph_sha256": "2be8452f9f4c02d26b71a821277b1e6513cdefbecf32b735c2dba3af62f6dbab",
+  "execution": {
+    "device": "mps",
+    "precision": "torch.float32",
+    "kernel": "metal-csr-f32-v1",
+    "experimental": true,
+    "history": [],
+    "note": "MPS float32 may change spike timing; not equivalent to the float64 reference. All neurons, edges and ticks retained."
+  },
+  "existing_body_pose_max_error": 0.0,
+  "existing_joint_positions_equal": true,
+  "existing_joint_velocities_equal": true,
+  "existing_activations_equal": true,
+  "new_activations_zero": true,
+  "channels": 186,
+  "named_peripheral_channels": 96,
+  "reference_table_sha256": "c46e3cec1a5114b8d981d5f0383012c8e7fcdebd6c4e3eaffe4ac3ba1def2e94",
+  "full_graph_step": {
+    "time": 0.02,
+    "steps": 1,
+    "spikes": 10486,
+    "wall_seconds": {
+      "simulated_seconds": 0.02,
+      "compute_wall_seconds": 0.9964392920373939,
+      "last_step_wall_seconds": 0.9964392920373939,
+      "simulated_per_wall_second": 0.020071468638201244,
+      "neural_dt_ms": 0.1,
+      "policy": "Every integration step is computed. Requested rate is a pacing ceiling; slow hardware never drops neural or physical steps."
+    },
+    "muscle_arrays_finite": true,
+    "max_new_activation": 0.0,
+    "new_channel_count": 96
+  }
+}

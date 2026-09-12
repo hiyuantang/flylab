@@ -1,0 +1,3599 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-12T19:04:48.196765+00:00",
+  "dataset": "male-cns:v1.0",
+  "source_hashes_verified": true,
+  "graph_sha256": "2be8452f9f4c02d26b71a821277b1e6513cdefbecf32b735c2dba3af62f6dbab",
+  "sources": [
+    {
+      "file": "body-annotations.feather",
+      "url": "https://storage.googleapis.com/flyem-male-cns/v1.0/connectome-data/flat-connectome/body-annotations-male-cns-v1.0-minconf-0.5.feather",
+      "sha256": "2177e246113e4cfbf1e7772ec37c6da1955ff22e8063d0b1f833101f99a9a3b2"
+    },
+    {
+      "file": "connectome-weights.feather",
+      "url": "https://storage.googleapis.com/flyem-male-cns/v1.0/connectome-data/flat-connectome/connectome-weights-male-cns-v1.0-minconf-0.5.feather",
+      "sha256": "e35da783d1c686b2b58b3b87cd6a403ae43bfcfba8bff28e08ef752c1a56afc1"
+    },
+    {
+      "file": "body-neurotransmitters.feather",
+      "url": "https://storage.googleapis.com/flyem-male-cns/v1.0/connectome-data/flat-connectome/body-neurotransmitters-male-cns-v1.0.feather",
+      "sha256": "95c9289220663abeb3409f3ad9e5a7f8a53f8093f5139d15502cd08da8879621"
+    }
+  ],
+  "supplement": {
+    "repository": "https://github.com/flyconnectome/2025malecns",
+    "commit": "67767d2233657983993ff6c2be48e836a935863c",
+    "files": [
+      {
+        "name": "dnan_cluster_function_20260509.csv",
+        "url": "https://raw.githubusercontent.com/flyconnectome/2025malecns/67767d2233657983993ff6c2be48e836a935863c/supplemental_data/dnan_cluster_function_20260509.csv",
+        "bytes": 97011,
+        "sha256": "24770406ba3c0916b36d06e839a8a8febccd1551c2a2fefd8063692d757fe6b5"
+      },
+      {
+        "name": "male-cns-v1.0-traced-synapse-capture-by-roi.csv",
+        "url": "https://raw.githubusercontent.com/flyconnectome/2025malecns/67767d2233657983993ff6c2be48e836a935863c/supplemental_data/male-cns-v1.0-traced-synapse-capture-by-roi.csv",
+        "bytes": 12726,
+        "sha256": "b91253bcb26d3496b1ddcf17c05006384ee98bebb729ed7d62e3529131e28e64"
+      },
+      {
+        "name": "optic-column-type-assignments-v1.0.xlsx",
+        "url": "https://raw.githubusercontent.com/flyconnectome/2025malecns/67767d2233657983993ff6c2be48e836a935863c/supplemental_data/optic-column-type-assignments-v1.0.xlsx",
+        "bytes": 111565,
+        "sha256": "d4af1cacb751036f7e84bfecc9bec79ca010066ac066559c29b566003ec080d3"
+      },
+      {
+        "name": "quantify-neuron-connections.ipynb",
+        "url": "https://raw.githubusercontent.com/flyconnectome/2025malecns/67767d2233657983993ff6c2be48e836a935863c/supplemental_data/quantify-neuron-connections.ipynb",
+        "bytes": 5170,
+        "sha256": "0f8b191be7cea941799133e5fc354ee299b849ceb26e4fb2904e3b07108357ec"
+      },
+      {
+        "name": "sensory_network_traversal_model_layers.feather",
+        "url": "https://raw.githubusercontent.com/flyconnectome/2025malecns/67767d2233657983993ff6c2be48e836a935863c/supplemental_data/sensory_network_traversal_model_layers.feather",
+        "bytes": 2209666,
+        "sha256": "a6d0f1ad66bcd7ce576f852f4245c4d7f3e86cdb7ab9da6b5309e6183d22cf35"
+      }
+    ]
+  },
+  "selection": "Every body annotation with a non-null superclass; all induced edges, no top-k or weight threshold.",
+  "annotation_rows": 211577,
+  "included_neurons": 166700,
+  "excluded_annotation_rows": 44877,
+  "excluded_status_counts": {
+    "Unimportant": 10751,
+    "Glia": 11864,
+    "Out of scope": 2594,
+    "Orphan": 12071,
+    "Orphan-artifact": 2292,
+    "Orphan hotknife": 1427,
+    "PRT Orphan": 76,
+    "Leaves": 416,
+    "(missing)": 876,
+    "0.5assign": 1832,
+    "Soma Anchor": 193,
+    "Prelim Roughly traced": 17,
+    "Anchor": 271,
+    "Roughly traced": 1,
+    "Hard to trace": 103,
+    "Partially traced": 9,
+    "Sensory Anchor": 78,
+    "RT Hard to trace": 2,
+    "Reviewed": 4
+  },
+  "unique_type_labels": 11751,
+  "included_without_type": 2194,
+  "superclass_neurons": {
+    "descending_neuron": 1314,
+    "visual_projection": 9201,
+    "visual_centrifugal": 563,
+    "cb_intrinsic": 32164,
+    "ol_intrinsic": 89403,
+    "cb_motor": 107,
+    "ascending_neuron": 1846,
+    "cb_endocrine": 72,
+    "cb_sensory": 4868,
+    "vnc_intrinsic": 13161,
+    "sensory_descending": 12,
+    "ol_sensory": 6098,
+    "efferent_descending": 4,
+    "sensory_ascending": 537,
+    "vnc_efferent": 94,
+    "cb_efferent": 4,
+    "ENS": 50,
+    "efferent_ascending": 8,
+    "cb_sensory_tbc": 14,
+    "visual_projection_tbc": 2,
+    "vnc_motor": 708,
+    "sensory_ascending_tbc": 2,
+    "vnc_sensory": 6370,
+    "vnc_endocrine": 22,
+    "vnc_tbc": 38,
+    "vnc_sensory_tbc": 36,
+    "descending_neuron_tbc": 2
+  },
+  "hex_column_neurons": 23720,
+  "hex_type_neurons": {
+    "L2": 1767,
+    "L1": 1767,
+    "Tm2": 1758,
+    "Mi9": 1760,
+    "C3": 1770,
+    "Mi1": 1762,
+    "T1": 1764,
+    "Mi4": 1758,
+    "Tm1": 1767,
+    "L5": 1773,
+    "Tm9": 1743,
+    "Tm20": 1732,
+    "L3": 892,
+    "Tm4": 833,
+    "C2": 874
+  },
+  "hex_duplicate_side_type_coordinate_groups": 31,
+  "raw_source_connection_rows": 151856684,
+  "raw_source_synapses": 311833243,
+  "retained_connections": 25582938,
+  "retained_synapses": 124177617,
+  "boundary_connection_rows": 117436340,
+  "boundary_synapses": 177167703,
+  "segment_category_connections": [
+    {
+      "pre": "included neuron",
+      "post": "included neuron",
+      "connection_rows": 25582938,
+      "synapses": 124177617
+    },
+    {
+      "pre": "included neuron",
+      "post": "unannotated segment",
+      "connection_rows": 112452244,
+      "synapses": 170414577
+    },
+    {
+      "pre": "included neuron",
+      "post": "excluded annotation: (missing)",
+      "connection_rows": 830,
+      "synapses": 1910
+    },
+    {
+      "pre": "included neuron",
+      "post": "excluded annotation: 0.5assign",
+      "connection_rows": 12249,
+      "synapses": 26075
+    },
+    {
+      "pre": "included neuron",
+      "post": "excluded annotation: Anchor",
+      "connection_rows": 8155,
+      "synapses": 23750
+    },
+    {
+      "pre": "included neuron",
+      "post": "excluded annotation: Glia",
+      "connection_rows": 5895,
+      "synapses": 9809
+    },
+    {
+      "pre": "included neuron",
+      "post": "excluded annotation: Hard to trace",
+      "connection_rows": 272,
+      "synapses": 670
+    },
+    {
+      "pre": "included neuron",
+      "post": "excluded annotation: Leaves",
+      "connection_rows": 362,
+      "synapses": 1251
+    },
+    {
+      "pre": "included neuron",
+      "post": "excluded annotation: Orphan",
+      "connection_rows": 102749,
+      "synapses": 254391
+    },
+    {
+      "pre": "included neuron",
+      "post": "excluded annotation: Orphan hotknife",
+      "connection_rows": 8701,
+      "synapses": 23407
+    },
+    {
+      "pre": "included neuron",
+      "post": "excluded annotation: Orphan-artifact",
+      "connection_rows": 28807,
+      "synapses": 79685
+    },
+    {
+      "pre": "included neuron",
+      "post": "excluded annotation: Out of scope",
+      "connection_rows": 8005,
+      "synapses": 44175
+    },
+    {
+      "pre": "included neuron",
+      "post": "excluded annotation: PRT Orphan",
+      "connection_rows": 756,
+      "synapses": 2542
+    },
+    {
+      "pre": "included neuron",
+      "post": "excluded annotation: Partially traced",
+      "connection_rows": 403,
+      "synapses": 1394
+    },
+    {
+      "pre": "included neuron",
+      "post": "excluded annotation: Prelim Roughly traced",
+      "connection_rows": 347,
+      "synapses": 645
+    },
+    {
+      "pre": "included neuron",
+      "post": "excluded annotation: RT Hard to trace",
+      "connection_rows": 60,
+      "synapses": 233
+    },
+    {
+      "pre": "included neuron",
+      "post": "excluded annotation: Reviewed",
+      "connection_rows": 43,
+      "synapses": 75
+    },
+    {
+      "pre": "included neuron",
+      "post": "excluded annotation: Sensory Anchor",
+      "connection_rows": 814,
+      "synapses": 1571
+    },
+    {
+      "pre": "included neuron",
+      "post": "excluded annotation: Soma Anchor",
+      "connection_rows": 140,
+      "synapses": 299
+    },
+    {
+      "pre": "included neuron",
+      "post": "excluded annotation: Unimportant",
+      "connection_rows": 2756,
+      "synapses": 4938
+    },
+    {
+      "pre": "unannotated segment",
+      "post": "included neuron",
+      "connection_rows": 4552783,
+      "synapses": 5614376
+    },
+    {
+      "pre": "unannotated segment",
+      "post": "unannotated segment",
+      "connection_rows": 7977814,
+      "synapses": 9199680
+    },
+    {
+      "pre": "unannotated segment",
+      "post": "excluded annotation: (missing)",
+      "connection_rows": 174,
+      "synapses": 197
+    },
+    {
+      "pre": "unannotated segment",
+      "post": "excluded annotation: 0.5assign",
+      "connection_rows": 1833,
+      "synapses": 2156
+    },
+    {
+      "pre": "unannotated segment",
+      "post": "excluded annotation: Anchor",
+      "connection_rows": 1395,
+      "synapses": 1669
+    },
+    {
+      "pre": "unannotated segment",
+      "post": "excluded annotation: Glia",
+      "connection_rows": 7363,
+      "synapses": 8145
+    },
+    {
+      "pre": "unannotated segment",
+      "post": "excluded annotation: Hard to trace",
+      "connection_rows": 152,
+      "synapses": 163
+    },
+    {
+      "pre": "unannotated segment",
+      "post": "excluded annotation: Leaves",
+      "connection_rows": 925,
+      "synapses": 1678
+    },
+    {
+      "pre": "unannotated segment",
+      "post": "excluded annotation: Orphan",
+      "connection_rows": 19346,
+      "synapses": 22778
+    },
+    {
+      "pre": "unannotated segment",
+      "post": "excluded annotation: Orphan hotknife",
+      "connection_rows": 1549,
+      "synapses": 2057
+    },
+    {
+      "pre": "unannotated segment",
+      "post": "excluded annotation: Orphan-artifact",
+      "connection_rows": 7242,
+      "synapses": 10459
+    },
+    {
+      "pre": "unannotated segment",
+      "post": "excluded annotation: Out of scope",
+      "connection_rows": 20009,
+      "synapses": 36809
+    },
+    {
+      "pre": "unannotated segment",
+      "post": "excluded annotation: PRT Orphan",
+      "connection_rows": 394,
+      "synapses": 725
+    },
+    {
+      "pre": "unannotated segment",
+      "post": "excluded annotation: Partially traced",
+      "connection_rows": 167,
+      "synapses": 200
+    },
+    {
+      "pre": "unannotated segment",
+      "post": "excluded annotation: Prelim Roughly traced",
+      "connection_rows": 120,
+      "synapses": 136
+    },
+    {
+      "pre": "unannotated segment",
+      "post": "excluded annotation: RT Hard to trace",
+      "connection_rows": 42,
+      "synapses": 48
+    },
+    {
+      "pre": "unannotated segment",
+      "post": "excluded annotation: Reviewed",
+      "connection_rows": 12,
+      "synapses": 12
+    },
+    {
+      "pre": "unannotated segment",
+      "post": "excluded annotation: Roughly traced",
+      "connection_rows": 6,
+      "synapses": 7
+    },
+    {
+      "pre": "unannotated segment",
+      "post": "excluded annotation: Sensory Anchor",
+      "connection_rows": 749,
+      "synapses": 840
+    },
+    {
+      "pre": "unannotated segment",
+      "post": "excluded annotation: Soma Anchor",
+      "connection_rows": 137,
+      "synapses": 225
+    },
+    {
+      "pre": "unannotated segment",
+      "post": "excluded annotation: Unimportant",
+      "connection_rows": 16955,
+      "synapses": 18762
+    },
+    {
+      "pre": "excluded annotation: (missing)",
+      "post": "included neuron",
+      "connection_rows": 855,
+      "synapses": 1653
+    },
+    {
+      "pre": "excluded annotation: (missing)",
+      "post": "unannotated segment",
+      "connection_rows": 2090,
+      "synapses": 2828
+    },
+    {
+      "pre": "excluded annotation: (missing)",
+      "post": "excluded annotation: (missing)",
+      "connection_rows": 3,
+      "synapses": 4
+    },
+    {
+      "pre": "excluded annotation: (missing)",
+      "post": "excluded annotation: Glia",
+      "connection_rows": 3,
+      "synapses": 3
+    },
+    {
+      "pre": "excluded annotation: (missing)",
+      "post": "excluded annotation: Leaves",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "excluded annotation: (missing)",
+      "post": "excluded annotation: Orphan",
+      "connection_rows": 3,
+      "synapses": 4
+    },
+    {
+      "pre": "excluded annotation: (missing)",
+      "post": "excluded annotation: Orphan-artifact",
+      "connection_rows": 4,
+      "synapses": 17
+    },
+    {
+      "pre": "excluded annotation: (missing)",
+      "post": "excluded annotation: Out of scope",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "excluded annotation: (missing)",
+      "post": "excluded annotation: Unimportant",
+      "connection_rows": 1,
+      "synapses": 2
+    },
+    {
+      "pre": "excluded annotation: 0.5assign",
+      "post": "included neuron",
+      "connection_rows": 21555,
+      "synapses": 46389
+    },
+    {
+      "pre": "excluded annotation: 0.5assign",
+      "post": "unannotated segment",
+      "connection_rows": 49101,
+      "synapses": 77968
+    },
+    {
+      "pre": "excluded annotation: 0.5assign",
+      "post": "excluded annotation: 0.5assign",
+      "connection_rows": 19,
+      "synapses": 37
+    },
+    {
+      "pre": "excluded annotation: 0.5assign",
+      "post": "excluded annotation: Anchor",
+      "connection_rows": 7,
+      "synapses": 20
+    },
+    {
+      "pre": "excluded annotation: 0.5assign",
+      "post": "excluded annotation: Glia",
+      "connection_rows": 19,
+      "synapses": 40
+    },
+    {
+      "pre": "excluded annotation: 0.5assign",
+      "post": "excluded annotation: Leaves",
+      "connection_rows": 1,
+      "synapses": 3
+    },
+    {
+      "pre": "excluded annotation: 0.5assign",
+      "post": "excluded annotation: Orphan",
+      "connection_rows": 143,
+      "synapses": 262
+    },
+    {
+      "pre": "excluded annotation: 0.5assign",
+      "post": "excluded annotation: Orphan hotknife",
+      "connection_rows": 8,
+      "synapses": 16
+    },
+    {
+      "pre": "excluded annotation: 0.5assign",
+      "post": "excluded annotation: Orphan-artifact",
+      "connection_rows": 7,
+      "synapses": 12
+    },
+    {
+      "pre": "excluded annotation: 0.5assign",
+      "post": "excluded annotation: Out of scope",
+      "connection_rows": 1,
+      "synapses": 2
+    },
+    {
+      "pre": "excluded annotation: 0.5assign",
+      "post": "excluded annotation: PRT Orphan",
+      "connection_rows": 5,
+      "synapses": 13
+    },
+    {
+      "pre": "excluded annotation: 0.5assign",
+      "post": "excluded annotation: Sensory Anchor",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "excluded annotation: 0.5assign",
+      "post": "excluded annotation: Unimportant",
+      "connection_rows": 39,
+      "synapses": 97
+    },
+    {
+      "pre": "excluded annotation: Anchor",
+      "post": "included neuron",
+      "connection_rows": 8881,
+      "synapses": 26163
+    },
+    {
+      "pre": "excluded annotation: Anchor",
+      "post": "unannotated segment",
+      "connection_rows": 25522,
+      "synapses": 36938
+    },
+    {
+      "pre": "excluded annotation: Anchor",
+      "post": "excluded annotation: (missing)",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "excluded annotation: Anchor",
+      "post": "excluded annotation: 0.5assign",
+      "connection_rows": 6,
+      "synapses": 16
+    },
+    {
+      "pre": "excluded annotation: Anchor",
+      "post": "excluded annotation: Anchor",
+      "connection_rows": 17,
+      "synapses": 48
+    },
+    {
+      "pre": "excluded annotation: Anchor",
+      "post": "excluded annotation: Glia",
+      "connection_rows": 1,
+      "synapses": 2
+    },
+    {
+      "pre": "excluded annotation: Anchor",
+      "post": "excluded annotation: Orphan",
+      "connection_rows": 46,
+      "synapses": 86
+    },
+    {
+      "pre": "excluded annotation: Anchor",
+      "post": "excluded annotation: Orphan hotknife",
+      "connection_rows": 5,
+      "synapses": 7
+    },
+    {
+      "pre": "excluded annotation: Anchor",
+      "post": "excluded annotation: Orphan-artifact",
+      "connection_rows": 18,
+      "synapses": 54
+    },
+    {
+      "pre": "excluded annotation: Anchor",
+      "post": "excluded annotation: PRT Orphan",
+      "connection_rows": 2,
+      "synapses": 7
+    },
+    {
+      "pre": "excluded annotation: Anchor",
+      "post": "excluded annotation: Sensory Anchor",
+      "connection_rows": 2,
+      "synapses": 3
+    },
+    {
+      "pre": "excluded annotation: Glia",
+      "post": "included neuron",
+      "connection_rows": 8185,
+      "synapses": 20330
+    },
+    {
+      "pre": "excluded annotation: Glia",
+      "post": "unannotated segment",
+      "connection_rows": 28647,
+      "synapses": 41039
+    },
+    {
+      "pre": "excluded annotation: Glia",
+      "post": "excluded annotation: (missing)",
+      "connection_rows": 2,
+      "synapses": 2
+    },
+    {
+      "pre": "excluded annotation: Glia",
+      "post": "excluded annotation: 0.5assign",
+      "connection_rows": 12,
+      "synapses": 22
+    },
+    {
+      "pre": "excluded annotation: Glia",
+      "post": "excluded annotation: Anchor",
+      "connection_rows": 5,
+      "synapses": 7
+    },
+    {
+      "pre": "excluded annotation: Glia",
+      "post": "excluded annotation: Glia",
+      "connection_rows": 108,
+      "synapses": 256
+    },
+    {
+      "pre": "excluded annotation: Glia",
+      "post": "excluded annotation: Leaves",
+      "connection_rows": 3,
+      "synapses": 3
+    },
+    {
+      "pre": "excluded annotation: Glia",
+      "post": "excluded annotation: Orphan",
+      "connection_rows": 80,
+      "synapses": 136
+    },
+    {
+      "pre": "excluded annotation: Glia",
+      "post": "excluded annotation: Orphan hotknife",
+      "connection_rows": 4,
+      "synapses": 8
+    },
+    {
+      "pre": "excluded annotation: Glia",
+      "post": "excluded annotation: Orphan-artifact",
+      "connection_rows": 7,
+      "synapses": 13
+    },
+    {
+      "pre": "excluded annotation: Glia",
+      "post": "excluded annotation: Out of scope",
+      "connection_rows": 31,
+      "synapses": 126
+    },
+    {
+      "pre": "excluded annotation: Glia",
+      "post": "excluded annotation: PRT Orphan",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "excluded annotation: Glia",
+      "post": "excluded annotation: Prelim Roughly traced",
+      "connection_rows": 1,
+      "synapses": 5
+    },
+    {
+      "pre": "excluded annotation: Glia",
+      "post": "excluded annotation: Sensory Anchor",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "excluded annotation: Glia",
+      "post": "excluded annotation: Unimportant",
+      "connection_rows": 175,
+      "synapses": 323
+    },
+    {
+      "pre": "excluded annotation: Hard to trace",
+      "post": "included neuron",
+      "connection_rows": 1243,
+      "synapses": 3628
+    },
+    {
+      "pre": "excluded annotation: Hard to trace",
+      "post": "unannotated segment",
+      "connection_rows": 4353,
+      "synapses": 6919
+    },
+    {
+      "pre": "excluded annotation: Hard to trace",
+      "post": "excluded annotation: Glia",
+      "connection_rows": 2,
+      "synapses": 5
+    },
+    {
+      "pre": "excluded annotation: Hard to trace",
+      "post": "excluded annotation: Orphan",
+      "connection_rows": 2,
+      "synapses": 2
+    },
+    {
+      "pre": "excluded annotation: Hard to trace",
+      "post": "excluded annotation: Orphan-artifact",
+      "connection_rows": 4,
+      "synapses": 7
+    },
+    {
+      "pre": "excluded annotation: Hard to trace",
+      "post": "excluded annotation: Sensory Anchor",
+      "connection_rows": 2,
+      "synapses": 6
+    },
+    {
+      "pre": "excluded annotation: Leaves",
+      "post": "included neuron",
+      "connection_rows": 877,
+      "synapses": 2838
+    },
+    {
+      "pre": "excluded annotation: Leaves",
+      "post": "unannotated segment",
+      "connection_rows": 6548,
+      "synapses": 9654
+    },
+    {
+      "pre": "excluded annotation: Leaves",
+      "post": "excluded annotation: Glia",
+      "connection_rows": 7,
+      "synapses": 14
+    },
+    {
+      "pre": "excluded annotation: Leaves",
+      "post": "excluded annotation: Leaves",
+      "connection_rows": 42,
+      "synapses": 119
+    },
+    {
+      "pre": "excluded annotation: Leaves",
+      "post": "excluded annotation: Orphan",
+      "connection_rows": 4,
+      "synapses": 17
+    },
+    {
+      "pre": "excluded annotation: Leaves",
+      "post": "excluded annotation: Orphan hotknife",
+      "connection_rows": 9,
+      "synapses": 26
+    },
+    {
+      "pre": "excluded annotation: Leaves",
+      "post": "excluded annotation: Orphan-artifact",
+      "connection_rows": 22,
+      "synapses": 131
+    },
+    {
+      "pre": "excluded annotation: Leaves",
+      "post": "excluded annotation: Out of scope",
+      "connection_rows": 326,
+      "synapses": 1087
+    },
+    {
+      "pre": "excluded annotation: Leaves",
+      "post": "excluded annotation: PRT Orphan",
+      "connection_rows": 11,
+      "synapses": 60
+    },
+    {
+      "pre": "excluded annotation: Leaves",
+      "post": "excluded annotation: Soma Anchor",
+      "connection_rows": 4,
+      "synapses": 17
+    },
+    {
+      "pre": "excluded annotation: Leaves",
+      "post": "excluded annotation: Unimportant",
+      "connection_rows": 4,
+      "synapses": 5
+    },
+    {
+      "pre": "excluded annotation: Orphan",
+      "post": "included neuron",
+      "connection_rows": 142647,
+      "synapses": 335803
+    },
+    {
+      "pre": "excluded annotation: Orphan",
+      "post": "unannotated segment",
+      "connection_rows": 362385,
+      "synapses": 548472
+    },
+    {
+      "pre": "excluded annotation: Orphan",
+      "post": "excluded annotation: (missing)",
+      "connection_rows": 2,
+      "synapses": 2
+    },
+    {
+      "pre": "excluded annotation: Orphan",
+      "post": "excluded annotation: 0.5assign",
+      "connection_rows": 99,
+      "synapses": 190
+    },
+    {
+      "pre": "excluded annotation: Orphan",
+      "post": "excluded annotation: Anchor",
+      "connection_rows": 52,
+      "synapses": 96
+    },
+    {
+      "pre": "excluded annotation: Orphan",
+      "post": "excluded annotation: Glia",
+      "connection_rows": 114,
+      "synapses": 186
+    },
+    {
+      "pre": "excluded annotation: Orphan",
+      "post": "excluded annotation: Hard to trace",
+      "connection_rows": 1,
+      "synapses": 3
+    },
+    {
+      "pre": "excluded annotation: Orphan",
+      "post": "excluded annotation: Leaves",
+      "connection_rows": 2,
+      "synapses": 2
+    },
+    {
+      "pre": "excluded annotation: Orphan",
+      "post": "excluded annotation: Orphan",
+      "connection_rows": 1338,
+      "synapses": 2487
+    },
+    {
+      "pre": "excluded annotation: Orphan",
+      "post": "excluded annotation: Orphan hotknife",
+      "connection_rows": 47,
+      "synapses": 84
+    },
+    {
+      "pre": "excluded annotation: Orphan",
+      "post": "excluded annotation: Orphan-artifact",
+      "connection_rows": 78,
+      "synapses": 148
+    },
+    {
+      "pre": "excluded annotation: Orphan",
+      "post": "excluded annotation: Out of scope",
+      "connection_rows": 31,
+      "synapses": 133
+    },
+    {
+      "pre": "excluded annotation: Orphan",
+      "post": "excluded annotation: PRT Orphan",
+      "connection_rows": 13,
+      "synapses": 34
+    },
+    {
+      "pre": "excluded annotation: Orphan",
+      "post": "excluded annotation: Prelim Roughly traced",
+      "connection_rows": 7,
+      "synapses": 9
+    },
+    {
+      "pre": "excluded annotation: Orphan",
+      "post": "excluded annotation: RT Hard to trace",
+      "connection_rows": 2,
+      "synapses": 21
+    },
+    {
+      "pre": "excluded annotation: Orphan",
+      "post": "excluded annotation: Reviewed",
+      "connection_rows": 1,
+      "synapses": 3
+    },
+    {
+      "pre": "excluded annotation: Orphan",
+      "post": "excluded annotation: Sensory Anchor",
+      "connection_rows": 10,
+      "synapses": 17
+    },
+    {
+      "pre": "excluded annotation: Orphan",
+      "post": "excluded annotation: Soma Anchor",
+      "connection_rows": 1,
+      "synapses": 5
+    },
+    {
+      "pre": "excluded annotation: Orphan",
+      "post": "excluded annotation: Unimportant",
+      "connection_rows": 173,
+      "synapses": 329
+    },
+    {
+      "pre": "excluded annotation: Orphan hotknife",
+      "post": "included neuron",
+      "connection_rows": 11008,
+      "synapses": 27591
+    },
+    {
+      "pre": "excluded annotation: Orphan hotknife",
+      "post": "unannotated segment",
+      "connection_rows": 25206,
+      "synapses": 37465
+    },
+    {
+      "pre": "excluded annotation: Orphan hotknife",
+      "post": "excluded annotation: (missing)",
+      "connection_rows": 2,
+      "synapses": 2
+    },
+    {
+      "pre": "excluded annotation: Orphan hotknife",
+      "post": "excluded annotation: 0.5assign",
+      "connection_rows": 5,
+      "synapses": 10
+    },
+    {
+      "pre": "excluded annotation: Orphan hotknife",
+      "post": "excluded annotation: Anchor",
+      "connection_rows": 6,
+      "synapses": 11
+    },
+    {
+      "pre": "excluded annotation: Orphan hotknife",
+      "post": "excluded annotation: Glia",
+      "connection_rows": 4,
+      "synapses": 12
+    },
+    {
+      "pre": "excluded annotation: Orphan hotknife",
+      "post": "excluded annotation: Orphan",
+      "connection_rows": 55,
+      "synapses": 109
+    },
+    {
+      "pre": "excluded annotation: Orphan hotknife",
+      "post": "excluded annotation: Orphan hotknife",
+      "connection_rows": 38,
+      "synapses": 73
+    },
+    {
+      "pre": "excluded annotation: Orphan hotknife",
+      "post": "excluded annotation: Orphan-artifact",
+      "connection_rows": 38,
+      "synapses": 94
+    },
+    {
+      "pre": "excluded annotation: Orphan hotknife",
+      "post": "excluded annotation: Out of scope",
+      "connection_rows": 20,
+      "synapses": 49
+    },
+    {
+      "pre": "excluded annotation: Orphan hotknife",
+      "post": "excluded annotation: PRT Orphan",
+      "connection_rows": 3,
+      "synapses": 8
+    },
+    {
+      "pre": "excluded annotation: Orphan hotknife",
+      "post": "excluded annotation: Partially traced",
+      "connection_rows": 1,
+      "synapses": 6
+    },
+    {
+      "pre": "excluded annotation: Orphan hotknife",
+      "post": "excluded annotation: Soma Anchor",
+      "connection_rows": 3,
+      "synapses": 5
+    },
+    {
+      "pre": "excluded annotation: Orphan hotknife",
+      "post": "excluded annotation: Unimportant",
+      "connection_rows": 7,
+      "synapses": 10
+    },
+    {
+      "pre": "excluded annotation: Orphan-artifact",
+      "post": "included neuron",
+      "connection_rows": 35167,
+      "synapses": 103365
+    },
+    {
+      "pre": "excluded annotation: Orphan-artifact",
+      "post": "unannotated segment",
+      "connection_rows": 98907,
+      "synapses": 156343
+    },
+    {
+      "pre": "excluded annotation: Orphan-artifact",
+      "post": "excluded annotation: (missing)",
+      "connection_rows": 2,
+      "synapses": 5
+    },
+    {
+      "pre": "excluded annotation: Orphan-artifact",
+      "post": "excluded annotation: 0.5assign",
+      "connection_rows": 9,
+      "synapses": 13
+    },
+    {
+      "pre": "excluded annotation: Orphan-artifact",
+      "post": "excluded annotation: Anchor",
+      "connection_rows": 4,
+      "synapses": 7
+    },
+    {
+      "pre": "excluded annotation: Orphan-artifact",
+      "post": "excluded annotation: Glia",
+      "connection_rows": 12,
+      "synapses": 18
+    },
+    {
+      "pre": "excluded annotation: Orphan-artifact",
+      "post": "excluded annotation: Leaves",
+      "connection_rows": 19,
+      "synapses": 69
+    },
+    {
+      "pre": "excluded annotation: Orphan-artifact",
+      "post": "excluded annotation: Orphan",
+      "connection_rows": 76,
+      "synapses": 162
+    },
+    {
+      "pre": "excluded annotation: Orphan-artifact",
+      "post": "excluded annotation: Orphan hotknife",
+      "connection_rows": 45,
+      "synapses": 127
+    },
+    {
+      "pre": "excluded annotation: Orphan-artifact",
+      "post": "excluded annotation: Orphan-artifact",
+      "connection_rows": 3541,
+      "synapses": 8183
+    },
+    {
+      "pre": "excluded annotation: Orphan-artifact",
+      "post": "excluded annotation: Out of scope",
+      "connection_rows": 120,
+      "synapses": 440
+    },
+    {
+      "pre": "excluded annotation: Orphan-artifact",
+      "post": "excluded annotation: PRT Orphan",
+      "connection_rows": 11,
+      "synapses": 27
+    },
+    {
+      "pre": "excluded annotation: Orphan-artifact",
+      "post": "excluded annotation: Partially traced",
+      "connection_rows": 15,
+      "synapses": 21
+    },
+    {
+      "pre": "excluded annotation: Orphan-artifact",
+      "post": "excluded annotation: Prelim Roughly traced",
+      "connection_rows": 6,
+      "synapses": 7
+    },
+    {
+      "pre": "excluded annotation: Orphan-artifact",
+      "post": "excluded annotation: Sensory Anchor",
+      "connection_rows": 4,
+      "synapses": 4
+    },
+    {
+      "pre": "excluded annotation: Orphan-artifact",
+      "post": "excluded annotation: Soma Anchor",
+      "connection_rows": 4,
+      "synapses": 15
+    },
+    {
+      "pre": "excluded annotation: Orphan-artifact",
+      "post": "excluded annotation: Unimportant",
+      "connection_rows": 21,
+      "synapses": 35
+    },
+    {
+      "pre": "excluded annotation: Out of scope",
+      "post": "included neuron",
+      "connection_rows": 11588,
+      "synapses": 70392
+    },
+    {
+      "pre": "excluded annotation: Out of scope",
+      "post": "unannotated segment",
+      "connection_rows": 109303,
+      "synapses": 144268
+    },
+    {
+      "pre": "excluded annotation: Out of scope",
+      "post": "excluded annotation: (missing)",
+      "connection_rows": 2,
+      "synapses": 2
+    },
+    {
+      "pre": "excluded annotation: Out of scope",
+      "post": "excluded annotation: Glia",
+      "connection_rows": 69,
+      "synapses": 96
+    },
+    {
+      "pre": "excluded annotation: Out of scope",
+      "post": "excluded annotation: Leaves",
+      "connection_rows": 193,
+      "synapses": 1446
+    },
+    {
+      "pre": "excluded annotation: Out of scope",
+      "post": "excluded annotation: Orphan",
+      "connection_rows": 24,
+      "synapses": 46
+    },
+    {
+      "pre": "excluded annotation: Out of scope",
+      "post": "excluded annotation: Orphan hotknife",
+      "connection_rows": 53,
+      "synapses": 163
+    },
+    {
+      "pre": "excluded annotation: Out of scope",
+      "post": "excluded annotation: Orphan-artifact",
+      "connection_rows": 163,
+      "synapses": 1382
+    },
+    {
+      "pre": "excluded annotation: Out of scope",
+      "post": "excluded annotation: Out of scope",
+      "connection_rows": 4220,
+      "synapses": 25850
+    },
+    {
+      "pre": "excluded annotation: Out of scope",
+      "post": "excluded annotation: PRT Orphan",
+      "connection_rows": 61,
+      "synapses": 389
+    },
+    {
+      "pre": "excluded annotation: Out of scope",
+      "post": "excluded annotation: Partially traced",
+      "connection_rows": 7,
+      "synapses": 15
+    },
+    {
+      "pre": "excluded annotation: Out of scope",
+      "post": "excluded annotation: Soma Anchor",
+      "connection_rows": 26,
+      "synapses": 112
+    },
+    {
+      "pre": "excluded annotation: Out of scope",
+      "post": "excluded annotation: Unimportant",
+      "connection_rows": 284,
+      "synapses": 356
+    },
+    {
+      "pre": "excluded annotation: PRT Orphan",
+      "post": "included neuron",
+      "connection_rows": 1377,
+      "synapses": 4876
+    },
+    {
+      "pre": "excluded annotation: PRT Orphan",
+      "post": "unannotated segment",
+      "connection_rows": 6762,
+      "synapses": 10223
+    },
+    {
+      "pre": "excluded annotation: PRT Orphan",
+      "post": "excluded annotation: Anchor",
+      "connection_rows": 1,
+      "synapses": 6
+    },
+    {
+      "pre": "excluded annotation: PRT Orphan",
+      "post": "excluded annotation: Glia",
+      "connection_rows": 4,
+      "synapses": 4
+    },
+    {
+      "pre": "excluded annotation: PRT Orphan",
+      "post": "excluded annotation: Leaves",
+      "connection_rows": 2,
+      "synapses": 20
+    },
+    {
+      "pre": "excluded annotation: PRT Orphan",
+      "post": "excluded annotation: Orphan",
+      "connection_rows": 9,
+      "synapses": 23
+    },
+    {
+      "pre": "excluded annotation: PRT Orphan",
+      "post": "excluded annotation: Orphan-artifact",
+      "connection_rows": 6,
+      "synapses": 42
+    },
+    {
+      "pre": "excluded annotation: PRT Orphan",
+      "post": "excluded annotation: Out of scope",
+      "connection_rows": 30,
+      "synapses": 240
+    },
+    {
+      "pre": "excluded annotation: PRT Orphan",
+      "post": "excluded annotation: PRT Orphan",
+      "connection_rows": 3,
+      "synapses": 6
+    },
+    {
+      "pre": "excluded annotation: PRT Orphan",
+      "post": "excluded annotation: Unimportant",
+      "connection_rows": 2,
+      "synapses": 2
+    },
+    {
+      "pre": "excluded annotation: Partially traced",
+      "post": "included neuron",
+      "connection_rows": 189,
+      "synapses": 1113
+    },
+    {
+      "pre": "excluded annotation: Partially traced",
+      "post": "unannotated segment",
+      "connection_rows": 1076,
+      "synapses": 1578
+    },
+    {
+      "pre": "excluded annotation: Partially traced",
+      "post": "excluded annotation: Glia",
+      "connection_rows": 2,
+      "synapses": 2
+    },
+    {
+      "pre": "excluded annotation: Partially traced",
+      "post": "excluded annotation: Orphan hotknife",
+      "connection_rows": 2,
+      "synapses": 2
+    },
+    {
+      "pre": "excluded annotation: Partially traced",
+      "post": "excluded annotation: Orphan-artifact",
+      "connection_rows": 15,
+      "synapses": 51
+    },
+    {
+      "pre": "excluded annotation: Partially traced",
+      "post": "excluded annotation: Out of scope",
+      "connection_rows": 4,
+      "synapses": 4
+    },
+    {
+      "pre": "excluded annotation: Partially traced",
+      "post": "excluded annotation: Partially traced",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "excluded annotation: Partially traced",
+      "post": "excluded annotation: Unimportant",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "excluded annotation: Prelim Roughly traced",
+      "post": "included neuron",
+      "connection_rows": 520,
+      "synapses": 1503
+    },
+    {
+      "pre": "excluded annotation: Prelim Roughly traced",
+      "post": "unannotated segment",
+      "connection_rows": 1341,
+      "synapses": 2010
+    },
+    {
+      "pre": "excluded annotation: Prelim Roughly traced",
+      "post": "excluded annotation: (missing)",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "excluded annotation: Prelim Roughly traced",
+      "post": "excluded annotation: 0.5assign",
+      "connection_rows": 2,
+      "synapses": 2
+    },
+    {
+      "pre": "excluded annotation: Prelim Roughly traced",
+      "post": "excluded annotation: Glia",
+      "connection_rows": 2,
+      "synapses": 5
+    },
+    {
+      "pre": "excluded annotation: Prelim Roughly traced",
+      "post": "excluded annotation: Orphan",
+      "connection_rows": 6,
+      "synapses": 22
+    },
+    {
+      "pre": "excluded annotation: Prelim Roughly traced",
+      "post": "excluded annotation: Orphan hotknife",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "excluded annotation: Prelim Roughly traced",
+      "post": "excluded annotation: Orphan-artifact",
+      "connection_rows": 2,
+      "synapses": 7
+    },
+    {
+      "pre": "excluded annotation: Prelim Roughly traced",
+      "post": "excluded annotation: Prelim Roughly traced",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "excluded annotation: RT Hard to trace",
+      "post": "included neuron",
+      "connection_rows": 76,
+      "synapses": 1066
+    },
+    {
+      "pre": "excluded annotation: RT Hard to trace",
+      "post": "unannotated segment",
+      "connection_rows": 410,
+      "synapses": 878
+    },
+    {
+      "pre": "excluded annotation: RT Hard to trace",
+      "post": "excluded annotation: Orphan",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "excluded annotation: Reviewed",
+      "post": "included neuron",
+      "connection_rows": 156,
+      "synapses": 429
+    },
+    {
+      "pre": "excluded annotation: Reviewed",
+      "post": "unannotated segment",
+      "connection_rows": 492,
+      "synapses": 740
+    },
+    {
+      "pre": "excluded annotation: Roughly traced",
+      "post": "included neuron",
+      "connection_rows": 1,
+      "synapses": 2
+    },
+    {
+      "pre": "excluded annotation: Roughly traced",
+      "post": "unannotated segment",
+      "connection_rows": 11,
+      "synapses": 12
+    },
+    {
+      "pre": "excluded annotation: Sensory Anchor",
+      "post": "included neuron",
+      "connection_rows": 2999,
+      "synapses": 8392
+    },
+    {
+      "pre": "excluded annotation: Sensory Anchor",
+      "post": "unannotated segment",
+      "connection_rows": 13062,
+      "synapses": 17835
+    },
+    {
+      "pre": "excluded annotation: Sensory Anchor",
+      "post": "excluded annotation: 0.5assign",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "excluded annotation: Sensory Anchor",
+      "post": "excluded annotation: Anchor",
+      "connection_rows": 1,
+      "synapses": 3
+    },
+    {
+      "pre": "excluded annotation: Sensory Anchor",
+      "post": "excluded annotation: Glia",
+      "connection_rows": 2,
+      "synapses": 3
+    },
+    {
+      "pre": "excluded annotation: Sensory Anchor",
+      "post": "excluded annotation: Hard to trace",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "excluded annotation: Sensory Anchor",
+      "post": "excluded annotation: Orphan",
+      "connection_rows": 16,
+      "synapses": 32
+    },
+    {
+      "pre": "excluded annotation: Sensory Anchor",
+      "post": "excluded annotation: Orphan-artifact",
+      "connection_rows": 9,
+      "synapses": 13
+    },
+    {
+      "pre": "excluded annotation: Sensory Anchor",
+      "post": "excluded annotation: Partially traced",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "excluded annotation: Sensory Anchor",
+      "post": "excluded annotation: Sensory Anchor",
+      "connection_rows": 2,
+      "synapses": 5
+    },
+    {
+      "pre": "excluded annotation: Soma Anchor",
+      "post": "included neuron",
+      "connection_rows": 83,
+      "synapses": 124
+    },
+    {
+      "pre": "excluded annotation: Soma Anchor",
+      "post": "unannotated segment",
+      "connection_rows": 227,
+      "synapses": 248
+    },
+    {
+      "pre": "excluded annotation: Soma Anchor",
+      "post": "excluded annotation: 0.5assign",
+      "connection_rows": 1,
+      "synapses": 2
+    },
+    {
+      "pre": "excluded annotation: Soma Anchor",
+      "post": "excluded annotation: Glia",
+      "connection_rows": 2,
+      "synapses": 2
+    },
+    {
+      "pre": "excluded annotation: Soma Anchor",
+      "post": "excluded annotation: Leaves",
+      "connection_rows": 2,
+      "synapses": 4
+    },
+    {
+      "pre": "excluded annotation: Soma Anchor",
+      "post": "excluded annotation: Orphan hotknife",
+      "connection_rows": 4,
+      "synapses": 5
+    },
+    {
+      "pre": "excluded annotation: Soma Anchor",
+      "post": "excluded annotation: Orphan-artifact",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "excluded annotation: Soma Anchor",
+      "post": "excluded annotation: Out of scope",
+      "connection_rows": 6,
+      "synapses": 11
+    },
+    {
+      "pre": "excluded annotation: Soma Anchor",
+      "post": "excluded annotation: Soma Anchor",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "excluded annotation: Unimportant",
+      "post": "included neuron",
+      "connection_rows": 2562,
+      "synapses": 6273
+    },
+    {
+      "pre": "excluded annotation: Unimportant",
+      "post": "unannotated segment",
+      "connection_rows": 31444,
+      "synapses": 36193
+    },
+    {
+      "pre": "excluded annotation: Unimportant",
+      "post": "excluded annotation: 0.5assign",
+      "connection_rows": 11,
+      "synapses": 15
+    },
+    {
+      "pre": "excluded annotation: Unimportant",
+      "post": "excluded annotation: Anchor",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "excluded annotation: Unimportant",
+      "post": "excluded annotation: Glia",
+      "connection_rows": 135,
+      "synapses": 187
+    },
+    {
+      "pre": "excluded annotation: Unimportant",
+      "post": "excluded annotation: Leaves",
+      "connection_rows": 10,
+      "synapses": 13
+    },
+    {
+      "pre": "excluded annotation: Unimportant",
+      "post": "excluded annotation: Orphan",
+      "connection_rows": 66,
+      "synapses": 116
+    },
+    {
+      "pre": "excluded annotation: Unimportant",
+      "post": "excluded annotation: Orphan hotknife",
+      "connection_rows": 7,
+      "synapses": 8
+    },
+    {
+      "pre": "excluded annotation: Unimportant",
+      "post": "excluded annotation: Orphan-artifact",
+      "connection_rows": 10,
+      "synapses": 21
+    },
+    {
+      "pre": "excluded annotation: Unimportant",
+      "post": "excluded annotation: Out of scope",
+      "connection_rows": 141,
+      "synapses": 203
+    },
+    {
+      "pre": "excluded annotation: Unimportant",
+      "post": "excluded annotation: Partially traced",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "excluded annotation: Unimportant",
+      "post": "excluded annotation: RT Hard to trace",
+      "connection_rows": 1,
+      "synapses": 2
+    },
+    {
+      "pre": "excluded annotation: Unimportant",
+      "post": "excluded annotation: Unimportant",
+      "connection_rows": 1227,
+      "synapses": 2184
+    }
+  ],
+  "superclass_connections": [
+    {
+      "pre": "ENS",
+      "post": "ENS",
+      "connection_rows": 3,
+      "synapses": 3
+    },
+    {
+      "pre": "ENS",
+      "post": "cb_endocrine",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "ascending_neuron",
+      "post": "ascending_neuron",
+      "connection_rows": 110502,
+      "synapses": 656576
+    },
+    {
+      "pre": "ascending_neuron",
+      "post": "cb_efferent",
+      "connection_rows": 29,
+      "synapses": 105
+    },
+    {
+      "pre": "ascending_neuron",
+      "post": "cb_endocrine",
+      "connection_rows": 707,
+      "synapses": 7584
+    },
+    {
+      "pre": "ascending_neuron",
+      "post": "cb_intrinsic",
+      "connection_rows": 229460,
+      "synapses": 1872674
+    },
+    {
+      "pre": "ascending_neuron",
+      "post": "cb_motor",
+      "connection_rows": 3299,
+      "synapses": 58610
+    },
+    {
+      "pre": "ascending_neuron",
+      "post": "cb_sensory",
+      "connection_rows": 5170,
+      "synapses": 24599
+    },
+    {
+      "pre": "ascending_neuron",
+      "post": "cb_sensory_tbc",
+      "connection_rows": 28,
+      "synapses": 174
+    },
+    {
+      "pre": "ascending_neuron",
+      "post": "descending_neuron",
+      "connection_rows": 66490,
+      "synapses": 572657
+    },
+    {
+      "pre": "ascending_neuron",
+      "post": "descending_neuron_tbc",
+      "connection_rows": 5,
+      "synapses": 21
+    },
+    {
+      "pre": "ascending_neuron",
+      "post": "efferent_ascending",
+      "connection_rows": 381,
+      "synapses": 2094
+    },
+    {
+      "pre": "ascending_neuron",
+      "post": "efferent_descending",
+      "connection_rows": 48,
+      "synapses": 166
+    },
+    {
+      "pre": "ascending_neuron",
+      "post": "ol_intrinsic",
+      "connection_rows": 1502,
+      "synapses": 2534
+    },
+    {
+      "pre": "ascending_neuron",
+      "post": "sensory_ascending",
+      "connection_rows": 3219,
+      "synapses": 25961
+    },
+    {
+      "pre": "ascending_neuron",
+      "post": "sensory_ascending_tbc",
+      "connection_rows": 12,
+      "synapses": 41
+    },
+    {
+      "pre": "ascending_neuron",
+      "post": "sensory_descending",
+      "connection_rows": 247,
+      "synapses": 1652
+    },
+    {
+      "pre": "ascending_neuron",
+      "post": "visual_centrifugal",
+      "connection_rows": 7116,
+      "synapses": 62973
+    },
+    {
+      "pre": "ascending_neuron",
+      "post": "visual_projection",
+      "connection_rows": 3875,
+      "synapses": 24244
+    },
+    {
+      "pre": "ascending_neuron",
+      "post": "visual_projection_tbc",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "ascending_neuron",
+      "post": "vnc_efferent",
+      "connection_rows": 1525,
+      "synapses": 8190
+    },
+    {
+      "pre": "ascending_neuron",
+      "post": "vnc_endocrine",
+      "connection_rows": 313,
+      "synapses": 1464
+    },
+    {
+      "pre": "ascending_neuron",
+      "post": "vnc_intrinsic",
+      "connection_rows": 294323,
+      "synapses": 1594274
+    },
+    {
+      "pre": "ascending_neuron",
+      "post": "vnc_motor",
+      "connection_rows": 12914,
+      "synapses": 136992
+    },
+    {
+      "pre": "ascending_neuron",
+      "post": "vnc_sensory",
+      "connection_rows": 17381,
+      "synapses": 81764
+    },
+    {
+      "pre": "ascending_neuron",
+      "post": "vnc_sensory_tbc",
+      "connection_rows": 19,
+      "synapses": 48
+    },
+    {
+      "pre": "ascending_neuron",
+      "post": "vnc_tbc",
+      "connection_rows": 242,
+      "synapses": 778
+    },
+    {
+      "pre": "cb_efferent",
+      "post": "ascending_neuron",
+      "connection_rows": 5,
+      "synapses": 6
+    },
+    {
+      "pre": "cb_efferent",
+      "post": "cb_efferent",
+      "connection_rows": 4,
+      "synapses": 8
+    },
+    {
+      "pre": "cb_efferent",
+      "post": "cb_endocrine",
+      "connection_rows": 9,
+      "synapses": 11
+    },
+    {
+      "pre": "cb_efferent",
+      "post": "cb_intrinsic",
+      "connection_rows": 18,
+      "synapses": 23
+    },
+    {
+      "pre": "cb_efferent",
+      "post": "descending_neuron",
+      "connection_rows": 18,
+      "synapses": 26
+    },
+    {
+      "pre": "cb_endocrine",
+      "post": "ascending_neuron",
+      "connection_rows": 58,
+      "synapses": 80
+    },
+    {
+      "pre": "cb_endocrine",
+      "post": "cb_efferent",
+      "connection_rows": 3,
+      "synapses": 3
+    },
+    {
+      "pre": "cb_endocrine",
+      "post": "cb_endocrine",
+      "connection_rows": 314,
+      "synapses": 596
+    },
+    {
+      "pre": "cb_endocrine",
+      "post": "cb_intrinsic",
+      "connection_rows": 733,
+      "synapses": 2037
+    },
+    {
+      "pre": "cb_endocrine",
+      "post": "cb_sensory",
+      "connection_rows": 6,
+      "synapses": 6
+    },
+    {
+      "pre": "cb_endocrine",
+      "post": "descending_neuron",
+      "connection_rows": 94,
+      "synapses": 189
+    },
+    {
+      "pre": "cb_endocrine",
+      "post": "efferent_descending",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "cb_endocrine",
+      "post": "sensory_ascending",
+      "connection_rows": 5,
+      "synapses": 6
+    },
+    {
+      "pre": "cb_endocrine",
+      "post": "sensory_descending",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "cb_endocrine",
+      "post": "visual_centrifugal",
+      "connection_rows": 3,
+      "synapses": 6
+    },
+    {
+      "pre": "cb_endocrine",
+      "post": "visual_projection",
+      "connection_rows": 3,
+      "synapses": 3
+    },
+    {
+      "pre": "cb_intrinsic",
+      "post": "ascending_neuron",
+      "connection_rows": 60298,
+      "synapses": 212075
+    },
+    {
+      "pre": "cb_intrinsic",
+      "post": "cb_efferent",
+      "connection_rows": 42,
+      "synapses": 104
+    },
+    {
+      "pre": "cb_intrinsic",
+      "post": "cb_endocrine",
+      "connection_rows": 6890,
+      "synapses": 45475
+    },
+    {
+      "pre": "cb_intrinsic",
+      "post": "cb_intrinsic",
+      "connection_rows": 6815307,
+      "synapses": 34365451
+    },
+    {
+      "pre": "cb_intrinsic",
+      "post": "cb_motor",
+      "connection_rows": 12638,
+      "synapses": 197543
+    },
+    {
+      "pre": "cb_intrinsic",
+      "post": "cb_sensory",
+      "connection_rows": 103671,
+      "synapses": 371813
+    },
+    {
+      "pre": "cb_intrinsic",
+      "post": "cb_sensory_tbc",
+      "connection_rows": 173,
+      "synapses": 1014
+    },
+    {
+      "pre": "cb_intrinsic",
+      "post": "descending_neuron",
+      "connection_rows": 299360,
+      "synapses": 2732731
+    },
+    {
+      "pre": "cb_intrinsic",
+      "post": "efferent_ascending",
+      "connection_rows": 54,
+      "synapses": 89
+    },
+    {
+      "pre": "cb_intrinsic",
+      "post": "efferent_descending",
+      "connection_rows": 177,
+      "synapses": 861
+    },
+    {
+      "pre": "cb_intrinsic",
+      "post": "ol_intrinsic",
+      "connection_rows": 2643,
+      "synapses": 7969
+    },
+    {
+      "pre": "cb_intrinsic",
+      "post": "ol_sensory",
+      "connection_rows": 1,
+      "synapses": 2
+    },
+    {
+      "pre": "cb_intrinsic",
+      "post": "sensory_ascending",
+      "connection_rows": 1477,
+      "synapses": 5127
+    },
+    {
+      "pre": "cb_intrinsic",
+      "post": "sensory_ascending_tbc",
+      "connection_rows": 3,
+      "synapses": 3
+    },
+    {
+      "pre": "cb_intrinsic",
+      "post": "sensory_descending",
+      "connection_rows": 143,
+      "synapses": 556
+    },
+    {
+      "pre": "cb_intrinsic",
+      "post": "visual_centrifugal",
+      "connection_rows": 78811,
+      "synapses": 527967
+    },
+    {
+      "pre": "cb_intrinsic",
+      "post": "visual_projection",
+      "connection_rows": 142393,
+      "synapses": 680696
+    },
+    {
+      "pre": "cb_intrinsic",
+      "post": "visual_projection_tbc",
+      "connection_rows": 9,
+      "synapses": 46
+    },
+    {
+      "pre": "cb_intrinsic",
+      "post": "vnc_efferent",
+      "connection_rows": 5,
+      "synapses": 15
+    },
+    {
+      "pre": "cb_intrinsic",
+      "post": "vnc_intrinsic",
+      "connection_rows": 103,
+      "synapses": 415
+    },
+    {
+      "pre": "cb_intrinsic",
+      "post": "vnc_motor",
+      "connection_rows": 8,
+      "synapses": 80
+    },
+    {
+      "pre": "cb_motor",
+      "post": "ascending_neuron",
+      "connection_rows": 361,
+      "synapses": 484
+    },
+    {
+      "pre": "cb_motor",
+      "post": "cb_endocrine",
+      "connection_rows": 7,
+      "synapses": 26
+    },
+    {
+      "pre": "cb_motor",
+      "post": "cb_intrinsic",
+      "connection_rows": 5912,
+      "synapses": 27932
+    },
+    {
+      "pre": "cb_motor",
+      "post": "cb_motor",
+      "connection_rows": 985,
+      "synapses": 6906
+    },
+    {
+      "pre": "cb_motor",
+      "post": "cb_sensory",
+      "connection_rows": 111,
+      "synapses": 248
+    },
+    {
+      "pre": "cb_motor",
+      "post": "cb_sensory_tbc",
+      "connection_rows": 8,
+      "synapses": 31
+    },
+    {
+      "pre": "cb_motor",
+      "post": "descending_neuron",
+      "connection_rows": 1655,
+      "synapses": 2995
+    },
+    {
+      "pre": "cb_motor",
+      "post": "efferent_ascending",
+      "connection_rows": 2,
+      "synapses": 2
+    },
+    {
+      "pre": "cb_motor",
+      "post": "efferent_descending",
+      "connection_rows": 8,
+      "synapses": 12
+    },
+    {
+      "pre": "cb_motor",
+      "post": "ol_intrinsic",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "cb_motor",
+      "post": "sensory_ascending",
+      "connection_rows": 58,
+      "synapses": 63
+    },
+    {
+      "pre": "cb_motor",
+      "post": "visual_centrifugal",
+      "connection_rows": 122,
+      "synapses": 195
+    },
+    {
+      "pre": "cb_motor",
+      "post": "visual_projection",
+      "connection_rows": 38,
+      "synapses": 59
+    },
+    {
+      "pre": "cb_motor",
+      "post": "vnc_motor",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "cb_sensory",
+      "post": "ascending_neuron",
+      "connection_rows": 14762,
+      "synapses": 77899
+    },
+    {
+      "pre": "cb_sensory",
+      "post": "cb_efferent",
+      "connection_rows": 2,
+      "synapses": 2
+    },
+    {
+      "pre": "cb_sensory",
+      "post": "cb_endocrine",
+      "connection_rows": 107,
+      "synapses": 1457
+    },
+    {
+      "pre": "cb_sensory",
+      "post": "cb_intrinsic",
+      "connection_rows": 250103,
+      "synapses": 1785104
+    },
+    {
+      "pre": "cb_sensory",
+      "post": "cb_motor",
+      "connection_rows": 689,
+      "synapses": 5117
+    },
+    {
+      "pre": "cb_sensory",
+      "post": "cb_sensory",
+      "connection_rows": 96092,
+      "synapses": 252504
+    },
+    {
+      "pre": "cb_sensory",
+      "post": "cb_sensory_tbc",
+      "connection_rows": 40,
+      "synapses": 96
+    },
+    {
+      "pre": "cb_sensory",
+      "post": "descending_neuron",
+      "connection_rows": 23338,
+      "synapses": 138543
+    },
+    {
+      "pre": "cb_sensory",
+      "post": "efferent_ascending",
+      "connection_rows": 2,
+      "synapses": 2
+    },
+    {
+      "pre": "cb_sensory",
+      "post": "efferent_descending",
+      "connection_rows": 10,
+      "synapses": 27
+    },
+    {
+      "pre": "cb_sensory",
+      "post": "ol_intrinsic",
+      "connection_rows": 2,
+      "synapses": 2
+    },
+    {
+      "pre": "cb_sensory",
+      "post": "sensory_ascending",
+      "connection_rows": 104,
+      "synapses": 189
+    },
+    {
+      "pre": "cb_sensory",
+      "post": "sensory_descending",
+      "connection_rows": 89,
+      "synapses": 284
+    },
+    {
+      "pre": "cb_sensory",
+      "post": "visual_centrifugal",
+      "connection_rows": 947,
+      "synapses": 2718
+    },
+    {
+      "pre": "cb_sensory",
+      "post": "visual_projection",
+      "connection_rows": 10,
+      "synapses": 17
+    },
+    {
+      "pre": "cb_sensory_tbc",
+      "post": "ascending_neuron",
+      "connection_rows": 23,
+      "synapses": 46
+    },
+    {
+      "pre": "cb_sensory_tbc",
+      "post": "cb_intrinsic",
+      "connection_rows": 369,
+      "synapses": 2794
+    },
+    {
+      "pre": "cb_sensory_tbc",
+      "post": "cb_motor",
+      "connection_rows": 15,
+      "synapses": 142
+    },
+    {
+      "pre": "cb_sensory_tbc",
+      "post": "cb_sensory",
+      "connection_rows": 53,
+      "synapses": 111
+    },
+    {
+      "pre": "cb_sensory_tbc",
+      "post": "cb_sensory_tbc",
+      "connection_rows": 1,
+      "synapses": 2
+    },
+    {
+      "pre": "cb_sensory_tbc",
+      "post": "descending_neuron",
+      "connection_rows": 95,
+      "synapses": 811
+    },
+    {
+      "pre": "cb_sensory_tbc",
+      "post": "visual_centrifugal",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "descending_neuron",
+      "post": "ascending_neuron",
+      "connection_rows": 63640,
+      "synapses": 427455
+    },
+    {
+      "pre": "descending_neuron",
+      "post": "cb_efferent",
+      "connection_rows": 26,
+      "synapses": 73
+    },
+    {
+      "pre": "descending_neuron",
+      "post": "cb_endocrine",
+      "connection_rows": 473,
+      "synapses": 2271
+    },
+    {
+      "pre": "descending_neuron",
+      "post": "cb_intrinsic",
+      "connection_rows": 177652,
+      "synapses": 864574
+    },
+    {
+      "pre": "descending_neuron",
+      "post": "cb_motor",
+      "connection_rows": 5971,
+      "synapses": 110000
+    },
+    {
+      "pre": "descending_neuron",
+      "post": "cb_sensory",
+      "connection_rows": 3326,
+      "synapses": 10495
+    },
+    {
+      "pre": "descending_neuron",
+      "post": "cb_sensory_tbc",
+      "connection_rows": 34,
+      "synapses": 199
+    },
+    {
+      "pre": "descending_neuron",
+      "post": "descending_neuron",
+      "connection_rows": 75273,
+      "synapses": 598721
+    },
+    {
+      "pre": "descending_neuron",
+      "post": "descending_neuron_tbc",
+      "connection_rows": 3,
+      "synapses": 22
+    },
+    {
+      "pre": "descending_neuron",
+      "post": "efferent_ascending",
+      "connection_rows": 568,
+      "synapses": 4769
+    },
+    {
+      "pre": "descending_neuron",
+      "post": "efferent_descending",
+      "connection_rows": 41,
+      "synapses": 104
+    },
+    {
+      "pre": "descending_neuron",
+      "post": "ol_intrinsic",
+      "connection_rows": 6291,
+      "synapses": 8549
+    },
+    {
+      "pre": "descending_neuron",
+      "post": "ol_sensory",
+      "connection_rows": 5,
+      "synapses": 5
+    },
+    {
+      "pre": "descending_neuron",
+      "post": "sensory_ascending",
+      "connection_rows": 630,
+      "synapses": 2680
+    },
+    {
+      "pre": "descending_neuron",
+      "post": "sensory_descending",
+      "connection_rows": 127,
+      "synapses": 358
+    },
+    {
+      "pre": "descending_neuron",
+      "post": "visual_centrifugal",
+      "connection_rows": 7346,
+      "synapses": 38769
+    },
+    {
+      "pre": "descending_neuron",
+      "post": "visual_projection",
+      "connection_rows": 4489,
+      "synapses": 8439
+    },
+    {
+      "pre": "descending_neuron",
+      "post": "vnc_efferent",
+      "connection_rows": 2381,
+      "synapses": 28605
+    },
+    {
+      "pre": "descending_neuron",
+      "post": "vnc_endocrine",
+      "connection_rows": 396,
+      "synapses": 5621
+    },
+    {
+      "pre": "descending_neuron",
+      "post": "vnc_intrinsic",
+      "connection_rows": 246077,
+      "synapses": 1718761
+    },
+    {
+      "pre": "descending_neuron",
+      "post": "vnc_motor",
+      "connection_rows": 17645,
+      "synapses": 229565
+    },
+    {
+      "pre": "descending_neuron",
+      "post": "vnc_sensory",
+      "connection_rows": 5188,
+      "synapses": 32059
+    },
+    {
+      "pre": "descending_neuron",
+      "post": "vnc_sensory_tbc",
+      "connection_rows": 6,
+      "synapses": 7
+    },
+    {
+      "pre": "descending_neuron",
+      "post": "vnc_tbc",
+      "connection_rows": 140,
+      "synapses": 458
+    },
+    {
+      "pre": "descending_neuron_tbc",
+      "post": "ascending_neuron",
+      "connection_rows": 29,
+      "synapses": 73
+    },
+    {
+      "pre": "descending_neuron_tbc",
+      "post": "descending_neuron",
+      "connection_rows": 6,
+      "synapses": 8
+    },
+    {
+      "pre": "descending_neuron_tbc",
+      "post": "vnc_efferent",
+      "connection_rows": 3,
+      "synapses": 13
+    },
+    {
+      "pre": "descending_neuron_tbc",
+      "post": "vnc_intrinsic",
+      "connection_rows": 12,
+      "synapses": 31
+    },
+    {
+      "pre": "descending_neuron_tbc",
+      "post": "vnc_motor",
+      "connection_rows": 3,
+      "synapses": 24
+    },
+    {
+      "pre": "efferent_ascending",
+      "post": "ascending_neuron",
+      "connection_rows": 416,
+      "synapses": 1641
+    },
+    {
+      "pre": "efferent_ascending",
+      "post": "cb_endocrine",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "efferent_ascending",
+      "post": "cb_intrinsic",
+      "connection_rows": 173,
+      "synapses": 407
+    },
+    {
+      "pre": "efferent_ascending",
+      "post": "cb_motor",
+      "connection_rows": 33,
+      "synapses": 1171
+    },
+    {
+      "pre": "efferent_ascending",
+      "post": "cb_sensory",
+      "connection_rows": 4,
+      "synapses": 4
+    },
+    {
+      "pre": "efferent_ascending",
+      "post": "descending_neuron",
+      "connection_rows": 221,
+      "synapses": 511
+    },
+    {
+      "pre": "efferent_ascending",
+      "post": "efferent_ascending",
+      "connection_rows": 8,
+      "synapses": 15
+    },
+    {
+      "pre": "efferent_ascending",
+      "post": "ol_intrinsic",
+      "connection_rows": 80,
+      "synapses": 127
+    },
+    {
+      "pre": "efferent_ascending",
+      "post": "sensory_ascending",
+      "connection_rows": 125,
+      "synapses": 167
+    },
+    {
+      "pre": "efferent_ascending",
+      "post": "sensory_descending",
+      "connection_rows": 3,
+      "synapses": 4
+    },
+    {
+      "pre": "efferent_ascending",
+      "post": "visual_centrifugal",
+      "connection_rows": 9,
+      "synapses": 11
+    },
+    {
+      "pre": "efferent_ascending",
+      "post": "visual_projection",
+      "connection_rows": 13,
+      "synapses": 14
+    },
+    {
+      "pre": "efferent_ascending",
+      "post": "vnc_efferent",
+      "connection_rows": 10,
+      "synapses": 329
+    },
+    {
+      "pre": "efferent_ascending",
+      "post": "vnc_endocrine",
+      "connection_rows": 10,
+      "synapses": 52
+    },
+    {
+      "pre": "efferent_ascending",
+      "post": "vnc_intrinsic",
+      "connection_rows": 1882,
+      "synapses": 6268
+    },
+    {
+      "pre": "efferent_ascending",
+      "post": "vnc_motor",
+      "connection_rows": 191,
+      "synapses": 3067
+    },
+    {
+      "pre": "efferent_ascending",
+      "post": "vnc_sensory",
+      "connection_rows": 58,
+      "synapses": 120
+    },
+    {
+      "pre": "efferent_ascending",
+      "post": "vnc_tbc",
+      "connection_rows": 2,
+      "synapses": 2
+    },
+    {
+      "pre": "efferent_descending",
+      "post": "ascending_neuron",
+      "connection_rows": 27,
+      "synapses": 42
+    },
+    {
+      "pre": "efferent_descending",
+      "post": "cb_endocrine",
+      "connection_rows": 5,
+      "synapses": 5
+    },
+    {
+      "pre": "efferent_descending",
+      "post": "cb_intrinsic",
+      "connection_rows": 141,
+      "synapses": 253
+    },
+    {
+      "pre": "efferent_descending",
+      "post": "cb_motor",
+      "connection_rows": 8,
+      "synapses": 11
+    },
+    {
+      "pre": "efferent_descending",
+      "post": "cb_sensory",
+      "connection_rows": 4,
+      "synapses": 5
+    },
+    {
+      "pre": "efferent_descending",
+      "post": "descending_neuron",
+      "connection_rows": 29,
+      "synapses": 44
+    },
+    {
+      "pre": "efferent_descending",
+      "post": "efferent_descending",
+      "connection_rows": 6,
+      "synapses": 19
+    },
+    {
+      "pre": "efferent_descending",
+      "post": "sensory_ascending",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "efferent_descending",
+      "post": "sensory_descending",
+      "connection_rows": 2,
+      "synapses": 3
+    },
+    {
+      "pre": "efferent_descending",
+      "post": "visual_centrifugal",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "ol_intrinsic",
+      "post": "ascending_neuron",
+      "connection_rows": 318,
+      "synapses": 459
+    },
+    {
+      "pre": "ol_intrinsic",
+      "post": "cb_intrinsic",
+      "connection_rows": 6101,
+      "synapses": 17191
+    },
+    {
+      "pre": "ol_intrinsic",
+      "post": "cb_motor",
+      "connection_rows": 14,
+      "synapses": 51
+    },
+    {
+      "pre": "ol_intrinsic",
+      "post": "cb_sensory",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "ol_intrinsic",
+      "post": "descending_neuron",
+      "connection_rows": 4612,
+      "synapses": 12468
+    },
+    {
+      "pre": "ol_intrinsic",
+      "post": "efferent_ascending",
+      "connection_rows": 25,
+      "synapses": 42
+    },
+    {
+      "pre": "ol_intrinsic",
+      "post": "ol_intrinsic",
+      "connection_rows": 8799556,
+      "synapses": 35691182
+    },
+    {
+      "pre": "ol_intrinsic",
+      "post": "ol_sensory",
+      "connection_rows": 24047,
+      "synapses": 182275
+    },
+    {
+      "pre": "ol_intrinsic",
+      "post": "visual_centrifugal",
+      "connection_rows": 133570,
+      "synapses": 366826
+    },
+    {
+      "pre": "ol_intrinsic",
+      "post": "visual_projection",
+      "connection_rows": 1898506,
+      "synapses": 7714143
+    },
+    {
+      "pre": "ol_intrinsic",
+      "post": "visual_projection_tbc",
+      "connection_rows": 50,
+      "synapses": 121
+    },
+    {
+      "pre": "ol_sensory",
+      "post": "cb_intrinsic",
+      "connection_rows": 5,
+      "synapses": 8
+    },
+    {
+      "pre": "ol_sensory",
+      "post": "descending_neuron",
+      "connection_rows": 4,
+      "synapses": 5
+    },
+    {
+      "pre": "ol_sensory",
+      "post": "ol_intrinsic",
+      "connection_rows": 63851,
+      "synapses": 564685
+    },
+    {
+      "pre": "ol_sensory",
+      "post": "ol_sensory",
+      "connection_rows": 3265,
+      "synapses": 49546
+    },
+    {
+      "pre": "ol_sensory",
+      "post": "visual_centrifugal",
+      "connection_rows": 371,
+      "synapses": 698
+    },
+    {
+      "pre": "ol_sensory",
+      "post": "visual_projection",
+      "connection_rows": 7414,
+      "synapses": 36420
+    },
+    {
+      "pre": "sensory_ascending",
+      "post": "ascending_neuron",
+      "connection_rows": 11999,
+      "synapses": 72217
+    },
+    {
+      "pre": "sensory_ascending",
+      "post": "cb_endocrine",
+      "connection_rows": 75,
+      "synapses": 265
+    },
+    {
+      "pre": "sensory_ascending",
+      "post": "cb_intrinsic",
+      "connection_rows": 15682,
+      "synapses": 88309
+    },
+    {
+      "pre": "sensory_ascending",
+      "post": "cb_motor",
+      "connection_rows": 1342,
+      "synapses": 11619
+    },
+    {
+      "pre": "sensory_ascending",
+      "post": "cb_sensory",
+      "connection_rows": 93,
+      "synapses": 141
+    },
+    {
+      "pre": "sensory_ascending",
+      "post": "descending_neuron",
+      "connection_rows": 4543,
+      "synapses": 18536
+    },
+    {
+      "pre": "sensory_ascending",
+      "post": "descending_neuron_tbc",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "sensory_ascending",
+      "post": "efferent_ascending",
+      "connection_rows": 119,
+      "synapses": 230
+    },
+    {
+      "pre": "sensory_ascending",
+      "post": "efferent_descending",
+      "connection_rows": 3,
+      "synapses": 4
+    },
+    {
+      "pre": "sensory_ascending",
+      "post": "sensory_ascending",
+      "connection_rows": 5807,
+      "synapses": 23350
+    },
+    {
+      "pre": "sensory_ascending",
+      "post": "sensory_ascending_tbc",
+      "connection_rows": 6,
+      "synapses": 16
+    },
+    {
+      "pre": "sensory_ascending",
+      "post": "sensory_descending",
+      "connection_rows": 17,
+      "synapses": 44
+    },
+    {
+      "pre": "sensory_ascending",
+      "post": "visual_centrifugal",
+      "connection_rows": 371,
+      "synapses": 1783
+    },
+    {
+      "pre": "sensory_ascending",
+      "post": "visual_projection",
+      "connection_rows": 1,
+      "synapses": 3
+    },
+    {
+      "pre": "sensory_ascending",
+      "post": "vnc_efferent",
+      "connection_rows": 91,
+      "synapses": 238
+    },
+    {
+      "pre": "sensory_ascending",
+      "post": "vnc_endocrine",
+      "connection_rows": 12,
+      "synapses": 47
+    },
+    {
+      "pre": "sensory_ascending",
+      "post": "vnc_intrinsic",
+      "connection_rows": 32210,
+      "synapses": 135399
+    },
+    {
+      "pre": "sensory_ascending",
+      "post": "vnc_motor",
+      "connection_rows": 3098,
+      "synapses": 18593
+    },
+    {
+      "pre": "sensory_ascending",
+      "post": "vnc_sensory",
+      "connection_rows": 622,
+      "synapses": 1423
+    },
+    {
+      "pre": "sensory_ascending",
+      "post": "vnc_tbc",
+      "connection_rows": 8,
+      "synapses": 10
+    },
+    {
+      "pre": "sensory_ascending_tbc",
+      "post": "ascending_neuron",
+      "connection_rows": 10,
+      "synapses": 72
+    },
+    {
+      "pre": "sensory_ascending_tbc",
+      "post": "cb_intrinsic",
+      "connection_rows": 23,
+      "synapses": 138
+    },
+    {
+      "pre": "sensory_ascending_tbc",
+      "post": "cb_motor",
+      "connection_rows": 3,
+      "synapses": 7
+    },
+    {
+      "pre": "sensory_ascending_tbc",
+      "post": "descending_neuron",
+      "connection_rows": 2,
+      "synapses": 7
+    },
+    {
+      "pre": "sensory_ascending_tbc",
+      "post": "sensory_ascending",
+      "connection_rows": 5,
+      "synapses": 13
+    },
+    {
+      "pre": "sensory_ascending_tbc",
+      "post": "vnc_intrinsic",
+      "connection_rows": 15,
+      "synapses": 109
+    },
+    {
+      "pre": "sensory_ascending_tbc",
+      "post": "vnc_sensory",
+      "connection_rows": 4,
+      "synapses": 7
+    },
+    {
+      "pre": "sensory_descending",
+      "post": "ascending_neuron",
+      "connection_rows": 671,
+      "synapses": 8292
+    },
+    {
+      "pre": "sensory_descending",
+      "post": "cb_efferent",
+      "connection_rows": 1,
+      "synapses": 2
+    },
+    {
+      "pre": "sensory_descending",
+      "post": "cb_endocrine",
+      "connection_rows": 9,
+      "synapses": 25
+    },
+    {
+      "pre": "sensory_descending",
+      "post": "cb_intrinsic",
+      "connection_rows": 785,
+      "synapses": 5759
+    },
+    {
+      "pre": "sensory_descending",
+      "post": "cb_motor",
+      "connection_rows": 10,
+      "synapses": 68
+    },
+    {
+      "pre": "sensory_descending",
+      "post": "cb_sensory",
+      "connection_rows": 81,
+      "synapses": 245
+    },
+    {
+      "pre": "sensory_descending",
+      "post": "cb_sensory_tbc",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "sensory_descending",
+      "post": "descending_neuron",
+      "connection_rows": 446,
+      "synapses": 3952
+    },
+    {
+      "pre": "sensory_descending",
+      "post": "efferent_ascending",
+      "connection_rows": 2,
+      "synapses": 2
+    },
+    {
+      "pre": "sensory_descending",
+      "post": "efferent_descending",
+      "connection_rows": 3,
+      "synapses": 16
+    },
+    {
+      "pre": "sensory_descending",
+      "post": "sensory_ascending",
+      "connection_rows": 17,
+      "synapses": 46
+    },
+    {
+      "pre": "sensory_descending",
+      "post": "sensory_descending",
+      "connection_rows": 20,
+      "synapses": 202
+    },
+    {
+      "pre": "sensory_descending",
+      "post": "visual_centrifugal",
+      "connection_rows": 11,
+      "synapses": 121
+    },
+    {
+      "pre": "sensory_descending",
+      "post": "visual_projection",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "sensory_descending",
+      "post": "vnc_efferent",
+      "connection_rows": 4,
+      "synapses": 70
+    },
+    {
+      "pre": "sensory_descending",
+      "post": "vnc_endocrine",
+      "connection_rows": 5,
+      "synapses": 82
+    },
+    {
+      "pre": "sensory_descending",
+      "post": "vnc_intrinsic",
+      "connection_rows": 1164,
+      "synapses": 6663
+    },
+    {
+      "pre": "sensory_descending",
+      "post": "vnc_motor",
+      "connection_rows": 94,
+      "synapses": 743
+    },
+    {
+      "pre": "sensory_descending",
+      "post": "vnc_sensory",
+      "connection_rows": 78,
+      "synapses": 212
+    },
+    {
+      "pre": "visual_centrifugal",
+      "post": "ascending_neuron",
+      "connection_rows": 933,
+      "synapses": 1736
+    },
+    {
+      "pre": "visual_centrifugal",
+      "post": "cb_efferent",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "visual_centrifugal",
+      "post": "cb_endocrine",
+      "connection_rows": 2,
+      "synapses": 2
+    },
+    {
+      "pre": "visual_centrifugal",
+      "post": "cb_intrinsic",
+      "connection_rows": 50929,
+      "synapses": 144766
+    },
+    {
+      "pre": "visual_centrifugal",
+      "post": "cb_motor",
+      "connection_rows": 152,
+      "synapses": 277
+    },
+    {
+      "pre": "visual_centrifugal",
+      "post": "cb_sensory",
+      "connection_rows": 195,
+      "synapses": 294
+    },
+    {
+      "pre": "visual_centrifugal",
+      "post": "cb_sensory_tbc",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "visual_centrifugal",
+      "post": "descending_neuron",
+      "connection_rows": 4833,
+      "synapses": 19535
+    },
+    {
+      "pre": "visual_centrifugal",
+      "post": "efferent_ascending",
+      "connection_rows": 5,
+      "synapses": 7
+    },
+    {
+      "pre": "visual_centrifugal",
+      "post": "ol_intrinsic",
+      "connection_rows": 369642,
+      "synapses": 1469897
+    },
+    {
+      "pre": "visual_centrifugal",
+      "post": "ol_sensory",
+      "connection_rows": 93,
+      "synapses": 181
+    },
+    {
+      "pre": "visual_centrifugal",
+      "post": "sensory_ascending",
+      "connection_rows": 109,
+      "synapses": 387
+    },
+    {
+      "pre": "visual_centrifugal",
+      "post": "sensory_descending",
+      "connection_rows": 5,
+      "synapses": 5
+    },
+    {
+      "pre": "visual_centrifugal",
+      "post": "visual_centrifugal",
+      "connection_rows": 11629,
+      "synapses": 63616
+    },
+    {
+      "pre": "visual_centrifugal",
+      "post": "visual_projection",
+      "connection_rows": 97278,
+      "synapses": 439005
+    },
+    {
+      "pre": "visual_centrifugal",
+      "post": "visual_projection_tbc",
+      "connection_rows": 3,
+      "synapses": 5
+    },
+    {
+      "pre": "visual_projection",
+      "post": "ascending_neuron",
+      "connection_rows": 2242,
+      "synapses": 6017
+    },
+    {
+      "pre": "visual_projection",
+      "post": "cb_endocrine",
+      "connection_rows": 26,
+      "synapses": 52
+    },
+    {
+      "pre": "visual_projection",
+      "post": "cb_intrinsic",
+      "connection_rows": 551521,
+      "synapses": 3847546
+    },
+    {
+      "pre": "visual_projection",
+      "post": "cb_motor",
+      "connection_rows": 389,
+      "synapses": 6387
+    },
+    {
+      "pre": "visual_projection",
+      "post": "cb_sensory",
+      "connection_rows": 2,
+      "synapses": 12
+    },
+    {
+      "pre": "visual_projection",
+      "post": "descending_neuron",
+      "connection_rows": 28999,
+      "synapses": 291793
+    },
+    {
+      "pre": "visual_projection",
+      "post": "efferent_ascending",
+      "connection_rows": 3,
+      "synapses": 3
+    },
+    {
+      "pre": "visual_projection",
+      "post": "ol_intrinsic",
+      "connection_rows": 480660,
+      "synapses": 1321731
+    },
+    {
+      "pre": "visual_projection",
+      "post": "ol_sensory",
+      "connection_rows": 185,
+      "synapses": 239
+    },
+    {
+      "pre": "visual_projection",
+      "post": "visual_centrifugal",
+      "connection_rows": 49194,
+      "synapses": 267179
+    },
+    {
+      "pre": "visual_projection",
+      "post": "visual_projection",
+      "connection_rows": 551099,
+      "synapses": 1613964
+    },
+    {
+      "pre": "visual_projection",
+      "post": "visual_projection_tbc",
+      "connection_rows": 30,
+      "synapses": 50
+    },
+    {
+      "pre": "visual_projection_tbc",
+      "post": "ascending_neuron",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "visual_projection_tbc",
+      "post": "cb_intrinsic",
+      "connection_rows": 20,
+      "synapses": 43
+    },
+    {
+      "pre": "visual_projection_tbc",
+      "post": "descending_neuron",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "visual_projection_tbc",
+      "post": "ol_intrinsic",
+      "connection_rows": 32,
+      "synapses": 46
+    },
+    {
+      "pre": "visual_projection_tbc",
+      "post": "visual_projection",
+      "connection_rows": 33,
+      "synapses": 95
+    },
+    {
+      "pre": "vnc_efferent",
+      "post": "ascending_neuron",
+      "connection_rows": 133,
+      "synapses": 194
+    },
+    {
+      "pre": "vnc_efferent",
+      "post": "descending_neuron",
+      "connection_rows": 68,
+      "synapses": 183
+    },
+    {
+      "pre": "vnc_efferent",
+      "post": "efferent_ascending",
+      "connection_rows": 5,
+      "synapses": 68
+    },
+    {
+      "pre": "vnc_efferent",
+      "post": "sensory_ascending",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "vnc_efferent",
+      "post": "sensory_descending",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "vnc_efferent",
+      "post": "vnc_efferent",
+      "connection_rows": 225,
+      "synapses": 794
+    },
+    {
+      "pre": "vnc_efferent",
+      "post": "vnc_endocrine",
+      "connection_rows": 15,
+      "synapses": 19
+    },
+    {
+      "pre": "vnc_efferent",
+      "post": "vnc_intrinsic",
+      "connection_rows": 649,
+      "synapses": 1078
+    },
+    {
+      "pre": "vnc_efferent",
+      "post": "vnc_motor",
+      "connection_rows": 203,
+      "synapses": 807
+    },
+    {
+      "pre": "vnc_efferent",
+      "post": "vnc_sensory",
+      "connection_rows": 34,
+      "synapses": 49
+    },
+    {
+      "pre": "vnc_endocrine",
+      "post": "ascending_neuron",
+      "connection_rows": 50,
+      "synapses": 82
+    },
+    {
+      "pre": "vnc_endocrine",
+      "post": "descending_neuron",
+      "connection_rows": 26,
+      "synapses": 31
+    },
+    {
+      "pre": "vnc_endocrine",
+      "post": "efferent_ascending",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "vnc_endocrine",
+      "post": "sensory_ascending",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "vnc_endocrine",
+      "post": "vnc_efferent",
+      "connection_rows": 17,
+      "synapses": 23
+    },
+    {
+      "pre": "vnc_endocrine",
+      "post": "vnc_endocrine",
+      "connection_rows": 42,
+      "synapses": 235
+    },
+    {
+      "pre": "vnc_endocrine",
+      "post": "vnc_intrinsic",
+      "connection_rows": 118,
+      "synapses": 198
+    },
+    {
+      "pre": "vnc_endocrine",
+      "post": "vnc_motor",
+      "connection_rows": 38,
+      "synapses": 55
+    },
+    {
+      "pre": "vnc_endocrine",
+      "post": "vnc_sensory",
+      "connection_rows": 4,
+      "synapses": 4
+    },
+    {
+      "pre": "vnc_intrinsic",
+      "post": "ascending_neuron",
+      "connection_rows": 274737,
+      "synapses": 1636238
+    },
+    {
+      "pre": "vnc_intrinsic",
+      "post": "cb_intrinsic",
+      "connection_rows": 19,
+      "synapses": 24
+    },
+    {
+      "pre": "vnc_intrinsic",
+      "post": "descending_neuron",
+      "connection_rows": 47789,
+      "synapses": 145735
+    },
+    {
+      "pre": "vnc_intrinsic",
+      "post": "descending_neuron_tbc",
+      "connection_rows": 5,
+      "synapses": 5
+    },
+    {
+      "pre": "vnc_intrinsic",
+      "post": "efferent_ascending",
+      "connection_rows": 1460,
+      "synapses": 7227
+    },
+    {
+      "pre": "vnc_intrinsic",
+      "post": "sensory_ascending",
+      "connection_rows": 5035,
+      "synapses": 31364
+    },
+    {
+      "pre": "vnc_intrinsic",
+      "post": "sensory_ascending_tbc",
+      "connection_rows": 4,
+      "synapses": 6
+    },
+    {
+      "pre": "vnc_intrinsic",
+      "post": "sensory_descending",
+      "connection_rows": 264,
+      "synapses": 1875
+    },
+    {
+      "pre": "vnc_intrinsic",
+      "post": "vnc_efferent",
+      "connection_rows": 10948,
+      "synapses": 129587
+    },
+    {
+      "pre": "vnc_intrinsic",
+      "post": "vnc_endocrine",
+      "connection_rows": 1667,
+      "synapses": 13059
+    },
+    {
+      "pre": "vnc_intrinsic",
+      "post": "vnc_intrinsic",
+      "connection_rows": 1831764,
+      "synapses": 11042345
+    },
+    {
+      "pre": "vnc_intrinsic",
+      "post": "vnc_motor",
+      "connection_rows": 155068,
+      "synapses": 2214610
+    },
+    {
+      "pre": "vnc_intrinsic",
+      "post": "vnc_sensory",
+      "connection_rows": 72684,
+      "synapses": 365870
+    },
+    {
+      "pre": "vnc_intrinsic",
+      "post": "vnc_sensory_tbc",
+      "connection_rows": 105,
+      "synapses": 217
+    },
+    {
+      "pre": "vnc_intrinsic",
+      "post": "vnc_tbc",
+      "connection_rows": 1294,
+      "synapses": 4819
+    },
+    {
+      "pre": "vnc_motor",
+      "post": "ascending_neuron",
+      "connection_rows": 663,
+      "synapses": 1314
+    },
+    {
+      "pre": "vnc_motor",
+      "post": "cb_motor",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "vnc_motor",
+      "post": "descending_neuron",
+      "connection_rows": 476,
+      "synapses": 599
+    },
+    {
+      "pre": "vnc_motor",
+      "post": "efferent_ascending",
+      "connection_rows": 5,
+      "synapses": 5
+    },
+    {
+      "pre": "vnc_motor",
+      "post": "sensory_ascending",
+      "connection_rows": 42,
+      "synapses": 47
+    },
+    {
+      "pre": "vnc_motor",
+      "post": "vnc_efferent",
+      "connection_rows": 212,
+      "synapses": 919
+    },
+    {
+      "pre": "vnc_motor",
+      "post": "vnc_endocrine",
+      "connection_rows": 33,
+      "synapses": 41
+    },
+    {
+      "pre": "vnc_motor",
+      "post": "vnc_intrinsic",
+      "connection_rows": 9553,
+      "synapses": 18590
+    },
+    {
+      "pre": "vnc_motor",
+      "post": "vnc_motor",
+      "connection_rows": 2424,
+      "synapses": 7892
+    },
+    {
+      "pre": "vnc_motor",
+      "post": "vnc_sensory",
+      "connection_rows": 205,
+      "synapses": 460
+    },
+    {
+      "pre": "vnc_motor",
+      "post": "vnc_sensory_tbc",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "vnc_motor",
+      "post": "vnc_tbc",
+      "connection_rows": 14,
+      "synapses": 34
+    },
+    {
+      "pre": "vnc_sensory",
+      "post": "ascending_neuron",
+      "connection_rows": 116619,
+      "synapses": 784019
+    },
+    {
+      "pre": "vnc_sensory",
+      "post": "descending_neuron",
+      "connection_rows": 8327,
+      "synapses": 42325
+    },
+    {
+      "pre": "vnc_sensory",
+      "post": "efferent_ascending",
+      "connection_rows": 65,
+      "synapses": 101
+    },
+    {
+      "pre": "vnc_sensory",
+      "post": "sensory_ascending",
+      "connection_rows": 703,
+      "synapses": 1673
+    },
+    {
+      "pre": "vnc_sensory",
+      "post": "sensory_ascending_tbc",
+      "connection_rows": 2,
+      "synapses": 3
+    },
+    {
+      "pre": "vnc_sensory",
+      "post": "sensory_descending",
+      "connection_rows": 80,
+      "synapses": 188
+    },
+    {
+      "pre": "vnc_sensory",
+      "post": "vnc_efferent",
+      "connection_rows": 810,
+      "synapses": 3538
+    },
+    {
+      "pre": "vnc_sensory",
+      "post": "vnc_endocrine",
+      "connection_rows": 120,
+      "synapses": 345
+    },
+    {
+      "pre": "vnc_sensory",
+      "post": "vnc_intrinsic",
+      "connection_rows": 357840,
+      "synapses": 1968053
+    },
+    {
+      "pre": "vnc_sensory",
+      "post": "vnc_motor",
+      "connection_rows": 9258,
+      "synapses": 58254
+    },
+    {
+      "pre": "vnc_sensory",
+      "post": "vnc_sensory",
+      "connection_rows": 142515,
+      "synapses": 439451
+    },
+    {
+      "pre": "vnc_sensory",
+      "post": "vnc_sensory_tbc",
+      "connection_rows": 142,
+      "synapses": 252
+    },
+    {
+      "pre": "vnc_sensory",
+      "post": "vnc_tbc",
+      "connection_rows": 851,
+      "synapses": 2502
+    },
+    {
+      "pre": "vnc_sensory_tbc",
+      "post": "ascending_neuron",
+      "connection_rows": 206,
+      "synapses": 580
+    },
+    {
+      "pre": "vnc_sensory_tbc",
+      "post": "descending_neuron",
+      "connection_rows": 19,
+      "synapses": 44
+    },
+    {
+      "pre": "vnc_sensory_tbc",
+      "post": "sensory_ascending",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "vnc_sensory_tbc",
+      "post": "vnc_intrinsic",
+      "connection_rows": 864,
+      "synapses": 2530
+    },
+    {
+      "pre": "vnc_sensory_tbc",
+      "post": "vnc_motor",
+      "connection_rows": 8,
+      "synapses": 30
+    },
+    {
+      "pre": "vnc_sensory_tbc",
+      "post": "vnc_sensory",
+      "connection_rows": 148,
+      "synapses": 269
+    },
+    {
+      "pre": "vnc_sensory_tbc",
+      "post": "vnc_sensory_tbc",
+      "connection_rows": 2,
+      "synapses": 3
+    },
+    {
+      "pre": "vnc_sensory_tbc",
+      "post": "vnc_tbc",
+      "connection_rows": 2,
+      "synapses": 4
+    },
+    {
+      "pre": "vnc_tbc",
+      "post": "ascending_neuron",
+      "connection_rows": 304,
+      "synapses": 1563
+    },
+    {
+      "pre": "vnc_tbc",
+      "post": "descending_neuron",
+      "connection_rows": 38,
+      "synapses": 60
+    },
+    {
+      "pre": "vnc_tbc",
+      "post": "efferent_ascending",
+      "connection_rows": 1,
+      "synapses": 1
+    },
+    {
+      "pre": "vnc_tbc",
+      "post": "sensory_ascending",
+      "connection_rows": 3,
+      "synapses": 4
+    },
+    {
+      "pre": "vnc_tbc",
+      "post": "vnc_efferent",
+      "connection_rows": 32,
+      "synapses": 79
+    },
+    {
+      "pre": "vnc_tbc",
+      "post": "vnc_endocrine",
+      "connection_rows": 9,
+      "synapses": 14
+    },
+    {
+      "pre": "vnc_tbc",
+      "post": "vnc_intrinsic",
+      "connection_rows": 1926,
+      "synapses": 8451
+    },
+    {
+      "pre": "vnc_tbc",
+      "post": "vnc_motor",
+      "connection_rows": 170,
+      "synapses": 1076
+    },
+    {
+      "pre": "vnc_tbc",
+      "post": "vnc_sensory",
+      "connection_rows": 575,
+      "synapses": 2319
+    },
+    {
+      "pre": "vnc_tbc",
+      "post": "vnc_tbc",
+      "connection_rows": 13,
+      "synapses": 59
+    }
+  ],
+  "self_connections": 101,
+  "directed_connections_with_reverse": 7647520,
+  "reciprocal_pair_examples": [
+    {
+      "pre": 10001,
+      "post": 10010,
+      "synapses": 1,
+      "reverse_synapses": 1
+    },
+    {
+      "pre": 10003,
+      "post": 10011,
+      "synapses": 6,
+      "reverse_synapses": 24
+    },
+    {
+      "pre": 10015,
+      "post": 10016,
+      "synapses": 4,
+      "reverse_synapses": 2
+    },
+    {
+      "pre": 10010,
+      "post": 10017,
+      "synapses": 12,
+      "reverse_synapses": 6
+    },
+    {
+      "pre": 10003,
+      "post": 10019,
+      "synapses": 1,
+      "reverse_synapses": 7
+    }
+  ],
+  "traversal_neurons_joined": 166335,
+  "traversal_source_rows": 166335,
+  "traversal_direction": {
+    "forward": {
+      "connections": 8033503,
+      "synapses": 42623322
+    },
+    "same_rank": {
+      "connections": 12501804,
+      "synapses": 59901012
+    },
+    "backward": {
+      "connections": 5046987,
+      "synapses": 21652035
+    },
+    "missing_rank": {
+      "connections": 644,
+      "synapses": 1248
+    }
+  },
+  "dnan_source_rows": 3201,
+  "dnan_joined_neurons": 3160,
+  "dnan_with_function_annotation": 320,
+  "limitations": [
+    "Type labels can be composite; a label count is not a validated biological type count.",
+    "Superclass blocks are not neuropil boundaries.",
+    "Traversal rank is not an anatomical layer.",
+    "Source/import totals and hashes are checked; this audit is not a new edge-by-edge reimport comparison.",
+    "Structural preservation does not measure physiological or behavioral fidelity."
+  ]
+}

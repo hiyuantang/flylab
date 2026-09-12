@@ -18,8 +18,7 @@ body {
   margin: 0;
 }
 button,
-input,
-select {
+input {
   font: inherit;
   font-size: 13px;
 }
@@ -49,7 +48,6 @@ button:disabled {
 }
 button:focus-visible,
 a:focus-visible,
-select:focus-visible,
 input:focus-visible,
 summary:focus-visible {
   outline: 2px solid var(--lime);
@@ -72,7 +70,7 @@ a {
 a:hover {
   text-decoration: underline;
 }
-select,
+.custom-select-trigger,
 input[type="number"] {
   border: 1px solid #41515e;
   border-radius: 5px;
@@ -80,9 +78,6 @@ input[type="number"] {
   color: #eaf2f6;
   padding: 9px 10px;
   min-width: 0;
-}
-select {
-  color-scheme: dark;
 }
 input[type="range"] {
   accent-color: var(--lime);
@@ -159,14 +154,14 @@ small {
   padding-left: 20px;
   border-left: 1px solid var(--border);
 }
-nav {
+.app-header nav {
   display: flex;
   align-items: stretch;
   height: 100%;
   margin: auto;
   gap: 25px;
 }
-nav button {
+.app-header nav button {
   border: 0;
   border-bottom: 2px solid transparent;
   border-radius: 0;
@@ -175,11 +170,11 @@ nav button {
   color: #a5b7c5;
   font-size: 13px;
 }
-nav button.active {
+.app-header nav button.active {
   color: var(--lime);
   border-bottom-color: var(--lime);
 }
-nav button:hover:not(:disabled) {
+.app-header nav button:hover:not(:disabled) {
   background: transparent;
   color: #edf2f5;
 }
@@ -245,8 +240,8 @@ nav button:hover:not(:disabled) {
 .odor-control {
   margin-left: auto;
 }
-.speed-control select {
-  width: 65px;
+.speed-control .custom-select {
+  width: 125px;
 }
 .experiment-main {
   padding: 0 16px 16px;
@@ -538,11 +533,9 @@ nav button:hover:not(:disabled) {
   display: flex;
   gap: 7px;
 }
-.stim-controls select {
+.stim-controls .custom-select {
   width: 100%;
   flex: 1;
-  font-size: 11px;
-  padding: 8px;
   max-width: 170px;
 }
 .stim-controls button {
@@ -1137,7 +1130,7 @@ nav button:hover:not(:disabled) {
     gap: 15px;
     padding: 0 18px;
   }
-  nav {
+  .app-header nav {
     gap: 16px;
   }
   .experiment-toolbar {
@@ -1161,7 +1154,7 @@ nav button:hover:not(:disabled) {
   .stim-controls {
     flex-wrap: wrap;
   }
-  .stim-controls select {
+  .stim-controls .custom-select {
     flex: 1;
     max-width: none;
   }
@@ -1203,14 +1196,14 @@ nav button:hover:not(:disabled) {
     margin-left: auto;
     font-size: 10px;
   }
-  nav {
+  .app-header nav {
     order: 3;
     height: 37px;
     width: 100%;
     justify-content: center;
     gap: 30px;
   }
-  nav button {
+  .app-header nav button {
     font-size: 12px;
   }
   .experiment-toolbar {
@@ -1239,7 +1232,7 @@ nav button:hover:not(:disabled) {
     font-size: 0;
     gap: 0;
   }
-  .odor-control select {
+  .odor-control .custom-select-trigger {
     font-size: 11px;
     padding: 8px;
   }
@@ -1298,7 +1291,7 @@ nav button:hover:not(:disabled) {
     font-size: 12px;
     padding: 9px 0;
   }
-  .stim-controls select {
+  .stim-controls .custom-select {
     max-width: none;
   }
   .stimulation {
@@ -1484,17 +1477,1028 @@ nav button:hover:not(:disabled) {
   font-size: 10px;
   color: #8ea0ad;
 }
-.environment-choice select {
+.environment-choice .custom-select {
   min-width: 150px;
-  padding: 7px 10px;
 }
 @media (max-width: 760px) {
   .environment-choice {
     order: 3;
     flex: 1;
   }
-  .environment-choice select {
+  .environment-choice .custom-select {
     min-width: 0;
     width: 100%;
   }
+}
+
+.physical-lab {
+  margin-bottom: 24px;
+}
+.lab-controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  align-items: end;
+  gap: 16px;
+  margin: 20px 0;
+}
+.lab-controls label {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  min-width: 0;
+  color: #b2bccb;
+  font-size: 12px;
+}
+.lab-controls input,
+.lab-controls .custom-select {
+  width: 100%;
+  min-width: 0;
+}
+.lab-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.lab-table-scroll {
+  overflow: auto;
+  max-height: 360px;
+  margin: 14px 0;
+}
+.lab-table-scroll table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 12px;
+}
+.lab-table-scroll th,
+.lab-table-scroll td {
+  padding: 10px;
+  border-bottom: 1px solid #283344;
+  text-align: left;
+  white-space: nowrap;
+}
+.lab-table-scroll th {
+  color: #b2bccb;
+}
+.controller-picker {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.controller-picker .custom-select {
+  max-width: 220px;
+}
+.region-row small {
+  font-size: 10px;
+  color: #98a6b9;
+}
+@media (max-width: 640px) {
+  .controller-picker {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .model-notice {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .controller-picker .custom-select {
+    max-width: 100%;
+  }
+}
+.lab-controls,
+.lab-actions {
+  margin-left: 18px;
+  margin-right: 18px;
+}
+.physical-lab > button,
+.data-layout > .panel > button {
+  margin: 10px 18px 18px;
+}
+.data-layout > .panel,
+.physical-lab {
+  min-width: 0;
+}
+.senses-panel {
+  margin-top: 18px;
+  padding-bottom: 20px;
+}
+.senses-readout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  padding: 0 22px;
+}
+.eye-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.eye-pair figure {
+  margin: 0;
+  min-width: 0;
+}
+.eye-pair figcaption {
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+.eye-pair figcaption span {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 3px;
+}
+.eye-pair svg {
+  display: block;
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid #40505a;
+}
+.eye-pair small {
+  display: block;
+  margin-top: 6px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+}
+.sense-signals {
+  margin-bottom: 12px;
+}
+.sense-signals strong {
+  font-size: 12px;
+  font-weight: 500;
+}
+.sense-signals > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin-top: 5px;
+}
+.sense-signals label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+}
+.sense-signals meter {
+  width: 58px;
+  accent-color: #cce494;
+}
+.sense-signals output {
+  font-family: "IBM Plex Mono", monospace;
+  color: #aebdc4;
+}
+.senses-panel > .body-copy,
+.sense-settings {
+  margin: 16px 22px 0;
+}
+.sense-settings {
+  border-top: 1px solid #34434c;
+  padding-top: 14px;
+}
+.sense-settings summary {
+  cursor: pointer;
+  font-size: 13px;
+}
+.sense-settings fieldset {
+  border: 0;
+  padding: 14px 0 0;
+  min-width: 0;
+}
+.sense-settings legend {
+  padding-top: 14px;
+  font-size: 12px;
+}
+.sense-switches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 22px;
+  margin-bottom: 18px;
+}
+.sense-switches label {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  font-size: 13px;
+}
+.sense-switches input {
+  width: auto;
+  accent-color: #cce494;
+}
+.sense-settings button {
+  padding: 10px 16px;
+}
+@media (max-width: 700px) {
+  .senses-readout {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 0 16px;
+  }
+  .senses-panel > .body-copy,
+  .sense-settings {
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+  .senses-panel .panel-heading {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+}
+
+/* World selection and true-scale scene navigation. */
+.scene-chooser {
+  margin: 0 0 16px;
+  padding: 14px 18px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: #172630;
+}
+.scene-choice-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 11px;
+}
+.scene-choice-title > span {
+  font-size: 10px;
+  letter-spacing: 0.13em;
+  color: #b4c4cc;
+}
+.scene-choice-title small {
+  font-size: 10px;
+  color: #8d9fa9;
+}
+.scene-options {
+  display: flex;
+  gap: 8px;
+}
+.scene-options button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  flex: 1;
+  padding: 11px 8px;
+  background: #1d303c;
+  border: 1px solid #354b58;
+  color: #adbec8;
+}
+.scene-options button.active {
+  background: #354334;
+  border-color: #849e4b;
+  color: #d9ed9b;
+}
+.fly-location {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  background: #26372b;
+  color: #e6ffa0;
+  border: 1px solid #a8c36e;
+  box-shadow: 0 3px 16px #15201730;
+  font-size: 10px;
+  padding: 7px 10px;
+}
+.world-loading {
+  position: absolute;
+  top: 50%;
+  left: 15%;
+  right: 15%;
+  text-align: center;
+  padding: 18px;
+  color: #dbe8ec;
+  background: #1b2d3bea;
+  border-radius: 6px;
+}
+.world-loading button {
+  margin-left: 10px;
+}
+@media (max-width: 600px) {
+  .scene-chooser {
+    padding: 12px;
+  }
+  .scene-choice-title {
+    align-items: flex-start;
+  }
+  .scene-choice-title small {
+    max-width: 155px;
+    text-align: right;
+  }
+  .scene-options {
+    gap: 5px;
+  }
+  .scene-options button {
+    flex-direction: column;
+    gap: 7px;
+    font-size: 9px;
+    padding: 10px 2px;
+  }
+  .view-switch button {
+    padding: 7px 8px;
+  }
+}
+
+.life-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.life-controls button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.save-notice {
+  padding: 10px 24px;
+  color: #bedcc5;
+  background: #1b3026;
+  font-size: 13px;
+}
+.clock-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  padding: 8px 0 12px;
+  color: var(--muted);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+.clock-strip strong {
+  color: #dce7ef;
+  margin-left: 6px;
+}
+
+.brain-view-tabs,
+.anatomy-tabs {
+  display: flex;
+  gap: 4px;
+}
+.brain-view-tabs {
+  margin: 0 18px;
+  padding: 4px;
+  background: #14232d;
+  border-radius: 7px;
+}
+.brain-view-tabs button,
+.anatomy-tabs button {
+  flex: 1;
+  border: 0;
+  background: transparent;
+  color: #96adbf;
+  font-size: 11px;
+}
+.brain-view-tabs button[aria-pressed="true"],
+.anatomy-tabs button[aria-pressed="true"] {
+  background: #294354;
+  color: #e2f2ff;
+}
+.anatomy-explorer {
+  padding: 12px 18px 18px;
+  min-width: 0;
+}
+.anatomy-intro strong {
+  font-size: 12px;
+  color: #d5e5f0;
+}
+.anatomy-intro p,
+.anatomy-wiring > p,
+.anatomy-provenance p {
+  font-size: 11px;
+  line-height: 1.5;
+  color: #9cb2c2;
+  margin: 6px 0 10px;
+}
+.anatomy-trail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  margin: 10px 0;
+}
+.anatomy-trail > span {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  max-width: 100%;
+}
+.anatomy-trail button {
+  border: 0;
+  background: none;
+  padding: 2px 4px;
+  font-size: 10px;
+  color: #8bbdf3;
+  overflow-wrap: anywhere;
+  text-align: left;
+}
+.anatomy-trail button:disabled {
+  color: #b9cbd9;
+  opacity: 1;
+}
+.anatomy-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.anatomy-heading > div {
+  min-width: 0;
+}
+.anatomy-heading small {
+  color: #89a3b6;
+  font-size: 10px;
+}
+.anatomy-heading h3 {
+  margin: 3px 0 10px;
+  font-size: 16px;
+  overflow-wrap: anywhere;
+}
+.anatomy-heading button {
+  flex-shrink: 0;
+  padding: 6px;
+}
+.anatomy-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  padding: 9px 0 13px;
+}
+.anatomy-metrics > span,
+.anatomy-edge-totals > span {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 10px;
+  color: #9bb1c2;
+}
+.anatomy-metrics strong {
+  font:
+    16px "IBM Plex Mono",
+    monospace;
+  color: #d7eaff;
+}
+.anatomy-metrics strong small {
+  font-size: 10px;
+}
+.anatomy-tabs {
+  border-bottom: 1px solid #304351;
+  padding-bottom: 7px;
+}
+.anatomy-search {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 0;
+  color: #92aec3;
+}
+.anatomy-search input {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid #3b5263;
+  border-radius: 5px;
+  background: #152631;
+  color: #dbeaf4;
+  padding: 8px;
+  font-size: 11px;
+}
+.anatomy-group-list,
+.anatomy-neuron-list {
+  max-height: 300px;
+  overflow-y: auto;
+}
+.anatomy-group-row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 95px 14px;
+  align-items: center;
+  gap: 12px;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #2b414f;
+  border-radius: 0;
+  padding: 8px 2px;
+  text-align: left;
+}
+.anatomy-group-row:hover,
+.anatomy-neuron-row:hover {
+  background: #243d4d;
+}
+.anatomy-group-label,
+.anatomy-neuron-row > span {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.anatomy-group-label strong,
+.anatomy-neuron-row strong {
+  font-size: 11px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+.anatomy-group-label small,
+.anatomy-neuron-row small {
+  font-size: 10px;
+  color: #98b0c1;
+  overflow-wrap: anywhere;
+}
+.anatomy-rate {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: right;
+}
+.anatomy-rate small {
+  font:
+    10px "IBM Plex Mono",
+    monospace;
+  color: #bbd8ee;
+}
+.anatomy-neuron-row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 112px;
+  gap: 10px;
+  text-align: left;
+  border: 0;
+  border-bottom: 1px solid #2b414f;
+  border-radius: 0;
+  background: none;
+  padding: 9px 2px;
+}
+.anatomy-neuron-rate {
+  align-items: flex-end;
+}
+.anatomy-edge-totals {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  padding: 10px 0 14px;
+}
+.anatomy-edge-totals strong {
+  color: #d9eafa;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+.anatomy-edge-totals small:first-child {
+  text-transform: capitalize;
+}
+.anatomy-edge-totals small {
+  font-size: 10px;
+  overflow-wrap: anywhere;
+}
+.anatomy-route-scroll {
+  overflow: auto;
+  max-height: 295px;
+}
+.anatomy-route-scroll table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10px;
+}
+.anatomy-route-scroll caption {
+  text-align: left;
+  color: #9ab3c6;
+  padding: 5px 0 10px;
+}
+.anatomy-route-scroll th,
+.anatomy-route-scroll td {
+  padding: 8px 4px;
+  border-bottom: 1px solid #2b414f;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.anatomy-route-scroll th:first-child {
+  text-align: left;
+  font-weight: 400;
+  overflow-wrap: anywhere;
+  max-width: 140px;
+}
+.anatomy-route-scroll thead {
+  color: #98b8d1;
+}
+.anatomy-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 12px 0;
+  font-size: 10px;
+  color: #97b0c3;
+}
+.anatomy-pagination button {
+  font-size: 10px;
+  padding: 5px 8px;
+}
+.anatomy-footnote {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 9px;
+  line-height: 1.5;
+  color: #93abbd;
+}
+.anatomy-provenance {
+  font-size: 10px;
+  margin-top: 10px;
+  color: #9ab7cd;
+}
+.anatomy-provenance summary {
+  cursor: pointer;
+}
+.anatomy-provenance .mono {
+  overflow-wrap: anywhere;
+  font-size: 9px;
+}
+.anatomy-empty {
+  padding: 15px 0;
+  font-size: 11px;
+  line-height: 1.6;
+  color: #a4bacb;
+}
+.anatomy-empty button {
+  margin-top: 8px;
+  font-size: 11px;
+}
+.anatomy-error {
+  color: #ffb9a1;
+  font-size: 12px;
+}
+.anatomy-back {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+}
+
+.anatomy-group-row,
+.anatomy-neuron-row,
+.anatomy-trail button {
+  white-space: normal;
+}
+
+/* Measured neuron positions, with a bounded connection inspector. */
+.neural-network {
+  min-width: 0;
+}
+.neural-tools {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  flex-wrap: wrap;
+}
+.neural-tools label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #a6bccb;
+  font-size: 11px;
+}
+.neural-tools .mono {
+  margin-left: auto;
+  font-size: 10px;
+  color: #92adbf;
+}
+.neural-tools button {
+  display: grid;
+  place-items: center;
+  padding: 9px;
+}
+.neural-workspace {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.neural-stage {
+  height: 390px;
+  position: relative;
+  background: radial-gradient(ellipse at center, #162c3c, #0b1822 80%);
+  overflow: hidden;
+}
+.neural-stage canvas {
+  touch-action: none;
+}
+.neural-stage-label {
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  color: #bbd1df;
+  pointer-events: none;
+  font-size: 11px;
+  line-height: 1.8;
+}
+.neural-stage-label span {
+  color: #7796ab;
+  font-size: 10px;
+}
+.neural-color-key {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  color: #bbd1df;
+  pointer-events: none;
+}
+.neural-color-key i {
+  width: 115px;
+  height: 5px;
+  border-radius: 4px;
+  background: linear-gradient(to right, #25465d, #379bd9, #aedb8f, #ffc27b);
+}
+.neural-inspector {
+  padding: 4px 16px 16px;
+  min-width: 0;
+  border-top: 1px solid #304351;
+}
+.neural-inspector .anatomy-search {
+  margin: 0;
+}
+.neural-inspector .anatomy-search button {
+  padding: 8px;
+  display: grid;
+  place-items: center;
+}
+.neural-empty {
+  padding: 12px 0 0;
+  font-size: 12px;
+  color: #c8d7df;
+}
+.neural-empty p,
+.neural-identity {
+  font-size: 11px;
+  line-height: 1.7;
+  color: #91a8b7;
+  overflow-wrap: anywhere;
+}
+.neural-selected {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+  gap: 8px;
+}
+.neural-selected strong {
+  display: block;
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+.neural-selected .mono {
+  display: block;
+  color: #829bae;
+  font-size: 11px;
+  margin-top: 4px;
+}
+.neural-readout {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 11px;
+  color: #95acbc;
+}
+.neural-readout b {
+  font-family: "IBM Plex Mono", monospace;
+  color: #dcebf3;
+  font-size: 13px;
+}
+.neural-inspector .brain-view-tabs {
+  padding: 8px 0;
+}
+.neural-partners {
+  max-height: 210px;
+  overflow: auto;
+  border-top: 1px solid #304351;
+}
+.neural-partners > button {
+  width: 100%;
+  text-align: left;
+  border: 0;
+  border-bottom: 1px solid #263846;
+  border-radius: 0;
+  background: transparent;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 4px;
+}
+.neural-partners > button:hover {
+  background: #223b4b;
+}
+.neural-partners strong {
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+.neural-partners small {
+  display: block;
+  color: #829bad;
+  font-size: 10px;
+  margin-top: 3px;
+}
+.neural-partners .mono {
+  text-align: right;
+  font-size: 11px;
+}
+.neural-pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+.neural-pagination span {
+  font-size: 10px;
+  color: #95acbc;
+}
+.neural-pagination button {
+  padding: 6px 8px;
+  font-size: 11px;
+}
+.neural-provenance {
+  margin: 0;
+  padding: 12px 16px;
+  border-top: 1px solid #304351;
+  color: #839eaf;
+  font-size: 10px;
+  line-height: 1.7;
+}
+.neural-message {
+  padding: 24px;
+  color: #abc0ce;
+  font-size: 12px;
+}
+.neural-dialog {
+  width: min(1440px, 94vw);
+  max-width: 94vw;
+  max-height: 94dvh;
+  padding: 0;
+  border: 1px solid #496575;
+  border-radius: 12px;
+  background: #14232d;
+  color: #dceaf3;
+  box-shadow: 0 20px 80px #0009;
+}
+.neural-dialog::backdrop {
+  background: #040c14c9;
+  backdrop-filter: blur(4px);
+}
+.neural-dialog .neural-workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+}
+.neural-dialog .neural-stage {
+  height: min(72dvh, 850px);
+  min-height: 380px;
+}
+.neural-dialog .neural-inspector {
+  border-top: 0;
+  border-left: 1px solid #304351;
+  max-height: 72dvh;
+  overflow-y: auto;
+}
+.neural-dialog .neural-partners {
+  max-height: 29dvh;
+}
+@media (max-width: 760px) {
+  .neural-dialog .neural-workspace {
+    display: flex;
+  }
+  .neural-dialog .neural-stage {
+    height: 48dvh;
+    min-height: 270px;
+  }
+  .neural-dialog .neural-inspector {
+    max-height: none;
+    border-left: 0;
+    border-top: 1px solid #304351;
+  }
+  .neural-tools .mono {
+    margin-left: 0;
+  }
+  .neural-tools > button {
+    margin-left: auto;
+  }
+  .neural-stage {
+    height: 330px;
+  }
+}
+
+.peripheral-telemetry {
+  margin: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+}
+.peripheral-telemetry summary {
+  cursor: pointer;
+}
+.peripheral-telemetry p {
+  margin: 10px 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.peripheral-telemetry .lab-table-scroll {
+  max-height: 230px;
+}
+
+.compound-eye canvas {
+  width: 100%;
+  display: block;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.retina-axis {
+  display: flex;
+  justify-content: space-around;
+  color: var(--muted);
+  font-size: 11px;
+  padding: 6px 0;
+}
+.retina-channel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* Shared custom listboxes: top-layer menus escape cards and modal clipping. */
+.custom-select {
+  display: inline-flex;
+  vertical-align: middle;
+  min-width: 0;
+  max-width: 100%;
+}
+.custom-select .custom-select-trigger {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  justify-content: space-between;
+  gap: 12px;
+  text-align: left;
+}
+.custom-select-value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.custom-select-trigger > svg {
+  flex-shrink: 0;
+  transition: transform 0.15s;
+}
+.custom-select-trigger[aria-expanded="true"] {
+  border-color: var(--lime);
+}
+.custom-select-trigger[aria-expanded="true"] > svg {
+  transform: rotate(180deg);
+}
+.custom-select-menu {
+  position: fixed;
+  inset: auto;
+  margin: 0;
+  padding: 5px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  color: #eaf2f6;
+  background: #172631;
+  border: 1px solid #4b626e;
+  border-radius: 8px;
+  box-shadow: 0 12px 32px #0008;
+  font:
+    13px/1.4 "DM Sans",
+    system-ui,
+    sans-serif;
+  color-scheme: dark;
+}
+.custom-select-menu:popover-open {
+  display: block;
+}
+.custom-select-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px;
+  min-height: 38px;
+  border-radius: 4px;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+.custom-select-option > svg {
+  flex-shrink: 0;
+}
+.custom-select-option[aria-selected="true"] {
+  color: var(--lime);
+}
+.custom-select-option[data-active="true"] {
+  background: #2c4351;
+}
+.custom-select-option[aria-disabled="true"] {
+  opacity: 0.42;
+  cursor: not-allowed;
+}
+.environment-choice .custom-select-trigger {
+  padding: 7px 10px;
 }

@@ -28,6 +28,8 @@ export function useWorkbench() {
   const [training, setTraining] = useState<Training | null>(null);
   const [connected, setConnected] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
+  const [notice, setNotice] = useState<string | null>(null);
   const frames = useRef<Simulation[]>([]);
   const [replay, setReplay] = useState<number | null>(null);
   useEffect(() => {
@@ -54,11 +56,20 @@ export function useWorkbench() {
         setSimulation(data.simulation);
         setTraining(data.training);
         const last = frames.current.at(-1);
-        if (last && last.time > data.simulation.time) {
+        if (
+          last &&
+          (last.episode !== data.simulation.episode ||
+            last.time > data.simulation.time ||
+            last.model.controller !== data.simulation.model.controller)
+        ) {
           frames.current = [];
           setReplay(null);
         }
-        if (!last || last.steps !== data.simulation.steps) {
+        if (
+          !last ||
+          last.episode !== data.simulation.episode ||
+          last.steps !== data.simulation.steps
+        ) {
           frames.current.push({ ...data.simulation, history: [] });
           if (frames.current.length > 400) frames.current.shift();
         }
@@ -80,12 +91,28 @@ export function useWorkbench() {
     };
   }, []);
   const command: Command = useCallback(async (action, values = {}) => {
+    setBusy(true);
     try {
       setError(null);
+      setNotice(null);
       if (action === "run" || action === "reset") setReplay(null);
-      await request("/control", { action, ...values });
+      const result = await request<Simulation>("/control", {
+        action,
+        ...values,
+      });
+      setSimulation(result);
+      if (action === "live_save")
+        setNotice(
+          `Full brain and body saved at ${result.time.toFixed(2)} s simulated time.`,
+        );
+      if (action === "live_restore")
+        setNotice(
+          `Full brain and body restored at ${result.time.toFixed(2)} s. Press Run to continue.`,
+        );
     } catch (e) {
       setError((e as Error).message);
+    } finally {
+      setBusy(false);
     }
   }, []);
   return {
@@ -94,7 +121,9 @@ export function useWorkbench() {
       replay === null ? simulation : (frames.current[replay] ?? simulation),
     training,
     connected,
+    busy,
     error,
+    notice,
     setError,
     command,
     frames,

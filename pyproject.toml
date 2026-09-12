@@ -22,7 +22,10 @@ Repository = "https://github.com/hiyuantang/flylab"
 Issues = "https://github.com/hiyuantang/flylab/issues"
 
 [dependency-groups]
-dev = ["pytest>=8.3"]
+dev = [
+    "brian2>=2.9.0",
+    "pytest>=8.3",
+]
 
 [build-system]
 requires = ["hatchling"]

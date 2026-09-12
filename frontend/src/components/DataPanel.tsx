@@ -1,28 +1,63 @@
 import { useEffect, useState } from "react";
-import { Database, ExternalLink, Zap, Check, Download } from "lucide-react";
-import type { Dataset, Probe } from "../lib/types";
+import { Database, Download, Play, Square } from "lucide-react";
 import { request, downloadJSON } from "../lib/api";
-import { LineChart } from "./Telemetry";
+import { ModelControls } from "./ModelControls";
+
+type PaperResult = {
+  dataset: string;
+  neurons: number;
+  connection_rows: number;
+  duration_ms: number;
+  seed: number;
+  cancelled?: boolean;
+  limits: string;
+  results: {
+    condition: string;
+    mn9_hz: number[];
+    total_spikes: number;
+    wall_seconds: number;
+  }[];
+};
+type PaperStatus = {
+  running: boolean;
+  error: string | null;
+  progress: {
+    condition: string;
+    simulated_ms: number;
+    target_ms: number;
+    neurons: number;
+  } | null;
+  result: PaperResult | null;
+};
 export function DataPanel({ onError }: { onError: (s: string) => void }) {
-  const [data, setData] = useState<Dataset | null>(null);
-  const [neuron, setNeuron] = useState(10001);
-  const [amplitude, setAmplitude] = useState(2);
-  const [probe, setProbe] = useState<Probe | null>(null);
+  const [paper, setPaper] = useState<PaperStatus | null>(null);
   const [busy, setBusy] = useState(false);
   useEffect(() => {
-    request<Dataset>("/data")
-      .then(setData)
-      .catch((e) => onError(e.message));
+    let disposed = false;
+    let timer: ReturnType<typeof setTimeout>;
+    const poll = async () => {
+      try {
+        const value = await request<PaperStatus>("/paper");
+        if (!disposed) setPaper(value);
+      } catch (e) {
+        if (!disposed) onError((e as Error).message);
+      }
+      if (!disposed) timer = setTimeout(poll, 1500);
+    };
+    void poll();
+    return () => {
+      disposed = true;
+      clearTimeout(timer);
+    };
   }, [onError]);
   const run = async () => {
     setBusy(true);
     try {
-      setProbe(
-        await request<Probe>("/probe", {
-          body_id: neuron,
-          amplitude,
-          duration_ms: 100,
-        }),
+      setPaper(
+        await request<PaperStatus>(
+          paper?.running ? "/paper/stop" : "/paper/start",
+          {},
+        ),
       );
     } catch (e) {
       onError((e as Error).message);
@@ -30,215 +65,139 @@ export function DataPanel({ onError }: { onError: (s: string) => void }) {
       setBusy(false);
     }
   };
+  const result = paper?.result;
   return (
     <div className="data-layout">
       <section className="panel">
         <div className="panel-heading">
           <div>
-            <h2>Model provenance</h2>
-            <p>Know what is measured, and what is modeled.</p>
+            <h2>What the model preserves</h2>
+            <p>Full imported populations, explicit biological assumptions.</p>
           </div>
           <Database size={21} />
         </div>
         <div className="model-comparison">
           <div>
-            <span className="model-label">EMBODIED EXPERIMENT</span>
-            <h3>Synthetic reference circuit</h3>
+            <span className="model-label">EMBODIED MALECNS</span>
+            <h3>Measured wiring, continuous neural state</h3>
             <p>
-              96 rate units drive a connected NeuroMechFly body with 69 segments
-              and 84 effective muscle actuators. Anatomy comes from a female
-              specimen; neural wiring, muscle mappings and walking control are
-              modeled assumptions. Feet provide contact feedback.
+              Every imported neuron updates at 0.1 ms. Raw synapse counts set
+              efficacy, with explicit delays and refractory periods. Performance
+              never changes population size or time step. Precision changes only
+              when you explicitly switch execution mode. The schematic brain
+              view summarizes activity; it does not reduce the simulated
+              network.
             </p>
-            <span className="status-line">
-              <Check size={14} /> PyTorch + MuJoCo · working closed loop
-            </span>
           </div>
           <div>
-            <span className="model-label">MEASURED CONNECTIVITY PROBE</span>
-            <h3>MaleCNS v1.0</h3>
+            <span className="model-label">MODEL LIMITS</span>
+            <h3>Anatomy is not complete physiology</h3>
             <p>
-              Actual neuron IDs and synapse counts from Janelia. The isolated
-              subgraph uses assumed leaky integrate-and-fire dynamics. It is not
-              connected to the embodied model's muscles.
+              Unknown transmitter effects, retinal routing, and many muscle
+              targets remain unresolved. The body uses female-derived anatomy
+              and assumed muscle properties. Unclassified source segments are
+              disclosed below. This is a scientific model, not a validated
+              digital organism.
             </p>
-            <span className="status-line">
-              <Check size={14} /> Measured wiring · assumed physiology
-            </span>
           </div>
         </div>
-        <div className="scientific-note">
-          <strong>Next scientific integration</strong>
-          <p>
-            Matching identified motor neurons to specific muscles, calibrating
-            neuron and receptor dynamics, and validating responses against
-            experiments are required before the measured circuit can drive the
-            body with biological claims.
-          </p>
-        </div>
+        <p className="body-copy">
+          The CPU reference uses float64. Experimental MPS GPU execution uses
+          float32 and can change spike timing. Slow hardware produces slow
+          motion; neural and physical time stay synchronized. Save state
+          preserves the full brain, pending spikes, random generator, and body
+          for continuation.
+        </p>
       </section>
-      {data?.neurons ? (
-        <>
-          <section className="panel">
-            <div className="panel-heading">
-              <div>
-                <h2>Imported MaleCNS subgraph</h2>
-                <p>
-                  Seed {data.seed} ·{" "}
-                  {data.neurons.find((n) => n.body_id === data.seed)?.type}
-                </p>
-              </div>
-              <a
-                className="button-link"
-                href="https://male-cns.janelia.org/download/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Source <ExternalLink size={14} />
-              </a>
-            </div>
-            <div className="dataset-metrics">
-              <div>
-                <strong>{data.neurons.length.toLocaleString()}</strong>
-                <span>Selected neurons</span>
-              </div>
-              <div>
-                <strong>{data.edge_count.toLocaleString()}</strong>
-                <span>Directed connections</span>
-              </div>
-              <div>
-                <strong>{data.synapse_count.toLocaleString()}</strong>
-                <span>Synapse count</span>
-              </div>
-              <div>
-                <strong>
-                  {data.boundary_connection_rows.toLocaleString()}
-                </strong>
-                <span>Excluded boundary edges</span>
-              </div>
-            </div>
-            <p className="body-copy">{data.selection}</p>
-            <details>
-              <summary>Source files & checksums</summary>
-              <p className="body-copy">
-                {data.annotation_rows.toLocaleString()} annotation rows ·{" "}
-                {data.source_connection_rows.toLocaleString()} segment-level
-                connection rows. Segment rows are not equivalent to identified
-                neurons. License: CC-BY.
-              </p>
-              {data.sources.map((s) => (
-                <div className="source-file" key={s.file}>
-                  <a href={s.url}>
-                    {s.file} <ExternalLink size={12} />
-                  </a>
-                  <span>{(s.bytes / 1e6).toFixed(1)} MB</span>
-                  <code>SHA256 {s.sha256}</code>
-                </div>
-              ))}
-            </details>
-          </section>
-          <section className="panel probe-panel">
-            <div className="panel-heading">
-              <div>
-                <h2>Stimulate measured wiring</h2>
-                <p>500 ms simulation · 1 ms integration · 100 ms stimulus</p>
-              </div>
-              <Zap size={21} />
-            </div>
-            <div className="probe-controls">
-              <label>
-                Neuron
-                <select
-                  aria-label="Probe neuron"
-                  value={neuron}
-                  onChange={(e) => setNeuron(+e.target.value)}
-                >
-                  {data.neurons.map((n) => (
-                    <option key={n.body_id} value={n.body_id}>
-                      {n.type ?? "Untyped"} · {n.body_id}
-                    </option>
-                  ))}
-                </select>
-              </label>
-              <label>
-                Current amplitude
-                <input
-                  aria-label="Probe amplitude"
-                  type="number"
-                  min="0"
-                  max="5"
-                  step=".5"
-                  value={amplitude}
-                  onChange={(e) => setAmplitude(+e.target.value)}
-                />
-              </label>
-              <button
-                className="primary"
-                disabled={busy || amplitude < 0 || amplitude > 5}
-                onClick={run}
-              >
-                <Zap size={16} />
-                {busy ? "Simulating…" : "Run neural probe"}
-              </button>
-            </div>
-            {probe ? (
-              <>
-                <div className="probe-result">
-                  <div>
-                    <strong>{probe.active_neurons}</strong>
-                    <span>Neurons that spiked</span>
-                  </div>
-                  <div>
-                    <strong>{probe.spikes}</strong>
-                    <span>Total spikes</span>
-                  </div>
-                  <button
-                    onClick={() => downloadJSON("malecns-probe.json", probe)}
-                  >
-                    <Download size={15} /> Export probe
-                  </button>
-                </div>
-                <div className="chart-legend">
-                  <span>
-                    <i style={{ background: "#65aeff" }} /> Stimulated neuron
-                    voltage (relative threshold)
-                  </span>
-                </div>
-                <LineChart series={[probe.history.map((x) => x.voltage)]} />
-                <div className="axis">
-                  <span>0 ms</span>
-                  <span>500 ms</span>
-                </div>
-                <div className="probe-neurons">
-                  {probe.neurons.slice(0, 12).map((n) => (
-                    <div key={n.body_id}>
-                      <span>
-                        {n.type ?? "Untyped"} <small>{n.body_id}</small>
-                      </span>
-                      <span className="mono">{n.spikes} spikes</span>
-                    </div>
-                  ))}
-                </div>
-              </>
-            ) : (
-              <div className="probe-empty">
-                Select an identified neuron to test signal propagation through
-                its measured connections.
-              </div>
+      <section className="panel">
+        <div className="panel-heading">
+          <div>
+            <h2>Paper reference experiment</h2>
+            <p>Shiu et al., Nature 2024 · full FlyWire female v630 graph</p>
+          </div>
+          <a
+            className="button-link"
+            href="https://www.nature.com/articles/s41586-024-07763-9"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Read paper
+          </a>
+        </div>
+        <p className="body-copy">
+          Run no-input, sugar, and sugar + bitter conditions on all 127,400
+          source neurons, without training. Measure both MN9 feeding outputs.
+          This isolated reference uses the paper’s specimen and signed counts;
+          it is not the MaleCNS animal in Experiment.
+        </p>
+        <div className="lab-controls">
+          <button className="primary" disabled={busy || !paper} onClick={run}>
+            {paper?.running ? <Square size={15} /> : <Play size={15} />}
+            {paper?.running ? "Stop experiment" : "Run full-graph reference"}
+          </button>
+          {result && (
+            <button
+              onClick={() =>
+                downloadJSON("flylab-paper-reference.json", result)
+              }
+            >
+              <Download size={15} /> Export results
+            </button>
+          )}
+          <span className="body-copy">
+            1 s per condition · seed 42 · one trial
+          </span>
+        </div>
+        {paper?.running && (
+          <p role="status" className="body-copy">
+            {paper.progress
+              ? `${paper.progress.condition}: ${paper.progress.simulated_ms} / ${paper.progress.target_ms} ms · ${paper.progress.neurons.toLocaleString()} neurons`
+              : "Loading complete source graph…"}
+          </p>
+        )}
+        {paper?.error && (
+          <p role="alert" className="body-copy">
+            {paper.error}
+          </p>
+        )}
+        {result && (
+          <>
+            {paper?.running && (
+              <p className="body-copy">Previous completed result:</p>
             )}
-            <details>
-              <summary>Firing-model assumptions</summary>
-              <p className="body-copy">{data.assumptions}</p>
-            </details>
-          </section>
-        </>
-      ) : (
-        <section className="panel body-copy">
-          {data
-            ? "Measured subgraph is not prepared. Run the importer documented in README."
-            : "Loading dataset manifest…"}
-        </section>
-      )}
+            <div className="joint-table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Condition</th>
+                    <th>MN9 output 1 (Hz)</th>
+                    <th>MN9 output 2 (Hz)</th>
+                    <th>Spikes</th>
+                    <th>Compute time</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {result.results.map((r) => (
+                    <tr key={r.condition}>
+                      <td>{r.condition}</td>
+                      <td>{r.mn9_hz[0]}</td>
+                      <td>{r.mn9_hz[1]}</td>
+                      <td>{r.total_spikes.toLocaleString()}</td>
+                      <td>{r.wall_seconds.toFixed(1)} s</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="body-copy">
+              {result.cancelled
+                ? "Experiment stopped. Partial results only."
+                : result.limits}
+            </p>
+          </>
+        )}
+      </section>
+      <ModelControls onError={onError} />
     </div>
   );
 }

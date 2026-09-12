@@ -1,0 +1,36 @@
+{
+  "before_time": 2.5000000000000018,
+  "after_time": 2.5000000000000018,
+  "neural_tensors_equal": {
+    "voltage": true,
+    "current": true,
+    "spikes": true,
+    "rates": true,
+    "output_gain": true,
+    "last_spike_tick": true,
+    "refractory_ticks": true,
+    "delay_queue": true,
+    "spike_counts": true
+  },
+  "rng_equal": true,
+  "body_integration_equal": true,
+  "model_equal": true,
+  "graph_equal": true,
+  "clocks_equal": true,
+  "vision_model": "compound-retina-v1",
+  "gpu_step": {
+    "time": 2.520000000000002,
+    "spikes": 3073796,
+    "timing": {
+      "simulated_seconds": 2.520000000000002,
+      "compute_wall_seconds": 119.28131786943413,
+      "last_step_wall_seconds": 1.4532972499728203,
+      "simulated_per_wall_second": 0.02112652714617393,
+      "neural_dt_ms": 0.1,
+      "policy": "Every integration step is computed. Requested rate is a pacing ceiling; slow hardware never drops neural or physical steps."
+    },
+    "all_muscles_finite": true,
+    "model": "compound-retina-v1",
+    "mapped_visual_neurons": 3793
+  }
+}

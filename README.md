@@ -1,145 +1,102 @@
 # FlyLab
 
-A local scientific workbench with a moving fly on the left and a linked neural activity inspector on the right. PyTorch simulates neurons and trains selected synapses; MuJoCo computes muscle activation, force, joint motion and contact; React Three Fiber renders the body state.
+A local PyTorch and MuJoCo workbench for an embodied fruit-fly nervous-system model. The fly appears on the left; an activity inspector on the right shows neural population summaries. The web experiment runs the **full imported MaleCNS identified-neuron graph: 166,700 neurons and 25,582,938 directed connections**.
 
-This first implementation has two explicitly different models. The embodied experiment uses a **synthetic 96-unit reference circuit** and an articulated NeuroMechFly body with assumed muscle mechanics. The measured-data probe uses **actual MaleCNS v1.0 connectivity** with assumed LIF physiology. The measured graph is not yet wired to the body. Neither mode is a validated reconstruction of a living male fly.
+Every imported neuron integrates at 0.1 ms. The CPU reference uses float64; optional Apple GPU execution uses explicitly labeled float32. Raw synapse counts, transmission delays and refractory dynamics follow an explicitly versioned model. Slow computation produces slow motion; the runtime never prunes neurons, skips integration steps, or silently lowers precision. Measured wiring does not supply complete physiology or a complete muscle map. This is an experimental model, not a validated digital organism. See [brain fidelity, continuation and numerical verification](docs/BRAIN_FIDELITY.md).
 
-## Run locally
+## Setup and run
 
-Install Git, [uv](https://docs.astral.sh/uv/getting-started/installation/), and Node.js 22 LTS with npm, then clone the repository:
+Use Python 3.12, [uv](https://docs.astral.sh/uv/getting-started/installation/), and Node.js 22:
 
 ```bash
 git clone https://github.com/hiyuantang/flylab.git
 cd flylab
+uv sync --python 3.12
+(cd frontend && npm ci)
+uv run python scripts/download_data.py
+PYTHONPATH=backend uv run python -m flylab.full_connectome
 ./scripts/dev.sh
 ```
 
-Open http://127.0.0.1:5178. The backend uses http://127.0.0.1:8000. The launch script installs Python 3.12 dependencies and frontend packages when they are absent. From an existing checkout, run `./scripts/dev.sh` in its root directory. Both processes bind only to loopback. Stop with Ctrl+C. If either port is in use, stop this project's previous process before starting another; do not kill unrelated applications.
+The three MaleCNS source tables total approximately 1.1 GB. The atomic importer writes `data/full/`; choose another `--output` directory to rebuild without overwriting it. The app requires this full artifact. Missing data or incompatible saved state produces an explicit error; there is no reduced-circuit fallback.
 
-Manual setup:
+Open [the development app](http://127.0.0.1:5178). FastAPI binds to port 8000 and Vite to 5178, both on loopback. The launcher installs absent dependencies. Stop with Ctrl+C. Stop only this project's previous processes if its ports are occupied.
+
+For a single-server build:
 
 ```bash
-uv sync --python 3.12
-cd frontend
-npm ci
-cd ..
+(cd frontend && npm run build)
 PYTHONPATH=backend uv run uvicorn flylab.api:app --host 127.0.0.1 --port 8000
-# In another terminal, from the repository:
-cd frontend
-npm run dev
 ```
 
-For a single-server build, run `npm run build` in frontend, then start the backend; it serves the built site and meshes at port 8000. Rebuild and restart after frontend changes.
+Open [the built app](http://127.0.0.1:8000). Multiple tabs share one local controller; this is not an authenticated multi-user service.
 
-## Experiments
+## Workbench controls
 
-- **Run / Pause / Step / Reset** advance or reset simulation time. Reset clears neural state, muscles, body pose, interventions and the recording, while preserving learned parameters.
-- **Environment** selects uniform cues for conditioning or a spatial Gaussian odor field sampled at the moving antennae. Changing environments pauses and resets the body. **Sensory cue** selects odor A, B or no odor. Spatial steering uses an explicit approach/avoid decoder; navigation success is not established.
-- **Brain activity** shows mean absolute modeled unit activity. Select a region in the visualization, list or selector. Stimulation injects a bounded 500 ms pulse; silencing clamps that population. A paused pulse advances when simulation time advances.
-- **Muscle activation** groups 84 effective Hill actuators by leg and torque direction: blue positive, orange negative. Hover for activation and total force in µN. Foot indicators show ground contact. The overlay represents modeled activation, not reconstructed muscle volumes.
-- **Body movement** uses 69 connected anatomical segments, 70 hinge degrees of freedom and 42 actuated leg joints. Recorded walking references guide finite-force muscles through an explicit controller; MuJoCo computes body motion and ground contact. Self-collision prevents nonadjacent legs and wings from passing through the body. Wing surfaces use smaller convex sections and constrained passive hinges; reset resolves initial intersections. Walking passes short stability checks. Flight, grooming and biological muscle calibration remain unimplemented.
-- **Replay** becomes available while paused. It displays the latest 400 streamed body/neural snapshots (up to about 20 seconds at 1×); it does not rewind backend state. The signal plot retains the latest 300 integration steps (6 simulated seconds). Export includes both buffers and model provenance.
-- **Camera** supports orbit/zoom, perspective/top/side, muscle overlay, a connected-skeleton overlay, follow mode and reset. Select a body segment to inspect its attachment.
+- **Run / Pause / Step** advance synchronized brain and body time. Step computes 20 ms, including 200 neural updates. The footer reports simulated time, computation time and measured speed. Pacing settings are ceilings, not speed guarantees.
+- **Save state / Resume saved** preserve and restore the entire neural state, pending spikes, RNG and physical integration state. Restore opens paused. Normal shutdown also saves, and startup resumes paused. Reset explicitly starts a new episode; forced termination can lose changes since the last save.
+- **Environment / Sensory cue** control uniform or spatial odor input. Vision, hearing, wind, touch and joint-position signals are configurable in **What the fly senses**. Sensory tuning remains assumed. Scene, environment and sensory reconfiguration explicitly reset the episode.
+- **Brain activity → 3D network** places 139,662 neurons at measured soma locations and colors them by live simulated firing rate. Enlarge the view, click a point or search a MaleCNS ID, and inspect incoming/outgoing partners, synapse counts and directed links. Neurons without coordinates remain searchable. The display uses soma points and graph links, not reconstructed axon shapes.
+- **Brain activity → Anatomical groups** explores every imported neuron through superclass, cell type, soma side and assigned column. Search groups or body IDs, inspect live rates/voltages, and compare exact internal/incoming/outgoing connection and synapse counts. Missing annotations remain explicit. **Interventions** retains the six coarse intervention populations and bounded 500 ms pulses or soma clamping. See [group membership and API](docs/ANATOMICAL_GROUPS.md).
+- **Data & model → Brain execution** switches the live brain between CPU float64 and experimental Apple GPU (MPS) float32. Switching pauses, backs up the original state in `data/execution-backups/`, and transfers the complete state without resetting time. GPU selection persists in saved state; unavailable hardware produces an error rather than a silent fallback. MuJoCo, sensors, training workers and the isolated paper experiment remain on CPU.
+- **Body and muscles** show 69 connected anatomical segments, 70 hinge degrees of freedom, 42 actuated leg joints and 84 effective muscle channels. Supported motor-neuron rates drive finite-force actuators; MuJoCo computes motion and contacts. No gait oscillator or posture tracker controls the web experiment. Successful walking, flight and feeding are not established.
+- **Camera / Replay** provide orbit, zoom, muscle and skeleton overlays, segment inspection and recorded display frames. Replay does not rewind the backend. Use Resume saved for actual state continuation.
 
-## Reinforcement learning
+## Scenes and sensing
 
-The website’s training task is a two-cue contextual bandit. At each trial the reference brain observes a synthetic odor and chooses approach or avoid. Reward is +1 for approaching the rewarded odor or avoiding the other; otherwise −1. The task does not reward physical locomotion.
+Choose Laboratory, Kitchen, Living room, Bedroom or Garden. Scene geometry is shared by rendering, collision physics and head-mounted visual rays. Furniture and terrain have real dimensions; the fly can fall from its starting surface. Overview locates it at room scale, Surface shows its surroundings, and Fly view returns to millimeter scale. Furniture is static and rooms are cutaways. See [scene architecture](docs/SCENES.md).
 
-REINFORCE updates the 256 MB-to-descending synaptic parameters. All other weights and the connection pattern stay fixed. Each update uses 32 independent trials. Training operates on a copy of the current brain, leaving the live experiment unchanged until **Apply trained brain** is clicked. A frozen two-cue evaluation reports exact action probabilities; it is not an out-of-distribution navigation benchmark.
+The sensory panel displays two 16 × 8 grayscale ray-sampled eye views, odor, antennal sound, wind/gravity, foot contact and joint position. Inputs reach 6,091 annotated visual sensory neurons, 114 auditory Johnston's-organ neurons and 475 wind/gravity Johnston's-organ neurons, alongside olfactory and leg sensory populations. Vision pools brightness by eye; retinal columns, color, receptor tuning and recognition remain unresolved. See [sensing assumptions](docs/SENSING.md).
 
-Completed and stopped runs save tensor checkpoints under data/checkpoints. Applying or loading a checkpoint resets the body and transient neural state; learning remains. Restore untrained reference brain resets learned parameters explicitly. The current task uses an engineering optimizer, not a validated dopamine-dependent biological plasticity mechanism.
+## Data and biological boundaries
 
-### Physical locomotion environment
+The MaleCNS importer retains every annotation with a non-null superclass and every induced connection, without top-k selection or weight thresholds. The local artifact has 124,177,617 synapses. It excludes 44,877 unclassified annotation rows and reports crossing edges separately; segment rows are not interchangeable with identified neurons. Counts remain int64 and source hashes are recorded in `data/full/manifest.json`.
 
-The separate Gymnasium environment rewards physical progress toward a target, penalizes muscle effort and falls, and ends on success or a time limit. Use it from a source checkout after installing dependencies:
+The current Shiu-derived LIF profile uses 20 ms membrane decay, 5 ms synaptic decay, 2.2 ms refractory periods, 1.8 ms transmission delays and 0.275 mV per signed synapse. ACh is positive; GABA, histamine and default glutamate are negative. Unknown/modulatory effects default to zero fast current while those neurons and anatomical edges remain present. Receptor-specific actions and graded transmission are not resolved.
 
-```python
-import gymnasium as gym
-import numpy as np
-import flylab.env  # registers FlyLab-Locomotion-v0
+The expanded bridge with pretarsal and peripheral mechanics maps 438 of 815 annotated brain/VNC motor neurons to 154 of 186 muscle channels. The remaining 377 have explicit missing-target or missing-mechanism records. Type names are measured; same-side assignment, fixed-axis force projections, muscle strength and rate-to-force conversion remain assumptions. Older saved states retain their legacy mapping until explicitly upgraded. See the [complete neuromuscular inventory and limitations](docs/NEUROMUSCULAR_MAPPING.md). Body geometry derives from a female NeuroMechFly specimen. See [mechanics](docs/PHYSICS.md), [asset provenance](docs/ASSETS.md), and the mapping in **Data & model**.
 
-env = gym.make("FlyLab-Locomotion-v0", action_mode="synergy", max_steps=500)
-observation, info = env.reset(seed=42)
-for _ in range(500):
-    action = np.full(6, 0.4, dtype=np.float32)
-    observation, reward, terminated, truncated, info = env.step(action)
-    if terminated or truncated:
-        break
-env.close()
-```
+## Paper reference experiment
 
-`synergy` accepts six leg drives in [0, 1]. `muscle` accepts 84 independent excitations and bypasses the reference controller. Both return 338 normalized observations describing joints, muscle activation, body motion, foot forces, target bearing, odor and controller state. Actions advance 20 ms of physics. This headless interface is ready for PyTorch policies; the example is a constant-drive baseline, not a trained policy. Physical locomotion training is not yet connected to the website’s training panel.
-
-See [body mechanics and assumptions](docs/PHYSICS.md) for the control hierarchy and validation limits.
-
-## Measured MaleCNS data
-
-The download script obtains three public Janelia flat-connectome tables, approximately 1.1 GB total:
+The independent reference uses the paper's **full FlyWire female v630 graph**, not MaleCNS. It runs no-input, sugar and sugar + bitter trials without training and measures MN9 outputs:
 
 ```bash
-uv run python scripts/download_data.py
-PYTHONPATH=backend uv run python -m flylab.connectome --seed 10001 --limit 256
+PYTHONPATH=backend uv run python scripts/reproduce_paper.py --download --duration-ms 1000 --seed 42
 ```
 
-The imported subgraph includes DNp01 body 10001 and up to 255 directly connected, annotated neighbors ranked by summed incident synapse count. Eligibility requires a non-null superclass. All measured edges induced by those IDs are retained, with original integer synapse counts. The importer records excluded crossing edges; it does not assume those inputs are biologically absent.
+This downloads about 90 MB of pinned source tables. **Data & model → Run full-graph reference** runs the same protocol after downloading. A recorded single-seed trial showed sugar-evoked MN9 activity and suppression with bitter input. It does not reproduce the paper's full trial statistics or all behavioral predictions. [Exact protocol, results and limitations](docs/BRAIN_FIDELITY.md).
 
-The local import contains 256 neurons, 13,839 connection rows and 98,830 synapses. It excludes 616,223 boundary connection rows. The raw connection table has 151,856,684 segment-to-segment rows; this is not a neuron count. Source URLs, sizes, SHA256 hashes, selection rule and neurotransmitter predictions are in data/manifest.json.
+The CPU reference passes Brian2 state/spike checks. Custom Metal kernels execute the complete graph on MPS without unsupported sparse tensor operations. GPU float32 passes the small Brian2 scheduling tests, but full-graph trajectories differ from float64 and GPU execution is not necessarily faster. No precision downgrade is automatic. See [GPU implementation and measured limits](docs/GPU_EXECUTION.md).
 
-The probe uses sparse PyTorch recurrence with 1 ms LIF integration. Its normalized efficacy, thresholds, decay, reset, refractory behavior and transmitter sign mapping are assumptions. It treats only predicted GABA as inhibitory; glutamate and other transmitters need receptor-specific modeling before physiological interpretation. With default settings a DNp01 pulse can spike only the stimulated cell. That is an outcome of the assumed dynamics, not proof that downstream neurons do not respond in vivo.
+## Physical learning
 
-Data and checkpoints are gitignored. The UI works with the reference model when bulk data are absent. The importer streams Arrow batches and makes two passes without loading the complete graph as a dense matrix.
+**Training** uses cross-entropy search over six neural population gains, sensory gain and motor gain. All anatomical neurons, edges and counts remain intact. Rewards come from MuJoCo balance, motion and effort; completed runs include a zero-muscle ablation and held-out perturbation checks. Applying a compatible full-graph policy restores its saved scene, senses and mechanics and starts a new episode. It does not replace the anatomical wiring.
 
-## Architecture
+This is engineering parameter optimization, not yet biological synaptic plasticity or demonstrated learned walking. Older synthetic bandit and posture utilities remain for historical tests; the web controller rejects them. The Gymnasium `FlyLab-Locomotion-v0` environment supports direct `action_mode="muscle"` control with 84 excitations for independent policy research. Its observations include physical state and sensory samples; physics advances 20 ms per action.
 
-| Module | Responsibility |
-|---|---|
-| backend/flylab/neural.py | Synthetic recurrent rate circuit and trainable synapses |
-| backend/flylab/body.py | Connected anatomical rig, muscle actuators and walking controller |
-| backend/flylab/arena.py | Synthetic odor sampling and target bearing |
-| backend/flylab/env.py | Gymnasium locomotion and direct muscle actions |
-| backend/flylab/assets/ | Pinned anatomical parameters and numeric gait references |
-| backend/flylab/simulation.py | Time integration, interventions, sensory/body bridge |
-| backend/flylab/training.py | REINFORCE, evaluation and checkpoints |
-| backend/flylab/connectome.py | Versioned measured data import and sparse LIF probe |
-| backend/flylab/api.py | Local HTTP controls, WebSocket snapshots and static hosting |
-| frontend/src/components/Scene.tsx | 3D rendering of backend body poses |
-| frontend/src/components/Brain.tsx | Selectable schematic brain and stimulation controls |
-| frontend/src/components/Telemetry.tsx | Recorded signals, replay and muscle inspection |
-| frontend/src/components/Training.tsx | Training and saved-brain workflow |
-| frontend/src/components/DataPanel.tsx | Provenance and measured-wiring experiment |
+## Organization and validation
 
-The server is a single local workbench. Multiple tabs share simulation and training state. It is not an authenticated multi-user deployment. Heavy training runs independently of UI rendering. The 1×/2×/4× setting is a requested stepping multiplier, not a real-time performance guarantee. End-to-end differentiability through MuJoCo is not provided.
-
-## Validation
+- `backend/flylab/full_connectome.py`: MaleCNS import and complete graph loading.
+- `paper_dynamics.py`, `paper_experiment.py`: verified neuron dynamics and pinned reference experiment.
+- `body.py`, `neuromuscular.py`, `senses.py`, `scenes.py`: mechanics, annotation-based coupling and world sensing.
+- `simulation.py`, `live_state.py`, `api.py`: synchronized integration, continuation and local service.
+- `physical_training.py`, `env.py`: physical reward optimization and Gymnasium interfaces.
+- `frontend/src/components/`: body/brain views, sensing, training and reference results.
+- `tests/`, `docs/`: deterministic checks, provenance and validation records.
 
 ```bash
 PYTHONPATH=backend uv run pytest -q
-cd frontend
-npm run build
+(cd frontend && npm run build)
 ```
 
-Tests cover stimulus expiry, motor silencing and muscle decay, physical joint motion, determinism, reset semantics, learning and reversal, checkpoint round trips, preservation of fixed connections, sparse edge direction, data count integrity, API validation and live streaming. Browser QA covers desktop and mobile layout, live controls, training/apply/evaluation, measured-data probing and replay. See docs/VALIDATION.md.
+Tests cover dynamics against Brian2, graph direction/count integrity, spike-delay and body-state continuation, physical effects, training isolation and API behavior. Optional dataset checks skip when bulk data are absent. See [validation records](docs/VALIDATION.md).
 
-## Scientific development still required
+Further work includes unclassified boundary interpretation, cell-type physiology, retinal routing, complete muscle/tendon mapping, validated locomotion, biological plasticity, and long-run GPU precision validation and performance optimization. MuJoCo is not end-to-end differentiable through the current PyTorch interface.
 
-1. Map MaleCNS motor and sensory IDs to experimentally supported muscle and receptor targets; preserve species, sex and specimen provenance.
-2. Replace the synthetic reference circuit with selected validated sensorimotor circuits, then expand. Build explicit boundary input models for subsets.
-3. Calibrate cell-type and receptor-specific physiology, graded versus spiking transmission, delays, and compartmental dynamics where supported.
-4. Replace effective actuators with calibrated muscle geometry, tendon routing and force laws. Add active neck, proboscis, wings and abdomen mechanics.
-5. Add vision and biological sensory encoders beyond the synthetic odor field and contact feedback; train embodied policies with held-out environments and perturbation benchmarks.
-6. Implement and compare local dopamine-modulated plasticity against engineering RL, without treating task success alone as biological validation.
+## License and sources
 
-## Sources and attribution
+Original code and documentation: [Apache-2.0](LICENSE), copyright 2026 Yuan Tang and FlyLab contributors. Third-party materials retain their licenses. MaleCNS data is CC BY 4.0; NeuroMechFly assets are Apache-2.0; the Shiu reference code and protocol adaptation retain their MIT notice. Datasets, checkpoints and build outputs are ignored by Git. See [third-party notices](THIRD_PARTY_NOTICES.md).
 
-- MaleCNS project and CC-BY data: https://male-cns.janelia.org/ and https://male-cns.janelia.org/download/
-- NeuroMechFly: https://neuromechfly.org/ and https://github.com/NeLy-EPFL/flygym
-- Body geometry, joint frames and masses derive from a female NeuroMechFly specimen. Visual and physical segments share transforms and a uniform scale; muscle routing and control remain assumptions. See [asset provenance](docs/ASSETS.md) and the bundled Apache 2.0 license.
-- MuJoCo muscle model: https://mujoco.readthedocs.io/en/stable/modeling.html#muscles
-- Fly connectome modeling precedent: https://www.nature.com/articles/s41586-024-07763-9
-- Dopamine and memory dynamics: https://www.nature.com/articles/s41586-024-07819-w
+Primary sources: [MaleCNS downloads](https://male-cns.janelia.org/download/), [Shiu et al., Nature 2024](https://www.nature.com/articles/s41586-024-07763-9), [NeuroMechFly](https://github.com/NeLy-EPFL/flygym), and [MuJoCo muscle modeling](https://mujoco.readthedocs.io/en/stable/modeling.html#muscles).
 
-## License
-
-FlyLab's original code and documentation are licensed under the [Apache License 2.0](LICENSE). Copyright 2026 Yuan Tang and FlyLab contributors.
-
-Third-party materials retain their own licenses. MaleCNS data is CC BY 4.0; the bundled NeuroMechFly meshes are Apache-2.0; DM Sans and IBM Plex Mono fonts are SIL OFL-1.1. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for attribution, source versions, modifications, and dependency notices. Bulk datasets, trained checkpoints, installed dependencies, and build outputs are excluded from Git.
+Compound-eye mode uses 857/852 measured optical directions and individual facet input for 3,793 visual neurons. The MaleCNS-to-optical-template registration remains unvalidated; UV, polarization and ocelli are absent. [Sensory implementation, evidence and limits](docs/SENSING.md).

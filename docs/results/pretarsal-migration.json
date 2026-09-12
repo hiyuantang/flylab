@@ -1,0 +1,45 @@
+{
+  "profile": "muscle-routing-v3",
+  "time": 0.0,
+  "backup": "data/mapping-backups/live-1789247730852950000.pt",
+  "neural_tensors_equal": {
+    "voltage": true,
+    "current": true,
+    "spikes": true,
+    "rates": true,
+    "output_gain": true,
+    "last_spike_tick": true,
+    "refractory_ticks": true,
+    "delay_queue": true,
+    "spike_counts": true
+  },
+  "existing_joint_positions_equal": true,
+  "existing_joint_velocities_equal": true,
+  "existing_muscle_activations_equal": true,
+  "new_muscles_initially_zero": true,
+  "old_channels": 84,
+  "new_channels": 90,
+  "note": "Physical model migration; changed mechanics, not exact continuation of the old body.",
+  "live_step": {
+    "time": 0.02,
+    "spikes": 10486,
+    "device": "mps",
+    "pretarsal_activation": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "pretarsal_force_uN": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "restored_body_matches_saved_snapshot": true
+}

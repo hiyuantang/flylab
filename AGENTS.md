@@ -35,6 +35,8 @@ Use short imperative summaries, following `Initialize FlyLab simulation workbenc
 
 ## Scientific Integrity & Contribution Boundaries
 
+Preserve every imported neuron and connection. Optimize execution without pruning, reduced circuits, skipped neural steps, or silent precision changes; accept slow motion and report simulated versus wall time. Validate dynamics against the scientific reference before claiming fidelity.
+
 Distinguish the synthetic embodied circuit from the measured connectome probe. Document assumptions and preserve source counts, provenance, and third-party notices. Keep credentials, datasets, checkpoints, and build outputs out of Git. Bind the shared local controller to loopback.
 
 Agents own integration and final review. Delegate only repetitive, independent batches to `luna_worker`, with exclusive ownership; verify results and preserve others' edits. Keep architecture, accuracy reviews, security, and external changes with the main agent.

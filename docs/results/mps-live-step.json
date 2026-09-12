@@ -1,0 +1,45 @@
+{
+  "scene": "kitchen",
+  "from_seconds": 0.19999999999999998,
+  "to_seconds": 0.21999999999999997,
+  "model": {
+    "name": "MaleCNS annotated full graph",
+    "controller": "connectome",
+    "neurons": 166700,
+    "edges": 25582938,
+    "engine": "PyTorch + MuJoCo",
+    "measured_connectome": true,
+    "device": "mps",
+    "precision": "torch.float32",
+    "execution": {
+      "device": "mps",
+      "precision": "torch.float32",
+      "kernel": "metal-csr-f32-v1",
+      "experimental": true,
+      "history": [
+        {
+          "from": "cpu",
+          "to": "mps",
+          "tick": 2000
+        }
+      ],
+      "note": "MPS float32 may change spike timing; not equivalent to the float64 reference. All neurons, edges and ticks retained."
+    },
+    "dynamics_version": "shiu-2024-linear-delay-v1",
+    "neural_wall_seconds": 0.965744832996279,
+    "spikes": 222663,
+    "assumptions": "Measured wiring; assumed physiology and partial muscle routing",
+    "ready": true
+  },
+  "timing": {
+    "simulated_seconds": 0.21999999999999997,
+    "compute_wall_seconds": 6.829977000015788,
+    "last_step_wall_seconds": 1.0730004160432145,
+    "simulated_per_wall_second": 0.03221094302359897,
+    "neural_dt_ms": 0.1,
+    "policy": "Every integration step is computed. Requested rate is a pacing ceiling; slow hardware never drops neural or physical steps."
+  },
+  "restored_seconds": 0.19999999999999998,
+  "paused": true,
+  "note": "One live GPU brain-body step, then restored pre-check state on MPS. Lifetime timing includes earlier CPU steps."
+}

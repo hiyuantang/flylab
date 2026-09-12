@@ -143,7 +143,7 @@ export function Telemetry({
           {legs.map((leg, i) => (
             <div className="muscle-column" key={leg}>
               <span
-                title={`${simulation.body.foot_forces[i].toFixed(2)} µN ground force`}
+                title={`${simulation.body.foot_forces[i].toFixed(2)} µN surface force`}
               >
                 <i
                   className={`foot-state ${simulation.body.foot_contacts[i] ? "contact" : ""}`}
@@ -182,10 +182,56 @@ export function Telemetry({
           <span>
             <i style={{ background: "#ff9f67" }} /> Negative torque
           </span>
-          <span>
-            {simulation.body.anatomy.muscles} effective muscles · mean by leg
-          </span>
+          <span>84 joint muscle channels · mean by leg</span>
         </div>
+        {simulation.body.pretarsi && simulation.body.pretarsi.length > 0 && (
+          <div
+            className="chart-legend"
+            aria-label="Pretarsal tendon activation"
+          >
+            <span>Pretarsal pull</span>
+            {simulation.body.pretarsi.map((foot) => (
+              <span key={foot.name}>
+                {foot.name.slice(0, 2).toUpperCase()}{" "}
+                {foot.activation.toFixed(2)}
+              </span>
+            ))}
+          </div>
+        )}
+        {!!simulation.body.peripheral_muscles?.length && (
+          <details className="peripheral-telemetry">
+            <summary>
+              Named peripheral muscles ·{" "}
+              {simulation.body.peripheral_muscles.length} channels
+            </summary>
+            <p>
+              Effective mechanics; wing forces do not establish flight. Force
+              parameters and transmission geometry are uncalibrated.
+            </p>
+            <div className="lab-table-scroll">
+              <table aria-label="Named peripheral muscle forces">
+                <thead>
+                  <tr>
+                    <th>Muscle</th>
+                    <th>Activation</th>
+                    <th>Force (µN)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {simulation.body.peripheral_muscles.map((m) => (
+                    <tr key={m.name} title={m.interpretation}>
+                      <td>
+                        {m.side} {m.target}
+                      </td>
+                      <td>{m.activation.toFixed(3)}</td>
+                      <td>{m.force_uN.toFixed(3)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </details>
+        )}
       </section>
     </div>
   );

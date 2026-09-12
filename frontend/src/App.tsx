@@ -1,3 +1,4 @@
+import Select from "./components/Select";
 import { Component, lazy, Suspense, useCallback, useState } from "react";
 import type { ReactNode, ErrorInfo } from "react";
 import {
@@ -6,22 +7,26 @@ import {
   Pause,
   SkipForward,
   RotateCcw,
+  Save,
+  FolderOpen,
   X,
   WifiOff,
 } from "lucide-react";
 import { useWorkbench, downloadJSON } from "./lib/api";
 import { Telemetry } from "./components/Telemetry";
+import { SceneChooser } from "./components/World";
+import { Senses } from "./components/Senses";
 const FlyScene = lazy(() =>
   import("./components/Scene").then((x) => ({ default: x.FlyScene })),
 );
 const Brain = lazy(() =>
   import("./components/Brain").then((x) => ({ default: x.Brain })),
 );
-const Training = lazy(() =>
-  import("./components/Training").then((x) => ({ default: x.Training })),
-);
 const DataPanel = lazy(() =>
   import("./components/DataPanel").then((x) => ({ default: x.DataPanel })),
+);
+const PhysicalLab = lazy(() =>
+  import("./components/PhysicalLab").then((x) => ({ default: x.PhysicalLab })),
 );
 class SceneBoundary extends Component<
   { children: ReactNode },
@@ -78,7 +83,11 @@ export default function App() {
         </nav>
         <div className={`connection ${w.connected ? "" : "offline"}`}>
           <i />
-          {w.connected ? "PyTorch connected" : "Connecting to PyTorch"}
+          {w.busy
+            ? "Applying change…"
+            : w.connected
+              ? "PyTorch connected"
+              : "Connecting to PyTorch"}
         </div>
       </header>
       {w.error && (
@@ -87,6 +96,11 @@ export default function App() {
           <button aria-label="Dismiss error" onClick={() => w.setError(null)}>
             <X size={16} />
           </button>
+        </div>
+      )}
+      {w.notice && (
+        <div className="save-notice" role="status">
+          {w.notice}
         </div>
       )}
       {!w.connected && (
@@ -102,34 +116,31 @@ export default function App() {
           <div className="experiment-toolbar">
             <div className="task-field">
               <span>Task</span>
-              <strong>
-                {s?.environment?.mode === "spatial"
-                  ? "Odor-guided movement"
-                  : "Odor conditioning"}
-              </strong>
+              <strong>Full measured brain</strong>
             </div>
             <label className="environment-choice">
               Environment
-              <select
+              <Select
                 aria-label="Environment"
                 title="Changing environment resets the body"
-                disabled={!w.connected}
+                disabled={!w.connected || w.busy || !s?.model.ready}
                 value={s?.environment?.mode ?? "uniform"}
-                onChange={(e) => {
+                onChange={(value) => {
                   w.setReplay(null);
                   void w.command("environment", {
-                    environment: e.target.value,
+                    environment: value,
                   });
                 }}
-              >
-                <option value="uniform">Uniform cue</option>
-                <option value="spatial">Spatial odor field</option>
-              </select>
+                options={[
+                  { value: "uniform", label: "Uniform cue" },
+                  { value: "spatial", label: "Spatial odor field" },
+                ]}
+              />
             </label>
             <div className="transport">
               <button
                 className="primary"
-                disabled={!w.connected}
+                disabled={!w.connected || w.busy || !s?.model.ready}
                 onClick={() => w.command(s?.running ? "pause" : "run")}
               >
                 {s?.running ? (
@@ -140,7 +151,7 @@ export default function App() {
                 {s?.running ? "Pause" : "Run"}
               </button>
               <button
-                disabled={!w.connected}
+                disabled={!w.connected || w.busy || !s?.model.ready}
                 onClick={() => {
                   w.setReplay(null);
                   void w.command("step");
@@ -149,7 +160,7 @@ export default function App() {
                 <SkipForward size={16} /> Step
               </button>
               <button
-                disabled={!w.connected}
+                disabled={!w.connected || w.busy || !s?.model.ready}
                 onClick={() => w.command("reset")}
               >
                 <RotateCcw size={16} /> Reset
@@ -157,50 +168,87 @@ export default function App() {
             </div>
             <label className="odor-control">
               Sensory cue
-              <select
+              <Select
                 aria-label="Sensory cue"
                 value={s?.odor ?? "A"}
-                disabled={!w.connected}
-                onChange={(e) =>
+                disabled={!w.connected || w.busy || !s?.model.ready}
+                onChange={(value) =>
                   w.command("odor", {
-                    odor: e.target.value,
+                    odor: value,
                     intensity: s?.intensity ?? 0.7,
                   })
                 }
-              >
-                <option value="A">Odor A</option>
-                <option value="B">Odor B</option>
-                <option value="none">No odor</option>
-              </select>
+                options={[
+                  { value: "A", label: "Odor A" },
+                  { value: "B", label: "Odor B" },
+                  { value: "none", label: "No odor" },
+                ]}
+              />
             </label>
             <label className="speed-control">
-              Rate
-              <select
+              Pacing ceiling
+              <Select
                 aria-label="Simulation rate"
                 value={s?.speed ?? 1}
-                disabled={!w.connected}
-                onChange={(e) => w.command("speed", { speed: +e.target.value })}
-              >
-                <option value="1">1×</option>
-                <option value="2">2×</option>
-                <option value="4">4×</option>
-              </select>
+                disabled={!w.connected || w.busy || !s?.model.ready}
+                onChange={(value) => w.command("speed", { speed: +value })}
+                options={[
+                  { value: "1", label: "1× real time" },
+                  { value: "2", label: "2× real time" },
+                  { value: "4", label: "4× real time" },
+                ]}
+              />
             </label>
           </div>
           <main className="experiment-main">
             <div className="model-notice">
               <span>
-                <i /> Synthetic reference circuit
+                <i /> {d?.model.name ?? "Preparing controller"}
               </span>
-              <span>
-                Measured MaleCNS wiring is available in{" "}
-                <button onClick={() => setTab("Data & model")}>
-                  Data & model →
+              <span className="life-controls">
+                <button
+                  disabled={!w.connected || w.busy || !s?.model.ready}
+                  onClick={() => w.command("live_save")}
+                  title="Save every neuron's state, delayed spikes, and the physical body"
+                >
+                  <Save size={14} /> Save state
+                </button>
+                <button
+                  disabled={!w.connected || w.busy}
+                  onClick={() => {
+                    w.setReplay(null);
+                    void w.command("live_restore");
+                  }}
+                  title="Restore the last full state, paused"
+                >
+                  <FolderOpen size={14} /> Resume saved
                 </button>
               </span>
             </div>
             {d && s ? (
               <>
+                <div className="clock-strip" aria-label="Simulation timing">
+                  <span>
+                    Simulated <strong>{d.time.toFixed(2)} s</strong>
+                  </span>
+                  <span>
+                    Computed in{" "}
+                    <strong>
+                      {(d.timing?.compute_wall_seconds ?? 0).toFixed(1)} s
+                    </strong>
+                  </span>
+                  <span>
+                    {d.timing?.simulated_per_wall_second != null
+                      ? `${d.timing.simulated_per_wall_second.toFixed(3)}× real time`
+                      : "Ready to simulate"}{" "}
+                    · full graph
+                  </span>
+                </div>
+                <SceneChooser
+                  scene={d.scene}
+                  command={w.command}
+                  disabled={!w.connected || w.busy || w.replay !== null}
+                />
                 <div className="simulation-grid">
                   <SceneBoundary>
                     <Suspense
@@ -208,7 +256,10 @@ export default function App() {
                         <div className="panel loading">Preparing 3D body…</div>
                       }
                     >
-                      <FlyScene simulation={d} />
+                      <FlyScene
+                        key={d.scene.id + d.scene.version}
+                        simulation={d}
+                      />
                     </Suspense>
                   </SceneBoundary>
                   <SceneBoundary>
@@ -222,11 +273,28 @@ export default function App() {
                       <Brain
                         simulation={d}
                         command={w.command}
-                        disabled={!w.connected || w.replay !== null}
+                        liveAvailable={
+                          w.connected && w.replay === null && !!s.model.ready
+                        }
+                        disabled={
+                          !w.connected ||
+                          w.busy ||
+                          w.replay !== null ||
+                          d.model.controller === "posture"
+                        }
                       />
                     </Suspense>
                   </SceneBoundary>
                 </div>
+                {d.senses && (
+                  <Senses
+                    key={d.episode}
+                    frame={d.senses}
+                    controller={d.model.controller ?? "connectome"}
+                    command={w.command}
+                    disabled={!w.connected || w.busy || w.replay !== null}
+                  />
+                )}
                 <Telemetry
                   simulation={d}
                   history={s.history}
@@ -241,6 +309,14 @@ export default function App() {
                     })
                   }
                 />
+                <p className="body-copy">
+                  Every imported neuron and connection remains in the
+                  simulation. Fixed {d.timing?.neural_dt_ms ?? 0.1} ms neural
+                  integration · {d.model.precision} ·{" "}
+                  {d.model.spikes?.toLocaleString()} spikes. Measured wiring;
+                  assumed physiology, sensory encoding, and partial muscle
+                  routing. Walking is not validated.
+                </p>
               </>
             ) : (
               <div className="loading panel">
@@ -259,16 +335,15 @@ export default function App() {
               <h1>Learning laboratory</h1>
               <p>Train a brain. Keep the experiment reproducible.</p>
             </div>
-            <span className="model-tag">Synthetic reference model</span>
+            <span className="model-tag">Full-graph physical learning</span>
           </div>
           <Suspense
             fallback={<div className="panel loading">Loading training…</div>}
           >
-            <Training
-              training={w.training}
+            <PhysicalLab
               command={w.command}
-              disabled={!w.connected}
               onError={onError}
+              scene={s?.scene}
             />
           </Suspense>
         </main>
@@ -293,17 +368,22 @@ export default function App() {
           Simulation time <strong>{(d?.time ?? 0).toFixed(2)} s</strong>
         </span>
         <span>
-          Neural steps <strong>{(d?.steps ?? 0).toLocaleString()}</strong>
+          Compute time{" "}
+          <strong>{(d?.timing?.compute_wall_seconds ?? 0).toFixed(1)} s</strong>
         </span>
         <span>
           Contact points <strong>{d?.body.contacts ?? 0}</strong>
         </span>
         <span className="footer-model">
-          {d?.model.neurons ?? 96} modeled units · CPU
+          {(d?.model.neurons ?? 0).toLocaleString()} neurons ·{" "}
+          {d?.model.device?.toUpperCase() ?? "—"} ·{" "}
+          {d?.model.precision?.replace("torch.", "") ?? "—"}
         </span>
         <span className="status-word">
           <i className={s?.running ? "running" : ""} />
           {w.replay !== null ? "Replay" : s?.running ? "Running" : "Paused"}
+          {d?.timing?.simulated_per_wall_second != null &&
+            ` · ${d.timing.simulated_per_wall_second.toFixed(3)}× measured rate`}
         </span>
       </footer>
     </div>

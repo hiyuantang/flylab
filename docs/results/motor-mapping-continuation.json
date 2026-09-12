@@ -1,0 +1,27 @@
+{
+  "before_profile": "leg-routing-v1",
+  "after_profile": "muscle-routing-v2",
+  "time": 0.4400000000000001,
+  "device": "mps",
+  "spikes": 460456,
+  "unchanged": {
+    "voltage": true,
+    "current": true,
+    "spikes": true,
+    "rates": true,
+    "output_gain": true,
+    "last_spike_tick": true,
+    "refractory_ticks": true,
+    "delay_queue": true,
+    "spike_counts": true,
+    "body_integration": true
+  },
+  "step_check": {
+    "time": 0.46000000000000013,
+    "spikes": 478726,
+    "active_channels": 39,
+    "finite_activation_and_force": true,
+    "restored_time": 0.4400000000000001,
+    "restored_body_matches": true
+  }
+}
