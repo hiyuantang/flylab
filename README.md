@@ -2,7 +2,7 @@
 
 A local scientific workbench with a moving fly on the left and a linked neural activity inspector on the right. PyTorch simulates neurons and trains selected synapses; MuJoCo computes muscle activation, force, joint motion and contact; React Three Fiber renders the body state.
 
-This first implementation has two explicitly different models. The embodied experiment uses a **synthetic 96-unit reference circuit** and a schematic body. The measured-data probe uses **actual MaleCNS v1.0 connectivity** with assumed LIF physiology. The measured graph is not yet wired to the body. Neither mode is a validated reconstruction of a living male fly.
+This first implementation has two explicitly different models. The embodied experiment uses a **synthetic 96-unit reference circuit** and an articulated NeuroMechFly body with assumed muscle mechanics. The measured-data probe uses **actual MaleCNS v1.0 connectivity** with assumed LIF physiology. The measured graph is not yet wired to the body. Neither mode is a validated reconstruction of a living male fly.
 
 ## Run locally
 
@@ -34,20 +34,43 @@ For a single-server build, run `npm run build` in frontend, then start the backe
 ## Experiments
 
 - **Run / Pause / Step / Reset** advance or reset simulation time. Reset clears neural state, muscles, body pose, interventions and the recording, while preserving learned parameters.
-- **Sensory cue** presents synthetic odor A, B or no odor. The arena marker is an illustration of the selected cue, not a spatially sampled odor source. Odor concentration is not yet computed from fly position.
+- **Environment** selects uniform cues for conditioning or a spatial Gaussian odor field sampled at the moving antennae. Changing environments pauses and resets the body. **Sensory cue** selects odor A, B or no odor. Spatial steering uses an explicit approach/avoid decoder; navigation success is not established.
 - **Brain activity** shows mean absolute modeled unit activity. Select a region in the visualization, list or selector. Stimulation injects a bounded 500 ms pulse; silencing clamps that population. A paused pulse advances when simulation time advances.
-- **Muscle activation** shows six synthetic antagonistic pairs. Blue is flexor, orange is extensor. Hover for activation and modeled force. The muscle overlay is a schematic visualization of activity, not a measured muscle volume.
-- **Body movement** comes from MuJoCo physics, not an animation cycle. An explicit synthetic VNC oscillator drives the motor units. Stable walking, flight, grooming and all-body muscle physiology are not established. The fly may crouch or drift rather than walk.
+- **Muscle activation** groups 84 effective Hill actuators by leg and torque direction: blue positive, orange negative. Hover for activation and total force in µN. Foot indicators show ground contact. The overlay represents modeled activation, not reconstructed muscle volumes.
+- **Body movement** uses 69 connected anatomical segments, 70 hinge degrees of freedom and 42 actuated leg joints. Recorded walking references guide finite-force muscles through an explicit controller; MuJoCo computes body motion and ground contact. Self-collision prevents nonadjacent legs and wings from passing through the body. Wing surfaces use smaller convex sections and constrained passive hinges; reset resolves initial intersections. Walking passes short stability checks. Flight, grooming and biological muscle calibration remain unimplemented.
 - **Replay** becomes available while paused. It displays the latest 400 streamed body/neural snapshots (up to about 20 seconds at 1×); it does not rewind backend state. The signal plot retains the latest 300 integration steps (6 simulated seconds). Export includes both buffers and model provenance.
-- **Camera** supports orbit/zoom, perspective/top/side, muscle overlay and follow mode.
+- **Camera** supports orbit/zoom, perspective/top/side, muscle overlay, a connected-skeleton overlay, follow mode and reset. Select a body segment to inspect its attachment.
 
 ## Reinforcement learning
 
-The training task is a two-cue contextual bandit. At each trial the reference brain observes a synthetic odor and chooses approach or avoid. Reward is +1 for approaching the rewarded odor or avoiding the other; otherwise −1. The task does not reward physical locomotion.
+The website’s training task is a two-cue contextual bandit. At each trial the reference brain observes a synthetic odor and chooses approach or avoid. Reward is +1 for approaching the rewarded odor or avoiding the other; otherwise −1. The task does not reward physical locomotion.
 
 REINFORCE updates the 256 MB-to-descending synaptic parameters. All other weights and the connection pattern stay fixed. Each update uses 32 independent trials. Training operates on a copy of the current brain, leaving the live experiment unchanged until **Apply trained brain** is clicked. A frozen two-cue evaluation reports exact action probabilities; it is not an out-of-distribution navigation benchmark.
 
 Completed and stopped runs save tensor checkpoints under data/checkpoints. Applying or loading a checkpoint resets the body and transient neural state; learning remains. Restore untrained reference brain resets learned parameters explicitly. The current task uses an engineering optimizer, not a validated dopamine-dependent biological plasticity mechanism.
+
+### Physical locomotion environment
+
+The separate Gymnasium environment rewards physical progress toward a target, penalizes muscle effort and falls, and ends on success or a time limit. Use it from a source checkout after installing dependencies:
+
+```python
+import gymnasium as gym
+import numpy as np
+import flylab.env  # registers FlyLab-Locomotion-v0
+
+env = gym.make("FlyLab-Locomotion-v0", action_mode="synergy", max_steps=500)
+observation, info = env.reset(seed=42)
+for _ in range(500):
+    action = np.full(6, 0.4, dtype=np.float32)
+    observation, reward, terminated, truncated, info = env.step(action)
+    if terminated or truncated:
+        break
+env.close()
+```
+
+`synergy` accepts six leg drives in [0, 1]. `muscle` accepts 84 independent excitations and bypasses the reference controller. Both return 338 normalized observations describing joints, muscle activation, body motion, foot forces, target bearing, odor and controller state. Actions advance 20 ms of physics. This headless interface is ready for PyTorch policies; the example is a constant-drive baseline, not a trained policy. Physical locomotion training is not yet connected to the website’s training panel.
+
+See [body mechanics and assumptions](docs/PHYSICS.md) for the control hierarchy and validation limits.
 
 ## Measured MaleCNS data
 
@@ -71,7 +94,10 @@ Data and checkpoints are gitignored. The UI works with the reference model when 
 | Module | Responsibility |
 |---|---|
 | backend/flylab/neural.py | Synthetic recurrent rate circuit and trainable synapses |
-| backend/flylab/body.py | MuJoCo schematic geometry and muscle actuators |
+| backend/flylab/body.py | Connected anatomical rig, muscle actuators and walking controller |
+| backend/flylab/arena.py | Synthetic odor sampling and target bearing |
+| backend/flylab/env.py | Gymnasium locomotion and direct muscle actions |
+| backend/flylab/assets/ | Pinned anatomical parameters and numeric gait references |
 | backend/flylab/simulation.py | Time integration, interventions, sensory/body bridge |
 | backend/flylab/training.py | REINFORCE, evaluation and checkpoints |
 | backend/flylab/connectome.py | Versioned measured data import and sparse LIF probe |
@@ -99,15 +125,15 @@ Tests cover stimulus expiry, motor silencing and muscle decay, physical joint mo
 1. Map MaleCNS motor and sensory IDs to experimentally supported muscle and receptor targets; preserve species, sex and specimen provenance.
 2. Replace the synthetic reference circuit with selected validated sensorimotor circuits, then expand. Build explicit boundary input models for subsets.
 3. Calibrate cell-type and receptor-specific physiology, graded versus spiking transmission, delays, and compartmental dynamics where supported.
-4. Integrate validated muscle geometry and mechanics. Extend beyond the current synthetic six pairs to additional leg muscles, neck, proboscis, wings and abdomen.
-5. Add spatial vision/olfaction and biologically grounded proprioceptive encoders; extend learning to embodied tasks with held-out environments and perturbation benchmarks.
+4. Replace effective actuators with calibrated muscle geometry, tendon routing and force laws. Add active neck, proboscis, wings and abdomen mechanics.
+5. Add vision and biological sensory encoders beyond the synthetic odor field and contact feedback; train embodied policies with held-out environments and perturbation benchmarks.
 6. Implement and compare local dopamine-modulated plasticity against engineering RL, without treating task success alone as biological validation.
 
 ## Sources and attribution
 
 - MaleCNS project and CC-BY data: https://male-cns.janelia.org/ and https://male-cns.janelia.org/download/
 - NeuroMechFly: https://neuromechfly.org/ and https://github.com/NeLy-EPFL/flygym
-- Body visuals include scaled/repositioned NeuroMechFly meshes derived from a female specimen; physics geometry remains schematic. See docs/ASSETS.md and the bundled Apache 2.0 license.
+- Body geometry, joint frames and masses derive from a female NeuroMechFly specimen. Visual and physical segments share transforms and a uniform scale; muscle routing and control remain assumptions. See [asset provenance](docs/ASSETS.md) and the bundled Apache 2.0 license.
 - MuJoCo muscle model: https://mujoco.readthedocs.io/en/stable/modeling.html#muscles
 - Fly connectome modeling precedent: https://www.nature.com/articles/s41586-024-07763-9
 - Dopamine and memory dynamics: https://www.nature.com/articles/s41586-024-07819-w

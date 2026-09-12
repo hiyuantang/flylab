@@ -1441,3 +1441,60 @@ nav button:hover:not(:disabled) {
     font-size: 10px;
   }
 }
+
+.anatomy-inspector {
+  position: absolute;
+  left: 18px;
+  bottom: 83px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 9px 12px;
+  border: 1px solid #ffffff75;
+  border-radius: 7px;
+  color: #34454d;
+  background: #edf2f2d9;
+  pointer-events: none;
+  max-width: calc(100% - 90px);
+}
+.anatomy-inspector strong {
+  font-size: 12px;
+  text-transform: capitalize;
+}
+.anatomy-inspector span {
+  font-size: 10px;
+}
+.foot-state {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  margin-right: 4px;
+  background: #677582;
+  vertical-align: middle;
+}
+.foot-state.contact {
+  background: #b9d680;
+  box-shadow: 0 0 5px #b9d68066;
+}
+.environment-choice {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 10px;
+  color: #8ea0ad;
+}
+.environment-choice select {
+  min-width: 150px;
+  padding: 7px 10px;
+}
+@media (max-width: 760px) {
+  .environment-choice {
+    order: 3;
+    flex: 1;
+  }
+  .environment-choice select {
+    min-width: 0;
+    width: 100%;
+  }
+}

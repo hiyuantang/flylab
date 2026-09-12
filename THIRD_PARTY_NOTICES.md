@@ -2,15 +2,16 @@
 
 The Apache-2.0 license at the repository root applies to FlyLab's original code and documentation. It does not replace the licenses of the materials below or of installed dependencies.
 
-## NeuroMechFly / FlyGym visual meshes
+## NeuroMechFly / FlyGym anatomy and walking references
 
 - Copyright 2023–2026 The NeuroMechFly v2 Authors.
 - Source: [NeLy-EPFL/flygym](https://github.com/NeLy-EPFL/flygym), commit `38c8ec61034cd59bc5ba0de20688d4a3c0000d60`.
 - Source directory: `src/flygym/assets/model/neuromechfly/meshes/simplified_max2000faces/`.
-- Included files in `frontend/public/models/`: `c_head.stl`, `c_thorax.stl`, `c_abdomen12.stl`, `c_abdomen3.stl`, `c_abdomen4.stl`, `c_abdomen5.stl`, `c_abdomen6.stl`, `l_eye.stl`, and `l_wing.stl`.
-- License: Apache-2.0. The complete upstream copyright and license text is retained in [FLYGYM-LICENSE.txt](frontend/public/models/FLYGYM-LICENSE.txt).
+- Included meshes: 39 unchanged STL files, listed with source URLs, sizes, Git blob IDs and SHA256 hashes in [sources.json](frontend/public/models/sources.json).
+- Derived backend assets: `anatomy.json` contains segment frames, masses, hierarchy and neutral angles from the upstream rig; `walking_reference.npz` contains numeric joint references converted from `src/flygym_demo/complex_terrain/assets/single_steps_untethered.pkl`. Their provenance is stored alongside the assets.
+- License: Apache-2.0. The complete upstream copyright and license text is retained with both the [meshes](frontend/public/models/FLYGYM-LICENSE.txt) and [backend assets](backend/flylab/assets/FLYGYM-LICENSE.txt).
 
-The STL files are unchanged. At runtime FlyLab centers, repositions, scales, and recolors their geometry, and mirrors an eye. Legs and the physical rig are schematic. The source body geometry derives from an adult female fly; it is not a measured male body or a neural-to-muscle mapping. See [asset provenance](docs/ASSETS.md).
+At runtime FlyLab uniformly converts mesh units to millimeters, mirrors left-side meshes for right-side segments, and applies shared anatomical transforms in physics and rendering. Colors, transparency and decorative bristles are added. Gait conversion changes right yaw/roll signs to match symmetric joint axes and uses periodic linear interpolation. Wing collision sections are generated from source triangles; wing anchors/resting angles and reset joint angles are adjusted for clearance. Muscle transmissions, strengths, limits and the feedback controller are FlyLab assumptions. The source body geometry derives from an adult female fly; it is not a measured male body or a neural-to-muscle mapping. See [asset provenance](docs/ASSETS.md).
 
 ## MaleCNS dataset
 

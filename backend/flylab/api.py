@@ -26,13 +26,14 @@ failure = None
 async def tick():
     global failure
     while True:
+        started = asyncio.get_running_loop().time()
         try:
             if sim.running:
                 sim.advance(2*sim.speed)
         except Exception as exc:
             sim.running = False
             failure = str(exc)
-        await asyncio.sleep(.04)
+        await asyncio.sleep(max(.001, .04 - (asyncio.get_running_loop().time() - started)))
 
 
 @asynccontextmanager
@@ -52,7 +53,7 @@ app = FastAPI(title="FlyLab", lifespan=lifespan)
 
 class Command(BaseModel):
     model_config = ConfigDict(allow_inf_nan=False)
-    action: Literal["run", "pause", "step", "reset", "stimulate", "silence", "select", "odor", "speed", "apply", "load", "restore"]
+    action: Literal["run", "pause", "step", "reset", "stimulate", "silence", "select", "odor", "speed", "apply", "load", "restore", "environment"]
     region: Literal["optic", "antennal", "mushroom", "descending", "vnc", "motor"] = "mushroom"
     amplitude: float = Field(default=1, ge=0, le=3)
     duration: float = Field(default=.5, ge=.02, le=5)
@@ -61,6 +62,7 @@ class Command(BaseModel):
     intensity: float = Field(default=.7, ge=0, le=1)
     speed: Literal[1, 2, 4] = 1
     checkpoint: str = ""
+    environment: Literal["uniform", "spatial"] = "uniform"
 
 
 @app.get("/api/health")
@@ -82,6 +84,7 @@ async def control(cmd: Command):
             case "pause": sim.running = False
             case "step": sim.running = False; sim.advance()
             case "reset": sim.running = False; sim.reset(); failure = None
+            case "environment": sim.running = False; sim.environment_mode = cmd.environment; sim.reset()
             case "select": sim.selected = cmd.region
             case "stimulate": sim.selected = cmd.region; sim.stimulate(cmd.region, cmd.amplitude, cmd.duration)
             case "silence":

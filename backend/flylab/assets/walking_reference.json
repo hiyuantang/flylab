@@ -1,0 +1,8 @@
+{
+  "source": "https://github.com/NeLy-EPFL/flygym",
+  "commit": "38c8ec61034cd59bc5ba0de20688d4a3c0000d60",
+  "path": "src/flygym_demo/complex_terrain/assets/single_steps_untethered.pkl",
+  "source_sha256": "1e5b28bb6b3f50ac95a04773ea37af28d05e26d03bd90fdba57fa1b3eacfaf8c",
+  "license": "Apache-2.0",
+  "description": "Recorded single-step joint references, converted to numeric NPZ. Order per leg: coxa yaw/pitch/roll; trochanterfemur pitch/roll; tibia pitch; tarsus1 pitch. Right yaw/roll signs flipped to symmetric v2 axes. Periodic linear interpolation replaces upstream cubic splines. Reference targets drive finite-force actuators; body poses are never replayed."
+}

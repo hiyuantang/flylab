@@ -4,10 +4,12 @@ Copyright 2026 Yuan Tang and FlyLab contributors.
 FlyLab's original code and documentation are licensed under the Apache
 License, Version 2.0. See LICENSE.
 
-This project includes visual meshes from NeuroMechFly / FlyGym.
+This project includes meshes and derived anatomical and walking-reference
+data from NeuroMechFly / FlyGym.
 Copyright 2023-2026 The NeuroMechFly v2 Authors.
 Their Apache-2.0 license is preserved in
-frontend/public/models/FLYGYM-LICENSE.txt.
+frontend/public/models/FLYGYM-LICENSE.txt and
+backend/flylab/assets/FLYGYM-LICENSE.txt.
 
 Third-party data, assets, and dependencies retain their original licenses.
 See THIRD_PARTY_NOTICES.md for attribution and provenance.

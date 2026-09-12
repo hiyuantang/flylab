@@ -45,9 +45,10 @@ export function DataPanel({ onError }: { onError: (s: string) => void }) {
             <span className="model-label">EMBODIED EXPERIMENT</span>
             <h3>Synthetic reference circuit</h3>
             <p>
-              96 rate units with an explicit locomotor oscillator. Twelve
-              modeled muscle actuators move a schematic six-legged MuJoCo body.
-              These connections and muscle mappings are synthetic.
+              96 rate units drive a connected NeuroMechFly body with 69 segments
+              and 84 effective muscle actuators. Anatomy comes from a female
+              specimen; neural wiring, muscle mappings and walking control are
+              modeled assumptions. Feet provide contact feedback.
             </p>
             <span className="status-line">
               <Check size={14} /> PyTorch + MuJoCo · working closed loop
@@ -59,7 +60,7 @@ export function DataPanel({ onError }: { onError: (s: string) => void }) {
             <p>
               Actual neuron IDs and synapse counts from Janelia. The isolated
               subgraph uses assumed leaky integrate-and-fire dynamics. It is not
-              connected to the schematic muscles.
+              connected to the embodied model's muscles.
             </p>
             <span className="status-line">
               <Check size={14} /> Measured wiring · assumed physiology

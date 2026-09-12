@@ -98,7 +98,7 @@ export function Telemetry({
             <i style={{ background: "#ff9f67" }} /> Muscle activation
           </span>
           <span>
-            <i style={{ background: "#dce6ed" }} /> Speed (model units/s)
+            <i style={{ background: "#dce6ed" }} /> Speed (mm/s)
           </span>
         </div>
         <LineChart
@@ -142,13 +142,20 @@ export function Telemetry({
         <div className="muscle-bars">
           {legs.map((leg, i) => (
             <div className="muscle-column" key={leg}>
-              <span>{leg}</span>
+              <span
+                title={`${simulation.body.foot_forces[i].toFixed(2)} µN ground force`}
+              >
+                <i
+                  className={`foot-state ${simulation.body.foot_contacts[i] ? "contact" : ""}`}
+                />
+                {leg}
+              </span>
               <div className="muscle-pair">
                 {[0, 1].map((j) => (
                   <div
                     className="muscle-track"
                     key={j}
-                    title={`${j ? "Extensor" : "Flexor"}: ${(simulation.body.activation[i * 2 + j] ?? 0).toFixed(3)} activation; ${(simulation.body.force[i * 2 + j] ?? 0).toFixed(5)} force`}
+                    title={`${j ? "Negative" : "Positive"} joint torque group (mean of 7 muscles): ${(simulation.body.activation[i * 2 + j] ?? 0).toFixed(3)} activation; ${(simulation.body.force[i * 2 + j] ?? 0).toFixed(5)} µN total force`}
                   >
                     <div
                       style={{
@@ -170,12 +177,14 @@ export function Telemetry({
         </div>
         <div className="chart-legend">
           <span>
-            <i style={{ background: "#65aeff" }} /> Flexor
+            <i style={{ background: "#65aeff" }} /> Positive torque
           </span>
           <span>
-            <i style={{ background: "#ff9f67" }} /> Extensor
+            <i style={{ background: "#ff9f67" }} /> Negative torque
           </span>
-          <span>12 modeled muscles</span>
+          <span>
+            {simulation.body.anatomy.muscles} effective muscles · mean by leg
+          </span>
         </div>
       </section>
     </div>

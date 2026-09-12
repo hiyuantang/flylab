@@ -102,8 +102,30 @@ export default function App() {
           <div className="experiment-toolbar">
             <div className="task-field">
               <span>Task</span>
-              <strong>Odor conditioning</strong>
+              <strong>
+                {s?.environment?.mode === "spatial"
+                  ? "Odor-guided movement"
+                  : "Odor conditioning"}
+              </strong>
             </div>
+            <label className="environment-choice">
+              Environment
+              <select
+                aria-label="Environment"
+                title="Changing environment resets the body"
+                disabled={!w.connected}
+                value={s?.environment?.mode ?? "uniform"}
+                onChange={(e) => {
+                  w.setReplay(null);
+                  void w.command("environment", {
+                    environment: e.target.value,
+                  });
+                }}
+              >
+                <option value="uniform">Uniform cue</option>
+                <option value="spatial">Spatial odor field</option>
+              </select>
+            </label>
             <div className="transport">
               <button
                 className="primary"

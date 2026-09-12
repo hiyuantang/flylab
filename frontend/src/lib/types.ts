@@ -10,6 +10,9 @@ export type Region = {
 };
 export type BodyPose = {
   name: string;
+  parent: string | null;
+  mesh: string;
+  mirror: boolean;
   position: [number, number, number];
   quaternion: [number, number, number, number];
 };
@@ -25,9 +28,35 @@ export type Simulation = {
   regions: Region[];
   neurons: number[];
   approach_probability: number;
+  environment?: {
+    source: [number, number, number];
+    mode: string;
+    distance: number;
+    concentration: number;
+    antennae: number[];
+  };
   body: {
     bodies: BodyPose[];
     feet: number[][];
+    foot_forces: number[];
+    foot_contacts: boolean[];
+    joint_velocities: number[];
+    muscle_activation: number[];
+    muscle_force: number[];
+    upright: number;
+    heading: number;
+    anatomy: {
+      name: string;
+      segments: number;
+      joints: number;
+      actuated_joints: number;
+      muscles: number;
+      mass_mg: number;
+      length_unit: string;
+      force_unit: string;
+      specimen: string;
+      muscle_map: string;
+    };
     joints: number[];
     position: number[];
     velocity: number[];
