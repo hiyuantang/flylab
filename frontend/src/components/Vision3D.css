@@ -1,0 +1,81 @@
+.vision-view-tabs,
+.vision-3d-tools,
+.vision-3d-tools > div,
+.vision-3d-caption {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.vision-view-tabs {
+  margin: 0 0 10px;
+}
+.vision-view-tabs button,
+.vision-3d-tools button {
+  padding: 5px 9px;
+  font-size: 11px;
+  min-height: 28px;
+}
+.vision-view-tabs button[aria-pressed="true"],
+.vision-3d-tools button[aria-pressed="true"] {
+  background: #2a4554;
+  color: #e2f0ba;
+  border-color: #779258;
+}
+.vision-3d {
+  min-width: 0;
+  width: 100%;
+}
+.vision-3d-tools {
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.vision-3d-tools label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: var(--muted);
+}
+.vision-3d-tools input {
+  width: auto;
+}
+.vision-3d-stage {
+  height: 300px;
+  position: relative;
+  background: #0e1820;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.vision-dialog .vision-3d-stage {
+  height: min(58dvh, 620px);
+  min-height: 260px;
+}
+.vision-3d-stage > p {
+  padding: 20px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.vision-3d-caption {
+  justify-content: center;
+  font-size: 11px;
+  margin-top: 8px;
+  gap: 16px;
+  color: var(--muted);
+}
+.vision-3d-note {
+  font-size: 11px;
+  color: var(--muted);
+  margin: 6px 0 0;
+  text-align: center;
+}
+.vision-direction {
+  font-size: 11px;
+  color: #e2eaf0;
+  background: #10202bd9;
+  padding: 3px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+  pointer-events: none;
+}

@@ -1,0 +1,86 @@
+{
+  "date": "2026-09-14",
+  "neurons": 166700,
+  "edges": 25582938,
+  "neural_precision": "float16",
+  "gradient_precision": "float32",
+  "scope": "Isolated full-graph forward/backward batches; same v1 adapter partition, hand transforms, body, gains, and targets. Includes initialization of batch state. Excludes validation guard. Do not interpret as whole-run speedup.",
+  "settings": {
+    "body": {
+      "mass_scale": 1.0,
+      "strength_scale": 1.0,
+      "friction": 1.0,
+      "limit_mode": "baseline",
+      "appendage_model": "peripheral-v2",
+      "elasticity_profile": "stance-elastic-v1"
+    },
+    "mapping_profile": "muscle-routing-v5",
+    "gains": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -2.0
+    ],
+    "senses": {
+      "vision_model": "compound-retina-v1",
+      "proprioception_model": "legacy-position-v1",
+      "contact_model": "legacy-leg-v1",
+      "spatial_model": "legacy-v2",
+      "calibration_sphere": false,
+      "vision_enabled": true,
+      "hearing_enabled": false,
+      "wind_enabled": false,
+      "touch_enabled": true,
+      "proprioception_enabled": true,
+      "illumination": 1.0,
+      "sound_amplitude": 0.8,
+      "sound_frequency": 250.0,
+      "wind_speed": 20.0,
+      "wind_direction": 0.0,
+      "stimulus_position": [
+        4.0,
+        2.0,
+        1.5
+      ]
+    },
+    "training_execution": {
+      "device": "mps",
+      "precision": "float16",
+      "gradient_precision": "float32"
+    }
+  },
+  "results": [
+    {
+      "batch_size": 1,
+      "steps": 5,
+      "before_seconds": 11.771432959008962,
+      "after_seconds": 8.67476641596295,
+      "speedup": 1.356974054926442,
+      "max_loss_difference": 0.0,
+      "gradient_relative_difference": 1.307302514223715e-07
+    },
+    {
+      "batch_size": 3,
+      "steps": 5,
+      "before_seconds": 30.766595875029452,
+      "after_seconds": 17.816707083955407,
+      "speedup": 1.7268396303566045,
+      "max_loss_difference": 0.0,
+      "gradient_relative_difference": 7.322228500230785e-08
+    }
+  ],
+  "kernel_profile_instrumented_seconds": {
+    "sync_weights": 0.1711170410271734,
+    "advance": 2.3412362068193033,
+    "muscles": 0.14574020996224135,
+    "incoming_grad": 0.825056379660964,
+    "transpose_grad": 24.75643449195195,
+    "factor_grad": 27.980642856215127,
+    "reduce_factors": 1.2392615474527702,
+    "reverse_state": 1.3335459468653426
+  }
+}

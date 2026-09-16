@@ -1,11 +1,20 @@
 import Select from "./Select";
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { Canvas, useThree } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei/core/OrbitControls";
-import { BufferAttribute, BufferGeometry, Color, Vector3 } from "three";
+import {
+  BufferAttribute,
+  BufferGeometry,
+  Color,
+  Vector3,
+  PointsMaterial,
+  DynamicDrawUsage,
+} from "three";
 import { Maximize2, X, Search, Crosshair } from "lucide-react";
 import type { NeuralLayout, NeuronConnections } from "../lib/neuralView";
+
+import { activityRefresh } from "../lib/activityRefresh";
 
 type Scope = "brain" | "vnc" | "all";
 const number = (n: number) => n.toLocaleString();
@@ -99,7 +108,15 @@ const NeuronCloud = memo(function NeuronCloud({
     );
     g.setAttribute(
       "color",
-      new BufferAttribute(new Float32Array(points.length), 3),
+      new BufferAttribute(new Float32Array(points.length), 3).setUsage(
+        DynamicDrawUsage,
+      ),
+    );
+    g.setAttribute(
+      "nextColor",
+      new BufferAttribute(new Float32Array(points.length), 3).setUsage(
+        DynamicDrawUsage,
+      ),
     );
     g.computeBoundingSphere();
     return {
@@ -113,10 +130,42 @@ const NeuronCloud = memo(function NeuronCloud({
         : 4,
     };
   }, [layout, scope]);
-  useEffect(() => () => geometry.g.dispose(), [geometry]);
+  const blend = useMemo(() => ({ value: 1 }), []);
+  const transition = useRef({ start: 0, initialized: false });
+  const material = useMemo(() => {
+    const m = new PointsMaterial({
+      vertexColors: true,
+      size: 1.2,
+      sizeAttenuation: false,
+      transparent: true,
+      opacity: 0.85,
+      depthWrite: false,
+      toneMapped: false,
+    });
+    m.onBeforeCompile = (shader) => {
+      shader.uniforms.activityBlend = blend;
+      shader.vertexShader =
+        "attribute vec3 nextColor; uniform float activityBlend;\n" +
+        shader.vertexShader.replace(
+          "#include <color_vertex>",
+          "#include <color_vertex>\nvColor.xyz = mix(color.xyz, nextColor, activityBlend);",
+        );
+    };
+    m.customProgramCacheKey = () => "flylab-activity-blend-v1";
+    return m;
+  }, [blend]);
+  useEffect(() => () => material.dispose(), [material]);
+  useEffect(() => {
+    transition.current.initialized = false;
+    return () => geometry.g.dispose();
+  }, [geometry]);
   useEffect(() => {
     const colors = geometry.g.getAttribute("color") as BufferAttribute;
+    const next = geometry.g.getAttribute("nextColor") as BufferAttribute;
+    const from = colors.array as Float32Array;
+    const to = next.array as Float32Array;
     const c = new Color();
+    const initialized = transition.current.initialized;
     for (let j = 0; j < geometry.indices.length; j++) {
       const rate = rates?.[geometry.indices[j]] ?? 0;
       const scale = Math.min(
@@ -125,11 +174,28 @@ const NeuronCloud = memo(function NeuronCloud({
       );
       const lo = Math.min(2, Math.floor(scale));
       c.copy(palette[lo]).lerp(palette[lo + 1], scale - lo);
-      colors.setXYZ(j, c.r, c.g, c.b);
+      const k = j * 3;
+      // Capture the last rendered blend if a new snapshot interrupts a fade.
+      for (let axis = 0; axis < 3; axis++) {
+        from[k + axis] += (to[k + axis] - from[k + axis]) * blend.value;
+      }
+      next.setXYZ(j, c.r, c.g, c.b);
+      if (!initialized) colors.setXYZ(j, c.r, c.g, c.b);
     }
-    colors.needsUpdate = true;
+    colors.needsUpdate = next.needsUpdate = true;
+    blend.value = initialized ? 0 : 1;
+    transition.current = { start: performance.now(), initialized: true };
     invalidate();
-  }, [geometry, rates, invalidate]);
+  }, [geometry, rates, blend, invalidate]);
+  useFrame(() => {
+    if (blend.value >= 1) return;
+    // Display-only 100 ms fade; never extrapolate rates or alter neural state.
+    blend.value = Math.min(
+      1,
+      (performance.now() - transition.current.start) / 100,
+    );
+    if (blend.value < 1) invalidate();
+  });
   const links = useMemo(() => {
     const lines: number[] = [],
       partners: number[] = [];
@@ -189,15 +255,7 @@ const NeuronCloud = memo(function NeuronCloud({
           }
         }}
       >
-        <pointsMaterial
-          vertexColors
-          size={1.2}
-          sizeAttenuation={false}
-          transparent
-          opacity={0.85}
-          depthWrite={false}
-          toneMapped={false}
-        />
+        <primitive object={material} attach="material" />
       </points>
       <lineSegments>
         <bufferGeometry>
@@ -271,6 +329,7 @@ export function NeuralNetwork({
   const dialog = useRef<HTMLDialogElement>(null);
   const stampRef = useRef(stamp);
   stampRef.current = stamp;
+  const refresh = useRef<ReturnType<typeof activityRefresh> | null>(null);
   const [detailRefresh, setDetailRefresh] = useState(0);
   useEffect(() => {
     if (!available) return;
@@ -316,12 +375,10 @@ export function NeuralNetwork({
   useEffect(() => {
     if (!layout || !available) return;
     const abort = new AbortController();
-    let timer: ReturnType<typeof setTimeout>,
-      previous = "";
-    const poll = async () => {
-      try {
-        if (!document.hidden && previous !== stampRef.current) {
-          const requestedStamp = stampRef.current;
+    let lastDetail = 0;
+    const updater = activityRefresh(
+      async (requestedStamp) => {
+        try {
           const response = await checked(
             await fetch("/api/neural-view/activity", { signal: abort.signal }),
           );
@@ -332,26 +389,40 @@ export function NeuralNetwork({
           const buffer = await response.arrayBuffer();
           if (buffer.byteLength !== layout.neurons * 4)
             throw new Error("Incomplete neural activity snapshot.");
-          if (!abort.signal.aborted) {
+          // A reset/restore can overtake a response. Never display the old episode.
+          if (
+            !abort.signal.aborted &&
+            requestedStamp.split(":")[0] === stampRef.current.split(":")[0]
+          ) {
             setRates(new Float32Array(buffer));
             setTime(Number(response.headers.get("X-Neural-Time-Ms")));
             setError(null);
-            setDetailRefresh((x) => x + 1);
-            previous = requestedStamp;
+            if (performance.now() - lastDetail >= 1000) {
+              setDetailRefresh((x) => x + 1);
+              lastDetail = performance.now();
+            }
           }
+        } catch (e) {
+          if (!abort.signal.aborted) setError((e as Error).message);
+          throw e;
         }
-      } catch (e) {
-        if (!abort.signal.aborted) setError((e as Error).message);
-      } finally {
-        if (!abort.signal.aborted) timer = setTimeout(poll, 1000);
-      }
-    };
-    void poll();
+      },
+      () => !document.hidden,
+    );
+    refresh.current = updater;
+    const wake = () => updater.request(stampRef.current);
+    document.addEventListener("visibilitychange", wake);
+    wake();
     return () => {
+      updater.dispose();
       abort.abort();
-      clearTimeout(timer);
+      document.removeEventListener("visibilitychange", wake);
+      if (refresh.current === updater) refresh.current = null;
     };
   }, [available, layout]);
+  useEffect(() => {
+    refresh.current?.request(stamp);
+  }, [stamp]);
   useEffect(() => {
     if (!selection || !available || !layout) return;
     const abort = new AbortController();
@@ -386,6 +457,13 @@ export function NeuralNetwork({
     setQuery(String(id));
     setFocus(null);
   }, []);
+  const clearSelection = useCallback(() => {
+    setSelection(null);
+    setConnections(null);
+    setDetailError(null);
+    setQuery("");
+    setFocus(null);
+  }, []);
   const visibleCount = useMemo(
     () =>
       layout
@@ -405,7 +483,7 @@ export function NeuralNetwork({
     <div className={`neural-network ${expanded ? "expanded" : ""}`}>
       <div className="neural-tools">
         <label>
-          Show{" "}
+          <span className="neural-scope-label">Show</span>
           <Select
             aria-label="Neural spatial scope"
             value={scope}
@@ -420,6 +498,28 @@ export function NeuralNetwork({
             ]}
           />
         </label>
+        <form
+          className="anatomy-search neural-toolbar-search"
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (
+              /^\d+$/.test(query.trim()) &&
+              Number.isSafeInteger(Number(query))
+            )
+              select(Number(query));
+            else setDetailError("Enter a numeric MaleCNS neuron ID.");
+          }}
+        >
+          <input
+            aria-label="Find neuron by ID"
+            placeholder="Neuron ID"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+          <button aria-label="Find neuron">
+            <Search size={15} />
+          </button>
+        </form>
         <span className="mono">
           {time === null
             ? "Awaiting state"
@@ -432,6 +532,11 @@ export function NeuralNetwork({
           {expanded ? <X size={16} /> : <Maximize2 size={16} />}
         </button>
       </div>
+      {detailError && !expanded && (
+        <p role="alert" className="neural-search-error">
+          {detailError}
+        </p>
+      )}
       {!available ? (
         <p className="neural-message">
           Connect to the measured brain to view its neurons.
@@ -448,8 +553,12 @@ export function NeuralNetwork({
       ) : (
         <>
           <div className="neural-workspace">
-            <div className="neural-stage">
+            <div
+              className="neural-stage"
+              data-selected-neuron={selection?.id ?? ""}
+            >
               <Canvas
+                onPointerMissed={clearSelection}
                 frameloop="demand"
                 dpr={[1, 1.5]}
                 camera={{ position: [0, 0, 14], fov: 45, near: 0.01, far: 150 }}
@@ -476,6 +585,11 @@ export function NeuralNetwork({
                 {number(visibleCount)} measured soma points
                 <br />
                 <span>Drag to orbit · scroll to zoom · click a neuron</span>
+                {selection && (
+                  <span className="neural-selection-label">
+                    Selected #{selection.id} · click blank space to clear
+                  </span>
+                )}
               </div>
               <div className="neural-color-key">
                 <span>0</span>
@@ -487,28 +601,6 @@ export function NeuralNetwork({
               className="neural-inspector"
               aria-label="Neuron connection inspector"
             >
-              <form
-                className="anatomy-search"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  if (
-                    /^\d+$/.test(query.trim()) &&
-                    Number.isSafeInteger(Number(query))
-                  )
-                    select(Number(query));
-                  else setDetailError("Enter a numeric MaleCNS neuron ID.");
-                }}
-              >
-                <input
-                  aria-label="Find neuron by ID"
-                  placeholder="Find neuron by MaleCNS ID"
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                />
-                <button aria-label="Find neuron">
-                  <Search size={15} />
-                </button>
-              </form>
               {detailError && <p role="alert">{detailError}</p>}
               {!selection ? (
                 <div className="neural-empty">
@@ -682,8 +774,9 @@ export function NeuralNetwork({
               MaleCNS v1.0
             </a>{" "}
             · 8 nm voxel space. Brain/VNC filters use annotated classes, not
-            neuropil boundaries. Colors show simulated firing rates; display
-            refresh is capped at 1 Hz.
+            neuropil boundaries. Colors follow completed simulation cycles with
+            a 100 ms display fade. No activity is extrapolated; connection
+            details refresh at most once per second.
           </p>
         </>
       )}

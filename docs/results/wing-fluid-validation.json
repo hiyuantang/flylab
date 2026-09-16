@@ -1,0 +1,2012 @@
+{
+  "interpretation": "Model-specific calibration and one-second engineering hover checks; not experimental biological validation, ground takeoff, or a learned flight policy.",
+  "model": {
+    "version": "wing-fluid-rig-v2",
+    "settings": {
+      "air_density": 1.225e-06,
+      "air_viscosity": 1.81e-05,
+      "wind": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "timestep": 5e-05,
+      "fluid_coefficients": [
+        1.0,
+        0.5,
+        1.5,
+        1.7,
+        1.0
+      ],
+      "servo_stiffness": 100.0,
+      "servo_damping": 0.01,
+      "torque_limit": 30.0,
+      "tethered": true,
+      "initial_height": 10.0,
+      "stroke_plane_pitch": 0.07913470832840196
+    },
+    "mujoco": "3.13.0",
+    "units": "mm, g, s; microNewtons; microNewton-mm; microWatts",
+    "controller": "Bounded engineering wing servos, not asynchronous muscles",
+    "fluid": "Native MuJoCo ellipsoid wings + inertia-based body drag; no resolved wake or flexible wings",
+    "body_count": 85,
+    "muscle_count": 196
+  },
+  "controller": "wing-hover-assist-v1",
+  "workers": 4,
+  "platform": "macOS-27.0-arm64-arm-64bit",
+  "pattern": {
+    "frequency_hz": 275.0,
+    "stroke_amplitude_rad": 1.2033435049692482,
+    "elevation_rad": 0.2858374930936211,
+    "stroke_bias_rad": -0.25,
+    "feather_amplitude_rad": 0.8
+  },
+  "source_sha256": {
+    "backend/flylab/flight.py": "ec649679c8f3b2e96d71bb098f345b078194dc7e8ce21b669eedee7ce0e9cd74",
+    "backend/flylab/flight_control.py": "00fa53883221f8a6e4061a5bafc59e8d71cd8517d16f6fd9e99b06880c05d200"
+  },
+  "criteria": {
+    "max_height_error_mm": 1,
+    "max_tilt_degrees": 15,
+    "max_horizontal_drift_mm": 5,
+    "environment_contacts": 0
+  },
+  "checks": {
+    "trim_force": true,
+    "trim_pitch_moment": true,
+    "vacuum_has_no_air_force": true,
+    "still_wings_have_no_hover_lift": true,
+    "vacuum_cannot_hover": true,
+    "timestep_refinement": true,
+    "all_air_hover_trials_pass": true,
+    "no_hidden_support": true
+  },
+  "cases": {
+    "tethered_air": {
+      "settings": {
+        "air_density": 1.225e-06,
+        "air_viscosity": 1.81e-05,
+        "wind": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "timestep": 5e-05,
+        "fluid_coefficients": [
+          1.0,
+          0.5,
+          1.5,
+          1.7,
+          1.0
+        ],
+        "servo_stiffness": 100.0,
+        "servo_damping": 0.01,
+        "torque_limit": 30.0,
+        "tethered": true,
+        "initial_height": 10.0,
+        "stroke_plane_pitch": 0.07913470832840196
+      },
+      "mode": "tether",
+      "mean_force_uN": [
+        -0.0006476834228590799,
+        -7.288116525409029e-05,
+        10.380880113935884
+      ],
+      "mean_torque_uN_mm": [
+        -0.025762704171333865,
+        0.0032988200692601875,
+        -3.7955531592010874e-05
+      ],
+      "mean_servo_power_uW": 60.273494781493895,
+      "averaging_interval_s": [
+        0.03999999999999935,
+        0.07999999999999935
+      ],
+      "averaging_cycles": 11,
+      "final": {
+        "time": 0.07999999999999935,
+        "position_mm": [
+          4.300976786027933e-05,
+          9.210459143240506e-07,
+          10.00009880762833
+        ],
+        "velocity_mm_s": [
+          0.30258672113331897,
+          0.005020008264102777,
+          -0.14402513987054474
+        ],
+        "upright": 0.999999988468242,
+        "quaternion": [
+          0.9999999971165555,
+          1.803837491129493e-07,
+          7.593316440297448e-05,
+          1.0044790747277023e-06
+        ],
+        "angular_velocity_rad_s": [
+          0.006062311396177831,
+          2.551598552526652,
+          0.006312812397594322
+        ],
+        "angles_rad": [
+          0.3098620564259451,
+          -0.5725497634351102,
+          0.8183111103724289,
+          0.3098679346385765,
+          -0.5725458571005682,
+          0.8183119179271559
+        ],
+        "fluid_force_uN": [
+          18.38578271950856,
+          -0.000622789296182059,
+          12.837341659672473
+        ],
+        "fluid_torque_uN_mm": [
+          -0.03806532015868546,
+          12.781582661390086,
+          0.05382176807555684
+        ],
+        "fluid_root_torque_uN_mm": [
+          -0.0005083738313632885,
+          19.974118826121877,
+          0.0003812319868650708
+        ],
+        "force_time_s": 0.07994999999999935,
+        "servo_torque_uN_mm": [
+          -2.5846460471180563,
+          22.80755201521511,
+          -2.4716727531770033,
+          -2.5856974615860686,
+          22.806976714992715,
+          -2.4717470447109235
+        ],
+        "servo_power_uW": 87.69805467622427,
+        "weight_uN": 10.382021100000001,
+        "tethered": true,
+        "contacts": 2,
+        "environment_contacts": 0,
+        "wing_contacts": 0
+      },
+      "lift_weight_ratio": 0.999890099812635,
+      "max_height_error_mm": 0.0011950569387551013,
+      "max_tilt_degrees": 0.11063290190983033,
+      "max_horizontal_drift_mm": 0.0012282049151517396,
+      "environment_contacts": 0,
+      "max_wing_contacts": 8,
+      "wing_contact_fraction": 0.040625,
+      "initial_rotation_vector_rad": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_velocity_mm_s": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wall_seconds": 1.626082082999801,
+      "physics_wall_seconds": 1.4499839059949409,
+      "simulated_seconds": 0.08,
+      "spinup_seconds": 0.0,
+      "physics_steps": 1600,
+      "no_applied_body_force": true,
+      "flight_check_passed": null
+    },
+    "tethered_vacuum": {
+      "settings": {
+        "air_density": 0.0,
+        "air_viscosity": 0.0,
+        "wind": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "timestep": 5e-05,
+        "fluid_coefficients": [
+          1.0,
+          0.5,
+          1.5,
+          1.7,
+          1.0
+        ],
+        "servo_stiffness": 100.0,
+        "servo_damping": 0.01,
+        "torque_limit": 30.0,
+        "tethered": true,
+        "initial_height": 10.0,
+        "stroke_plane_pitch": 0.07913470832840196
+      },
+      "mode": "tether",
+      "mean_force_uN": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_torque_uN_mm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_servo_power_uW": -2.5208238094430655,
+      "averaging_interval_s": [
+        0.03999999999999935,
+        0.07999999999999935
+      ],
+      "averaging_cycles": 11,
+      "final": {
+        "time": 0.07999999999999935,
+        "position_mm": [
+          2.9160704203763307e-05,
+          -4.2724930393777133e-07,
+          10.00000796126221
+        ],
+        "velocity_mm_s": [
+          0.1426714014341185,
+          -0.0012855833382318057,
+          -0.023022652756737667
+        ],
+        "upright": 0.9999999780360944,
+        "quaternion": [
+          0.9999999945089144,
+          -2.1552731718894487e-06,
+          -0.00010477264908927166,
+          4.6771309137396974e-07
+        ],
+        "angular_velocity_rad_s": [
+          0.006033829594524215,
+          0.6424748423280037,
+          0.00046983649786098535
+        ],
+        "angles_rad": [
+          0.23213767630828633,
+          -0.39773637935408196,
+          0.8002195134379327,
+          0.2321449802128361,
+          -0.39774298269608493,
+          0.8002204598010008
+        ],
+        "fluid_force_uN": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "fluid_torque_uN_mm": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "fluid_root_torque_uN_mm": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "force_time_s": 0.07994999999999935,
+        "servo_torque_uN_mm": [
+          6.799884018631143,
+          4.1149031422432145,
+          -0.43847573048616084,
+          6.798958958660371,
+          4.115726479519399,
+          -0.43864811987778296
+        ],
+        "servo_power_uW": 14.38030088225326,
+        "weight_uN": 10.382021100000001,
+        "tethered": true,
+        "contacts": 2,
+        "environment_contacts": 0,
+        "wing_contacts": 0
+      },
+      "lift_weight_ratio": 0.0,
+      "max_height_error_mm": 0.0006475002120236439,
+      "max_tilt_degrees": 0.09120663065996834,
+      "max_horizontal_drift_mm": 0.00023447413537021138,
+      "environment_contacts": 0,
+      "max_wing_contacts": 8,
+      "wing_contact_fraction": 0.01875,
+      "initial_rotation_vector_rad": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_velocity_mm_s": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wall_seconds": 0.48198087499986286,
+      "physics_wall_seconds": 0.32444427400923814,
+      "simulated_seconds": 0.08,
+      "spinup_seconds": 0.0,
+      "physics_steps": 1600,
+      "no_applied_body_force": true,
+      "flight_check_passed": null
+    },
+    "stationary": {
+      "settings": {
+        "air_density": 1.225e-06,
+        "air_viscosity": 1.81e-05,
+        "wind": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "timestep": 5e-05,
+        "fluid_coefficients": [
+          1.0,
+          0.5,
+          1.5,
+          1.7,
+          1.0
+        ],
+        "servo_stiffness": 100.0,
+        "servo_damping": 0.01,
+        "torque_limit": 30.0,
+        "tethered": true,
+        "initial_height": 10.0,
+        "stroke_plane_pitch": 0.07913470832840196
+      },
+      "mode": "still",
+      "mean_force_uN": [
+        -0.00011955142637036868,
+        -2.3143053727544774e-05,
+        3.992671512601544e-05
+      ],
+      "mean_torque_uN_mm": [
+        -0.00014579630063270342,
+        3.8889854521731525e-05,
+        3.5532068141771866e-05
+      ],
+      "mean_servo_power_uW": -1.641169203652881e-07,
+      "averaging_interval_s": [
+        0.039999999999999675,
+        0.07999999999999935
+      ],
+      "averaging_cycles": 0,
+      "final": {
+        "time": 0.07999999999999935,
+        "position_mm": [
+          -6.960095057447646e-07,
+          -8.731711512062457e-07,
+          9.99994373432415
+        ],
+        "velocity_mm_s": [
+          -0.0005402638659327707,
+          -0.0003982922134006671,
+          -0.0012092385024358224
+        ],
+        "upright": 0.9999997529516834,
+        "quaternion": [
+          0.9999999382377065,
+          -8.225515615152128e-07,
+          -0.00035145907603713024,
+          -6.5215376690936e-07
+        ],
+        "angular_velocity_rad_s": [
+          0.0007438921712477253,
+          -0.011074019628262094,
+          -0.0041974625763224185
+        ],
+        "angles_rad": [
+          0.28561810188095516,
+          -0.25001750744087076,
+          -2.3137348380326336e-05,
+          0.2856192996086024,
+          -0.250018037170096,
+          -2.3028813643864483e-05
+        ],
+        "fluid_force_uN": [
+          0.00010462262997471058,
+          -1.479631480340982e-05,
+          -0.00015675747594871793
+        ],
+        "fluid_torque_uN_mm": [
+          -1.9898774656088504e-05,
+          -9.388173498922584e-05,
+          1.713802796231338e-05
+        ],
+        "fluid_root_torque_uN_mm": [
+          -2.2688125172513227e-05,
+          -0.00023475104445576172,
+          2.8573000688223827e-05
+        ],
+        "force_time_s": 0.07994999999999935,
+        "servo_torque_uN_mm": [
+          0.021941191860147313,
+          0.0017731957194833114,
+          0.0023102268415710336,
+          0.021792755670066555,
+          0.001838789722270917,
+          0.0022936414952308957
+        ],
+        "servo_power_uW": 8.224581839563805e-08,
+        "weight_uN": 10.382021100000001,
+        "tethered": true,
+        "contacts": 2,
+        "environment_contacts": 0,
+        "wing_contacts": 0
+      },
+      "lift_weight_ratio": 3.845755536560741e-06,
+      "max_height_error_mm": 0.00018579735067980607,
+      "max_tilt_degrees": 0.053237275783601136,
+      "max_horizontal_drift_mm": 0.00011181529413392567,
+      "environment_contacts": 0,
+      "max_wing_contacts": 0,
+      "wing_contact_fraction": 0.0,
+      "initial_rotation_vector_rad": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_velocity_mm_s": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wall_seconds": 1.6119180840000809,
+      "physics_wall_seconds": 1.4365954829977454,
+      "simulated_seconds": 0.08,
+      "spinup_seconds": 0.0,
+      "physics_steps": 1600,
+      "no_applied_body_force": true,
+      "flight_check_passed": null
+    },
+    "half_step": {
+      "settings": {
+        "air_density": 1.225e-06,
+        "air_viscosity": 1.81e-05,
+        "wind": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "timestep": 2.5e-05,
+        "fluid_coefficients": [
+          1.0,
+          0.5,
+          1.5,
+          1.7,
+          1.0
+        ],
+        "servo_stiffness": 100.0,
+        "servo_damping": 0.01,
+        "torque_limit": 30.0,
+        "tethered": true,
+        "initial_height": 10.0,
+        "stroke_plane_pitch": 0.07913470832840196
+      },
+      "mode": "tether",
+      "mean_force_uN": [
+        -0.01327394977511187,
+        -0.0002015321721937903,
+        10.31255846559965
+      ],
+      "mean_torque_uN_mm": [
+        -0.031578004915298025,
+        0.012604260023351516,
+        0.0001326208445258069
+      ],
+      "mean_servo_power_uW": 60.88950611135393,
+      "averaging_interval_s": [
+        0.03999999999999527,
+        0.07999999999999527
+      ],
+      "averaging_cycles": 11,
+      "final": {
+        "time": 0.07999999999999527,
+        "position_mm": [
+          7.045809458575131e-05,
+          6.409387838252136e-08,
+          10.000034345665338
+        ],
+        "velocity_mm_s": [
+          0.2783967739074132,
+          -0.00024161853796513306,
+          -0.05496735406167564
+        ],
+        "upright": 0.9999999912329317,
+        "quaternion": [
+          0.9999999978079422,
+          -3.706650183396067e-06,
+          6.61044287717991e-05,
+          -7.628576650017472e-07
+        ],
+        "angular_velocity_rad_s": [
+          -0.008757651616807345,
+          2.6108949710605445,
+          -0.005802746210892984
+        ],
+        "angles_rad": [
+          0.3080754777918127,
+          -0.6178056448309296,
+          0.8168479714301214,
+          0.30807216336475235,
+          -0.6178065633252735,
+          0.8168474992115462
+        ],
+        "fluid_force_uN": [
+          18.59621778666895,
+          2.012614263092403e-05,
+          12.90121691882919
+        ],
+        "fluid_torque_uN_mm": [
+          -0.04781574832671201,
+          13.00034563348767,
+          0.06900297710565806
+        ],
+        "fluid_root_torque_uN_mm": [
+          -6.769730787571695e-06,
+          20.202116307199976,
+          7.838436479922035e-05
+        ],
+        "force_time_s": 0.07997499999999527,
+        "servo_torque_uN_mm": [
+          -2.496781180372224,
+          22.296878924653612,
+          -2.422212872744268,
+          -2.496381503046429,
+          22.29702891134454,
+          -2.4221808664270554
+        ],
+        "servo_power_uW": 86.02605935064415,
+        "weight_uN": 10.382021100000001,
+        "tethered": true,
+        "contacts": 2,
+        "environment_contacts": 0,
+        "wing_contacts": 0
+      },
+      "lift_weight_ratio": 0.9933093341141109,
+      "max_height_error_mm": 0.0004475438299529344,
+      "max_tilt_degrees": 0.10178095643302212,
+      "max_horizontal_drift_mm": 0.00030280281071722135,
+      "environment_contacts": 0,
+      "max_wing_contacts": 8,
+      "wing_contact_fraction": 0.036875,
+      "initial_rotation_vector_rad": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_velocity_mm_s": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wall_seconds": 3.218973166000069,
+      "physics_wall_seconds": 2.870589791000384,
+      "simulated_seconds": 0.08,
+      "spinup_seconds": 0.0,
+      "physics_steps": 3200,
+      "no_applied_body_force": true,
+      "flight_check_passed": null
+    },
+    "quarter_step": {
+      "settings": {
+        "air_density": 1.225e-06,
+        "air_viscosity": 1.81e-05,
+        "wind": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "timestep": 1.25e-05,
+        "fluid_coefficients": [
+          1.0,
+          0.5,
+          1.5,
+          1.7,
+          1.0
+        ],
+        "servo_stiffness": 100.0,
+        "servo_damping": 0.01,
+        "torque_limit": 30.0,
+        "tethered": true,
+        "initial_height": 10.0,
+        "stroke_plane_pitch": 0.07913470832840196
+      },
+      "mode": "tether",
+      "mean_force_uN": [
+        -0.02456412532979268,
+        -0.00016411463962010193,
+        10.273587427844127
+      ],
+      "mean_torque_uN_mm": [
+        -0.0356643356825747,
+        0.0040526071817847354,
+        1.5238057565607642e-07
+      ],
+      "mean_servo_power_uW": 60.7368462010864,
+      "averaging_interval_s": [
+        0.03999999999999323,
+        0.07999999999999323
+      ],
+      "averaging_cycles": 11,
+      "final": {
+        "time": 0.07999999999999323,
+        "position_mm": [
+          8.152859795314571e-05,
+          5.005588433333187e-09,
+          9.999998845523574
+        ],
+        "velocity_mm_s": [
+          0.265918155499132,
+          -3.371194379279867e-05,
+          -0.013245464703684819
+        ],
+        "upright": 0.9999999922543518,
+        "quaternion": [
+          0.9999999980635084,
+          -3.7451514001754553e-06,
+          6.211922948520084e-05,
+          -3.9983741127798345e-07
+        ],
+        "angular_velocity_rad_s": [
+          -0.008685881744733965,
+          2.571218798222764,
+          -0.0069757135793036594
+        ],
+        "angles_rad": [
+          0.30694264783289327,
+          -0.6391448950256103,
+          0.8157461628538417,
+          0.306939447893759,
+          -0.6391459758968467,
+          0.8157457063688962
+        ],
+        "fluid_force_uN": [
+          18.62288513288756,
+          4.272298186296882e-05,
+          12.850753850081883
+        ],
+        "fluid_torque_uN_mm": [
+          -0.051632901286376896,
+          13.076837007169548,
+          0.07487401217833527
+        ],
+        "fluid_root_torque_uN_mm": [
+          -4.61093614622359e-05,
+          20.23937153491432,
+          9.233661006068255e-05
+        ],
+        "force_time_s": 0.07998749999999323,
+        "servo_torque_uN_mm": [
+          -2.4427507145030596,
+          21.98664587636896,
+          -2.37661415640693,
+          -2.4423533272523343,
+          21.986828602253304,
+          -2.376588877521911
+        ],
+        "servo_power_uW": 84.7314112091109,
+        "weight_uN": 10.382021100000001,
+        "tethered": true,
+        "contacts": 2,
+        "environment_contacts": 0,
+        "wing_contacts": 0
+      },
+      "lift_weight_ratio": 0.9895556297650104,
+      "max_height_error_mm": 0.00020871902680319465,
+      "max_tilt_degrees": 0.09416086611373732,
+      "max_horizontal_drift_mm": 0.0001423406867205006,
+      "environment_contacts": 0,
+      "max_wing_contacts": 8,
+      "wing_contact_fraction": 0.0321875,
+      "initial_rotation_vector_rad": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_velocity_mm_s": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wall_seconds": 6.271560207999755,
+      "physics_wall_seconds": 5.592785791995539,
+      "simulated_seconds": 0.08,
+      "spinup_seconds": 0.0,
+      "physics_steps": 6400,
+      "no_applied_body_force": true,
+      "flight_check_passed": null
+    },
+    "fixed_free": {
+      "settings": {
+        "air_density": 1.225e-06,
+        "air_viscosity": 1.81e-05,
+        "wind": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "timestep": 5e-05,
+        "fluid_coefficients": [
+          1.0,
+          0.5,
+          1.5,
+          1.7,
+          1.0
+        ],
+        "servo_stiffness": 100.0,
+        "servo_damping": 0.01,
+        "torque_limit": 30.0,
+        "tethered": true,
+        "initial_height": 10.0,
+        "stroke_plane_pitch": 0.07913470832840196
+      },
+      "mode": "fixed",
+      "mean_force_uN": [
+        1.001311557581337,
+        0.12432024686242442,
+        8.98899137909953
+      ],
+      "mean_torque_uN_mm": [
+        0.03892024769743474,
+        -0.20151169169052746,
+        0.012079531135492939
+      ],
+      "mean_servo_power_uW": 59.66072752200063,
+      "averaging_interval_s": [
+        0.1018181818181598,
+        0.19999999999997797
+      ],
+      "averaging_cycles": 27,
+      "final": {
+        "time": 0.19999999999997797,
+        "position_mm": [
+          4.059169874167502,
+          1.2481888364205591,
+          8.184507257607507
+        ],
+        "velocity_mm_s": [
+          -17.786502262103095,
+          6.774702757071006,
+          -99.8576275987081
+        ],
+        "upright": 0.21850096011488002,
+        "quaternion": [
+          0.7782746092618023,
+          0.03429026458016223,
+          -0.624158391514192,
+          0.05949044155013302
+        ],
+        "angular_velocity_rad_s": [
+          3.086497567146172,
+          -41.600018607433114,
+          0.00925416714276215
+        ],
+        "angles_rad": [
+          0.3146761877562036,
+          -0.5767788461095795,
+          0.8236628761588103,
+          0.31427734960231873,
+          -0.5751128018049149,
+          0.8232550746523782
+        ],
+        "fluid_force_uN": [
+          -9.16383033834571,
+          -0.924008002356705,
+          22.64215683205252
+        ],
+        "fluid_torque_uN_mm": [
+          -1.7598229293847134,
+          14.185360449647666,
+          -0.17005255733545263
+        ],
+        "fluid_root_torque_uN_mm": [
+          -2.852885729820434,
+          21.94059943820163,
+          -0.29595660383962025
+        ],
+        "force_time_s": 0.19994999999997798,
+        "servo_torque_uN_mm": [
+          -3.0826522465752504,
+          23.33746157401046,
+          -3.0642657181626163,
+          -3.0561646648901934,
+          23.181045422326868,
+          -3.0219053756167966
+        ],
+        "servo_power_uW": 88.30664634927743,
+        "weight_uN": 10.382021100000001,
+        "tethered": false,
+        "contacts": 2,
+        "environment_contacts": 0,
+        "wing_contacts": 0,
+        "physics_time_s": 0.2799999999999773
+      },
+      "lift_weight_ratio": 0.8658228771177829,
+      "max_height_error_mm": 1.8154927423924931,
+      "max_tilt_degrees": 77.37899758075795,
+      "max_horizontal_drift_mm": 4.299598274657736,
+      "environment_contacts": 0,
+      "max_wing_contacts": 8,
+      "wing_contact_fraction": 0.04225,
+      "initial_rotation_vector_rad": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_velocity_mm_s": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wall_seconds": 5.441718750000291,
+      "physics_wall_seconds": 4.864647610015709,
+      "simulated_seconds": 0.2,
+      "spinup_seconds": 0.08,
+      "physics_steps": 5600,
+      "no_applied_body_force": true,
+      "flight_check_passed": false
+    },
+    "hover": {
+      "settings": {
+        "air_density": 1.225e-06,
+        "air_viscosity": 1.81e-05,
+        "wind": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "timestep": 5e-05,
+        "fluid_coefficients": [
+          1.0,
+          0.5,
+          1.5,
+          1.7,
+          1.0
+        ],
+        "servo_stiffness": 100.0,
+        "servo_damping": 0.01,
+        "torque_limit": 30.0,
+        "tethered": true,
+        "initial_height": 10.0,
+        "stroke_plane_pitch": 0.07913470832840196
+      },
+      "mode": "hover",
+      "mean_force_uN": [
+        -0.0039890222740867525,
+        0.005204580452929947,
+        10.07023681970289
+      ],
+      "mean_torque_uN_mm": [
+        0.0007444305006862083,
+        0.1157449305501625,
+        0.0018585433506212545
+      ],
+      "mean_servo_power_uW": 57.7490024550953,
+      "averaging_interval_s": [
+        0.5018181818182493,
+        1.0000000000000675
+      ],
+      "averaging_cycles": 137,
+      "final": {
+        "time": 1.0000000000000675,
+        "position_mm": [
+          -1.6111794218568203,
+          2.106923761836265,
+          9.991383948127405
+        ],
+        "velocity_mm_s": [
+          -2.318549026896055,
+          -0.02582738414802257,
+          0.46124052710959673
+        ],
+        "upright": 0.9997840178536433,
+        "quaternion": [
+          0.9999390143576159,
+          -0.0013616685592673053,
+          -0.01030227799628346,
+          -0.0037385147239258868
+        ],
+        "angular_velocity_rad_s": [
+          2.666849409480146,
+          -3.698516336994609,
+          -1.88065022656629
+        ],
+        "angles_rad": [
+          0.31212156596469925,
+          -0.5668930101603022,
+          0.8142192677629947,
+          0.3084710800353244,
+          -0.569971098678612,
+          0.8225759453088617
+        ],
+        "fluid_force_uN": [
+          17.96157254636414,
+          -0.19311268750844682,
+          13.138820154871748
+        ],
+        "fluid_torque_uN_mm": [
+          0.09381640500032207,
+          12.79471017291677,
+          0.027686024350544652
+        ],
+        "fluid_root_torque_uN_mm": [
+          0.17879043783195425,
+          19.941005212635016,
+          0.01655663733629309
+        ],
+        "force_time_s": 0.9999500000000674,
+        "servo_torque_uN_mm": [
+          -2.9232281655681653,
+          22.301128404902478,
+          -2.488241269528743,
+          -2.4818567319974854,
+          22.679075635133046,
+          -2.4703852804621818
+        ],
+        "servo_power_uW": 85.71212270667985,
+        "weight_uN": 10.382021100000001,
+        "tethered": false,
+        "contacts": 3,
+        "environment_contacts": 0,
+        "wing_contacts": 0,
+        "physics_time_s": 1.080000000000067
+      },
+      "lift_weight_ratio": 0.9699688261761372,
+      "max_height_error_mm": 0.21300251201051879,
+      "max_tilt_degrees": 2.7181279436607366,
+      "max_horizontal_drift_mm": 2.6523625068238985,
+      "environment_contacts": 0,
+      "max_wing_contacts": 13,
+      "wing_contact_fraction": 0.0361,
+      "initial_rotation_vector_rad": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_velocity_mm_s": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wall_seconds": 22.11576712499982,
+      "physics_wall_seconds": 18.929300237045936,
+      "simulated_seconds": 1.0,
+      "spinup_seconds": 0.08,
+      "physics_steps": 21600,
+      "no_applied_body_force": true,
+      "flight_check_passed": true
+    },
+    "hover_vacuum": {
+      "settings": {
+        "air_density": 0.0,
+        "air_viscosity": 0.0,
+        "wind": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "timestep": 5e-05,
+        "fluid_coefficients": [
+          1.0,
+          0.5,
+          1.5,
+          1.7,
+          1.0
+        ],
+        "servo_stiffness": 100.0,
+        "servo_damping": 0.01,
+        "torque_limit": 30.0,
+        "tethered": true,
+        "initial_height": 10.0,
+        "stroke_plane_pitch": 0.07913470832840196
+      },
+      "mode": "hover",
+      "mean_force_uN": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_torque_uN_mm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_servo_power_uW": 0.06348687905953752,
+      "averaging_interval_s": [
+        0.03999999999999119,
+        0.07999999999999119
+      ],
+      "averaging_cycles": 11,
+      "final": {
+        "time": 0.07999999999999119,
+        "position_mm": [
+          0.15718766769921752,
+          -0.10345235550634449,
+          1.1003115404733657
+        ],
+        "velocity_mm_s": [
+          -1.4964836198570979,
+          -44.766973136912085,
+          -25.419716793031775
+        ],
+        "upright": 0.9976044527310381,
+        "quaternion": [
+          0.945331841374228,
+          -0.010577571762918766,
+          0.0329528240076763,
+          0.32426830873449564
+        ],
+        "angular_velocity_rad_s": [
+          81.3596971940949,
+          -32.565449632811465,
+          2.451737081841191
+        ],
+        "angles_rad": [
+          -0.13398010433541907,
+          1.7937982681068059,
+          -1.1384367061071388,
+          0.01045422832783665,
+          2.223835627188795,
+          -0.9310181331358204
+        ],
+        "fluid_force_uN": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "fluid_torque_uN_mm": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "fluid_root_torque_uN_mm": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "force_time_s": 0.0799499999999912,
+        "servo_torque_uN_mm": [
+          23.42787290274522,
+          -30.0,
+          30.0,
+          8.986613031930926,
+          -30.0,
+          30.0
+        ],
+        "servo_power_uW": 0.43677972842922036,
+        "weight_uN": 10.382021100000001,
+        "tethered": false,
+        "contacts": 62,
+        "environment_contacts": 13,
+        "wing_contacts": 43,
+        "physics_time_s": 0.15999999999999054
+      },
+      "lift_weight_ratio": 0.0,
+      "max_height_error_mm": 8.899688459526635,
+      "max_tilt_degrees": 32.49158009929277,
+      "max_horizontal_drift_mm": 0.5737371657505913,
+      "environment_contacts": 83,
+      "max_wing_contacts": 54,
+      "wing_contact_fraction": 0.848125,
+      "initial_rotation_vector_rad": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_velocity_mm_s": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wall_seconds": 2.199782000000141,
+      "physics_wall_seconds": 1.6835795439892536,
+      "simulated_seconds": 0.08,
+      "spinup_seconds": 0.08,
+      "physics_steps": 3200,
+      "no_applied_body_force": true,
+      "flight_check_passed": false
+    },
+    "hover_half_step": {
+      "settings": {
+        "air_density": 1.225e-06,
+        "air_viscosity": 1.81e-05,
+        "wind": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "timestep": 2.5e-05,
+        "fluid_coefficients": [
+          1.0,
+          0.5,
+          1.5,
+          1.7,
+          1.0
+        ],
+        "servo_stiffness": 100.0,
+        "servo_damping": 0.01,
+        "torque_limit": 30.0,
+        "tethered": true,
+        "initial_height": 10.0,
+        "stroke_plane_pitch": 0.07913470832840196
+      },
+      "mode": "hover",
+      "mean_force_uN": [
+        0.005222208891195601,
+        -0.0007078113213594614,
+        10.217607038962056
+      ],
+      "mean_torque_uN_mm": [
+        0.0011464149417990755,
+        0.0673345727567111,
+        -0.0012541915476021717
+      ],
+      "mean_servo_power_uW": 60.22000900180253,
+      "averaging_interval_s": [
+        0.5018181818190043,
+        1.0000000000008225
+      ],
+      "averaging_cycles": 137,
+      "final": {
+        "time": 1.0000000000008225,
+        "position_mm": [
+          -0.5233422957159651,
+          3.51078305118276,
+          10.019597642440113
+        ],
+        "velocity_mm_s": [
+          -0.17858987269626617,
+          3.56577220097591,
+          -0.2696532031132027
+        ],
+        "upright": 0.9998328006638458,
+        "quaternion": [
+          0.999958032519057,
+          -0.0015370611034163219,
+          -0.009013163220622183,
+          -0.0005775227609923668
+        ],
+        "angular_velocity_rad_s": [
+          -0.054068744829239596,
+          -3.8765930525923444,
+          -0.07306610249461067
+        ],
+        "angles_rad": [
+          0.3092099836329677,
+          -0.6182584338287784,
+          0.8170480924011118,
+          0.30872283680250834,
+          -0.6171303153579594,
+          0.8175427146923621
+        ],
+        "fluid_force_uN": [
+          18.41933261930588,
+          -0.04993989839102848,
+          13.31896937891531
+        ],
+        "fluid_torque_uN_mm": [
+          0.07453237215496454,
+          13.151848925163497,
+          -0.055334673410723303
+        ],
+        "fluid_root_torque_uN_mm": [
+          0.1350120394511767,
+          20.397584607307408,
+          -0.11180629546355705
+        ],
+        "force_time_s": 0.9999750000008224,
+        "servo_torque_uN_mm": [
+          -2.742323253508175,
+          22.338086778519926,
+          -2.4722903127901645,
+          -2.684366625556553,
+          22.242862955796248,
+          -2.4470151200961823
+        ],
+        "servo_power_uW": 85.97763343288432,
+        "weight_uN": 10.382021100000001,
+        "tethered": false,
+        "contacts": 2,
+        "environment_contacts": 0,
+        "wing_contacts": 0,
+        "physics_time_s": 1.0800000000008176
+      },
+      "lift_weight_ratio": 0.9841635786082206,
+      "max_height_error_mm": 0.08423530607582741,
+      "max_tilt_degrees": 3.5001225266666536,
+      "max_horizontal_drift_mm": 3.549575297265489,
+      "environment_contacts": 0,
+      "max_wing_contacts": 16,
+      "wing_contact_fraction": 0.038025,
+      "initial_rotation_vector_rad": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_velocity_mm_s": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wall_seconds": 43.79820787499966,
+      "physics_wall_seconds": 37.55018540098854,
+      "simulated_seconds": 1.0,
+      "spinup_seconds": 0.08,
+      "physics_steps": 43200,
+      "no_applied_body_force": true,
+      "flight_check_passed": true
+    },
+    "pitch_positive": {
+      "settings": {
+        "air_density": 1.225e-06,
+        "air_viscosity": 1.81e-05,
+        "wind": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "timestep": 5e-05,
+        "fluid_coefficients": [
+          1.0,
+          0.5,
+          1.5,
+          1.7,
+          1.0
+        ],
+        "servo_stiffness": 100.0,
+        "servo_damping": 0.01,
+        "torque_limit": 30.0,
+        "tethered": true,
+        "initial_height": 10.0,
+        "stroke_plane_pitch": 0.07913470832840196
+      },
+      "mode": "hover",
+      "mean_force_uN": [
+        0.001304523809286643,
+        0.020780226371056212,
+        10.065057918250519
+      ],
+      "mean_torque_uN_mm": [
+        -0.004627193772749941,
+        0.11985961669723164,
+        0.010935045241075515
+      ],
+      "mean_servo_power_uW": 57.71961660378554,
+      "averaging_interval_s": [
+        0.5018181818182493,
+        1.0000000000000675
+      ],
+      "averaging_cycles": 137,
+      "final": {
+        "time": 1.0000000000000675,
+        "position_mm": [
+          -1.4173484780113663,
+          2.0122786896963367,
+          9.994870223093752
+        ],
+        "velocity_mm_s": [
+          -0.44804776347927644,
+          7.879279601227514,
+          0.10457429985501124
+        ],
+        "upright": 0.9994339144006205,
+        "quaternion": [
+          0.9998571530802061,
+          -0.0031277678892459183,
+          -0.016530573726305838,
+          -0.00162192313493466
+        ],
+        "angular_velocity_rad_s": [
+          0.6531379806112202,
+          -4.544766186998084,
+          1.6921727394258441
+        ],
+        "angles_rad": [
+          0.29264361620295765,
+          -0.5704465231190158,
+          0.821881445698228,
+          0.29668878090250766,
+          -0.5621341380175757,
+          0.8176024967653357
+        ],
+        "fluid_force_uN": [
+          17.644446877483485,
+          -0.2061426927305517,
+          13.16780397012939
+        ],
+        "fluid_torque_uN_mm": [
+          0.666802092666629,
+          12.440152334082368,
+          -0.8710758234264607
+        ],
+        "fluid_root_torque_uN_mm": [
+          0.69225353329961,
+          19.465455427914144,
+          -0.7951984556380882
+        ],
+        "force_time_s": 0.9999500000000674,
+        "servo_torque_uN_mm": [
+          -2.605228199791739,
+          22.782798345029175,
+          -2.6543909954059615,
+          -3.171821499394934,
+          22.071490139544697,
+          -2.5960007361144477
+        ],
+        "servo_power_uW": 84.16463991261266,
+        "weight_uN": 10.382021100000001,
+        "tethered": false,
+        "contacts": 4,
+        "environment_contacts": 0,
+        "wing_contacts": 0,
+        "physics_time_s": 1.080000000000067
+      },
+      "lift_weight_ratio": 0.9694699925287685,
+      "max_height_error_mm": 0.201959436982742,
+      "max_tilt_degrees": 7.652374381457088,
+      "max_horizontal_drift_mm": 2.4613293629921094,
+      "environment_contacts": 0,
+      "max_wing_contacts": 16,
+      "wing_contact_fraction": 0.037,
+      "initial_rotation_vector_rad": [
+        0,
+        0.08726646259971647,
+        0
+      ],
+      "initial_velocity_mm_s": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wall_seconds": 22.09563179199995,
+      "physics_wall_seconds": 18.934666837011264,
+      "simulated_seconds": 1.0,
+      "spinup_seconds": 0.08,
+      "physics_steps": 21600,
+      "no_applied_body_force": true,
+      "flight_check_passed": true
+    },
+    "pitch_negative": {
+      "settings": {
+        "air_density": 1.225e-06,
+        "air_viscosity": 1.81e-05,
+        "wind": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "timestep": 5e-05,
+        "fluid_coefficients": [
+          1.0,
+          0.5,
+          1.5,
+          1.7,
+          1.0
+        ],
+        "servo_stiffness": 100.0,
+        "servo_damping": 0.01,
+        "torque_limit": 30.0,
+        "tethered": true,
+        "initial_height": 10.0,
+        "stroke_plane_pitch": 0.07913470832840196
+      },
+      "mode": "hover",
+      "mean_force_uN": [
+        0.005163217069211064,
+        0.009322102939988091,
+        10.071962272688266
+      ],
+      "mean_torque_uN_mm": [
+        -0.0003022875655685648,
+        0.11157053350362861,
+        0.005828025845369204
+      ],
+      "mean_servo_power_uW": 57.78001365565852,
+      "averaging_interval_s": [
+        0.5018181818182493,
+        1.0000000000000675
+      ],
+      "averaging_cycles": 137,
+      "final": {
+        "time": 1.0000000000000675,
+        "position_mm": [
+          -2.0203286051696407,
+          2.15987456849811,
+          9.991724035326131
+        ],
+        "velocity_mm_s": [
+          0.5067144460983364,
+          1.686314900125243,
+          2.872981304725575
+        ],
+        "upright": 0.9997862358470052,
+        "quaternion": [
+          0.999930008424894,
+          9.385845558249388e-05,
+          -0.010337952751254735,
+          -0.005752927506365393
+        ],
+        "angular_velocity_rad_s": [
+          -0.23029960510610803,
+          -6.469207709365464,
+          -0.9664356562797911
+        ],
+        "angles_rad": [
+          0.2945426974464658,
+          -0.5635125180839965,
+          0.8155922084566275,
+          0.29138043487149085,
+          -0.5676554364775458,
+          0.8230968727366436
+        ],
+        "fluid_force_uN": [
+          17.716354937049616,
+          -0.15799544345179833,
+          13.15549196514636
+        ],
+        "fluid_torque_uN_mm": [
+          -0.10045951524455654,
+          12.070003956545548,
+          0.5274545772084943
+        ],
+        "fluid_root_torque_uN_mm": [
+          0.038308423523556644,
+          19.276973839623196,
+          0.4271319394861908
+        ],
+        "force_time_s": 0.9999500000000674,
+        "servo_torque_uN_mm": [
+          -2.965040754665953,
+          22.185620744900653,
+          -2.603786056547534,
+          -2.561884760429809,
+          22.52183903755204,
+          -2.5971071102937344
+        ],
+        "servo_power_uW": 83.95894562357988,
+        "weight_uN": 10.382021100000001,
+        "tethered": false,
+        "contacts": 1,
+        "environment_contacts": 0,
+        "wing_contacts": 0,
+        "physics_time_s": 1.080000000000067
+      },
+      "lift_weight_ratio": 0.9701350224272097,
+      "max_height_error_mm": 0.22018548071300081,
+      "max_tilt_degrees": 4.974553138599861,
+      "max_horizontal_drift_mm": 2.957496546830039,
+      "environment_contacts": 0,
+      "max_wing_contacts": 14,
+      "wing_contact_fraction": 0.0351,
+      "initial_rotation_vector_rad": [
+        0,
+        -0.08726646259971647,
+        0
+      ],
+      "initial_velocity_mm_s": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wall_seconds": 22.04605166700003,
+      "physics_wall_seconds": 18.884700216997317,
+      "simulated_seconds": 1.0,
+      "spinup_seconds": 0.08,
+      "physics_steps": 21600,
+      "no_applied_body_force": true,
+      "flight_check_passed": true
+    },
+    "roll_positive": {
+      "settings": {
+        "air_density": 1.225e-06,
+        "air_viscosity": 1.81e-05,
+        "wind": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "timestep": 5e-05,
+        "fluid_coefficients": [
+          1.0,
+          0.5,
+          1.5,
+          1.7,
+          1.0
+        ],
+        "servo_stiffness": 100.0,
+        "servo_damping": 0.01,
+        "torque_limit": 30.0,
+        "tethered": true,
+        "initial_height": 10.0,
+        "stroke_plane_pitch": 0.07913470832840196
+      },
+      "mode": "hover",
+      "mean_force_uN": [
+        0.0019585475752522566,
+        0.001769594027957459,
+        10.066012223661073
+      ],
+      "mean_torque_uN_mm": [
+        -0.0018739257923534591,
+        0.12124763872931316,
+        0.005071149682084073
+      ],
+      "mean_servo_power_uW": 57.710316528032614,
+      "averaging_interval_s": [
+        0.5018181818182493,
+        1.0000000000000675
+      ],
+      "averaging_cycles": 137,
+      "final": {
+        "time": 1.0000000000000675,
+        "position_mm": [
+          -2.1326540158456027,
+          1.8953302276031312,
+          9.994547679697703
+        ],
+        "velocity_mm_s": [
+          0.0649473023958579,
+          1.5118041698679376,
+          -1.3144487438673607
+        ],
+        "upright": 0.999821122852951,
+        "quaternion": [
+          0.9999459342435428,
+          0.002619261590275844,
+          -0.009087246131044011,
+          -0.004323195147550856
+        ],
+        "angular_velocity_rad_s": [
+          -0.24806670346799212,
+          -2.9516089931557383,
+          0.17569988134766684
+        ],
+        "angles_rad": [
+          0.31177108042999474,
+          -0.5677030561043793,
+          0.8160399975819342,
+          0.31156363917796437,
+          -0.567419343408317,
+          0.8209017962745366
+        ],
+        "fluid_force_uN": [
+          18.028440106742067,
+          -0.2741460158320207,
+          13.014357089117981
+        ],
+        "fluid_torque_uN_mm": [
+          0.17604309997444428,
+          12.994141316428294,
+          0.08293151355440186
+        ],
+        "fluid_root_torque_uN_mm": [
+          0.27434006502276387,
+          20.073665565837214,
+          0.09589277001589307
+        ],
+        "force_time_s": 0.9999500000000674,
+        "servo_torque_uN_mm": [
+          -2.8720466713167703,
+          22.388706227350685,
+          -2.482219157660296,
+          -2.8660544350203097,
+          22.375546557173674,
+          -2.4653969272671787
+        ],
+        "servo_power_uW": 85.38991955172747,
+        "weight_uN": 10.382021100000001,
+        "tethered": false,
+        "contacts": 5,
+        "environment_contacts": 0,
+        "wing_contacts": 0,
+        "physics_time_s": 1.080000000000067
+      },
+      "lift_weight_ratio": 0.969561911568555,
+      "max_height_error_mm": 0.21275693979575117,
+      "max_tilt_degrees": 5.6921297056581786,
+      "max_horizontal_drift_mm": 2.853154363676896,
+      "environment_contacts": 0,
+      "max_wing_contacts": 12,
+      "wing_contact_fraction": 0.0352,
+      "initial_rotation_vector_rad": [
+        0.08726646259971647,
+        0,
+        0
+      ],
+      "initial_velocity_mm_s": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wall_seconds": 21.926805208999667,
+      "physics_wall_seconds": 18.82037512197394,
+      "simulated_seconds": 1.0,
+      "spinup_seconds": 0.08,
+      "physics_steps": 21600,
+      "no_applied_body_force": true,
+      "flight_check_passed": true
+    },
+    "roll_negative": {
+      "settings": {
+        "air_density": 1.225e-06,
+        "air_viscosity": 1.81e-05,
+        "wind": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "timestep": 5e-05,
+        "fluid_coefficients": [
+          1.0,
+          0.5,
+          1.5,
+          1.7,
+          1.0
+        ],
+        "servo_stiffness": 100.0,
+        "servo_damping": 0.01,
+        "torque_limit": 30.0,
+        "tethered": true,
+        "initial_height": 10.0,
+        "stroke_plane_pitch": 0.07913470832840196
+      },
+      "mode": "hover",
+      "mean_force_uN": [
+        0.0023850530312730426,
+        0.004961214397486602,
+        10.071740724238628
+      ],
+      "mean_torque_uN_mm": [
+        -0.003339729725591672,
+        0.11364821429016675,
+        0.008779408683798208
+      ],
+      "mean_servo_power_uW": 57.77796440614816,
+      "averaging_interval_s": [
+        0.5018181818182493,
+        1.0000000000000675
+      ],
+      "averaging_cycles": 137,
+      "final": {
+        "time": 1.0000000000000675,
+        "position_mm": [
+          -1.7508395387237907,
+          2.522723240749914,
+          9.987959786842607
+        ],
+        "velocity_mm_s": [
+          -0.5088271630618272,
+          0.3075010293821603,
+          0.9437787785648831
+        ],
+        "upright": 0.999787080296624,
+        "quaternion": [
+          0.9999362228993329,
+          -0.0015282888109429144,
+          -0.01020412588118393,
+          -0.004592415718146044
+        ],
+        "angular_velocity_rad_s": [
+          2.4557695663044736,
+          -4.3127142125557905,
+          -2.0417574443085087
+        ],
+        "angles_rad": [
+          0.30469563341793027,
+          -0.5620169120800732,
+          0.8136524220853565,
+          0.2997267842886675,
+          -0.5690949293049982,
+          0.8239559408658427
+        ],
+        "fluid_force_uN": [
+          17.718705961339218,
+          -0.0699974625408185,
+          12.91200192120065
+        ],
+        "fluid_torque_uN_mm": [
+          -0.275931524208795,
+          12.51770714334939,
+          0.6017714719510577
+        ],
+        "fluid_root_torque_uN_mm": [
+          -0.1523622446958908,
+          19.53512966442693,
+          0.4702437685123684
+        ],
+        "force_time_s": 0.9999500000000674,
+        "servo_torque_uN_mm": [
+          -2.9852048164677534,
+          22.005503483346523,
+          -2.521033679248646,
+          -2.359090442137081,
+          22.657617399479683,
+          -2.5389247574494505
+        ],
+        "servo_power_uW": 84.03228170513319,
+        "weight_uN": 10.382021100000001,
+        "tethered": false,
+        "contacts": 2,
+        "environment_contacts": 0,
+        "wing_contacts": 0,
+        "physics_time_s": 1.080000000000067
+      },
+      "lift_weight_ratio": 0.9701136828009941,
+      "max_height_error_mm": 0.2210616151632152,
+      "max_tilt_degrees": 5.70474133980568,
+      "max_horizontal_drift_mm": 3.0707607591244037,
+      "environment_contacts": 0,
+      "max_wing_contacts": 12,
+      "wing_contact_fraction": 0.0367,
+      "initial_rotation_vector_rad": [
+        -0.08726646259971647,
+        0,
+        0
+      ],
+      "initial_velocity_mm_s": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wall_seconds": 21.73760891699976,
+      "physics_wall_seconds": 18.65625922999652,
+      "simulated_seconds": 1.0,
+      "spinup_seconds": 0.08,
+      "physics_steps": 21600,
+      "no_applied_body_force": true,
+      "flight_check_passed": true
+    },
+    "velocity_positive": {
+      "settings": {
+        "air_density": 1.225e-06,
+        "air_viscosity": 1.81e-05,
+        "wind": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "timestep": 5e-05,
+        "fluid_coefficients": [
+          1.0,
+          0.5,
+          1.5,
+          1.7,
+          1.0
+        ],
+        "servo_stiffness": 100.0,
+        "servo_damping": 0.01,
+        "torque_limit": 30.0,
+        "tethered": true,
+        "initial_height": 10.0,
+        "stroke_plane_pitch": 0.07913470832840196
+      },
+      "mode": "hover",
+      "mean_force_uN": [
+        0.003593425805494483,
+        0.010622268967229691,
+        10.068925207911237
+      ],
+      "mean_torque_uN_mm": [
+        -0.0030918557210774028,
+        0.117464705216992,
+        0.018024351449861493
+      ],
+      "mean_servo_power_uW": 57.719965639936405,
+      "averaging_interval_s": [
+        0.5018181818182493,
+        1.0000000000000675
+      ],
+      "averaging_cycles": 137,
+      "final": {
+        "time": 1.0000000000000675,
+        "position_mm": [
+          -1.71015174272315,
+          1.9887601275446536,
+          9.988018074769116
+        ],
+        "velocity_mm_s": [
+          -0.5786684885159341,
+          -0.764773624581368,
+          0.5515924823604239
+        ],
+        "upright": 0.9996670791371237,
+        "quaternion": [
+          0.9998628484973642,
+          -0.0009680699223399531,
+          -0.012865584792905066,
+          -0.010383822191209147
+        ],
+        "angular_velocity_rad_s": [
+          1.6334750359487429,
+          -4.375279370928065,
+          -1.7911976657233373
+        ],
+        "angles_rad": [
+          0.2971484144942499,
+          -0.5610588004352645,
+          0.8134874182139614,
+          0.29226667267703615,
+          -0.5683785637870921,
+          0.8256825783963077
+        ],
+        "fluid_force_uN": [
+          17.65577279058288,
+          -0.2739691045170111,
+          12.912883877198547
+        ],
+        "fluid_torque_uN_mm": [
+          -0.1696734768400406,
+          12.46175178390095,
+          0.6871967720798776
+        ],
+        "fluid_root_torque_uN_mm": [
+          0.035318127166689424,
+          19.403948170415262,
+          0.5542026343444747
+        ],
+        "force_time_s": 0.9999500000000674,
+        "servo_torque_uN_mm": [
+          -3.014538856174898,
+          21.9754503318121,
+          -2.603089034883368,
+          -2.387337220367538,
+          22.632938548633497,
+          -2.6246805953570487
+        ],
+        "servo_power_uW": 83.40549761251427,
+        "weight_uN": 10.382021100000001,
+        "tethered": false,
+        "contacts": 1,
+        "environment_contacts": 0,
+        "wing_contacts": 0,
+        "physics_time_s": 1.080000000000067
+      },
+      "lift_weight_ratio": 0.969842491257433,
+      "max_height_error_mm": 0.22002309062572856,
+      "max_tilt_degrees": 7.08044152899901,
+      "max_horizontal_drift_mm": 2.622944712415132,
+      "environment_contacts": 0,
+      "max_wing_contacts": 16,
+      "wing_contact_fraction": 0.03625,
+      "initial_rotation_vector_rad": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_velocity_mm_s": [
+        25,
+        0,
+        0
+      ],
+      "wall_seconds": 21.68606650000038,
+      "physics_wall_seconds": 18.6165322550396,
+      "simulated_seconds": 1.0,
+      "spinup_seconds": 0.08,
+      "physics_steps": 21600,
+      "no_applied_body_force": true,
+      "flight_check_passed": true
+    },
+    "velocity_negative": {
+      "settings": {
+        "air_density": 1.225e-06,
+        "air_viscosity": 1.81e-05,
+        "wind": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "timestep": 5e-05,
+        "fluid_coefficients": [
+          1.0,
+          0.5,
+          1.5,
+          1.7,
+          1.0
+        ],
+        "servo_stiffness": 100.0,
+        "servo_damping": 0.01,
+        "torque_limit": 30.0,
+        "tethered": true,
+        "initial_height": 10.0,
+        "stroke_plane_pitch": 0.07913470832840196
+      },
+      "mode": "hover",
+      "mean_force_uN": [
+        -0.004060135444384835,
+        0.004328966330116377,
+        10.071868582325198
+      ],
+      "mean_torque_uN_mm": [
+        0.00044028542611091517,
+        0.11502365075472756,
+        0.0012369940225346655
+      ],
+      "mean_servo_power_uW": 57.75447123890647,
+      "averaging_interval_s": [
+        0.5018181818182493,
+        1.0000000000000675
+      ],
+      "averaging_cycles": 137,
+      "final": {
+        "time": 1.0000000000000675,
+        "position_mm": [
+          -1.9515032481436758,
+          2.245050383913879,
+          9.979395769166397
+        ],
+        "velocity_mm_s": [
+          -2.9237298736603945,
+          3.290230885608365,
+          4.151652588959235
+        ],
+        "upright": 0.9998197512127048,
+        "quaternion": [
+          0.9999539537658136,
+          -0.0029769542810396464,
+          -0.009014551395166371,
+          -0.0014021249835206033
+        ],
+        "angular_velocity_rad_s": [
+          -0.16460171855152583,
+          -6.793291474548999,
+          0.29790458153263666
+        ],
+        "angles_rad": [
+          0.3040823673405931,
+          -0.5693866244330039,
+          0.8175942825959859,
+          0.30378017044249994,
+          -0.5686327464718577,
+          0.8191838072966231
+        ],
+        "fluid_force_uN": [
+          17.901868341567422,
+          -0.022363565387092103,
+          13.344866820910456
+        ],
+        "fluid_torque_uN_mm": [
+          0.07392012021443392,
+          12.220289899300065,
+          -0.055671801668916665
+        ],
+        "fluid_root_torque_uN_mm": [
+          0.13448378786238274,
+          19.587346755841285,
+          -0.12457088917075895
+        ],
+        "force_time_s": 0.9999500000000674,
+        "servo_torque_uN_mm": [
+          -2.5076577855845166,
+          22.624406545652484,
+          -2.514713678965478,
+          -2.475147804326042,
+          22.544665173354385,
+          -2.496100178087289
+        ],
+        "servo_power_uW": 85.86700711985114,
+        "weight_uN": 10.382021100000001,
+        "tethered": false,
+        "contacts": 3,
+        "environment_contacts": 0,
+        "wing_contacts": 0,
+        "physics_time_s": 1.080000000000067
+      },
+      "lift_weight_ratio": 0.9701259981377996,
+      "max_height_error_mm": 0.21173289980552923,
+      "max_tilt_degrees": 6.78610648202609,
+      "max_horizontal_drift_mm": 2.974662359634648,
+      "environment_contacts": 0,
+      "max_wing_contacts": 14,
+      "wing_contact_fraction": 0.03705,
+      "initial_rotation_vector_rad": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_velocity_mm_s": [
+        -25,
+        0,
+        0
+      ],
+      "wall_seconds": 21.349016125000162,
+      "physics_wall_seconds": 18.319577688990194,
+      "simulated_seconds": 1.0,
+      "spinup_seconds": 0.08,
+      "physics_steps": 21600,
+      "no_applied_body_force": true,
+      "flight_check_passed": true
+    }
+  }
+}

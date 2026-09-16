@@ -1,0 +1,47 @@
+{
+  "created_utc": "2026-09-13T09:32:20.876421+00:00",
+  "torch": "2.14.0",
+  "precision": "float32",
+  "kernel": "metal-csr-f32-v1",
+  "neurons": 166700,
+  "edges": 25582938,
+  "graph_sha256": "2be8452f9f4c02d26b71a821277b1e6513cdefbecf32b735c2dba3af62f6dbab",
+  "duration_ms": 200,
+  "trials": 3,
+  "runs": {
+    "0.1": {
+      "wall_seconds": [
+        8.90454866597429,
+        8.85542700003134,
+        8.88788645900786
+      ],
+      "spikes": [
+        232610,
+        232610,
+        232610
+      ],
+      "median_wall_seconds": 8.88788645900786,
+      "wall_seconds_per_simulated_second": 44.439432295039296
+    },
+    "1.0": {
+      "wall_seconds": [
+        0.8921874169609509,
+        0.891648625023663,
+        0.898256125045009
+      ],
+      "spikes": [
+        224572,
+        224572,
+        224572
+      ],
+      "median_wall_seconds": 0.8921874169609509,
+      "wall_seconds_per_simulated_second": 4.460937084804755
+    }
+  },
+  "speedup": 9.9619051894753,
+  "neurons_with_different_spike_counts": 11023,
+  "max_spike_count_difference": 26,
+  "coarse_delay_ms": 2.0,
+  "coarse_refractory_ms": 3.0,
+  "limits": "Fixed 14.7 drive to olfactory/ol_sensory neurons, from reset. Brain-only timing; excludes body, sensing and UI. Coarse timing changes dynamics; no equivalence claim. No live state modified."
+}

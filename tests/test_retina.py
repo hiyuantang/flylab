@@ -21,7 +21,7 @@ def test_measured_directions_acceptance_cones_and_variable_eye_counts():
 
 
 def test_spatial_scene_sampling_is_pose_attached_and_not_mean_pooled():
-    body=FlyBody();settings=SensorySettings(vision_model=MODEL,vision_enabled=True)
+    body=FlyBody();settings=SensorySettings(vision_model=MODEL,vision_enabled=True,calibration_sphere=True)
     suite=SensorSuite(settings);before=body.data.qpos.copy()
     frame=suite.sample(body,[0,0,0]);eyes=frame['vision']['eyes']
     assert [e['count'] for e in eyes]==[857,852]

@@ -1,0 +1,7 @@
+{
+  "returncode": 0,
+  "stdout": "{\"jax\": \"0.4.34\", \"jaxlib\": \"0.4.34\", \"jax-metal\": \"0.1.1\", \"mujoco\": \"3.13.0\", \"mujoco-mjx\": \"3.13.0\"}\nMetal device set to: Apple M1 Pro\ndevices [METAL(id=0)]\nmatrix_device METAL:0\nmatrix_value 32.0\nFailed to import warp: No module named 'warp'\nFailed to import mujoco_warp: No module named 'warp'\nmjx_import_ok\n\nsystemMemory: 16.00 GB\nmaxCacheSize: 5.92 GB\n\n",
+  "stderr": "Platform 'METAL' is experimental and not all JAX functionality may be correctly supported!\nWARNING: All log messages before absl::InitializeLog() is called are written to STDERR\nW0000 00:00:1789297193.596463 8427576 mps_client.cc:510] WARNING: JAX Apple GPU support is experimental and not all JAX functionality is correctly supported!\nI0000 00:00:1789297193.608859 8427576 service.cc:145] XLA service 0x8e7165f00 initialized for platform METAL (this does not guarantee that XLA will be used). Devices:\nI0000 00:00:1789297193.608868 8427576 service.cc:153]   StreamExecutor device (0): Metal, <undefined>\nI0000 00:00:1789297193.610282 8427576 mps_client.cc:406] Using Simple allocator.\nI0000 00:00:1789297193.610290 8427576 mps_client.cc:384] XLA backend will use up to 12712722432 bytes on device 0 for SimpleAllocator.\nI0000 00:00:1789297208.850444 8427576 mps_client.h:209] MetalClient destroyed.\n",
+  "timeout": false,
+  "scope": "Official Apple JAX Metal plug-in plus matching-version MuJoCo MJX, in isolated temporary environment; forces Metal, no CPU fallback."
+}

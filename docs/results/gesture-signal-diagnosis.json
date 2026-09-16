@@ -1,0 +1,115 @@
+{
+  "configuration_source": "data/gesture-checkpoints/gesture-1789409003024982000.pt",
+  "starts_from": "original adapter",
+  "neural_dt_ms": 0.1,
+  "command_ms": 20,
+  "backprop_window_ms": 20,
+  "neurons": 166700,
+  "edges": 25582938,
+  "short_comparisons": {
+    "palm": {
+      "drive_max_difference": 12.259652137756348,
+      "motor_rate_max_difference": 0.0,
+      "activation_max_difference": 0.0
+    },
+    "jitter": {
+      "drive_max_difference": 12.259652137756348,
+      "motor_rate_max_difference": 0.0,
+      "activation_max_difference": 0.0
+    },
+    "blank": {
+      "drive_max_difference": 13.24590015411377,
+      "motor_rate_max_difference": 0.0,
+      "activation_max_difference": 0.0
+    }
+  },
+  "first_difference_ms": {
+    "ENS": null,
+    "ascending_neuron": 320,
+    "cb_efferent": null,
+    "cb_endocrine": null,
+    "cb_intrinsic": 340,
+    "cb_motor": 380,
+    "cb_sensory": null,
+    "cb_sensory_tbc": null,
+    "descending_neuron": 340,
+    "descending_neuron_tbc": null,
+    "efferent_ascending": 380,
+    "efferent_descending": null,
+    "ol_intrinsic": 380,
+    "ol_sensory": 20,
+    "sensory_ascending": null,
+    "sensory_ascending_tbc": null,
+    "sensory_descending": null,
+    "visual_centrifugal": 320,
+    "visual_projection": 180,
+    "visual_projection_tbc": null,
+    "vnc_efferent": 380,
+    "vnc_endocrine": 360,
+    "vnc_intrinsic": 340,
+    "vnc_motor": 360,
+    "vnc_sensory": 340,
+    "vnc_sensory_tbc": null,
+    "vnc_tbc": null
+  },
+  "gradient_norm": 5.202217102050781,
+  "visual_gradient_max_difference": 0.00012054361286573112,
+  "direction_probes": [
+    {
+      "gradient_direction_displacement": -0.1,
+      "loss": 0.013436023332178592
+    },
+    {
+      "gradient_direction_displacement": -0.01,
+      "loss": 0.013399242796003819
+    },
+    {
+      "gradient_direction_displacement": -0.001,
+      "loss": 0.01343538612127304
+    },
+    {
+      "gradient_direction_displacement": 0.0,
+      "loss": 0.01340232528746128
+    },
+    {
+      "gradient_direction_displacement": 0.001,
+      "loss": 0.013408226519823076
+    },
+    {
+      "gradient_direction_displacement": 0.01,
+      "loss": 0.013347699120640755
+    },
+    {
+      "gradient_direction_displacement": 0.1,
+      "loss": 0.013302175700664519
+    }
+  ],
+  "motor_difference_per_20ms": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.125,
+    19.96875,
+    19.796875,
+    32.5,
+    31.09375,
+    41.9765625,
+    53.6875,
+    36.142578125
+  ],
+  "limitations": "One configuration and deterministic replay, at original weights. Longer runs hold short targets for diagnostic scoring only; no long-duration target certification or successful training claim. Gradient direction probes are finite perturbations of a discrete FP16 model, not a smooth finite-difference gradient proof."
+}

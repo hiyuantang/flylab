@@ -19,6 +19,8 @@ Run from the repository root unless noted. Use Python 3.12 and Node.js 22.
 
 ## Coding Style & Naming Conventions
 
+Use custom dropdown menus throughout the UI; never use native HTML `<select>` controls. Reuse `frontend/src/components/Select.tsx` for selection menus.
+
 Use four-space Python indentation, `snake_case` functions/modules, and `PascalCase` classes. Use two-space TypeScript indentation, `camelCase` functions/variables, and `PascalCase.tsx` component files. Preserve strict TypeScript types and update shared contracts when API payloads change.
 
 Format changed frontend files with the installed Prettier, for example, from `frontend/`: `npx prettier --write src/components/Brain.tsx`. No Python formatter or lint command is configured.

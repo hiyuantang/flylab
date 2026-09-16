@@ -1,3 +1,4 @@
+import { useViewState, oneOf } from "../lib/viewState";
 import Select from "./Select";
 import { useState } from "react";
 import { Zap, VolumeX } from "lucide-react";
@@ -15,8 +16,10 @@ export function Brain({
   disabled: boolean;
   liveAvailable: boolean;
 }) {
-  const [view, setView] = useState<"spatial" | "anatomy" | "schematic">(
+  const [view, setView] = useViewState<"spatial" | "anatomy" | "schematic">(
+    "brain.panel",
     "spatial",
+    oneOf(["spatial", "anatomy", "schematic"]),
   );
   const [amplitude, setAmplitude] = useState(1);
   return (

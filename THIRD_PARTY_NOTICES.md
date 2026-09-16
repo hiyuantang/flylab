@@ -35,13 +35,28 @@ The frontend obtains these assets through npm. Installed packages and built font
 | [IBM Plex Mono](https://github.com/IBM/plex), via `@fontsource/ibm-plex-mono` 5.3.0 | Copyright 2017 IBM Corp. | [SIL OFL-1.1](frontend/public/assets/licenses/IBM-Plex-Mono-OFL.txt) |
 | [Lucide React](https://github.com/lucide-icons/lucide) 0.468.0 | Lucide Contributors; includes portions from Cole Bemis's Feather icons | [Upstream ISC notice, including Feather attribution](frontend/public/assets/licenses/Lucide-LICENSE.txt) |
 
-## Software dependencies
+## Motor target evidence
+
+`backend/flylab/assets/motor_target_evidence.json` is a regrouped subset of the motor-neuron records from Cheong et al., *Organization of circuits linking descending input to motor output in the Drosophila Male Adult Nerve Cord connectome*, [Supplementary file 3](https://cdn.elifesciences.org/articles/96084/elife-96084-supp3-v1.csv), [eLife article](https://elifesciences.org/articles/96084). The source is distributed under [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/). FlyLab groups repeated records by neuron type and retains target, confidence, matching references and caveats; source URL and SHA256 are recorded in the JSON. This attribution does not imply endorsement. The code's Apache-2.0 license does not replace the source data's license.
+
+The additional VL1 neck assignments cite Gorko et al., [*Motor neurons generate pose-targeted movements via proprioceptive sculpting*](https://www.nature.com/articles/s41586-024-07222-5), Figure 4h. Paper PDFs and anatomical figures are not redistributed in this repository.
+
+## Software dependency licenses
 
 Python and npm dependencies are installed separately under their own licenses. `uv.lock` and `frontend/package-lock.json` record the resolved versions. PyTorch, MuJoCo, FastAPI, NumPy, PyArrow, React, Three.js, React Three Fiber, and Drei are dependencies, not original FlyLab code. Vite emits an additional `frontend/dist/assets/THIRD_PARTY_LICENSES.md` containing the bundled JavaScript dependencies’ license texts at build time. Preserve applicable upstream copyright, license, and notice files when redistributing dependencies or application bundles. The notices above identify the assets directly included in this source repository and the fonts and icons used by its interface; they are not an exhaustive inventory of transitive software dependencies.
 
 ## Shiu computational brain reference
 
 Equations, experiment parameters and receptor ID lists are adapted from [Philip Shiu and Nico Spiller's Drosophila brain model](https://github.com/philshiu/Drosophila_brain_model), commit `91bdd1e7dcf193f3e7ca5a8933497fcef63b7960`, accompanying [Shiu et al., Nature 2024](https://www.nature.com/articles/s41586-024-07763-9). Copyright 2023 Philip Shiu and Nico Spiller. The [complete upstream MIT license](backend/flylab/assets/SHIU-MIT-LICENSE.txt) is included. FlyLab implements the equations in PyTorch, adds explicit scheduling and continuation tests, and separately applies them to MaleCNS. The paper's full FlyWire female v630 tables are downloaded separately, checksum-pinned, and excluded from Git; their provenance is included in experiment results. This model is distinct from the MaleCNS specimen and is not an endorsement or a replication of every published result.
+
+## Hand gesture mesh
+
+`frontend/public/models/hand/` contains the generic right-hand mesh from
+[WebXR Input Profiles](https://github.com/immersive-web/webxr-input-profiles/tree/main/packages/assets/profiles/generic-hand),
+MIT license, Copyright (c) 2019 Amazon. The full license is retained in
+`frontend/public/models/hand/LICENSE.md`; the source file SHA256 and modifications
+are recorded in `provenance.json`. FlyLab reparents the finger bones and bakes
+three poses into matching JSON and OBJ meshes for rendering and visual rays.
 
 ## Compound-eye numerical reference
 

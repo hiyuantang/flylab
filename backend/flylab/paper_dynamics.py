@@ -9,13 +9,14 @@ from __future__ import annotations
 
 import math
 import time
+from dataclasses import replace
 import torch
 
 PAPER_DYNAMICS_VERSION = 'shiu-2024-linear-delay-v1'
 
 
 class PaperDynamics:
-    """Full-population state; analytic linear integration each 0.1 ms.
+    """Full-population state; analytic integration on the configured neural clock.
 
     Event delivery only visits edges of neurons that actually fired. All neurons
     still integrate on every tick; no activity threshold, pruning or top-k.
@@ -28,44 +29,112 @@ class PaperDynamics:
         self.out_ptr = outgoing.crow_indices()
         self.out_post = outgoing.col_indices()
         self.out_weight = outgoing.values()
-        self.delay_steps = round(self.config.delay_ms / self.config.dt_ms)
+        self.delay_steps = self.config.integration_ticks(self.config.delay_ms)
         self.dtype = torch.float64
         self.device = torch.device('cpu')
         self.metal = None
         self.execution_history = []
 
-    def set_device(self, device):
-        """Migrate complete state atomically; MPS explicitly uses float32.
+    def set_device(self, device, precision=None):
+        """Migrate all persistent state, retaining clocks and CPU input RNG.
 
-        Converting back to float64 cannot recover precision previously lost.
-        RNG stays on CPU so identical seeds generate identical input events.
+        Precision is explicit when changed on the same device. Device-only
+        requests preserve its current precision; entering MPS defaults to FP32.
+        Converting back cannot recover previously rounded values.
         """
-        from .metal_dynamics import MetalDynamics, NEURAL_TENSORS
+        from .metal_dynamics import MetalDynamics, ActiveRowMetalDynamics, NEURAL_TENSORS
         if device not in {'cpu', 'mps'}:
             raise ValueError('Supported execution devices: cpu, mps')
+        if device == 'mps' and not torch.backends.mps.is_available():
+            raise ValueError('Apple MPS GPU is unavailable in this process')
         if self.config.profile != 'shiu-2024':
             raise ValueError('Device selection requires paper physiology')
-        if self.device.type == device:
+        precision = precision or (str(self.dtype).removeprefix('torch.') if self.device.type == device
+                                  else 'float32' if device == 'mps' else 'float64')
+        if precision not in ({'float16', 'float32'} if device == 'mps' else {'float64'}):
+            raise ValueError('MPS supports float16/float32; CPU requires float64')
+        dtype = getattr(torch, precision)
+        if self.device.type == device and self.dtype == dtype:
             return
-        dtype = torch.float32 if device == 'mps' else torch.float64
-        metal = MetalDynamics(self.weights) if device == 'mps' else None
-        state = {name: getattr(self, name).to(device=device,
-                 dtype=dtype if getattr(self, name).is_floating_point() else getattr(self, name).dtype)
-                 for name in NEURAL_TENSORS}
+        # Validate conversion on CPU before allocating a replacement GPU kernel.
+        # Integer counters, queued event indices and neuron IDs remain integers.
+        state = {}
+        for name in NEURAL_TENSORS:
+            previous = getattr(self, name)
+            value = previous.cpu().to(dtype=dtype if previous.is_floating_point() else previous.dtype)
+            if not torch.isfinite(value).all():
+                raise ValueError(f'Precision conversion overflowed {name}; execution unchanged')
+            state[name] = value.to(device=device)
+        metal = (ActiveRowMetalDynamics(self.weights) if dtype == torch.float16 else MetalDynamics(self.weights)) if device == 'mps' else None
         if device == 'mps':
             torch.mps.synchronize()
-        self.execution_history.append({'from': self.device.type, 'to': device, 'tick': self.tick_index})
+        self.execution_history.append({'from': self.device.type, 'to': device, 'tick': self.tick_index,
+                                       'from_precision': str(self.dtype), 'to_precision': str(dtype)})
         self.device, self.dtype, self.metal = torch.device(device), dtype, metal
         for name, value in state.items():
             setattr(self, name, value)
+        if "reward_circuit" in self.__dict__:
+            self.reward_circuit.apply_weights()
 
     def execution_summary(self):
-        from .metal_dynamics import METAL_VERSION
         gpu = self.voltage.device.type == 'mps'
+        if not gpu:
+            note = 'CPU float64 reference. Prior rounding, if any, is not reversible.'
+        elif self.metal.state_dtype == torch.float16:
+            note = 'Experimental FP16 state, weights and arithmetic; rounding changes firing and is not reference-equivalent. All neurons, edges and ticks retained.'
+        elif self.metal.weight_dtype == torch.float16:
+            note = 'Experimental FP16 weight storage, FP32 state and sums; weight rounding may change spikes. Offline benchmark only.'
+        else:
+            note = 'MPS float32 may change spike timing; not equivalent to the float64 reference. All neurons, edges and ticks retained.'
+        coarse = self.config.timing_rounding == 'ceil'
+        if coarse:
+            note += ' Coarse neural clock: delays and refractory durations round up; spike timing and behavior change.'
         return {'device': self.voltage.device.type, 'precision': str(self.voltage.dtype),
-                'kernel': METAL_VERSION if gpu else 'cpu-event-f64-v1',
-                'experimental': gpu, 'history': self.execution_history,
-                'note': 'MPS float32 may change spike timing; not equivalent to the float64 reference. All neurons, edges and ticks retained.' if gpu else 'CPU float64 reference. Prior float32 rounding, if any, is not reversible.'}
+                'neural_dt_ms': self.config.dt_ms, 'timing_rounding': self.config.timing_rounding,
+                'effective_delay_ms': self.delay_steps * self.config.dt_ms,
+                'effective_refractory_ms': self.config.integration_ticks(self.config.refractory_ms) * self.config.dt_ms,
+                'kernel': self.metal.version if gpu else 'cpu-event-f64-v1',
+                'weight_precision': str(self.metal.weight_dtype) if gpu else str(self.weights.dtype),
+                'experimental': gpu or coarse, 'history': self.execution_history, 'note': note}
+
+    def set_timestep(self, dt_ms):
+        """Change the clock at a shared boundary, retaining state and queued signals.
+
+        Pending events and refractory release times move to the next new tick,
+        never an earlier one. Merging pending signals may change floating sums.
+        """
+        if dt_ms not in {.1, 1., 1000 / 960} or self.config.profile != 'shiu-2024':
+            raise ValueError('Supported paper timesteps: 0.1, 1 or 1000/960 ms')
+        if dt_ms == self.config.dt_ms:
+            return
+        old = self.config
+        new = replace(old, dt_ms=dt_ms, timing_rounding='exact' if dt_ms == .1 else 'ceil')
+        origin = self.time_origin_ms
+        tick = round((self.time_ms - origin) / dt_ms)
+        if not math.isclose(origin + tick * dt_ms, self.time_ms, abs_tol=1e-8):
+            origin, tick = self.time_ms, 0
+        # Map on CPU in float64, even when neural state uses half precision.
+        last, refractory = self.last_spike_tick.cpu(), self.refractory_ticks.cpu()
+        release = tick + torch.ceil((last + refractory - self.tick_index).double() * old.dt_ms / dt_ms - 1e-9).long()
+        new_ref = torch.ceil(refractory.double() * old.dt_ms / dt_ms - 1e-9).long()
+        new_ref[refractory == old.integration_ticks(old.refractory_ms)] = new.integration_ticks(new.refractory_ms)
+        offsets = [math.ceil(i * old.dt_ms / dt_ms - 1e-9) for i in range(len(self.delay_queue))]
+        delay_steps = new.integration_ticks(new.delay_ms)
+        queue = torch.zeros((max(delay_steps, max(offsets)) + 1, len(self.ids)), dtype=self.dtype)
+        previous = self.delay_queue.cpu()
+        for offset, target in enumerate(offsets):
+            queue[(tick + target) % len(queue)] += previous[(self.tick_index + offset) % len(previous)]
+        if not torch.isfinite(queue).all():
+            raise ValueError('Coarsening pending signals overflowed; timestep unchanged')
+        new_last = (release - new_ref).to(self.device)
+        queue, new_ref = queue.to(self.device), new_ref.to(self.device)
+        if self.device.type == 'mps':
+            torch.mps.synchronize()
+        self.execution_history.append({'kind': 'timestep', 'from_dt_ms': old.dt_ms,
+                                       'to_dt_ms': dt_ms, 'time_ms': self.time_ms})
+        self.config, self.delay_steps, self.tick_index = new, delay_steps, tick
+        self.time_origin_ms = origin
+        self.delay_queue, self.refractory_ticks, self.last_spike_tick = queue, new_ref, new_last
 
     def reset_paper(self, seed=0):
         n = len(self.ids)
@@ -75,11 +144,12 @@ class PaperDynamics:
         self.rates = torch.zeros(n, dtype=self.dtype)
         self.output_gain = torch.ones(n, dtype=self.dtype)
         self.last_spike_tick = torch.full((n,), -10**12, dtype=torch.int64)
-        self.refractory_ticks = torch.full((n,), round(self.config.refractory_ms / self.config.dt_ms), dtype=torch.int64)
+        self.refractory_ticks = torch.full((n,), self.config.integration_ticks(self.config.refractory_ms), dtype=torch.int64)
         self.delay_queue = torch.zeros((self.delay_steps + 1, n), dtype=self.dtype)
         self.spike_counts = torch.zeros(n, dtype=torch.int64)
         self.generator = torch.Generator().manual_seed(seed)
         self.tick_index = 0
+        self.time_origin_ms = 0.
         self.time_ms = 0.
         self.total_spikes = 0
         self.last_wall_seconds = 0.
@@ -164,7 +234,7 @@ class PaperDynamics:
             self.rates.mul_(rate_decay).add_(self.spikes, alpha=(1. - rate_decay) * 1000. / c.dt_ms)
             self.tick_index += 1
         self.total_spikes = int(self.spike_counts.sum())
-        self.time_ms = self.tick_index * c.dt_ms
+        self.time_ms = self.time_origin_ms + self.tick_index * c.dt_ms
         self.last_wall_seconds = time.perf_counter() - started
         return self.rates
 
@@ -175,7 +245,7 @@ class PaperDynamics:
         a, b = math.exp(-c.dt_ms / c.membrane_ms), math.exp(-c.dt_ms / c.synapse_ms)
         coupling = c.dt_ms / c.membrane_ms * a if c.synapse_ms == c.membrane_ms else c.synapse_ms / (c.membrane_ms - c.synapse_ms) * (a - b)
         decay = math.exp(-c.dt_ms / 50.)
-        parameters = torch.tensor([a, b, coupling, 1-a, decay, (1-decay)*1000/c.dt_ms], device=self.device)
+        parameters = torch.tensor([a, b, coupling, 1-a, decay, (1-decay)*1000/c.dt_ms], device=self.device, dtype=self.dtype)
         silence = (torch.zeros(len(self.ids), dtype=torch.bool) if silence is None else silence).to(device=self.device, dtype=torch.bool)
         if silence.shape != drive.shape:
             raise ValueError('Silence mask must cover every neuron')
@@ -199,6 +269,6 @@ class PaperDynamics:
             self.tick_index += 1
         torch.mps.synchronize()
         self.total_spikes = int(self.spike_counts.sum())
-        self.time_ms = self.tick_index*c.dt_ms
+        self.time_ms = self.time_origin_ms + self.tick_index*c.dt_ms
         self.last_wall_seconds = time.perf_counter() - started
         return self.rates

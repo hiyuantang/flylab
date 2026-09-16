@@ -12,7 +12,7 @@ import numpy as np
 import pyarrow.feather as feather
 import torch
 
-from flylab.motor_mapping import PERIPHERAL_PROFILE, LEGACY_PROFILE, SOURCE
+from flylab.motor_mapping import EXTENDED_PROFILE, PERIPHERAL_PROFILE, LEGACY_PROFILE, SOURCE
 from flylab.neuromuscular import NeuromuscularBridge
 
 
@@ -21,7 +21,8 @@ def audit(directory):
     rows = feather.read_table(annotations).to_pylist()
     brain = SimpleNamespace(neurons=rows, ids=np.array([r['bodyId'] for r in rows]),
                             voltage=torch.zeros(len(rows), dtype=torch.float64))
-    current = NeuromuscularBridge(brain, PERIPHERAL_PROFILE)
+    current = NeuromuscularBridge(brain, EXTENDED_PROFILE)
+    previous = NeuromuscularBridge(brain, PERIPHERAL_PROFILE)
     legacy = NeuromuscularBridge(brain, LEGACY_PROFILE)
     manifest = json.loads((directory / 'manifest.json').read_text())
     return {'annotation_sha256': hashlib.sha256(annotations.read_bytes()).hexdigest(),
@@ -29,6 +30,7 @@ def audit(directory):
             'function_source': SOURCE,
             'scope': 'Annotation and routing audit; no dynamics or locomotion validation.',
             'legacy': {k: v for k, v in legacy.summary().items() if k not in {'mapping', 'unmapped'}},
+            'previous_v4': {k: v for k, v in previous.summary().items() if k not in {'mapping', 'unmapped'}},
             'current': current.summary()}
 
 

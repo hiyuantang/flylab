@@ -1,0 +1,51 @@
+{
+  "scope": "Body only: 60 command intervals, same held excitation and initial full integration state; all fractional steps retained.",
+  "simulated_seconds": 1.0,
+  "endpoint_exact": true,
+  "trials": [
+    {
+      "trial": 0,
+      "mode": "python",
+      "wall_seconds": 8.431217500008643
+    },
+    {
+      "trial": 0,
+      "mode": "native",
+      "wall_seconds": 8.580827166966628
+    },
+    {
+      "trial": 1,
+      "mode": "native",
+      "wall_seconds": 8.758680791012011
+    },
+    {
+      "trial": 1,
+      "mode": "python",
+      "wall_seconds": 8.6978752919822
+    },
+    {
+      "trial": 2,
+      "mode": "python",
+      "wall_seconds": 8.465596541995183
+    },
+    {
+      "trial": 2,
+      "mode": "native",
+      "wall_seconds": 8.588751124974806
+    },
+    {
+      "trial": 3,
+      "mode": "native",
+      "wall_seconds": 9.125829041004181
+    },
+    {
+      "trial": 3,
+      "mode": "python",
+      "wall_seconds": 9.017861666972749
+    }
+  ],
+  "median_seconds": {
+    "python": 8.581735916988691,
+    "native": 8.673715957993409
+  }
+}

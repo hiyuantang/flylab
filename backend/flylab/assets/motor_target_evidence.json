@@ -1,0 +1,2864 @@
+{
+  "source": "https://cdn.elifesciences.org/articles/96084/elife-96084-supp3-v1.csv",
+  "article": "https://elifesciences.org/articles/96084",
+  "attribution": "Cheong et al., Supplementary file 3; eLife, CC BY 4.0. Source match scores are ordinal author assessments, not probabilities.",
+  "sha256": "c46e3cec1a5114b8d981d5f0383012c8e7fcdebd6c4e3eaffe4ac3ba1def2e94",
+  "types": {
+    "hg1 MN": [
+      {
+        "subclass": "wm",
+        "systematic_type": "MNwm03",
+        "target": "hg1",
+        "match_certainty(1-5)": "4",
+        "publication_match": "O'Sullivan et al. (2018), Shirangi et al. (2013), Ehrhardt et al. (2023)",
+        "line_match": "SS32023, SS47161, SS48311",
+        "match_notes": ""
+      }
+    ],
+    "b1 MN": [
+      {
+        "subclass": "wm",
+        "systematic_type": "MNwm16",
+        "target": "b1",
+        "match_certainty(1-5)": "5",
+        "publication_match": "Trimarchi & Schneiderman (1994), Ehrhardt et al. (2023)",
+        "line_match": "SS40980",
+        "match_notes": ""
+      }
+    ],
+    "DLMn c-f": [
+      {
+        "subclass": "wm",
+        "systematic_type": "MNwm20",
+        "target": "DLM c-f",
+        "match_certainty(1-5)": "4",
+        "publication_match": "Sun & Wyman (1997), Ehrhardt et al. (2023)",
+        "line_match": "SS31561, SS44039, SS44056",
+        "match_notes": ""
+      }
+    ],
+    "b3 MN": [
+      {
+        "subclass": "wm",
+        "systematic_type": "MNwm18",
+        "target": "b3",
+        "match_certainty(1-5)": "5",
+        "publication_match": "Ehrhardt et al. (2023)",
+        "line_match": "SS98650, SS45779",
+        "match_notes": "Muscle ID from SS98650 (this work)"
+      }
+    ],
+    "b2 MN": [
+      {
+        "subclass": "wm",
+        "systematic_type": "MNwm17",
+        "target": "b2",
+        "match_certainty(1-5)": "4",
+        "publication_match": "Trimarchi & Schneiderman (1994), O'Sullivan et al (2018)",
+        "line_match": "SS40772",
+        "match_notes": ""
+      }
+    ],
+    "TTMn": [
+      {
+        "subclass": "wm",
+        "systematic_type": "MNwm34",
+        "target": "TTM",
+        "match_certainty(1-5)": "5",
+        "publication_match": "King & Wyman (1980), Bacon & Strausfeld (1986), Namiki et al. (2018)",
+        "line_match": "SS02623",
+        "match_notes": ""
+      }
+    ],
+    "DLMn a, b": [
+      {
+        "subclass": "wm",
+        "systematic_type": "MNwm19",
+        "target": "DLM a, b",
+        "match_certainty(1-5)": "5",
+        "publication_match": "Sun & Wyman (1997), Ehrhardt et al. (2023)",
+        "line_match": "SS44039, SS44056",
+        "match_notes": ""
+      }
+    ],
+    "iii1 MN": [
+      {
+        "subclass": "wm",
+        "systematic_type": "MNwm27",
+        "target": "iii1",
+        "match_certainty(1-5)": "5",
+        "publication_match": "Trimarchi & Schneiderman (1994), Namiki et al. (2018), Ehrhardt et al. (2023)",
+        "line_match": "SS40980, SS41027",
+        "match_notes": ""
+      }
+    ],
+    "hg3 MN": [
+      {
+        "subclass": "wm",
+        "systematic_type": "MNwm23",
+        "target": "hg3",
+        "match_certainty(1-5)": "5",
+        "publication_match": "Ehrhardt et al. (2023)",
+        "line_match": "SS49039, SS52405",
+        "match_notes": ""
+      }
+    ],
+    "i2 MN": [
+      {
+        "subclass": "wm",
+        "systematic_type": "MNwm26",
+        "target": "i2",
+        "match_certainty(1-5)": "4",
+        "publication_match": "Ehrhardt et al. (2023)",
+        "line_match": "SS34778, SS34781, SS37246, SS45778, SS53438",
+        "match_notes": ""
+      }
+    ],
+    "MNwm36": [
+      {
+        "subclass": "wm",
+        "systematic_type": "MNwm36",
+        "target": "wing",
+        "match_certainty(1-5)": "",
+        "publication_match": "Jenett et al. (2012)",
+        "line_match": "R92F05",
+        "match_notes": "muscle target not characterized"
+      }
+    ],
+    "hg4 MN": [
+      {
+        "subclass": "wm",
+        "systematic_type": "MNwm24",
+        "target": "hg4",
+        "match_certainty(1-5)": "5",
+        "publication_match": "Sterne et al. (2021), Wu et al. (2016)",
+        "line_match": "SS38113, OL0070B",
+        "match_notes": "Weak stochastic line for MN, publication did not describe muscle target of MN, ID'd in this work"
+      }
+    ],
+    "ps1 MN": [
+      {
+        "subclass": "wm",
+        "systematic_type": "MNwm29",
+        "target": "ps1",
+        "match_certainty(1-5)": "5",
+        "publication_match": "O'Sullivan et al. (2018), Shirangi et al. (2013), Sterne et al. 2021",
+        "line_match": "SS47152, SS31705",
+        "match_notes": ""
+      }
+    ],
+    "i1 MN": [
+      {
+        "subclass": "wm",
+        "systematic_type": "MNwm25",
+        "target": "i1",
+        "match_certainty(1-5)": "4",
+        "publication_match": "Trimarchi & Schneiderman (1994), Ehrhardt et al. (2023)",
+        "line_match": "SS41039, SS40772, SS45772, SS45782",
+        "match_notes": ""
+      }
+    ],
+    "tp2 MN": [
+      {
+        "subclass": "wm",
+        "systematic_type": "MNwm32",
+        "target": "tp2",
+        "match_certainty(1-5)": "3",
+        "publication_match": "Trimarchi & Schneiderman (1994), Ehrhardt et al. (2023)",
+        "line_match": "SS47120",
+        "match_notes": ""
+      }
+    ],
+    "iii3 MN": [
+      {
+        "subclass": "wm",
+        "systematic_type": "MNwm28",
+        "target": "iii3",
+        "match_certainty(1-5)": "5",
+        "publication_match": "Trimarchi & Schneiderman (1994), Ehrhardt et al. (2023)",
+        "line_match": "SS45779, SS40980",
+        "match_notes": ""
+      }
+    ],
+    "tp1 MN": [
+      {
+        "subclass": "wm",
+        "systematic_type": "MNwm31",
+        "target": "tp1",
+        "match_certainty(1-5)": "5",
+        "publication_match": "Trimarchi & Schneiderman (1994), Ehrhardt et al. (2023)",
+        "line_match": "SS41052",
+        "match_notes": ""
+      }
+    ],
+    "tpn MN": [
+      {
+        "subclass": "wm",
+        "systematic_type": "MNwm33",
+        "target": "tp",
+        "match_certainty(1-5)": "3",
+        "publication_match": "Ehrhardt et al. (2023), O'Sullivan et al. (2018)",
+        "line_match": "SS51528",
+        "match_notes": ""
+      }
+    ],
+    "DVMn 1a-c": [
+      {
+        "subclass": "wm",
+        "systematic_type": "MNwm21",
+        "target": "DVM 1a-c",
+        "match_certainty(1-5)": "5",
+        "publication_match": "Schlurmann & Hausen (2006), Ehrhardt et al. (2023)",
+        "line_match": "SS41068",
+        "match_notes": ""
+      }
+    ],
+    "ps2 MN": [
+      {
+        "subclass": "wm",
+        "systematic_type": "MNwm30",
+        "target": "ps2",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "SS98638",
+        "match_notes": "Muscle target ID'd from this work"
+      }
+    ],
+    "DVMn 2a, b": [
+      {
+        "subclass": "wm",
+        "systematic_type": "MNwm15",
+        "target": "DVM 2a, b",
+        "match_certainty(1-5)": "5",
+        "publication_match": "Schlurmann & Hausen (2006), Ehrhardt et al. (2023)",
+        "line_match": "SS41068",
+        "match_notes": ""
+      }
+    ],
+    "DVMn 3a, b": [
+      {
+        "subclass": "wm",
+        "systematic_type": "MNwm15",
+        "target": "DVM 3a, b",
+        "match_certainty(1-5)": "4",
+        "publication_match": "Schlurmann & Hausen (2006), Ehrhardt et al. (2023)",
+        "line_match": "SS41068",
+        "match_notes": ""
+      }
+    ],
+    "MNwm35": [
+      {
+        "subclass": "wm",
+        "systematic_type": "MNwm35",
+        "target": "wing",
+        "match_certainty(1-5)": "1",
+        "publication_match": "Ehrhardt et al. (2023)",
+        "line_match": "SS41027",
+        "match_notes": "iii4 MN (putative), line match has many MNs"
+      }
+    ],
+    "hg2 MN": [
+      {
+        "subclass": "wm",
+        "systematic_type": "MNwm22",
+        "target": "hg2",
+        "match_certainty(1-5)": "5",
+        "publication_match": "O'Sullivan et al (2018), Ehrhardt et al. (2023)",
+        "line_match": "SS37252, SS37253",
+        "match_notes": ""
+      }
+    ],
+    "STTMm": [
+      {
+        "subclass": "wm",
+        "systematic_type": "MNwm01",
+        "target": "TTM",
+        "match_certainty(1-5)": "2",
+        "publication_match": "Bacon & Strausfeld (1986)",
+        "line_match": "",
+        "match_notes": "satellite TTM MN from Musca"
+      },
+      {
+        "subclass": "wm",
+        "systematic_type": "MNwm02",
+        "target": "TTM",
+        "match_certainty(1-5)": "2",
+        "publication_match": "Bacon & Strausfeld (1986)",
+        "line_match": "",
+        "match_notes": "satellite TTM MN from Musca"
+      }
+    ],
+    "ADNM1": [
+      {
+        "subclass": "nm",
+        "systematic_type": "MNnm04",
+        "target": "TH1",
+        "match_certainty(1-5)": "5",
+        "publication_match": "Strausfeld, Seyan and Milde (1987)",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNnm10": [
+      {
+        "subclass": "nm",
+        "systematic_type": "MNnm10",
+        "target": "neck",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNnm08": [
+      {
+        "subclass": "nm",
+        "systematic_type": "MNnm08",
+        "target": "neck",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNnm09": [
+      {
+        "subclass": "nm",
+        "systematic_type": "MNnm09",
+        "target": "neck",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "FNM2": [
+      {
+        "subclass": "nm",
+        "systematic_type": "MNnm06",
+        "target": "AD",
+        "match_certainty(1-5)": "2",
+        "publication_match": "Strausfeld, Seyan and Milde (1987)",
+        "line_match": "",
+        "match_notes": "tentatively recognized as FMN2 because it crosses the midline"
+      }
+    ],
+    "ADNM2": [
+      {
+        "subclass": "nm",
+        "systematic_type": "MNnm05",
+        "target": "TH2",
+        "match_certainty(1-5)": "5",
+        "publication_match": "Strausfeld, Seyan and Milde (1987)",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNnm14": [
+      {
+        "subclass": "nm",
+        "systematic_type": "MNnm14",
+        "target": "neck",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNnm13": [
+      {
+        "subclass": "nm",
+        "systematic_type": "MNnm13",
+        "target": "neck",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNnm07": [
+      {
+        "subclass": "nm",
+        "systematic_type": "MNnm07",
+        "target": "neck",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNnm12": [
+      {
+        "subclass": "nm",
+        "systematic_type": "MNnm12",
+        "target": "neck",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNnm11": [
+      {
+        "subclass": "nm",
+        "systematic_type": "MNnm11",
+        "target": "neck",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNnm03": [
+      {
+        "subclass": "nm",
+        "systematic_type": "MNnm03",
+        "target": "neck",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNhm42": [
+      {
+        "subclass": "hm",
+        "systematic_type": "MNhm42",
+        "target": "haltere",
+        "match_certainty(1-5)": "5",
+        "publication_match": "Ehrhardt et al. (2023)",
+        "line_match": "SS47195",
+        "match_notes": "either hb1 or hb2 MN, exact muscle target not determined"
+      }
+    ],
+    "MNhm03": [
+      {
+        "subclass": "hm",
+        "systematic_type": "MNhm03",
+        "target": "haltere",
+        "match_certainty(1-5)": "",
+        "publication_match": "Shuai et al. (2023)",
+        "line_match": "MB430C",
+        "match_notes": "muscle target not characterized"
+      }
+    ],
+    "hiii2 MN": [
+      {
+        "subclass": "hm",
+        "systematic_type": "MNhm41",
+        "target": "hiii2",
+        "match_certainty(1-5)": "2",
+        "publication_match": "Dickerson et al. (2019)",
+        "line_match": "SS36076",
+        "match_notes": "SS36076 has hi2 and hiii2 MN; hiii2 MN identity tentatively assigned given that hi2 MN morphology is known"
+      }
+    ],
+    "hDVM MN": [
+      {
+        "subclass": "hm",
+        "systematic_type": "MNhm37",
+        "target": "hDVM",
+        "match_certainty(1-5)": "4",
+        "publication_match": "Dickerson et al. (2019), Ehrhardt et al. (2023)",
+        "line_match": "SS51523",
+        "match_notes": ""
+      }
+    ],
+    "hi2 MN": [
+      {
+        "subclass": "hm",
+        "systematic_type": "MNhm40",
+        "target": "hi2",
+        "match_certainty(1-5)": "2",
+        "publication_match": "Dickerson et al. (2019), Ehrhardt et al. (2023)",
+        "line_match": "SS37231",
+        "match_notes": "one of two hi2 pair matches; one pair or the other may be a different haltere MN"
+      },
+      {
+        "subclass": "hm",
+        "systematic_type": "MNhm39",
+        "target": "hi2",
+        "match_certainty(1-5)": "1",
+        "publication_match": "Dickerson et al. (2019), Ehrhardt et al. (2023)",
+        "line_match": "SS37231",
+        "match_notes": "one of two hi2 pair matches; one pair or the other may be a different haltere MN"
+      }
+    ],
+    "hi1 MN": [
+      {
+        "subclass": "hm",
+        "systematic_type": "MNhm38",
+        "target": "hi1",
+        "match_certainty(1-5)": "4",
+        "publication_match": "Dickerson et al. (2019), Ehrhardt et al. (2023)",
+        "line_match": "SS41075",
+        "match_notes": ""
+      }
+    ],
+    "MNhm43": [
+      {
+        "subclass": "hm",
+        "systematic_type": "MNhm43",
+        "target": "haltere",
+        "match_certainty(1-5)": "3",
+        "publication_match": "Ehrhardt et al. (2023)",
+        "line_match": "SS47195",
+        "match_notes": "either hb1 or hb2 MN, exact muscle target not determined"
+      }
+    ],
+    "MNxm01": [
+      {
+        "subclass": "xm",
+        "systematic_type": "MNxm01",
+        "target": "",
+        "match_certainty(1-5)": "",
+        "publication_match": "Aso et al. (2014), Shuai et al. (2023)",
+        "line_match": "MB564C, MB080C",
+        "match_notes": "muscle target not characterized"
+      }
+    ],
+    "MNxm02": [
+      {
+        "subclass": "xm",
+        "systematic_type": "MNxm02",
+        "target": "",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNxm03": [
+      {
+        "subclass": "xm",
+        "systematic_type": "MNxm03",
+        "target": "",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "Ti extensor MN": [
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml41",
+        "target": "Ti extensor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml39",
+        "target": "Ti extensor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl41",
+        "target": "Ti extensor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl39",
+        "target": "Ti extensor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl41",
+        "target": "Ti extensor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl39",
+        "target": "Ti extensor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "Ti flexor MN": [
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml40",
+        "target": "Ti flexor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml21",
+        "target": "Ti flexor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml30",
+        "target": "Ti flexor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl40",
+        "target": "Ti flexor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl21",
+        "target": "Ti flexor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl30",
+        "target": "Ti flexor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl40",
+        "target": "Ti flexor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl21",
+        "target": "Ti flexor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "Sternal posterior rotator MN": [
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml33",
+        "target": "Sternal posterior rotator",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml34",
+        "target": "Sternal posterior rotator",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml06",
+        "target": "Sternal posterior rotator",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl34",
+        "target": "Sternal posterior rotator",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl33",
+        "target": "Sternal posterior rotator",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl06",
+        "target": "Sternal posterior rotator",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl34",
+        "target": "Sternal posterior rotator",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl06",
+        "target": "Sternal posterior rotator",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl33",
+        "target": "Sternal posterior rotator",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNml29": [
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml29",
+        "target": "middle leg",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "ltm MN": [
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml32",
+        "target": "ltm",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml23",
+        "target": "ltm",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml04",
+        "target": "ltm",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl32",
+        "target": "ltm",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl23",
+        "target": "ltm",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl04",
+        "target": "ltm",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl32",
+        "target": "ltm",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl45",
+        "target": "ltm",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl23",
+        "target": "ltm",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl04",
+        "target": "ltm",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNml81": [
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml81",
+        "target": "middle leg",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "Acc. ti flexor MN": [
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml27",
+        "target": "Acc. ti flexor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml24",
+        "target": "Acc. ti flexor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml28",
+        "target": "Acc. ti flexor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml26",
+        "target": "Acc. ti flexor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml25",
+        "target": "Acc. ti flexor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl28",
+        "target": "Acc. ti flexor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl27",
+        "target": "Acc. ti flexor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl26",
+        "target": "Acc. ti flexor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl25",
+        "target": "Acc. ti flexor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl24",
+        "target": "Acc. ti flexor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl24",
+        "target": "Acc. ti flexor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl27",
+        "target": "Acc. ti flexor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl25",
+        "target": "Acc. ti flexor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl43",
+        "target": "Acc. ti flexor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl26",
+        "target": "Acc. ti flexor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl28",
+        "target": "Acc. ti flexor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl42",
+        "target": "Acc. ti flexor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "Sternal adductor MN": [
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml16",
+        "target": "Sternal adductor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl16",
+        "target": "Sternal adductor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl16",
+        "target": "Sternal adductor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "Tr extensor MN": [
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml37",
+        "target": "Tr extensor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml09",
+        "target": "Tr extensor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl37",
+        "target": "Tr extensor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl09",
+        "target": "Tr extensor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl37",
+        "target": "Tr extensor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl09",
+        "target": "Tr extensor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "Tr flexor MN": [
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml12",
+        "target": "Tr flexor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml11",
+        "target": "Tr flexor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml07",
+        "target": "Tr flexor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml05",
+        "target": "Tr flexor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl11",
+        "target": "Tr flexor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl12",
+        "target": "Tr flexor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl07",
+        "target": "Tr flexor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl05",
+        "target": "Tr flexor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl12",
+        "target": "Tr flexor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl07",
+        "target": "Tr flexor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl05",
+        "target": "Tr flexor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl58",
+        "target": "Tr flexor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl11",
+        "target": "Tr flexor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "Tergotr. MN": [
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml18",
+        "target": "Tergotr.",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl18",
+        "target": "Tergotr.",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl18",
+        "target": "Tergotr.",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl20",
+        "target": "Tergotr.",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl57",
+        "target": "Tergotr.",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNml80": [
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml80",
+        "target": "middle leg",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "ltm1-tibia MN": [
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml38",
+        "target": "ltm1-tibia",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml19",
+        "target": "ltm1-tibia",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl38",
+        "target": "ltm1-tibia",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl19",
+        "target": "ltm1-tibia",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl38",
+        "target": "ltm1-tibia",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl19",
+        "target": "ltm1-tibia",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNml85": [
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml85",
+        "target": "middle leg",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "Sternal anterior rotator MN": [
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml36",
+        "target": "Sternal anterior rotator",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl36",
+        "target": "Sternal anterior rotator",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl36",
+        "target": "Sternal anterior rotator",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNml84": [
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml84",
+        "target": "middle leg",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "Fe reductor MN": [
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml35",
+        "target": "Fe reductor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml03",
+        "target": "Fe reductor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl35",
+        "target": "Fe reductor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl13",
+        "target": "Fe reductor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl35",
+        "target": "Fe reductor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl44",
+        "target": "Fe reductor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl13",
+        "target": "Fe reductor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl03",
+        "target": "Fe reductor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNml83": [
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml83",
+        "target": "middle leg",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "Pleural remotor/abductor MN": [
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml17",
+        "target": "Pleural remotor/abductor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml31",
+        "target": "Pleural remotor/abductor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl17",
+        "target": "Pleural remotor/abductor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl31",
+        "target": "Pleural remotor/abductor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl17",
+        "target": "Pleural remotor/abductor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl31",
+        "target": "Pleural remotor/abductor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "ltm2-femur MN": [
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml15",
+        "target": "ltm2-femur",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl15",
+        "target": "ltm2-femur",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl15",
+        "target": "ltm2-femur",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNml79": [
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml79",
+        "target": "middle leg",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "Sternotrochanter MN": [
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml22",
+        "target": "Sternotrochanter",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml08",
+        "target": "Sternotrochanter",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl22",
+        "target": "Sternotrochanter",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl08",
+        "target": "Sternotrochanter",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl08",
+        "target": "Sternotrochanter",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl22",
+        "target": "Sternotrochanter",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNml78": [
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml78",
+        "target": "middle leg",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "Acc. tr flexor MN": [
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml14",
+        "target": "Acc. tr flexor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl14",
+        "target": "Acc. tr flexor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl14",
+        "target": "Acc. tr flexor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNml82": [
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml82",
+        "target": "middle leg",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNml77": [
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml77",
+        "target": "middle leg",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNml76": [
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml76",
+        "target": "middle leg",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNml86": [
+      {
+        "subclass": "ml",
+        "systematic_type": "MNml86",
+        "target": "middle leg",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNhl68": [
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl68",
+        "target": "hind leg",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNhl02": [
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl02",
+        "target": "hind leg",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNhl67": [
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl67",
+        "target": "hind leg",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNhl59": [
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl59",
+        "target": "hind leg",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNhl66": [
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl66",
+        "target": "hind leg",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNhl65": [
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl65",
+        "target": "hind leg",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNhl64": [
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl64",
+        "target": "hind leg",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNhl88": [
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl88",
+        "target": "hind leg",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNhl75": [
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl75",
+        "target": "hind leg",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNhl29": [
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl29",
+        "target": "hind leg",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNhl63": [
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl63",
+        "target": "hind leg",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNhl01": [
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl01",
+        "target": "hind leg",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNhl87": [
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl87",
+        "target": "hind leg",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNhl74": [
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl74",
+        "target": "hind leg",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNhl62": [
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl62",
+        "target": "hind leg",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNhl61": [
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl61",
+        "target": "hind leg",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNhl60": [
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl60",
+        "target": "hind leg",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNhl70": [
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl70",
+        "target": "hind leg",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNhl72": [
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl72",
+        "target": "hind leg",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNhl69": [
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl69",
+        "target": "hind leg",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNhl73": [
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl73",
+        "target": "hind leg",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNhl71": [
+      {
+        "subclass": "hl",
+        "systematic_type": "MNhl71",
+        "target": "hind leg",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "Tergopleural/Pleural promotor MN": [
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl56",
+        "target": "Tergopleural/Pleural promotor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl55",
+        "target": "Tergopleural/Pleural promotor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl54",
+        "target": "Tergopleural/Pleural promotor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl53",
+        "target": "Tergopleural/Pleural promotor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "Ta depressor MN": [
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl50",
+        "target": "Ta depressor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl49",
+        "target": "Ta depressor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl48",
+        "target": "Ta depressor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl47",
+        "target": "Ta depressor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl46",
+        "target": "Ta depressor",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "Ta levator MN": [
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl52",
+        "target": "Ta levator",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "fl",
+        "systematic_type": "MNfl51",
+        "target": "Ta levator",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad23": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad23",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad22": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad22",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad42": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad42",
+        "target": "abdomen A2",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad21": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad21",
+        "target": "abdomen A2",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad21",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad69": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad69",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad68": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad68",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad19": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad19",
+        "target": "abdomen A2",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad19",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad41": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad41",
+        "target": "abdomen A2",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad67": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad67",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad66": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad66",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad65": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad65",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad64": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad64",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad20": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad20",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad63": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad63",
+        "target": "abdomen A2",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad62": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad62",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad18": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad18",
+        "target": "abdomen A2",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad18",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad37": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad37",
+        "target": "abdomen A2",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad17": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad17",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad40": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad40",
+        "target": "abdomen A2",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad13": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad13",
+        "target": "abdomen A2",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad13",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad36": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad36",
+        "target": "abdomen A2",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad27": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad27",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad16": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad16",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad61": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad61",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad15": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad15",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad35": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad35",
+        "target": "abdomen A2",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad14": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad14",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad38": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad38",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad59": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad59",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad09": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad09",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad12": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad12",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad58": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad58",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad08": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad08",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad26": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad26",
+        "target": "abdomen A1",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad57": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad57",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad11": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad11",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad10": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad10",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad56": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad56",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad07": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad07",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad55": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad55",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad54": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad54",
+        "target": "abdomen A2",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad53": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad53",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad25": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad25",
+        "target": "abdomen A2",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad52": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad52",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad34": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad34",
+        "target": "abdomen A1",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad34",
+        "target": "abdomen A2",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad51": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad51",
+        "target": "abdomen A2",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad06": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad06",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad50": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad50",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad33": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad33",
+        "target": "abdomen A2",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad49": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad49",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad32": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad32",
+        "target": "abdomen A2",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad24": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad24",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "Ehrhardt et al. (2023)",
+        "line_match": "SS48247",
+        "match_notes": ""
+      }
+    ],
+    "MNad05": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad05",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad31": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad31",
+        "target": "abdomen A2",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad28": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad28",
+        "target": "abdomen A1",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad48": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad48",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad47": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad47",
+        "target": "abdomen A2",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad30": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad30",
+        "target": "abdomen A2",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad46": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad46",
+        "target": "abdomen A2",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad03": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad03",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad04": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad04",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad45": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad45",
+        "target": "abdomen A2",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad44": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad44",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad02": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad02",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      },
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad02",
+        "target": "abdomen A2",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad43": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad43",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad29": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad29",
+        "target": "abdomen A1",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad01": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad01",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ],
+    "MNad39": [
+      {
+        "subclass": "ad",
+        "systematic_type": "MNad39",
+        "target": "abdomen",
+        "match_certainty(1-5)": "",
+        "publication_match": "",
+        "line_match": "",
+        "match_notes": ""
+      }
+    ]
+  }
+}

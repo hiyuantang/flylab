@@ -117,6 +117,7 @@ class Physiology:
     histamine_sign: float = -1.
     profile: str = 'legacy-normalized'
     delay_ms: float = 1.8
+    timing_rounding: str = 'exact'
 
     @classmethod
     def paper(cls, **overrides):
@@ -126,17 +127,28 @@ class Physiology:
     def __post_init__(self):
         if self.profile not in {'legacy-normalized', 'shiu-2024'}:
             raise ValueError('Unknown physiology profile')
-        if not all(math.isfinite(x) for k, x in asdict(self).items() if k != 'profile'):
+        if self.timing_rounding not in {'exact', 'ceil'}:
+            raise ValueError('Unknown timing rounding mode')
+        if not all(math.isfinite(x) for k, x in asdict(self).items() if k not in {'profile', 'timing_rounding'}):
             raise ValueError('Physiology values must be finite')
         if not (0 < self.dt_ms <= self.membrane_ms and self.dt_ms <= self.synapse_ms and self.refractory_ms >= 0 and 0 <= self.gain <= 100):
             raise ValueError('Invalid integration times or gain')
         if any(value not in {-1., 0., 1.} for value in (self.glutamate_sign, self.unknown_sign, self.histamine_sign)):
             raise ValueError('Transmitter signs must be -1, 0, or 1')
-        if self.delay_ms < 0 or (self.profile == 'shiu-2024' and any(not math.isclose(round(v / self.dt_ms) * self.dt_ms, v) for v in [self.delay_ms, self.refractory_ms])):
+        if self.delay_ms < 0 or (self.profile == 'shiu-2024' and self.timing_rounding == 'exact' and any(not math.isclose(round(v / self.dt_ms) * self.dt_ms, v) for v in [self.delay_ms, self.refractory_ms])):
             raise ValueError('Delay and refractory time must be whole integration ticks')
+
+    def integration_ticks(self, duration_ms):
+        ticks = duration_ms / self.dt_ms
+        return math.ceil(ticks - 1e-9) if self.timing_rounding == 'ceil' else round(ticks)
 
 
 class FullBrain(PaperDynamics):
+    @cached_property
+    def reward_circuit(self):
+        from .dopamine import DopamineCircuit
+        return DopamineCircuit(self)
+
     @cached_property
     def neural_view(self):
         from .neural_view import NeuralView
@@ -147,7 +159,7 @@ class FullBrain(PaperDynamics):
         from .anatomy import AnatomyIndex
         return AnatomyIndex(self)
 
-    def __init__(self, directory: Path, physiology: Physiology | None = None, device='cpu'):
+    def __init__(self, directory: Path, physiology: Physiology | None = None, device='cpu', precision=None):
         self.directory = directory
         self.manifest = json.loads((directory / 'manifest.json').read_text())
         self.config = physiology or Physiology.paper()
@@ -172,14 +184,19 @@ class FullBrain(PaperDynamics):
         if self.config.profile == 'shiu-2024':
             self.prepare_paper()
         self.reset()
-        if device != 'cpu':
-            self.set_device(device)
+        if self.config.profile == 'shiu-2024':
+            if device != 'cpu' or precision is not None:
+                self.set_device(device, precision)
+        elif device != 'cpu' or precision not in {None, 'float32'}:
+            raise ValueError('Legacy physiology requires CPU float32')
 
     @property
     def dynamics_version(self):
         return PAPER_DYNAMICS_VERSION if self.config.profile == 'shiu-2024' else DYNAMICS_VERSION
 
     def reset(self):
+        if 'reward_circuit' in self.__dict__:
+            self.reward_circuit.reset()
         if self.config.profile == 'shiu-2024':
             self.reset_paper()
             return
@@ -195,9 +212,9 @@ class FullBrain(PaperDynamics):
         self.last_wall_seconds = 0.
 
     @torch.no_grad()
-    def advance(self, drive: torch.Tensor, duration_ms=20., silence=None):
+    def advance(self, drive: torch.Tensor, duration_ms=20., silence=None, *, poisson_hz=None):
         if self.config.profile == 'shiu-2024':
-            return self.advance_paper(drive, duration_ms, silence)
+            return self.advance_paper(drive, duration_ms, silence, poisson_hz=poisson_hz)
         if drive.shape != self.voltage.shape or not torch.isfinite(drive).all():
             raise ValueError('Drive must be a finite current for each neuron')
         steps = round(duration_ms / self.config.dt_ms)

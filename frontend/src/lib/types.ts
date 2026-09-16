@@ -17,13 +17,97 @@ export type BodyPose = {
   position: [number, number, number];
   quaternion: [number, number, number, number];
 };
+export type DopamineState = {
+  profile: string;
+  available: boolean;
+  enabled: boolean;
+  pulse_remaining_s: number;
+  events: number;
+  last_event: { score: number; time: number } | null;
+  plastic_edges: number;
+  changed_edges: number;
+  pathways: {
+    valence: string;
+    dan_type: string;
+    mbon_type: string;
+    compartment: string;
+    neurons: number;
+    dan_hz: number;
+    plastic_edges: number;
+    mean_factor: number;
+  }[];
+};
+export type BodyParameters = {
+  mass_scale: number;
+  strength_scale: number;
+  friction: number;
+  limit_mode: string;
+  appendage_model: string;
+  elasticity_profile: string;
+};
+export type PolicyActivity = {
+  groups: {
+    id: string;
+    label: string;
+    stage: number;
+    count: number;
+    unit: string;
+    reduction: "token_rms" | "feature_rms" | "excitation";
+    labels: string[] | null;
+  }[];
+  values: Record<string, number[]>;
+  step: number;
+  measured: boolean;
+};
 export type Simulation = {
+  policy_activity?: PolicyActivity;
+  body_parameters?: BodyParameters;
+  gesture_model?: string | null;
+  gesture_stimulus?: {
+    gesture: "palm" | "fist" | "point" | "point_right" | "point_both";
+    position: [number, number, number];
+    quaternion?: [number, number, number, number];
+    mesh_url: string;
+    focus_offset?: [number, number, number];
+    framing_radius?: number;
+    color: string;
+    visual_only: boolean;
+  } | null;
+  locomotion?: {
+    target: string;
+    amplitude: number;
+    remaining_s: number;
+    targets: { type: string; body_ids: number[]; mean_hz: number }[];
+    core: { type: string; neurons: number; mean_hz: number }[];
+  } | null;
+  reward?: DopamineState | null;
   timing?: {
     simulated_seconds: number;
     compute_wall_seconds: number;
     last_step_wall_seconds: number;
     simulated_per_wall_second: number | null;
     neural_dt_ms: number | null;
+    muscle_command_hz?: number;
+    sensory_hz?: number;
+    physics_max_dt_ms?: number;
+    coupling?: {
+      coupling_mode: "serial" | "pipelined";
+      command_delay_ms: number;
+      command_generated_at: number | null;
+      command_source_time: number | null;
+      applied_command_generated_at: number | null;
+      last_sensory_time: number | null;
+    };
+    performance?: {
+      phase: "idle" | "computing" | "waiting" | "over-budget" | "on-time";
+      target_hz: number | null;
+      achieved_hz: number | null;
+      budget_ms: number;
+      compute_ms: number;
+      deadline_misses: number;
+      completed_cycles: number;
+      over_budget: boolean;
+    };
   };
   scene: SceneSummary;
   episode: number;
@@ -50,6 +134,7 @@ export type Simulation = {
     bodies: BodyPose[];
     pretarsi?: {
       name: string;
+      parent?: string | null;
       position: [number, number, number];
       quaternion: [number, number, number, number];
       capsules: number[][];
@@ -69,8 +154,18 @@ export type Simulation = {
       interpretation: string;
     }[];
     feet: number[][];
+    foot_parents?: string[];
     foot_forces: number[];
     foot_contacts: boolean[];
+    support?: {
+      elasticity_profile: string;
+      feet_support_fraction: number;
+      supporting_feet: number;
+      feet_supported: boolean;
+      weight_uN: number;
+      other_vertical_uN: number;
+      other_contacts: Record<string, number>;
+    };
     joint_velocities: number[];
     muscle_activation: number[];
     muscle_force: number[];
@@ -107,14 +202,25 @@ export type Simulation = {
     edges: number;
     engine: string;
     measured_connectome: boolean;
-    controller?: "synthetic" | "posture" | "connectome";
+    controller?: "synthetic" | "posture" | "connectome" | "transformer";
+    parameters?: number;
     neural_wall_seconds?: number;
     spikes?: number;
     assumptions?: string;
   };
 };
 export type SensorySettings = {
-  vision_model: "legacy-grid-v2" | "compound-retina-v1";
+  vision_model:
+    | "legacy-grid-v2"
+    | "compound-retina-v1"
+    | "compound-retina-balanced-v1"
+    | "compound-retina-balanced-v2"
+    | "compound-retina-balanced-v3"
+    | "compound-retina-balanced-v4"
+    | "compound-retina-balanced-v5";
+  proprioception_model?: "legacy-position-v1" | "feco-opponent-v1";
+  contact_model?: "legacy-leg-v1" | "tarsal-contact-v1";
+  spatial_model?: "legacy-v2" | "geometry-v3";
   vision_enabled: boolean;
   hearing_enabled: boolean;
   wind_enabled: boolean;
@@ -128,6 +234,12 @@ export type SensorySettings = {
   stimulus_position: [number, number, number];
 };
 export type SensoryFrame = {
+  leg_routing?: { neurons: number; unresolved_proprioceptors: number } | null;
+  legs?: {
+    opening_rad: number[];
+    velocity_rad_s: number[];
+    signals: Record<string, number[]>;
+  } | null;
   scene_id: string;
   time: number;
   version: string;
@@ -142,7 +254,10 @@ export type SensoryFrame = {
     optics: string;
     eyes: {
       count: number;
+      sampling?: "measured" | "bio-inspired";
       angles_degrees: number[][];
+      patch_angles_degrees?: number[][];
+      patch_channels?: Record<string, number[][]>;
       channels: Record<string, number[]>;
     }[];
     width: number;
@@ -299,4 +414,85 @@ export type AnatomySnapshot = {
   source: string;
   membership: string;
   limitations: string;
+};
+export type MotorEvidenceSource = {
+  title: string;
+  url: string;
+  locator: string;
+  supports: string;
+  data_url?: string;
+};
+
+export type MotorMappingRecord = {
+  body_id: number;
+  type: string | null;
+  body_region: string;
+  status: "mapped" | "unmapped";
+  muscle_target?: string;
+  target_side: string | null;
+  joint?: string;
+  reason?: string | null;
+  confidence: {
+    identity: {
+      level: "supported" | "tentative" | "family_only" | "unresolved";
+      basis: string;
+    };
+    mechanics: { level: "approximate" | "unresolved"; basis: string };
+  };
+  sources: MotorEvidenceSource[];
+  reference_matches: {
+    target: string;
+    "match_certainty(1-5)": string;
+    match_notes: string;
+    systematic_type: string;
+  }[];
+};
+
+export type EvidenceNeuron = {
+  body_id: number;
+  type: string | null;
+  superclass: string | null;
+  class: string | null;
+  transmitter: string | null;
+  transmitter_score: number | null;
+  sensory: boolean;
+  motor: boolean;
+};
+export type EvidenceMetadata = {
+  total: number;
+  sensory_total: number;
+  motor_total: number;
+  classes: Record<string, number>;
+  missing_type: number;
+  missing_transmitter: number;
+  missing_transmitter_score: number;
+  scope: string;
+  confidence_policy: string;
+  manifest: {
+    edges: number;
+    retained_synapses: number;
+    excluded_annotation_rows: number;
+    boundary_connection_rows: number;
+    selection: string;
+    sources: { file: string; url: string; sha256: string }[];
+  };
+};
+export type EvidenceDetail = EvidenceNeuron & {
+  annotations: Record<string, unknown>;
+  claims: { name: string; level: string; basis: string }[];
+  sources: { title: string; url: string; sha256?: string }[];
+  sensory_inputs: {
+    mode: string;
+    group: number | null;
+    basis: string;
+    selected: boolean;
+    enabled: boolean | null;
+    confidence: string;
+    source?: string;
+    routing?: Record<string, unknown>;
+  }[];
+  sensory_explanation: string;
+  motor_output: MotorMappingRecord | null;
+  physiology: Record<string, unknown>;
+  intervention: string;
 };

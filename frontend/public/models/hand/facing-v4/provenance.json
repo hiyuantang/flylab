@@ -1,0 +1,7 @@
+{
+  "source": "https://github.com/immersive-web/webxr-input-profiles/tree/main/packages/assets/profiles/generic-hand",
+  "source_sha256": "291790c14f7f88a7f9bd35330c47392ed8e8d395ae6728f4bb7089f1bc1f2b96",
+  "license": "MIT; Copyright (c) 2019 Amazon",
+  "modifications": "Reparented finger bones, posed joints, baked mesh to millimetres; mirrored human-left hand with reversed winding at -100 mm Y, human-right at +100 mm Y; palms centered at (-15,0,85), yawed inward by atan2(100,110)+13 degrees, tilted -50 degrees. Human hand labels map to the same-named fly front legs.",
+  "generator": "scripts/build_hand_gestures.mjs"
+}

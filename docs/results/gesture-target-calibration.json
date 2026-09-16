@@ -1,0 +1,149 @@
+{
+  "target_version": "grounded-muscle-reference-v1",
+  "body_parameters": {
+    "mass_scale": 1.0,
+    "strength_scale": 1.0,
+    "friction": 1.0,
+    "limit_mode": "baseline",
+    "appendage_model": "peripheral-v2",
+    "elasticity_profile": "stance-elastic-v1"
+  },
+  "command_hz": 50,
+  "steps": 250,
+  "all_verified": true,
+  "provenance": "Calibrated engineering commands in the existing MuJoCo body; not biological recordings. Replay commands, not activations, from a fresh FlyBody with these exact parameters.",
+  "results": {
+    "palm": {
+      "pose_reached": true,
+      "foot_heights_mm": [
+        0.029700861535558617,
+        0.03896984861737391,
+        0.053027747314941406,
+        0.028607188773130048,
+        0.038177701454264516,
+        0.036923266250967056
+      ],
+      "raised_legs": [],
+      "support_feet_near_floor": true,
+      "body_height_mm": 1.227558426635959,
+      "upright": 0.999902117381768,
+      "target_version": "grounded-muscle-reference-v1",
+      "command_hz": 50,
+      "settle_seconds": 0.1,
+      "checked_seconds": 5.0,
+      "checked_frames": 246,
+      "source": "simulated engineering muscle commands",
+      "supervised_channels": 84,
+      "min_raised_foot_height_mm": null,
+      "max_support_foot_height_mm": 0.056436433866572586,
+      "min_upright": 0.9998042404287566
+    },
+    "fist": {
+      "pose_reached": true,
+      "foot_heights_mm": [
+        0.03072590307565456,
+        0.04081280496482712,
+        0.06200849224780351,
+        0.02871105178392073,
+        0.024287234414162185,
+        0.044686867122377676
+      ],
+      "raised_legs": [],
+      "support_feet_near_floor": true,
+      "body_height_mm": 0.9836741525900229,
+      "upright": 0.9976329076145409,
+      "target_version": "grounded-muscle-reference-v1",
+      "command_hz": 50,
+      "settle_seconds": 0.1,
+      "checked_seconds": 5.0,
+      "checked_frames": 246,
+      "source": "simulated engineering muscle commands",
+      "supervised_channels": 84,
+      "min_raised_foot_height_mm": null,
+      "max_support_foot_height_mm": 0.07445241718045802,
+      "min_upright": 0.9939899693587251
+    },
+    "point": {
+      "pose_reached": true,
+      "foot_heights_mm": [
+        0.5991664299260374,
+        0.03800780175805079,
+        0.05161921495963612,
+        0.02374236258363642,
+        0.03486925135108497,
+        0.038612865493550405
+      ],
+      "raised_legs": [
+        0
+      ],
+      "support_feet_near_floor": true,
+      "body_height_mm": 1.1800144859883424,
+      "upright": 0.999820279075056,
+      "target_version": "grounded-muscle-reference-v1",
+      "command_hz": 50,
+      "settle_seconds": 0.1,
+      "checked_seconds": 5.0,
+      "checked_frames": 246,
+      "source": "simulated engineering muscle commands",
+      "supervised_channels": 84,
+      "min_raised_foot_height_mm": 0.569808203740528,
+      "max_support_foot_height_mm": 0.05354209934980877,
+      "min_upright": 0.9991132690876049
+    },
+    "point_right": {
+      "pose_reached": true,
+      "foot_heights_mm": [
+        0.02758707154845086,
+        0.038608046361958914,
+        0.05187076803375611,
+        0.6423943978709233,
+        0.03336035650009823,
+        0.03439958431533509
+      ],
+      "raised_legs": [
+        3
+      ],
+      "support_feet_near_floor": true,
+      "body_height_mm": 1.2183200186465724,
+      "upright": 0.9998926346352444,
+      "target_version": "grounded-muscle-reference-v1",
+      "command_hz": 50,
+      "settle_seconds": 0.1,
+      "checked_seconds": 5.0,
+      "checked_frames": 246,
+      "source": "simulated engineering muscle commands",
+      "supervised_channels": 84,
+      "min_raised_foot_height_mm": 0.5593811309128901,
+      "max_support_foot_height_mm": 0.05224422012118053,
+      "min_upright": 0.9995428088436029
+    },
+    "point_both": {
+      "pose_reached": true,
+      "foot_heights_mm": [
+        0.6090813394174539,
+        0.03639813942578459,
+        0.053711627755222396,
+        0.6250151206822042,
+        0.035250531614953916,
+        0.039566933897401284
+      ],
+      "raised_legs": [
+        0,
+        3
+      ],
+      "support_feet_near_floor": true,
+      "body_height_mm": 1.1697594424399815,
+      "upright": 0.9999638013537574,
+      "target_version": "grounded-muscle-reference-v1",
+      "command_hz": 50,
+      "settle_seconds": 0.1,
+      "checked_seconds": 5.0,
+      "checked_frames": 246,
+      "source": "simulated engineering muscle commands",
+      "supervised_channels": 84,
+      "min_raised_foot_height_mm": 0.37998828824401304,
+      "max_support_foot_height_mm": 0.053968157619922456,
+      "min_upright": 0.9953128414241595
+    }
+  }
+}

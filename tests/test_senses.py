@@ -21,7 +21,7 @@ from flylab.scenes import get_scene
 
 def test_eyes_follow_pose_and_light_without_mutating_body():
     body = FlyBody()
-    suite = SensorSuite(SensorySettings(vision_enabled=True))
+    suite = SensorSuite(SensorySettings(vision_enabled=True, calibration_sphere=True))
     before = body.data.qpos.copy()
     frame = suite.sample(body, [12., 0., .01])
     assert np.asarray(frame['vision']['pixels']).shape == (2, 8, 16)

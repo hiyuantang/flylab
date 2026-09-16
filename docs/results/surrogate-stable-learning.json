@@ -1,0 +1,34 @@
+{
+  "scale": 0.001,
+  "lr": 0.01,
+  "steps": 25,
+  "batch_size": 1,
+  "iterations": 3,
+  "baseline_validation_loss": 0.016822111681103705,
+  "rows": [
+    {
+      "iteration": 1,
+      "training_loss": 0.016822111681103705,
+      "validation_loss": 0.01678414192050695,
+      "gradient_norm": 7.521800975037619e-06,
+      "gradient_log10_norm": -5.123678162084378,
+      "parameter_change": 0.08726608593702156
+    },
+    {
+      "iteration": 2,
+      "training_loss": 0.01678414192050695,
+      "validation_loss": 0.016792054772377014,
+      "gradient_norm": 1.0858756580887445e-05,
+      "gradient_log10_norm": -4.964219902277185,
+      "parameter_change": 0.172515747033831
+    },
+    {
+      "iteration": 3,
+      "training_loss": 0.016792054772377014,
+      "validation_loss": 0.01682790666818619,
+      "gradient_norm": 8.781973476654563e-06,
+      "gradient_log10_norm": -5.056407878887286,
+      "parameter_change": 0.2593028348717353
+    }
+  ]
+}

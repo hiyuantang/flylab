@@ -1,0 +1,27 @@
+{
+  "mapping_profile": "muscle-routing-v5",
+  "neurons": 166700,
+  "directed_connections": 25582938,
+  "simulated_seconds": 0.016666666666666666,
+  "wall_seconds": 0.8630544580519199,
+  "spikes": 2596,
+  "muscle_channels": 196,
+  "finite_body": true,
+  "finite_neurons": true,
+  "pending_command_shape": [
+    196
+  ],
+  "new_channel_activation": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "scope": "One cycle of an isolated clone of the saved full-graph animal. Live state was not advanced or overwritten; this is not walking validation."
+}

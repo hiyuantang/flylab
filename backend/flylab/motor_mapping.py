@@ -6,11 +6,15 @@ insertion reconstructions. Paired legs use mirrored axes in body.make_xml.
 """
 from collections import Counter
 from .peripheral_mechanics import PROFILE as PERIPHERAL_PROFILE, LOOKUP, MUSCLES
+from .extended_mechanics import PROFILE as EXTENDED_PROFILE, LOOKUP as EXTENDED_LOOKUP, MUSCLES as EXTENDED_MUSCLES
+from .motor_evidence import annotate_evidence
 
 LEGACY_PROFILE = 'leg-routing-v1'
 MAPPING_PROFILE = 'muscle-routing-v2'
 PRETARSAL_PROFILE = 'muscle-routing-v3'
-PROFILES = (LEGACY_PROFILE, MAPPING_PROFILE, PRETARSAL_PROFILE, PERIPHERAL_PROFILE)
+PROFILES = (LEGACY_PROFILE, MAPPING_PROFILE, PRETARSAL_PROFILE, PERIPHERAL_PROFILE, EXTENDED_PROFILE)
+PERIPHERAL_PROFILES = (PERIPHERAL_PROFILE, EXTENDED_PROFILE)
+TENDON_PROFILES = (PRETARSAL_PROFILE, *PERIPHERAL_PROFILES)
 LONG_TENDON_TARGETS = {'ltm MN', 'ltm1-tibia MN', 'ltm2-femur MN'}
 SOURCE = 'https://faculty.washington.edu/tuthill/docs/azevedo24_appendix.pdf'
 
@@ -52,22 +56,39 @@ NERVE_LEG = {'ProLN': 'fl', 'DProN': 'fl', 'VProN': 'fl', 'ProAN': 'fl',
 
 
 def resolve_motor(row, profile=MAPPING_PROFILE):
+    return annotate_evidence(_resolve_motor(row, profile))
+
+
+def peripheral_muscles(profile):
+    return EXTENDED_MUSCLES if profile == EXTENDED_PROFILE else MUSCLES
+
+
+def body_model_for_profile(profile):
+    if profile not in PROFILES:
+        raise ValueError('Unknown muscle mapping profile')
+    return ('peripheral-v2' if profile == EXTENDED_PROFILE else
+            'peripheral-v1' if profile == PERIPHERAL_PROFILE else
+            'pretarsal-v1' if profile == PRETARSAL_PROFILE else 'baseline')
+
+
+def _resolve_motor(row, profile):
     if profile not in PROFILES:
         raise ValueError('Unknown muscle mapping profile')
     record = {key: row.get(key) for key in ['type', 'superclass', 'subclass', 'somaSide', 'exitNerve', 'instance', 'mancType']}
     record.update(body_id=int(row['bodyId']), body_region=BODY_REGIONS.get(row.get('subclass'), 'unresolved'),
                   target_label=row.get('type'), source='MaleCNS v1.0 neuron annotations')
     name, subclass, side = row.get('type'), row.get('subclass'), row.get('somaSide')
-    if profile == PERIPHERAL_PROFILE and row.get('superclass') in {'cb_motor', 'vnc_motor'} and (name, subclass, side) in LOOKUP:
-        channel = LOOKUP[(name, subclass, side)]
-        muscle = MUSCLES[channel - 90]
+    lookup = EXTENDED_LOOKUP if profile == EXTENDED_PROFILE else LOOKUP
+    if profile in PERIPHERAL_PROFILES and row.get('superclass') in {'cb_motor', 'vnc_motor'} and (name, subclass, side) in lookup:
+        channel = lookup[(name, subclass, side)]
+        muscle = peripheral_muscles(profile)[channel - 90]
         instance = str(row.get('instance') or '')
         if instance.endswith(('_L', '_R')) and instance[-1] != side:
             record.update(status='unmapped', reason='annotation_conflict', projections=[])
         else:
             record.update(status='mapped', reason=None, leg=side, projections=[],
                           peripheral_channel=channel, muscle_target=muscle.target,
-                          function_source=muscle.source, evidence='Named MaleCNS muscle target; same-side assignment is assumed.',
+                          function_source=muscle.source, evidence='Annotated neuron matched to the cited muscle target; see identity confidence and target side.',
                           routing=muscle.interpretation)
         return record
     reason = None
@@ -75,11 +96,11 @@ def resolve_motor(row, profile=MAPPING_PROFILE):
     if profile == LEGACY_PROFILE:
         old = LEGACY_TARGETS.get(name)
         target = ((*old, 1.),) if old else None
-    if profile in {PRETARSAL_PROFILE, PERIPHERAL_PROFILE} and name in LONG_TENDON_TARGETS:
+    if profile in TENDON_PROFILES and name in LONG_TENDON_TARGETS:
         target = (('pretarsus', 'flexion', 0, 1.),)
     if row.get('superclass') != 'vnc_motor' or subclass not in {'fl', 'ml', 'hl'}:
-        reason = 'peripheral_route_unresolved' if profile == PERIPHERAL_PROFILE else 'body_actuator_missing'
-    elif not name or (name not in TARGETS and not (profile in {PRETARSAL_PROFILE, PERIPHERAL_PROFILE} and name in LONG_TENDON_TARGETS)):
+        reason = 'peripheral_route_unresolved' if profile in PERIPHERAL_PROFILES else 'body_actuator_missing'
+    elif not name or (name not in TARGETS and not (profile in TENDON_PROFILES and name in LONG_TENDON_TARGETS)):
         reason = ('muscle_action_unknown' if name == 'Fe reductor MN' else
                   'pretarsal_tendon_missing' if str(name).startswith('ltm') else 'muscle_identity_unresolved')
     elif target is None:
@@ -111,12 +132,14 @@ def inventory_summary(records):
         region['total'] += 1
         region[record['status']] += 1
     return {'total_motor_neurons': len(records), 'coverage_by_region': regions,
-            'unmapped_reasons': dict(Counter(r['reason'] for r in records if r['status'] == 'unmapped'))}
+            'unmapped_reasons': dict(Counter(r['reason'] for r in records if r['status'] == 'unmapped')),
+            'connected_identity_confidence': dict(Counter(r['confidence']['identity']['level']
+                for r in records if r['status'] == 'mapped'))}
 
 
 def validate_body_profile(profile, parameters):
     if profile not in PROFILES:
         raise ValueError('Unknown muscle mapping profile')
-    expected = 'peripheral-v1' if profile == PERIPHERAL_PROFILE else 'pretarsal-v1' if profile == PRETARSAL_PROFILE else 'baseline'
+    expected = body_model_for_profile(profile)
     if profile not in PROFILES or parameters.appendage_model != expected:
         raise ValueError('Muscle mapping and physical appendage model do not match')

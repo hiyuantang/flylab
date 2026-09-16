@@ -4,10 +4,13 @@ from __future__ import annotations
 import numpy as np
 
 
-def odor_sensors(body, source, strength=.7):
+def odor_sensors(body, source, strength=.7, *, spatial_model='legacy-v2'):
     """Gaussian concentration sampled at the two moving antennal funiculi (mm)."""
     sites = np.array([body.data.xpos[body.body_ids[f"{side}_funiculus"]] for side in ["l", "r"]])
-    distances = np.linalg.norm(sites[:, :2] - np.asarray(source)[:2], axis=1)
+    if spatial_model not in {'legacy-v2', 'geometry-v3'}:
+        raise ValueError('Unknown spatial sensor model')
+    dimensions = 3 if spatial_model == 'geometry-v3' else 2
+    distances = np.linalg.norm(sites[:, :dimensions] - np.asarray(source)[:dimensions], axis=1)
     return strength * np.exp(-.5 * (distances / 8.) ** 2)
 
 

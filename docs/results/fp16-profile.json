@@ -1,0 +1,24 @@
+{
+  "neurons": 166700,
+  "edges": 25582938,
+  "repeats": 50,
+  "kernel": "metal-csr-f16-v1",
+  "phases": {
+    "integrate": {
+      "mean_wall_ms": 0.07653334061615169
+    },
+    "gather_zero": {
+      "mean_wall_ms": 2.752792499959469
+    },
+    "gather_84_sources": {
+      "mean_wall_ms": 2.697414179565385
+    },
+    "gather_8335_sources": {
+      "mean_wall_ms": 2.691712499363348
+    },
+    "finish": {
+      "mean_wall_ms": 0.0314808392431587
+    }
+  },
+  "limits": "Synthetic repeated kernel dispatches on fixed buffers, not a summed simulation profile. Wall time includes submission gaps. Repeated integration/finish changes scratch state. No Instruments hardware counters collected."
+}

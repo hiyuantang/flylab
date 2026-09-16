@@ -54,7 +54,7 @@ The MaleCNS importer retains every annotation with a non-null superclass and eve
 
 The current Shiu-derived LIF profile uses 20 ms membrane decay, 5 ms synaptic decay, 2.2 ms refractory periods, 1.8 ms transmission delays and 0.275 mV per signed synapse. ACh is positive; GABA, histamine and default glutamate are negative. Unknown/modulatory effects default to zero fast current while those neurons and anatomical edges remain present. Receptor-specific actions and graded transmission are not resolved.
 
-The expanded bridge with pretarsal and peripheral mechanics maps 438 of 815 annotated brain/VNC motor neurons to 154 of 186 muscle channels. The remaining 377 have explicit missing-target or missing-mechanism records. Type names are measured; same-side assignment, fixed-axis force projections, muscle strength and rate-to-force conversion remain assumptions. Older saved states retain their legacy mapping until explicitly upgraded. See the [complete neuromuscular inventory and limitations](docs/NEUROMUSCULAR_MAPPING.md). Body geometry derives from a female NeuroMechFly specimen. See [mechanics](docs/PHYSICS.md), [asset provenance](docs/ASSETS.md), and the mapping in **Data & model**.
+The expanded bridge with pretarsal and peripheral mechanics maps 454 of 815 annotated brain/VNC motor neurons to 164 of 196 muscle channels. Identity evidence is supported for 436, tentative for 14, and muscle-family-only for four; every mechanical transmission remains approximate. The remaining 361 have explicit missing-target or missing-mechanism records. Type names are measured; same-side assignment, fixed-axis force projections, muscle strength and rate-to-force conversion remain assumptions. Older saved states retain their legacy mapping until explicitly upgraded. See the [complete neuromuscular inventory and limitations](docs/NEUROMUSCULAR_MAPPING.md). Body geometry derives from a female NeuroMechFly specimen. See [mechanics](docs/PHYSICS.md), [asset provenance](docs/ASSETS.md), and the mapping in **Data & model**.
 
 ## Paper reference experiment
 
@@ -69,6 +69,18 @@ This downloads about 90 MB of pinned source tables. **Data & model → Run full-
 The CPU reference passes Brian2 state/spike checks. Custom Metal kernels execute the complete graph on MPS without unsupported sparse tensor operations. GPU float32 passes the small Brian2 scheduling tests, but full-graph trajectories differ from float64 and GPU execution is not necessarily faster. No precision downgrade is automatic. See [GPU implementation and measured limits](docs/GPU_EXECUTION.md).
 
 ## Physical learning
+
+The **Training** page offers [3D hand-to-muscle training](docs/GESTURE_LEARNING.md)
+with a frozen MaleCNS base and a constrained LoRA-inspired adapter. Adam uses
+surrogate spike gradients and supervised muscle activation loss. Configure batch
+size, iterations, rank, and gesture proportions; positions and orientations are
+randomized online. The preview shows the last sample of each completed batch.
+Scene buttons present hands to the existing compound-eye sensor. Load inference
+weights in the left Brain activity panel. The **Weights** page shows parent/child
+lineages, run logs, adapter-only versions, and branch deletion. Teacher targets
+and learned behavior require physical validation; training completion is not a
+claim of successful gesture control. The earlier gain search remains expandable.
+
 
 **Training** uses cross-entropy search over six neural population gains, sensory gain and motor gain. All anatomical neurons, edges and counts remain intact. Rewards come from MuJoCo balance, motion and effort; completed runs include a zero-muscle ablation and held-out perturbation checks. Applying a compatible full-graph policy restores its saved scene, senses and mechanics and starts a new episode. It does not replace the anatomical wiring.
 

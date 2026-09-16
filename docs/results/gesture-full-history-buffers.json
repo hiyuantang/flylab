@@ -1,0 +1,63 @@
+{
+  "steps": 5,
+  "batch_size": 3,
+  "rows": [
+    {
+      "mode": "warmup",
+      "seconds": 19.71749687497504,
+      "losses": [
+        0.014357124920934439,
+        0.014357124920934439,
+        0.014357124920934439
+      ],
+      "gradient_log10_norm": 23.325945064302886,
+      "gradient_identical": true
+    },
+    {
+      "mode": "allocate",
+      "seconds": 22.997484917053953,
+      "losses": [
+        0.014357124920934439,
+        0.014357124920934439,
+        0.014357124920934439
+      ],
+      "gradient_log10_norm": 23.325945064302886,
+      "gradient_identical": true
+    },
+    {
+      "mode": "reuse",
+      "seconds": 17.902816666988656,
+      "losses": [
+        0.014357124920934439,
+        0.014357124920934439,
+        0.014357124920934439
+      ],
+      "gradient_log10_norm": 23.325945064302886,
+      "gradient_identical": true
+    },
+    {
+      "mode": "reuse",
+      "seconds": 17.090830874978565,
+      "losses": [
+        0.014357124920934439,
+        0.014357124920934439,
+        0.014357124920934439
+      ],
+      "gradient_log10_norm": 23.325945064302886,
+      "gradient_identical": true
+    },
+    {
+      "mode": "allocate",
+      "seconds": 17.577521542087197,
+      "losses": [
+        0.014357124920934439,
+        0.014357124920934439,
+        0.014357124920934439
+      ],
+      "gradient_log10_norm": 23.325945064302886,
+      "gradient_identical": true
+    }
+  ],
+  "scope": "Full-sample BPTT; allocation versus scratch reuse only; no optimizer updates",
+  "interpretation": "Two measured repeats per mode. Allocation times varied substantially; these measurements do not establish a reliable steady-state speedup. All compared losses and clipped gradients were exactly identical."
+}

@@ -1,0 +1,158 @@
+{
+  "created_utc": "2026-09-12T23:59:10.800907+00:00",
+  "torch": "2.14.0",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "neurons": 166700,
+  "edges": 25582938,
+  "graph_sha256": "2be8452f9f4c02d26b71a821277b1e6513cdefbecf32b735c2dba3af62f6dbab",
+  "connectivity_exactly_preserved": true,
+  "duration_ms": 100,
+  "dt_ms": 0.1,
+  "stimulus": "14.7 mV equivalent current to olfactory-class and ol_sensory neurons",
+  "stimulated_neurons": 8737,
+  "trials": 3,
+  "timing_order": "fp32/mixed alternating with mixed/fp32; both warmed for 20 ms first",
+  "runs": {
+    "fp32": {
+      "device": "mps",
+      "precision": "torch.float32",
+      "kernel": "metal-csr-f32-v1",
+      "weight_precision": "torch.float32",
+      "experimental": true,
+      "history": [],
+      "note": "MPS float32 may change spike timing; not equivalent to the float64 reference. All neurons, edges and ticks retained.",
+      "spikes": 103411,
+      "ticks": 1000,
+      "wall_seconds": [
+        4.382968791993335,
+        4.371555665973574,
+        4.359837667027023
+      ],
+      "median_wall_seconds": 4.371555665973574,
+      "simulated_per_wall_second": 0.02287515192322945,
+      "weight_bytes": 102331752,
+      "csr_bytes": 205330308
+    },
+    "mixed": {
+      "device": "mps",
+      "precision": "torch.float32",
+      "kernel": "metal-csr-w16-state32-v1",
+      "weight_precision": "torch.float16",
+      "experimental": true,
+      "history": [],
+      "note": "Experimental FP16 weight storage, FP32 state and sums; weight rounding may change spikes. Offline benchmark only.",
+      "spikes": 103693,
+      "ticks": 1000,
+      "wall_seconds": [
+        4.241469707980286,
+        4.255745292000938,
+        4.214365624997299
+      ],
+      "median_wall_seconds": 4.241469707980286,
+      "simulated_per_wall_second": 0.02357673327522555,
+      "weight_bytes": 51165876,
+      "csr_bytes": 154164432
+    }
+  },
+  "speedup_fp32_over_mixed": 1.0306700193445995,
+  "weight_rounding": {
+    "max_absolute_error": 0.25,
+    "mean_absolute_error": 0.00026724906727480064,
+    "different_elements": 22758726
+  },
+  "mixed_vs_fp32": {
+    "voltage": {
+      "max_absolute_error": 60.35478973388672,
+      "mean_absolute_error": 0.4507258687193836,
+      "different_elements": 137320
+    },
+    "current": {
+      "max_absolute_error": 384.31959533691406,
+      "mean_absolute_error": 1.9924753764359333,
+      "different_elements": 139554
+    },
+    "rates": {
+      "max_absolute_error": 50.117902755737305,
+      "mean_absolute_error": 0.34310636342751744,
+      "different_elements": 11139
+    },
+    "spike_counts": {
+      "max_absolute_error": 4.0,
+      "mean_absolute_error": 0.017864427114577086,
+      "different_elements": 2836
+    },
+    "delay_queue": {
+      "max_absolute_error": 1.0,
+      "mean_absolute_error": 0.0009105547311590314,
+      "different_elements": 2884
+    }
+  },
+  "spike_bins": {
+    "bin_ms": 1,
+    "different_neuron_bins": 55270,
+    "neurons_with_any_difference": 10429,
+    "first_different_bin_start_ms": 25,
+    "absolute_count_difference_sum": 55270
+  },
+  "cpu_fp64_reference": {
+    "wall_seconds": 2.274793333024718,
+    "spikes": 103082,
+    "gpu_endpoint_errors": {
+      "fp32": {
+        "voltage": {
+          "max_absolute_error": 103.86806519937358,
+          "mean_absolute_error": 0.39242581679176763,
+          "different_elements": 145781
+        },
+        "current": {
+          "max_absolute_error": 433.2288194175014,
+          "mean_absolute_error": 1.8882445929621248,
+          "different_elements": 139728
+        },
+        "rates": {
+          "max_absolute_error": 46.38731752525703,
+          "mean_absolute_error": 0.3101073433157187,
+          "different_elements": 18315
+        },
+        "spike_counts": {
+          "max_absolute_error": 4.0,
+          "mean_absolute_error": 0.01549490101979604,
+          "different_elements": 2478
+        },
+        "delay_queue": {
+          "max_absolute_error": 1.0,
+          "mean_absolute_error": 0.0009077131942032646,
+          "different_elements": 2875
+        }
+      },
+      "mixed": {
+        "voltage": {
+          "max_absolute_error": 61.137344679354044,
+          "mean_absolute_error": 0.4218790628961075,
+          "different_elements": 145815
+        },
+        "current": {
+          "max_absolute_error": 433.2288194175014,
+          "mean_absolute_error": 2.0424671480011174,
+          "different_elements": 139767
+        },
+        "rates": {
+          "max_absolute_error": 51.50371085783461,
+          "mean_absolute_error": 0.3438825076889057,
+          "different_elements": 18387
+        },
+        "spike_counts": {
+          "max_absolute_error": 3.0,
+          "mean_absolute_error": 0.017882423515296942,
+          "different_elements": 2853
+        },
+        "delay_queue": {
+          "max_absolute_error": 1.0,
+          "mean_absolute_error": 0.0008919268777823383,
+          "different_elements": 2825
+        }
+      }
+    }
+  },
+  "limits": "One short fixed stimulus from reset, no body or long-run behavioral validation. 1 ms bins cannot detect all within-bin spike timing shifts. Timings depend on concurrent GPU load. Mixed mode is offline-only and cannot resume as an ordinary FP32 checkpoint. Live brain not changed."
+}

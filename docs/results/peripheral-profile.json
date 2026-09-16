@@ -1,0 +1,24 @@
+{
+  "scope": "cProfile of 20 complete cycles from an isolated saved FP16 animal after one warm-up; includes snapshots. GPU synchronization waits are included in brain time.",
+  "cycles": 20,
+  "simulated_seconds": 0.3333333333333333,
+  "total_wall_seconds": 3.6530201900000008,
+  "components": {
+    "body_physics": {
+      "calls": 20,
+      "wall_seconds": 2.2391262910000003
+    },
+    "brain": {
+      "calls": 20,
+      "wall_seconds": 0.9841798310000001
+    },
+    "sensing": {
+      "calls": 40,
+      "wall_seconds": 0.257950667
+    },
+    "muscle_readout": {
+      "calls": 20,
+      "wall_seconds": 0.055928374
+    }
+  }
+}

@@ -1,0 +1,110 @@
+.flight-main {
+  padding: 20px;
+  max-width: 1800px;
+  margin: auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+.flight-main h1 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.flight-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 16px;
+}
+.flight-grid .arena-panel {
+  height: 600px;
+  min-height: 380px;
+}
+.flight-empty {
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  text-align: center;
+}
+.flight-empty p {
+  max-width: 560px;
+  color: var(--muted, #98acb8);
+  line-height: 1.6;
+}
+.flight-settings {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.flight-settings label {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.flight-settings input {
+  padding: 10px;
+  background: #10202a;
+  border: 1px solid #3b505e;
+  border-radius: 6px;
+  color: inherit;
+  width: 100%;
+  box-sizing: border-box;
+}
+.flight-settings .primary {
+  justify-content: center;
+}
+.flight-settings p {
+  line-height: 1.5;
+  font-size: 13px;
+}
+.flight-measurements {
+  border-top: 1px solid #30434e;
+  padding-top: 14px;
+}
+.flight-measurements dl {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  font-size: 13px;
+}
+.flight-measurements dd {
+  margin: 0;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.flight-check-pass {
+  color: #d5ed93;
+  font-weight: 600;
+}
+.flight-playback {
+  padding: 14px;
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.flight-playback input {
+  flex: 1;
+  min-width: 120px;
+}
+.flight-playback span,
+.flight-playback p {
+  font-size: 13px;
+}
+.flight-playback p {
+  width: 100%;
+  margin: 0;
+  color: #b9c9d1;
+}
+@media (max-width: 1000px) {
+  .flight-grid {
+    grid-template-columns: 1fr;
+  }
+  .flight-grid .arena-panel {
+    height: 500px;
+  }
+}

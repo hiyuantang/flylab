@@ -1,0 +1,972 @@
+{
+  "running": false,
+  "mode": "training",
+  "phase": "Stopped improving; best validated weights saved",
+  "started_at": 1789400643.976303,
+  "iteration": 7,
+  "total": 10,
+  "batch_size": 3,
+  "batch_sample": 3,
+  "history": [
+    {
+      "iteration": 1,
+      "loss": 0.020383497583679855,
+      "gradient_norm": 3.2040226459503174,
+      "sample_losses": [
+        0.020312183420173824,
+        0.02041915466543287,
+        0.02041915466543287
+      ],
+      "validation_loss": 0.020344674494117497,
+      "update_accepted": true,
+      "update_scale": 1.0,
+      "validation_trials": [
+        {
+          "scale": 1.0,
+          "loss": 0.020344674494117497
+        }
+      ]
+    },
+    {
+      "iteration": 2,
+      "loss": 0.020361029038516183,
+      "gradient_norm": 11.254451751708984,
+      "sample_losses": [
+        0.02029561426024884,
+        0.020393736427649856,
+        0.020393736427649856
+      ],
+      "validation_loss": 0.020336585119366646,
+      "update_accepted": true,
+      "update_scale": 0.25,
+      "validation_trials": [
+        {
+          "scale": 1.0,
+          "loss": 0.020416777580976486
+        },
+        {
+          "scale": 0.5,
+          "loss": 0.020404015388339757
+        },
+        {
+          "scale": 0.25,
+          "loss": 0.020336585119366646
+        }
+      ]
+    },
+    {
+      "iteration": 3,
+      "loss": 0.02035309304483235,
+      "gradient_norm": 3.580864429473877,
+      "sample_losses": [
+        0.0202870627399534,
+        0.020386108197271824,
+        0.020386108197271824
+      ],
+      "validation_loss": 0.02031763307750225,
+      "update_accepted": true,
+      "update_scale": 1.0,
+      "validation_trials": [
+        {
+          "scale": 1.0,
+          "loss": 0.02031763307750225
+        }
+      ]
+    },
+    {
+      "iteration": 4,
+      "loss": 0.020301282910319667,
+      "gradient_norm": 5.0013203620910645,
+      "sample_losses": [
+        0.020366684184409678,
+        0.02026858227327466,
+        0.02026858227327466
+      ],
+      "validation_loss": 0.02031416967511177,
+      "update_accepted": true,
+      "update_scale": 0.5,
+      "validation_trials": [
+        {
+          "scale": 1.0,
+          "loss": 0.020396303758025168
+        },
+        {
+          "scale": 0.5,
+          "loss": 0.02031416967511177
+        }
+      ]
+    },
+    {
+      "iteration": 5,
+      "loss": 0.020296235335990787,
+      "gradient_norm": 6.036412239074707,
+      "sample_losses": [
+        0.020260366378352046,
+        0.020260366378352046,
+        0.020367973251268268
+      ],
+      "validation_loss": 0.02031416967511177,
+      "update_accepted": false,
+      "update_scale": 0.0,
+      "validation_trials": [
+        {
+          "scale": 1.0,
+          "loss": 0.02036511292681098
+        },
+        {
+          "scale": 0.5,
+          "loss": 0.020363907795399427
+        },
+        {
+          "scale": 0.25,
+          "loss": 0.020415303856134416
+        }
+      ]
+    },
+    {
+      "iteration": 6,
+      "loss": 0.020296235335990787,
+      "gradient_norm": 6.036412239074707,
+      "sample_losses": [
+        0.020260366378352046,
+        0.020260366378352046,
+        0.020367973251268268
+      ],
+      "validation_loss": 0.02031416967511177,
+      "update_accepted": false,
+      "update_scale": 0.0,
+      "validation_trials": [
+        {
+          "scale": 1.0,
+          "loss": 0.02036511292681098
+        },
+        {
+          "scale": 0.5,
+          "loss": 0.020363907795399427
+        },
+        {
+          "scale": 0.25,
+          "loss": 0.020415303856134416
+        }
+      ]
+    },
+    {
+      "iteration": 7,
+      "loss": 0.020296235335990787,
+      "gradient_norm": 6.036412239074707,
+      "sample_losses": [
+        0.020367973251268268,
+        0.020260366378352046,
+        0.020260366378352046
+      ],
+      "validation_loss": 0.02031416967511177,
+      "update_accepted": false,
+      "update_scale": 0.0,
+      "validation_trials": [
+        {
+          "scale": 1.0,
+          "loss": 0.02036511292681098
+        },
+        {
+          "scale": 0.5,
+          "loss": 0.020363907795399427
+        },
+        {
+          "scale": 0.25,
+          "loss": 0.020415303856134416
+        }
+      ]
+    }
+  ],
+  "preview_iteration": 7,
+  "error": null,
+  "checkpoint": "temporary audit only; not installed",
+  "rank": 2,
+  "horizon": 10,
+  "learning_rate": 0.01,
+  "seed": 42,
+  "cancelled": false,
+  "completed_rollouts": 21,
+  "parent": null,
+  "execution": {
+    "device": "mps",
+    "precision": "float16",
+    "gradient_precision": "float32"
+  },
+  "parallel_samples": 3,
+  "adapter": {
+    "version": "connectome-low-rank-v1",
+    "grouping": "motor-target-v2",
+    "rank": 2,
+    "groups": 480,
+    "trainable_parameters": 1920,
+    "parameter_change": 0.41867667232418493,
+    "min_factor": 0.9866963627480758,
+    "max_factor": 1.0138148828988682,
+    "neurons": 166700,
+    "edges": 25582938
+  },
+  "teacher_evaluation": {
+    "palm": {
+      "pose_reached": true,
+      "foot_heights_mm": [
+        0.030506530915538763,
+        0.03925835812398649,
+        0.049777495635973446,
+        0.03043531273466265,
+        0.0380125512049473,
+        0.036973658274472854
+      ],
+      "raised_legs": [],
+      "support_feet_near_floor": true,
+      "body_height_mm": 1.2593115970032422,
+      "upright": 0.9999769071030784,
+      "target_version": "grounded-muscle-reference-v1",
+      "command_hz": 50,
+      "settle_seconds": 0.1,
+      "checked_seconds": 0.2,
+      "checked_frames": 6,
+      "source": "simulated engineering muscle commands",
+      "supervised_channels": 84
+    },
+    "fist": {
+      "pose_reached": true,
+      "foot_heights_mm": [
+        0.02892069436391758,
+        0.038331438552770755,
+        0.056999805618168885,
+        0.032160912454901505,
+        0.031860852155263436,
+        0.04287817279600395
+      ],
+      "raised_legs": [],
+      "support_feet_near_floor": true,
+      "body_height_mm": 0.9897926261415182,
+      "upright": 0.9979626891445469,
+      "target_version": "grounded-muscle-reference-v1",
+      "command_hz": 50,
+      "settle_seconds": 0.1,
+      "checked_seconds": 0.2,
+      "checked_frames": 6,
+      "source": "simulated engineering muscle commands",
+      "supervised_channels": 84
+    },
+    "point": {
+      "pose_reached": true,
+      "foot_heights_mm": [
+        0.6262326829006938,
+        0.03669704029982919,
+        0.05132930489947333,
+        0.02465782343511299,
+        0.036936787297232404,
+        0.03815109461449302
+      ],
+      "raised_legs": [
+        0
+      ],
+      "support_feet_near_floor": true,
+      "body_height_mm": 1.220673808149506,
+      "upright": 0.9995619057024033,
+      "target_version": "grounded-muscle-reference-v1",
+      "command_hz": 50,
+      "settle_seconds": 0.1,
+      "checked_seconds": 0.2,
+      "checked_frames": 6,
+      "source": "simulated engineering muscle commands",
+      "supervised_channels": 84
+    },
+    "point_right": {
+      "pose_reached": true,
+      "foot_heights_mm": [
+        0.02711901452019972,
+        0.038993770629335844,
+        0.051140041074786056,
+        0.6269424268714837,
+        0.033286765306982324,
+        0.03387181837615144
+      ],
+      "raised_legs": [
+        3
+      ],
+      "support_feet_near_floor": true,
+      "body_height_mm": 1.214200389082942,
+      "upright": 0.999724063928232,
+      "target_version": "grounded-muscle-reference-v1",
+      "command_hz": 50,
+      "settle_seconds": 0.1,
+      "checked_seconds": 0.2,
+      "checked_frames": 6,
+      "source": "simulated engineering muscle commands",
+      "supervised_channels": 84
+    },
+    "point_both": {
+      "pose_reached": true,
+      "foot_heights_mm": [
+        0.519961934385844,
+        0.03420720586257051,
+        0.05295968757652939,
+        0.5301419962349183,
+        0.03030286199022541,
+        0.0396957028747076
+      ],
+      "raised_legs": [
+        0,
+        3
+      ],
+      "support_feet_near_floor": true,
+      "body_height_mm": 1.133172857412088,
+      "upright": 0.9980181752427276,
+      "target_version": "grounded-muscle-reference-v1",
+      "command_hz": 50,
+      "settle_seconds": 0.1,
+      "checked_seconds": 0.2,
+      "checked_frames": 6,
+      "source": "simulated engineering muscle commands",
+      "supervised_channels": 84
+    }
+  },
+  "target_reachability": {
+    "target_channels": 84,
+    "unrouted_channels": 32,
+    "unrouted_names": [
+      "lf_coxa_roll_positive",
+      "lf_coxa_roll_negative",
+      "lf_trochanterfemur_roll_positive",
+      "lf_trochanterfemur_roll_negative",
+      "lm_coxa_roll_positive",
+      "lm_coxa_roll_negative",
+      "lm_trochanterfemur_roll_positive",
+      "lm_trochanterfemur_roll_negative",
+      "lm_tarsus1_pitch_positive",
+      "lm_tarsus1_pitch_negative",
+      "lh_coxa_roll_positive",
+      "lh_coxa_roll_negative",
+      "lh_trochanterfemur_roll_positive",
+      "lh_trochanterfemur_roll_negative",
+      "lh_tarsus1_pitch_positive",
+      "lh_tarsus1_pitch_negative",
+      "rf_coxa_roll_positive",
+      "rf_coxa_roll_negative",
+      "rf_trochanterfemur_roll_positive",
+      "rf_trochanterfemur_roll_negative",
+      "rm_coxa_roll_positive",
+      "rm_coxa_roll_negative",
+      "rm_trochanterfemur_roll_positive",
+      "rm_trochanterfemur_roll_negative",
+      "rm_tarsus1_pitch_positive",
+      "rm_tarsus1_pitch_negative",
+      "rh_coxa_roll_positive",
+      "rh_coxa_roll_negative",
+      "rh_trochanterfemur_roll_positive",
+      "rh_trochanterfemur_roll_negative",
+      "rh_tarsus1_pitch_positive",
+      "rh_tarsus1_pitch_negative"
+    ],
+    "unavoidable_mse": 0.008574538275447314,
+    "per_gesture_floor": {
+      "point": 0.008567854369144333,
+      "point_right": 0.008581222181750293
+    },
+    "full_target_reachable": false,
+    "note": "Zero-output muscle channels create this loss floor. Routed channels may have further limits."
+  },
+  "validation_initial_loss": 0.02036566864699125,
+  "validation_loss": 0.02031416967511177,
+  "validation_inputs": [
+    {
+      "gesture": "point",
+      "placement": {
+        "position": [
+          120.98031456277575,
+          1.0457165710567016,
+          82.69646276244349
+        ],
+        "quaternion": [
+          0.9985455751644472,
+          0.011950958130114648,
+          -0.03137039645120766,
+          -0.0421877606157249
+        ]
+      }
+    },
+    {
+      "gesture": "point_right",
+      "placement": {
+        "position": [
+          111.27578467502772,
+          5.463774950654852,
+          90.7028200301965
+        ],
+        "quaternion": [
+          0.9996830450856782,
+          0.017689872360999555,
+          -0.016370967278021318,
+          -0.007271121953277801
+        ]
+      }
+    }
+  ],
+  "sample_step": 10,
+  "sample_total": 10,
+  "current_gesture": "point",
+  "batch_gestures": [
+    "point_right",
+    "point",
+    "point"
+  ],
+  "wall_seconds": 343.0719700829359,
+  "muscle_comparison": {
+    "names": [
+      "lf_coxa_yaw_positive",
+      "lf_coxa_yaw_negative",
+      "lf_coxa_pitch_positive",
+      "lf_coxa_pitch_negative",
+      "lf_coxa_roll_positive",
+      "lf_coxa_roll_negative",
+      "lf_trochanterfemur_pitch_positive",
+      "lf_trochanterfemur_pitch_negative",
+      "lf_trochanterfemur_roll_positive",
+      "lf_trochanterfemur_roll_negative",
+      "lf_tibia_pitch_positive",
+      "lf_tibia_pitch_negative",
+      "lf_tarsus1_pitch_positive",
+      "lf_tarsus1_pitch_negative",
+      "lm_coxa_yaw_positive",
+      "lm_coxa_yaw_negative",
+      "lm_coxa_pitch_positive",
+      "lm_coxa_pitch_negative",
+      "lm_coxa_roll_positive",
+      "lm_coxa_roll_negative",
+      "lm_trochanterfemur_pitch_positive",
+      "lm_trochanterfemur_pitch_negative",
+      "lm_trochanterfemur_roll_positive",
+      "lm_trochanterfemur_roll_negative",
+      "lm_tibia_pitch_positive",
+      "lm_tibia_pitch_negative",
+      "lm_tarsus1_pitch_positive",
+      "lm_tarsus1_pitch_negative",
+      "lh_coxa_yaw_positive",
+      "lh_coxa_yaw_negative",
+      "lh_coxa_pitch_positive",
+      "lh_coxa_pitch_negative",
+      "lh_coxa_roll_positive",
+      "lh_coxa_roll_negative",
+      "lh_trochanterfemur_pitch_positive",
+      "lh_trochanterfemur_pitch_negative",
+      "lh_trochanterfemur_roll_positive",
+      "lh_trochanterfemur_roll_negative",
+      "lh_tibia_pitch_positive",
+      "lh_tibia_pitch_negative",
+      "lh_tarsus1_pitch_positive",
+      "lh_tarsus1_pitch_negative",
+      "rf_coxa_yaw_positive",
+      "rf_coxa_yaw_negative",
+      "rf_coxa_pitch_positive",
+      "rf_coxa_pitch_negative",
+      "rf_coxa_roll_positive",
+      "rf_coxa_roll_negative",
+      "rf_trochanterfemur_pitch_positive",
+      "rf_trochanterfemur_pitch_negative",
+      "rf_trochanterfemur_roll_positive",
+      "rf_trochanterfemur_roll_negative",
+      "rf_tibia_pitch_positive",
+      "rf_tibia_pitch_negative",
+      "rf_tarsus1_pitch_positive",
+      "rf_tarsus1_pitch_negative",
+      "rm_coxa_yaw_positive",
+      "rm_coxa_yaw_negative",
+      "rm_coxa_pitch_positive",
+      "rm_coxa_pitch_negative",
+      "rm_coxa_roll_positive",
+      "rm_coxa_roll_negative",
+      "rm_trochanterfemur_pitch_positive",
+      "rm_trochanterfemur_pitch_negative",
+      "rm_trochanterfemur_roll_positive",
+      "rm_trochanterfemur_roll_negative",
+      "rm_tibia_pitch_positive",
+      "rm_tibia_pitch_negative",
+      "rm_tarsus1_pitch_positive",
+      "rm_tarsus1_pitch_negative",
+      "rh_coxa_yaw_positive",
+      "rh_coxa_yaw_negative",
+      "rh_coxa_pitch_positive",
+      "rh_coxa_pitch_negative",
+      "rh_coxa_roll_positive",
+      "rh_coxa_roll_negative",
+      "rh_trochanterfemur_pitch_positive",
+      "rh_trochanterfemur_pitch_negative",
+      "rh_trochanterfemur_roll_positive",
+      "rh_trochanterfemur_roll_negative",
+      "rh_tibia_pitch_positive",
+      "rh_tibia_pitch_negative",
+      "rh_tarsus1_pitch_positive",
+      "rh_tarsus1_pitch_negative"
+    ],
+    "target": [
+      0.17930878698825836,
+      0.10000000149011612,
+      0.11095854640007019,
+      0.10000000149011612,
+      0.18571539223194122,
+      0.10000000149011612,
+      0.10000000149011612,
+      0.21430262923240662,
+      0.18881818652153015,
+      0.10000000149011612,
+      0.20277069509029388,
+      0.10000000149011612,
+      0.10000000149011612,
+      0.1914605051279068,
+      0.10000000149011612,
+      0.1442462056875229,
+      0.10000000149011612,
+      0.13516581058502197,
+      0.10077829658985138,
+      0.10108669102191925,
+      0.17249271273612976,
+      0.10000000149011612,
+      0.10005361586809158,
+      0.10410161316394806,
+      0.10413531213998795,
+      0.11893671751022339,
+      0.1193515881896019,
+      0.10000000149011612,
+      0.223422572016716,
+      0.10000000149011612,
+      0.10000000149011612,
+      0.4511760473251343,
+      0.10216797143220901,
+      0.10146129131317139,
+      0.10000000149011612,
+      0.23037195205688477,
+      0.10000000149011612,
+      0.41076764464378357,
+      0.10000000149011612,
+      0.1657876819372177,
+      0.11712419986724854,
+      0.10000000149011612,
+      0.10000000149011612,
+      0.12764188647270203,
+      0.1210874542593956,
+      0.10000000149011612,
+      0.10000000149011612,
+      0.12000741064548492,
+      0.1593150794506073,
+      0.10000000149011612,
+      0.10000000149011612,
+      0.11159774661064148,
+      0.10112480074167252,
+      0.10938147455453873,
+      0.12151768058538437,
+      0.10000000149011612,
+      0.10000000149011612,
+      0.15155450999736786,
+      0.10465747863054276,
+      0.10054170340299606,
+      0.10000000149011612,
+      0.19876481592655182,
+      0.14820240437984467,
+      0.10000000149011612,
+      0.1035623550415039,
+      0.10023782402276993,
+      0.1000165045261383,
+      0.11290711164474487,
+      0.11209437251091003,
+      0.10000000149011612,
+      0.10000000149011612,
+      0.11613303422927856,
+      0.10000000149011612,
+      0.13072572648525238,
+      0.10000000149011612,
+      0.3683798611164093,
+      0.12280923873186111,
+      0.10000000149011612,
+      0.10032463818788528,
+      0.11673407256603241,
+      0.10000000149011612,
+      0.14504097402095795,
+      0.10012008994817734,
+      0.10307351499795914
+    ],
+    "actual": [
+      0.0,
+      0.0,
+      0.004077679939581016,
+      0.016103666267628533,
+      0.0,
+      0.0,
+      0.011671821228755676,
+      0.003838985225851671,
+      0.0,
+      0.0,
+      0.0,
+      0.008690971232086944,
+      0.0,
+      0.0,
+      0.0019293630973887695,
+      0.0,
+      0.010342968032593198,
+      0.0010640168246352079,
+      0.0,
+      0.0,
+      0.0011247393614243126,
+      0.0038966079979707957,
+      0.0,
+      0.0,
+      0.0,
+      0.0930852948469373,
+      0.0,
+      0.0,
+      0.005748086777702614,
+      0.0,
+      0.01000267360131716,
+      0.016969773905422383,
+      0.0,
+      0.0,
+      0.04038066779576077,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.02469868951453102,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.004479662467453455,
+      0.0,
+      0.0,
+      0.00044670814781337014,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.00408128806325874,
+      0.0,
+      0.01142588617782197,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.011936919890777751,
+      0.0,
+      0.0,
+      0.0,
+      0.018809489894791528,
+      0.0,
+      0.0,
+      0.0015864385265211723,
+      0.0,
+      0.0005290496988708827,
+      0.023006997991606774,
+      0.0,
+      0.0,
+      0.028208296530960707,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.05402700664405175,
+      0.0,
+      0.0
+    ]
+  },
+  "preview_gesture": "point",
+  "last_batch": [
+    {
+      "loss": 0.020367973251268268,
+      "gesture": "point_right",
+      "placement": {
+        "position": [
+          103.61310472165117,
+          -4.75916438732938,
+          87.05173486613255
+        ],
+        "quaternion": [
+          0.9993779469394733,
+          -0.031986151092940465,
+          -0.0008942977776858479,
+          -0.014825840306282208
+        ]
+      },
+      "pose": {
+        "pose_reached": false,
+        "foot_heights_mm": [
+          0.03084634365969305,
+          0.04191551849349069,
+          0.05557211714205425,
+          0.0302466504406805,
+          0.040150320956046204,
+          0.05628779618967096
+        ],
+        "raised_legs": [
+          3
+        ],
+        "support_feet_near_floor": true,
+        "body_height_mm": 0.7874897733202031,
+        "upright": 0.9977695613957361
+      },
+      "final_joints": [
+        0.12773177182134032,
+        0.29533199600063575,
+        1.0008776486150468,
+        -2.239635920162535,
+        0.7056097572134377,
+        1.5404823582574847,
+        -0.6278471788104122,
+        0.7076390830699363,
+        -0.12436065232217088,
+        1.768710007428366,
+        -1.7380020342476514,
+        -0.13883906013772546,
+        1.795475359382183,
+        -0.6351766856798603,
+        0.7211663036878055,
+        0.3952847657489616,
+        1.9767708961905879,
+        -1.6526397112305442,
+        -0.29971050315494446,
+        1.7988602826751487,
+        -0.2789378958281458,
+        0.1159517761460347,
+        0.34363045432376516,
+        1.0058644583018403,
+        -2.249563413892406,
+        0.696129039127708,
+        1.5879760761022121,
+        -0.6259563306575885,
+        0.7127193690862578,
+        -0.11024519413618945,
+        1.772729988585037,
+        -1.7639210244638852,
+        -0.1389062369160094,
+        2.0196685138633534,
+        -0.6574707672784572,
+        0.6325403197139875,
+        0.40585320832043237,
+        1.9994308692085634,
+        -1.6166331212708203,
+        -0.27665426015891736,
+        1.7043251817566318,
+        -0.26024201983322526
+      ]
+    },
+    {
+      "loss": 0.020260366378352046,
+      "gesture": "point",
+      "placement": {
+        "position": [
+          108.67174511337093,
+          1.090985897777001,
+          84.84807319658687
+        ],
+        "quaternion": [
+          0.9992751341047306,
+          -0.022774361711429447,
+          0.029828628685690455,
+          0.006386526390826327
+        ]
+      },
+      "pose": {
+        "pose_reached": false,
+        "foot_heights_mm": [
+          0.03084634365969305,
+          0.04191551849349069,
+          0.05557211714205425,
+          0.0302466504406805,
+          0.040150320956046204,
+          0.05628779618967096
+        ],
+        "raised_legs": [
+          0
+        ],
+        "support_feet_near_floor": true,
+        "body_height_mm": 0.7874897733202031,
+        "upright": 0.9977695613957361
+      },
+      "final_joints": [
+        0.12773177182134032,
+        0.29533199600063575,
+        1.0008776486150468,
+        -2.239635920162535,
+        0.7056097572134377,
+        1.5404823582574847,
+        -0.6278471788104122,
+        0.7076390830699363,
+        -0.12436065232217088,
+        1.768710007428366,
+        -1.7380020342476514,
+        -0.13883906013772546,
+        1.795475359382183,
+        -0.6351766856798603,
+        0.7211663036878055,
+        0.3952847657489616,
+        1.9767708961905879,
+        -1.6526397112305442,
+        -0.29971050315494446,
+        1.7988602826751487,
+        -0.2789378958281458,
+        0.1159517761460347,
+        0.34363045432376516,
+        1.0058644583018403,
+        -2.249563413892406,
+        0.696129039127708,
+        1.5879760761022121,
+        -0.6259563306575885,
+        0.7127193690862578,
+        -0.11024519413618945,
+        1.772729988585037,
+        -1.7639210244638852,
+        -0.1389062369160094,
+        2.0196685138633534,
+        -0.6574707672784572,
+        0.6325403197139875,
+        0.40585320832043237,
+        1.9994308692085634,
+        -1.6166331212708203,
+        -0.27665426015891736,
+        1.7043251817566318,
+        -0.26024201983322526
+      ]
+    },
+    {
+      "loss": 0.020260366378352046,
+      "gesture": "point",
+      "placement": {
+        "position": [
+          103.16053485906278,
+          -0.16010002994207584,
+          85.88848393225425
+        ],
+        "quaternion": [
+          0.9991836110528417,
+          0.031967773686617476,
+          -0.0020241064449563117,
+          0.024618607637808966
+        ]
+      },
+      "pose": {
+        "pose_reached": false,
+        "foot_heights_mm": [
+          0.03084634365969305,
+          0.04191551849349069,
+          0.05557211714205425,
+          0.0302466504406805,
+          0.040150320956046204,
+          0.05628779618967096
+        ],
+        "raised_legs": [
+          0
+        ],
+        "support_feet_near_floor": true,
+        "body_height_mm": 0.7874897733202031,
+        "upright": 0.9977695613957361
+      },
+      "final_joints": [
+        0.12773177182134032,
+        0.29533199600063575,
+        1.0008776486150468,
+        -2.239635920162535,
+        0.7056097572134377,
+        1.5404823582574847,
+        -0.6278471788104122,
+        0.7076390830699363,
+        -0.12436065232217088,
+        1.768710007428366,
+        -1.7380020342476514,
+        -0.13883906013772546,
+        1.795475359382183,
+        -0.6351766856798603,
+        0.7211663036878055,
+        0.3952847657489616,
+        1.9767708961905879,
+        -1.6526397112305442,
+        -0.29971050315494446,
+        1.7988602826751487,
+        -0.2789378958281458,
+        0.1159517761460347,
+        0.34363045432376516,
+        1.0058644583018403,
+        -2.249563413892406,
+        0.696129039127708,
+        1.5879760761022121,
+        -0.6259563306575885,
+        0.7127193690862578,
+        -0.11024519413618945,
+        1.772729988585037,
+        -1.7639210244638852,
+        -0.1389062369160094,
+        2.0196685138633534,
+        -0.6574707672784572,
+        0.6325403197139875,
+        0.40585320832043237,
+        1.9994308692085634,
+        -1.6166331212708203,
+        -0.27665426015891736,
+        1.7043251817566318,
+        -0.26024201983322526
+      ]
+    }
+  ],
+  "loss": 0.020296235335990787,
+  "gradient_norm": 6.036412239074707,
+  "update_accepted": false,
+  "update_scale": 0.0,
+  "validation_trials": [
+    {
+      "scale": 1.0,
+      "loss": 0.02036511292681098
+    },
+    {
+      "scale": 0.5,
+      "loss": 0.020363907795399427
+    },
+    {
+      "scale": 0.25,
+      "loss": 0.020415303856134416
+    }
+  ],
+  "early_stopped": true,
+  "stop_reason": "Three consecutive proposals failed fixed-input validation",
+  "success": null,
+  "behavior_validated": false,
+  "checkpoints": [
+    "gesture-1789400987031767000.pt"
+  ],
+  "gestures": [
+    {
+      "id": "palm",
+      "target": "Stand",
+      "mesh_url": "/models/hand/facing-v4/palm.json"
+    },
+    {
+      "id": "fist",
+      "target": "Crouch",
+      "mesh_url": "/models/hand/facing-v4/fist.json"
+    },
+    {
+      "id": "point",
+      "target": "Raise left front leg",
+      "mesh_url": "/models/hand/facing-v4/point.json"
+    },
+    {
+      "id": "point_right",
+      "target": "Raise right front leg",
+      "mesh_url": "/models/hand/facing-v4/point_right.json"
+    },
+    {
+      "id": "point_both",
+      "target": "Raise both front legs",
+      "mesh_url": "/models/hand/facing-v4/point_both.json"
+    }
+  ],
+  "loaded_model": null,
+  "algorithm": "Supervised muscle activation \u00b7 Adam \u00b7 surrogate gradients",
+  "backprop_window_ms": 20,
+  "configuration_source": "data/gesture-checkpoints/gesture-1789393517314641000.pt",
+  "starts_from": "original connectome"
+}

@@ -1,0 +1,17 @@
+{
+  "time": 1.5166666666666666,
+  "format": "flylab-live-v2",
+  "precision": "torch.float16",
+  "coupling_mode": "pipelined",
+  "exact_restored_fields": [
+    "all neural tensors",
+    "RNG",
+    "complete MuJoCo integration state",
+    "body tensors",
+    "buffered command and timestamps"
+  ],
+  "backend_tests_passed": 167,
+  "frontend_build": "passed",
+  "browser_errors": [],
+  "browser_observation": "Run/Pause/Save/Resume passed; 91 cycles, final indicator 6.1 cycles per wall second and 166 ms latest cycle. Browser load is excluded from the controlled benchmark."
+}

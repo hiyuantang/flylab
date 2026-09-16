@@ -1,0 +1,47 @@
+{
+  "from": "muscle-routing-v4",
+  "to": "muscle-routing-v5",
+  "simulated_time": 0.0,
+  "checks": {
+    "neural_tensors": {
+      "voltage": true,
+      "current": true,
+      "spikes": true,
+      "rates": true,
+      "output_gain": true,
+      "last_spike_tick": true,
+      "refractory_ticks": true,
+      "delay_queue": true,
+      "spike_counts": true
+    },
+    "rng": true,
+    "parameters": true,
+    "graph_unchanged": true,
+    "configuration": {
+      "physiology": true,
+      "execution": true,
+      "clock": true,
+      "time": true,
+      "steps": true,
+      "locomotion": true,
+      "environment": true
+    },
+    "old_buffered_command": true,
+    "new_buffered_command_zero": true,
+    "buffer_timestamps": {
+      "generated_at": true,
+      "source_time": true,
+      "applied_at": true,
+      "sensed_at": true
+    },
+    "existing_joint_state": true,
+    "existing_muscle_state": true,
+    "new_muscles_relaxed": true,
+    "new_head_pitch_at_rest": true
+  },
+  "backup": "data/mapping-backups/pre-motor-v5-20260914.pt",
+  "sources": {
+    "gorko-2024.pdf": "20bd67cf19d82e56e2c7eca1a465ac553d7f6c94ecfb4fa4f11d22dc69b2ad7a",
+    "manc-motor-matches-2026.csv": "c46e3cec1a5114b8d981d5f0383012c8e7fcdebd6c4e3eaffe4ac3ba1def2e94"
+  }
+}

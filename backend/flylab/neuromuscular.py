@@ -13,7 +13,7 @@ from .full_connectome import FullBrain
 from .senses import SensorSuite
 
 from .motor_mapping import resolve_motor, inventory_summary, MAPPING_PROFILE, LEGACY_PROFILE, PROFILES, PRETARSAL_PROFILE, PERIPHERAL_PROFILE
-from .peripheral_mechanics import CHANNEL_COUNT, MUSCLES
+from .motor_mapping import PERIPHERAL_PROFILES, peripheral_muscles
 
 REGION_NAMES = ['optic', 'antennal', 'mushroom', 'descending', 'vnc', 'motor']
 
@@ -42,6 +42,10 @@ class NeuromuscularBridge:
         self.mapping_profile = mapping_profile
         self.brain = brain
         self._retina = None
+        from .leg_feedback import LegFeedback
+        self.leg_feedback = LegFeedback(brain.neurons)
+        from .locomotion import LocomotorCommand
+        self.locomotion = LocomotorCommand(brain)
         self.regions = {r: torch.tensor([i for i, n in enumerate(brain.neurons) if region_for(n) == r], dtype=torch.long) for r in REGION_NAMES}
         self.olfactory = [[], []]
         self.visual = [[], []]
@@ -50,7 +54,7 @@ class NeuromuscularBridge:
         self.touch = [[] for _ in LEGS]
         self.position = [[] for _ in LEGS]
         self.mapping = []
-        count = CHANNEL_COUNT if mapping_profile == PERIPHERAL_PROFILE else 90 if mapping_profile == PRETARSAL_PROFILE else 84
+        count = 90 + len(peripheral_muscles(mapping_profile)) if mapping_profile in PERIPHERAL_PROFILES else 90 if mapping_profile == PRETARSAL_PROFILE else 84
         self.channels = [[] for _ in range(count)]
         self.unmapped = []
         self.motor_inventory = []
@@ -88,7 +92,7 @@ class NeuromuscularBridge:
                 channel = record['peripheral_channel']
                 self.channels[channel].append(i)
                 self.channel_weights[channel].append(1.)
-                muscle = MUSCLES[channel-90]
+                muscle = peripheral_muscles(mapping_profile)[channel-90]
                 transmissions = [{'joint': name, 'actuator': channel, 'coefficient': abs(c),
                                   'torque_sign': 1 if c < 0 else -1} for name, c in muscle.joints]
             for link, axis, polarity, coefficient in record['projections']:
@@ -145,7 +149,10 @@ class NeuromuscularBridge:
         for leg in range(6):
             drive[self.touch[leg]] = float(frame['touch'][leg] * 3 * gain)
             # Generic position tuning is declared, not identified receptor tuning.
-            drive[self.position[leg]] = float(frame['proprioception'][leg] * 2 * gain)
+            if frame.get('legs') is None:
+                drive[self.position[leg]] = float(frame['proprioception'][leg] * 2 * gain)
+        if frame.get('legs') is not None:
+            self.leg_feedback.apply(drive, frame['legs'], gain)
         return drive
 
     def muscles(self):
@@ -158,8 +165,9 @@ class NeuromuscularBridge:
                 action[channel] = np.clip(float(rate) / 100 * gain, 0, 1)
         return action
 
-    def command(self, body, source, intensity=.7, spatial=True, pulses=None, silenced=(), frame=None):
+    def prepare_command(self, body, source, intensity=.7, spatial=True, pulses=None, silenced=(), frame=None):
         drive = self.sensory_drive(body, source, intensity, spatial, frame)
+        self.locomotion.apply(drive, float(body.data.time))
         for region, amplitude in (pulses or {}).items():
             drive[self.regions[region]] += amplitude
         if self.brain.config.profile == 'shiu-2024':
@@ -170,19 +178,27 @@ class NeuromuscularBridge:
         mask = torch.zeros(len(drive), dtype=torch.bool)
         for region in silenced:
             mask[self.regions[region]] = True
-        self.brain.advance(drive, silence=mask)
+        return drive, mask
+
+    def advance_command(self, drive, mask, silenced=(), duration_s=.02, *, poisson_hz=None):
+        self.brain.advance(drive, duration_ms=duration_s * 1000, silence=mask, poisson_hz=poisson_hz)
         action = self.muscles()
         if 'motor' in silenced:
             action[:] = 0
         return action
 
-    def step(self, body, source, intensity=.7, spatial=True, pulses=None, silenced=(), frame=None):
-        action = self.command(body, source, intensity, spatial, pulses, silenced, frame)
-        body.step_muscles(action)
+    def command(self, body, source, intensity=.7, spatial=True, pulses=None, silenced=(), frame=None, duration_s=.02):
+        drive, mask = self.prepare_command(body, source, intensity, spatial, pulses, silenced, frame)
+        return self.advance_command(drive, mask, silenced, duration_s)
+
+    def step(self, body, source, intensity=.7, spatial=True, pulses=None, silenced=(), frame=None, duration_s=.02):
+        action = self.command(body, source, intensity, spatial, pulses, silenced, frame, duration_s)
+        body.step_muscles(action, dt=duration_s)
         return action
 
     def summary(self):
         return {**inventory_summary(self.motor_inventory), 'mapping_profile': self.mapping_profile, 'available_profiles': list(PROFILES),
+                'leg_feedback': self.leg_feedback.summary(),
                 'mapped_motor_neurons': len(self.mapping), 'unmapped_motor_neurons': len(self.unmapped),
                 'actuated_channels': sum(bool(len(x)) for x in self.channels), 'total_channels': len(self.channels),
                 'sensory_neurons': {'olfactory': sum(map(len, self.olfactory)), 'tactile': sum(map(len, self.touch)), 'proprioceptive': sum(map(len, self.position)),

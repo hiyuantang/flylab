@@ -44,7 +44,7 @@ class FlyEnv(gym.Env):
             np.sin(data.qpos[7:]), np.cos(data.qpos[7:]), np.tanh(data.qvel[6:] / 100),
             data.act * 2 - 1, rotation.ravel(), np.tanh(data.qvel[:6] / 20),
             np.tanh(self.body.foot_feedback() / 10), np.tanh(local_target[:2] / 20),
-            odor_sensors(self.body, self.target), np.sin(self.body.phases), np.cos(self.body.phases),
+            odor_sensors(self.body, self.target, spatial_model=self.sensors.settings.spatial_model), np.sin(self.body.phases), np.cos(self.body.phases),
             np.tanh(self.body.magnitudes), [self.steps / self.max_steps],
             sensory_observation(self.sensors.sample(self.body, self.target)),
         ])

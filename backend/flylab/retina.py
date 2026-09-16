@@ -11,6 +11,11 @@ import numpy as np
 import torch
 
 MODEL = 'compound-retina-v1'
+GRID_MODEL = 'compound-retina-balanced-v1'
+BALANCED_MODEL = 'compound-retina-balanced-v2'
+EMBODIED_MODEL = 'compound-retina-balanced-v3'
+PATCH_MODEL = 'compound-retina-balanced-v4'
+SURFACE_MODEL = 'compound-retina-balanced-v5'
 ASSET = Path(__file__).parent / 'assets/retina/eye-directions.json'
 
 
@@ -19,12 +24,90 @@ def eye_template():
     return json.loads(ASSET.read_text())
 
 
-@lru_cache(maxsize=1)
-def optical_geometry():
+def grid_axes():
+    """Designed equal-solid-angle eye: 8x8 groups, each with 4x4 visual units.
+
+    Coverage (-30..210 deg azimuth, -80..80 elevation) is an engineering
+    assumption, not a measured specimen. Ordering keeps each 16-unit group
+    contiguous. The right eye mirrors the left about the sagittal plane.
+    """
+    axes = []
+    limit = np.sin(np.deg2rad(80.))
+    for row in range(8):
+        for column in range(8):
+            for subrow in range(4):
+                for subcolumn in range(4):
+                    az = np.deg2rad(-30 + (column * 4 + subcolumn + .5) * 240 / 32)
+                    z = -limit + (row * 4 + subrow + .5) * 2 * limit / 32
+                    radius = np.sqrt(1 - z * z)
+                    axes.append([radius * np.cos(az), radius * np.sin(az), z])
+    left = np.asarray(axes)
+    return left, left * np.array([1., -1., 1.])
+
+
+def balanced_axes():
+    """Resample measured right-eye hex topology, then mirror for equal eyes.
+
+    Interpolate only inside complete neighboring facet triangles. Sampling is
+    uniform in facet coordinates, not visual angle, retaining the measured
+    nonuniform angular coverage. The 1024 count and symmetry are engineered.
+    """
+    template = eye_template()
+    measured = np.asarray(template['right'], dtype=float)
+    measured /= np.linalg.norm(measured, axis=1)[:, None]
+    hexes = np.asarray(template['right_hex'])
+    lookup = {tuple(h): i for i, h in enumerate(hexes)}
+    points, directions = [], []
+    # Dense triangular lattice in anatomical facet coordinates. Only local
+    # interpolation is allowed: no convex-hull bridging across missing facets.
+    for q4 in range(int(hexes[:, 0].min()) * 4, int(hexes[:, 0].max()) * 4 + 1):
+        for r4 in range(int(hexes[:, 1].min()) * 4, int(hexes[:, 1].max()) * 4 + 1):
+            q, r = q4 // 4, r4 // 4
+            u, v = q4 / 4 - q, r4 / 4 - r
+            if u >= v:
+                vertices, weights = [(q, r), (q+1, r), (q+1, r+1)], [1-u, u-v, v]
+            else:
+                vertices, weights = [(q, r), (q, r+1), (q+1, r+1)], [1-v, v-u, u]
+            active = [(h, w) for h, w in zip(vertices, weights) if w > 0]
+            if not all(h in lookup for h, _ in active):
+                continue
+            direction = sum(w * measured[lookup[h]] for h, w in active)
+            directions.append(direction / np.linalg.norm(direction))
+            points.append([(q4 - .5*r4)/4, np.sqrt(3)*r4/8])
+    points, directions = np.asarray(points), np.asarray(directions)
+    # Deterministic farthest-point selection in the hex sheet preserves its
+    # density variation when mapped back to the curved angular eye surface.
+    distance = np.full(len(points), np.inf)
+    chosen = []
+    index = int(np.argmin(((points - points.mean(0))**2).sum(1)))
+    for _ in range(1024):
+        chosen.append(index)
+        distance = np.minimum(distance, ((points - points[index])**2).sum(1))
+        distance[chosen] = -1
+        index = int(np.argmax(distance))
+    points, directions = points[chosen], directions[chosen]
+
+    def group(indices):
+        if len(indices) == 16:
+            return indices
+        axis = int(np.argmax(np.ptp(points[indices], axis=0)))
+        ordered = indices[np.argsort(points[indices, axis], kind='stable')]
+        half = len(ordered) // 2
+        return np.concatenate([group(ordered[:half]), group(ordered[half:])])
+
+    right = directions[group(np.arange(1024))]
+    return right * np.array([1., -1., 1.]), right
+
+
+@lru_cache(maxsize=6)
+def optical_geometry(model=MODEL):
     """Seven quadrature rays per measured axis approximate an acceptance cone."""
     result = []
-    for side in ['left', 'right']:
-        axes = np.array(eye_template()[side])
+    if model not in {MODEL, GRID_MODEL, BALANCED_MODEL, EMBODIED_MODEL, PATCH_MODEL, SURFACE_MODEL}:
+        raise ValueError('Unknown compound-eye geometry')
+    templates = balanced_axes() if model in {BALANCED_MODEL, EMBODIED_MODEL, PATCH_MODEL, SURFACE_MODEL} else grid_axes() if model == GRID_MODEL else [eye_template()[side] for side in ['left', 'right']]
+    for template in templates:
+        axes = np.array(template)
         axes /= np.linalg.norm(axes, axis=1)[:, None]
         tangent = np.cross(axes, np.array([0., 0., 1.]))
         tangent /= np.linalg.norm(tangent, axis=1)[:, None]
@@ -33,6 +116,16 @@ def optical_geometry():
         ring = np.arange(6) * np.pi / 3
         around = np.cos(ring)[None,:,None]*tangent[:,None] + np.sin(ring)[None,:,None]*other[:,None]
         rays = np.concatenate([axes[:,None], np.cos(np.deg2rad(2))*axes[:,None] + np.sin(np.deg2rad(2))*around],axis=1)
+        if model in {PATCH_MODEL, SURFACE_MODEL}:
+            # Nine separate point samples. Patch half-width is one third of
+            # nearest-neighbor separation: disjoint local angular footprints.
+            similarity = axes @ axes.T
+            np.fill_diagonal(similarity, -1)
+            spacing = np.arccos(np.clip(similarity.max(1), -1, 1)) / 3
+            offsets = np.array([(x, y) for y in (-1, 0, 1) for x in (-1, 0, 1)])
+            rays = axes[:, None] + np.tan(spacing)[:, None, None] * (
+                offsets[None, :, :1] * tangent[:, None] + offsets[None, :, 1:] * other[:, None])
+            rays /= np.linalg.norm(rays, axis=2, keepdims=True)
         result.append((axes, rays.reshape(-1,3)))
     return tuple(result)
 

@@ -1,0 +1,94 @@
+{
+  "scope": "Existing motor mapping: CPU float64 weighted means vs GPU float32 matrix; neural precision unchanged. Different rounding can alter physical trajectories.",
+  "max_action_abs_error": 0.0,
+  "microbench_trials": [
+    {
+      "trial": 0,
+      "mode": "cpu",
+      "mean_ms": 2.497402500011958
+    },
+    {
+      "trial": 0,
+      "mode": "gpu_matrix",
+      "mean_ms": 0.7545666600344703
+    },
+    {
+      "trial": 1,
+      "mode": "gpu_matrix",
+      "mean_ms": 0.7548262504860759
+    },
+    {
+      "trial": 1,
+      "mode": "cpu",
+      "mean_ms": 2.2694274998502806
+    },
+    {
+      "trial": 2,
+      "mode": "cpu",
+      "mean_ms": 2.232594580273144
+    },
+    {
+      "trial": 2,
+      "mode": "gpu_matrix",
+      "mean_ms": 0.709725419874303
+    },
+    {
+      "trial": 3,
+      "mode": "gpu_matrix",
+      "mean_ms": 0.6763083301484585
+    },
+    {
+      "trial": 3,
+      "mode": "cpu",
+      "mean_ms": 2.2190983302425593
+    },
+    {
+      "trial": 4,
+      "mode": "cpu",
+      "mean_ms": 2.2332562500378117
+    },
+    {
+      "trial": 4,
+      "mode": "gpu_matrix",
+      "mean_ms": 0.6351329199969769
+    }
+  ],
+  "complete_cycle_trials": [
+    {
+      "trial": 0,
+      "mode": "cpu",
+      "cycles": 30,
+      "simulated_seconds": 0.5,
+      "wall_seconds": 5.664360542024951
+    },
+    {
+      "trial": 0,
+      "mode": "gpu_matrix",
+      "cycles": 30,
+      "simulated_seconds": 0.5,
+      "wall_seconds": 5.779024874966126
+    },
+    {
+      "trial": 1,
+      "mode": "gpu_matrix",
+      "cycles": 30,
+      "simulated_seconds": 0.5,
+      "wall_seconds": 5.8649427920463495
+    },
+    {
+      "trial": 1,
+      "mode": "cpu",
+      "cycles": 30,
+      "simulated_seconds": 0.5,
+      "wall_seconds": 5.683958000037819
+    }
+  ],
+  "median_readout_ms": {
+    "cpu": 2.2332562500378117,
+    "gpu_matrix": 0.709725419874303
+  },
+  "median_complete_cycle_wall_seconds": {
+    "cpu": 5.674159271031385,
+    "gpu_matrix": 5.821983833506238
+  }
+}

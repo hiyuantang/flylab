@@ -82,3 +82,21 @@ def migrate_body(source, target):
     if not np.isfinite(b.qpos).all():
         raise ValueError('Invalid migrated physical state')
     return target
+
+
+def migrate_motor_command(source, target, command):
+    """Preserve an already computed command by actuator name; new muscles rest.
+
+This does not recompute neural output or change the command's timestamps.
+"""
+    if (command.shape != (source.model.nu,) or command.dtype != np.float32
+            or not np.isfinite(command).all() or np.any((command < 0) | (command > 1))):
+        raise ValueError('Invalid muscle command for body migration')
+    migrated = np.zeros(target.model.nu, dtype=np.float32)
+    for i in range(source.model.nu):
+        name = source.model.actuator(i).name
+        index = mujoco.mj_name2id(target.model, mujoco.mjtObj.mjOBJ_ACTUATOR, name)
+        if index < 0:
+            raise ValueError('Cannot remove a buffered muscle actuator')
+        migrated[index] = command[i]
+    return migrated

@@ -1,0 +1,1687 @@
+{
+  "scope": "Exploratory qualitative reflex and physical support calibration; not a fit to biological recordings.",
+  "protocol": {
+    "protocol": "bounded-calibration-v1-exploratory",
+    "source_snapshot_timing": "Assembled after the exploratory runs. Maintained fit_calibration.py archives code before future runs.",
+    "checkpoint": "data/calibration/2026-09-13-baseline/input.pt",
+    "checkpoint_sha256": "f25f34529f391099a2f5445395b6c99a9112b2cb3e8adae25ca13b65028bcf0a",
+    "source_sha256": {
+      "backend/flylab/__init__.py": "2778e33d798b30f1aeef502c0fb8ee015d9df7eee769f0bc6c81f53ccd4276a5",
+      "backend/flylab/anatomy.py": "86c92272a2c02b0c0d915c0450941acd85e0c254560bf084e0c8e76327d21dc1",
+      "backend/flylab/api.py": "771d182e19ce784fa238213e8fd57379302e14c0ded9612a618a9e56365b0a44",
+      "backend/flylab/arena.py": "fddab70fd5765dff740bc252d8444f9bfadff6c1e016a6d69182a67eaaab5c2f",
+      "backend/flylab/body.py": "8e267b6964335aff08895479b95771e337a07d23eca4c9d0bb0d7d9cb9cbc4c6",
+      "backend/flylab/calibration.py": "fc46a45253c1a4935db47728cde79d8244d6802067a1923987bcf90ec9b630a7",
+      "backend/flylab/connectome.py": "a8ba7e47d2abb21ccddf120f748a5d84f87fc2d4e0c01f169503aa1e0b2ceafe",
+      "backend/flylab/coupling.py": "77e7f51491e395c09666281bf76a24d388079810b7484b78ee5adcd2be3751d6",
+      "backend/flylab/cpg_rate.py": "338bd8dc8117b055b64d0ea915391312e33c68e36225b99ca0d5c9eec0086087",
+      "backend/flylab/dopamine.py": "83a9a0b5f70c7d7b9a3b1f5328263468ecb84b6ac523c092eea8c2ed86fcc790",
+      "backend/flylab/env.py": "c7e5389d7a03a4b7976827a238609c8cafdd12e7685975d5ca0274c184b56e5d",
+      "backend/flylab/full_connectome.py": "adc4abd18ad3407a904fdcd1626057f5100da3ef67dd4df7c4aecd083c621ba8",
+      "backend/flylab/leg_feedback.py": "e180c2ef15b1f18f4d1efb45ae4ea430c834129f37feb8a05f4e541695cfed0f",
+      "backend/flylab/live_state.py": "998b481857576861034f9f510b0e9eb71e4f8276ee2c06c2745bc59a5e2c127a",
+      "backend/flylab/locomotion.py": "279e7326bb02647f47f9ec8db84af6333e150b389bb8d6fd06e2d31ac30cbf99",
+      "backend/flylab/matrix_readout.py": "483c97156dacb11c6604115a31c1e04218183a4f6c7ef8bf383cb01a2729197e",
+      "backend/flylab/metal_dynamics.py": "f99cf66a3f911ecb54757454e61cb0e346a50e3abaae3e6ee4185c63b64e8eec",
+      "backend/flylab/motor_mapping.py": "b4623ffda5e0ad743be8dc1ffe90acc11f81ec712af52ca98a08d18577741cb7",
+      "backend/flylab/neural.py": "d29795619c7add2c46bf9828fef3a67cc9734665427e6be36aec8263525bca00",
+      "backend/flylab/neural_view.py": "bb827ba87803b832538b9f21c2ddd00024253e602e3a1e724e2ac2c3758c921e",
+      "backend/flylab/neuromuscular.py": "2d9084ee652242c81303936a7a3d8fad9f3c54acc1dd75132eb50fb199765736",
+      "backend/flylab/paper_dynamics.py": "7ae22738f833084da4193c113d8c1c15a9551842770d07071342b9d3b81fea3e",
+      "backend/flylab/paper_experiment.py": "064a76c47f93427dda896cf6b1c1e9cf357b1feb7b361b1ba17904ad5382f72a",
+      "backend/flylab/peripheral_mechanics.py": "3865ec0b53370bc4cf70de3dfa884faf3035f6514f653117dbde1be87b472c91",
+      "backend/flylab/physical_policy.py": "233eba29de589a43ba8e75f42f2912e82ef494a723592f9806efe29afb5b316a",
+      "backend/flylab/physical_training.py": "d3da5c6d3d7387a368b80facf3fe197fbf7e93557a906f608b54c6a7c52f73bd",
+      "backend/flylab/pretarsus.py": "d8dda68613d9988e9c7bdb9ce68804d949111d6143d53ddeafa39102c14c1cdd",
+      "backend/flylab/retina.py": "58ffbbb0ce03161a479e44977d8f6fd6d191cc0128837603321bcd501c208c02",
+      "backend/flylab/scenes.py": "bb88b77acd1e092809eaf69348ca90abdc556ba0fd3ccd40c85180e848ec051f",
+      "backend/flylab/scheduler.py": "48cea4e5a09208f627934d4577ff81d2bb78682bc243bb2e98576945ead533aa",
+      "backend/flylab/senses.py": "f8a3ac3d38b8b13ca4b004156344d2a8aa7237bfc9381f791c0c44bc93777aac",
+      "backend/flylab/simulation.py": "a09a67d0ebbb6ee7bd0ac4bbd298c4ea3b122edffe76a8b8adc169b39eb5f5e3",
+      "backend/flylab/training.py": "e5b807217a6d93c4ec55a269874466cf9f06edf56c9a73d78af4bfd1362dbf30",
+      "backend/flylab/validation.py": "aec4574115b2d937c955d5e6a2e82925464a2fe832d810089ff98f0f31b3cd2f",
+      "scripts/audit_malecns.py": "b40d98ab4edff53f800a63ab1868a6774237117921ebc7a2b1dd37623039ed1f",
+      "scripts/audit_motor_mapping.py": "354e55e69e4dd86902e159e1fda11b2285617496281723649649e8eddf1a9054",
+      "scripts/audit_retina.py": "47312f53335584435d91a0985a6618706aa709f6670af6684e12774e608de17a",
+      "scripts/benchmark_coupling.py": "631502fba8fb9f10281842f04feed0fecc3485fe2fcd5c5bf9f3dd8798a4f240",
+      "scripts/benchmark_fp16_optimization.py": "771f55c3d860df180b9a9024e7f3c1265a28f7777b5e54000453be0389e1c984",
+      "scripts/benchmark_live_precision.py": "2de2f8014b673c45297522ef8de4c82716bc12f547ff5afc61ad74dd2bde1a2a",
+      "scripts/benchmark_matrix_readout.py": "5061d14598a9e70d81d465c4bcac82d9912b93c9bbe53373683b3f821669d5ae",
+      "scripts/benchmark_mixed_precision.py": "ae74ca78f3914b3c7a47efbfcf765c079797c74244784574224a47b4edbc85d5",
+      "scripts/benchmark_physics_batch.py": "76446ae042347d6f2b7969a42d8a4ab39ca01af2459c0f61068e977b1e868e69",
+      "scripts/benchmark_timestep.py": "1af0ba6ca6ca472fd14168ef149e8fdf2610e1aba7300ab59d71e43a7fc9e189",
+      "scripts/benchmark_visual_matrix.py": "1da13684b8830c2d6bbe99f7abcb2253b828f4520982db6d0f1afb78eca558cd",
+      "scripts/calibrate_locomotion.py": "e9b3af61d4e85569f2a5b68ae84b1361d9ba24f604396bc85772ea2ba9d4de8e",
+      "scripts/download_data.py": "8580c03ea931f4ee77d92fde27885ecd21a3d5b2d0fe0a82c3c720d4b46bf69d",
+      "scripts/download_neuron_volumes.py": "9d2540b5e44bd635bd3ce985052225324454755c9e0765aaeb6a449f602a2a20",
+      "scripts/fit_calibration.py": "453c8b3160274efe863be75bb19907036d07cd3c5ea747c006833fc50e492a41",
+      "scripts/probe_gpu_precision.py": "2a7a9caad44a0d4167af54b2d816fe71808380ad38bdf5aee39b1ee4cb17908b",
+      "scripts/probe_mjx_body.py": "2f6c8edf2f6b63728bdba7e38f253fc9b7e537b6ad3c0d9346bd40bdbd1f89ab",
+      "scripts/probe_mjx_metal.py": "b19b74f012daede15e88d99593a4cc0361787c8b92f84d00d3e0249e83cb9529",
+      "scripts/probe_reflexes.py": "ca32c04021344daa1d23b15c050e6a51f5e3250f5016ac9424279bbd6ddb335c",
+      "scripts/probe_standing.py": "48ca15ce494c3d3b3201b074e46566adebabca9eb2ab77ca97b954d88eda107d",
+      "scripts/probe_walking.py": "f06d61ea6a7b2f7894c4dcc33de88214965c47a00e370270e628efead8cff375",
+      "scripts/profile_fp16.py": "a4f12d806247f3b6f2eb8cd98e95f73bba71b9d3b5da00eea755145b3b9eb458",
+      "scripts/profile_fp16_marking.py": "da41be06b190ac7ec78cda07663d32e1236f1bddeb1308acd9088a44791f8b6e",
+      "scripts/reproduce_paper.py": "36e489062a46bbb4b38bdb6bc25a820d712c16908407fd41131ace8648a5c82f",
+      "scripts/validate_gpu.py": "703a6554c3988f862bff18e948b7c4a107a5e14dc7693b19c63389377015e914"
+    }
+  },
+  "raw_directory": "data/calibration/2026-09-13-fit",
+  "raw_sha256": {
+    "body-strength-0.5.json": "06eea11fed84e6dba44122f13c34661955981d9be69b50975e31bfc8f28f8d8f",
+    "body-strength-0.75.json": "98c350b58eb9f5b7245a1983fed7e9f1238d79f804620964ce2ffc508f2c328d",
+    "body-strength-1.0.json": "98052e7c0b371461ee4e7a50b34767e1c773aed17d04c9f3a936adb70d9776d6",
+    "body-strength-1.25.json": "a5b5eb94e2bd26179a4463f69e291ee30c6d15663cd3f608f6de4ee82fb78f24",
+    "confirm-strength-0.5-push--3.0.json": "119da258b57a79fea020738a5603c5f3fd836312f5e9882d7341824d9f5a125a",
+    "confirm-strength-0.5-push--6.0.json": "92341cf708a44c2f6d75f1af09706b03501ffcd81c9e3251625b2e577652e648",
+    "confirm-strength-0.5-push-6.0.json": "44dedf1f053fe806e38a236b3735794fa5fdbcae1365af9f23d91571ea4a4592",
+    "confirm-strength-1.0-push--6.0.json": "970363b9a66964958f104a5fd44b8a94e2778b27db3140b7685a3732c99097b7",
+    "confirm-strength-1.0-push-6.0.json": "0713c98a89188ca8337da9cc6ac27b59217761eb2258484bd0b49ab9eed3a69a",
+    "heldout-baseline.json": "d0a39f58409fbb3ff74e8278c2674f32840e8c8454b701e1e7bc6db9b562c3fe",
+    "heldout-candidate.json": "af08c0f8a16349485a76c9b783fb100cd3cef29bd1082dc6d0219971427b24e5",
+    "heldout-disconnected.json": "29aa400752fc809c12ff95c08120b4d9af46ce5ea653cada48c2717a9e41fce9",
+    "protocol.json": "69461c81bc6039d5c856ce31d1a383cea0b633acedba759c1fccaeb6976ca6af",
+    "reflex-vnc--0.5.json": "3f91728d5c074f4a338ef810c43f2b60798fa3b868d236f20e1b6d6f3e77992c",
+    "reflex-vnc-0.0.json": "ba2e489c7fdad8838acb73586f5c92b325f7b880d0ee7a7d19ce37883d1c94e5",
+    "reflex-vnc-0.15.json": "bd307ab5157e8628285ea7d47a2dd9325b9e0cf68e0b7f3f957ead73838c9f03",
+    "reflex-vnc-0.3.json": "bf35b31e82c2efe4e729ccdd3f116d4f5ba8c17b0f0b2950bb70a3369b3d449b",
+    "reflex-vnc-0.5.json": "26a944cca5f6303b17b7a53df0654ce57eb6d222cb38da3c2726de4b92d82bed",
+    "reflex-vnc-1.0.json": "d0d86c1e7da38658c23fdcdf15f6551cdb33a529b5da1bc36cd7a21cf65b688e"
+  },
+  "neurons": 166700,
+  "edges": 25582938,
+  "graph_sha256": "2be8452f9f4c02d26b71a821277b1e6513cdefbecf32b735c2dba3af62f6dbab",
+  "reflex_candidates": [
+    {
+      "vnc_log_gain": -0.5,
+      "left": {
+        "available": 12,
+        "restoring": 1,
+        "opposing": 0,
+        "silent": 11,
+        "score": 1
+      },
+      "right": {
+        "available": 11,
+        "restoring": 3,
+        "opposing": 0,
+        "silent": 8,
+        "score": 3
+      }
+    },
+    {
+      "vnc_log_gain": 0.0,
+      "left": {
+        "available": 12,
+        "restoring": 5,
+        "opposing": 0,
+        "silent": 7,
+        "score": 5
+      },
+      "right": {
+        "available": 11,
+        "restoring": 4,
+        "opposing": 1,
+        "silent": 6,
+        "score": 2
+      }
+    },
+    {
+      "vnc_log_gain": 0.15,
+      "left": {
+        "available": 12,
+        "restoring": 5,
+        "opposing": 1,
+        "silent": 6,
+        "score": 3
+      },
+      "right": {
+        "available": 11,
+        "restoring": 5,
+        "opposing": 3,
+        "silent": 3,
+        "score": -1
+      }
+    },
+    {
+      "vnc_log_gain": 0.3,
+      "left": {
+        "available": 12,
+        "restoring": 5,
+        "opposing": 1,
+        "silent": 6,
+        "score": 3
+      },
+      "right": {
+        "available": 11,
+        "restoring": 5,
+        "opposing": 2,
+        "silent": 4,
+        "score": 1
+      }
+    },
+    {
+      "vnc_log_gain": 0.5,
+      "left": {
+        "available": 12,
+        "restoring": 7,
+        "opposing": 2,
+        "silent": 3,
+        "score": 3
+      },
+      "right": {
+        "available": 11,
+        "restoring": 7,
+        "opposing": 1,
+        "silent": 3,
+        "score": 5
+      }
+    },
+    {
+      "vnc_log_gain": 1.0,
+      "left": {
+        "available": 12,
+        "restoring": 5,
+        "opposing": 6,
+        "silent": 1,
+        "score": -7
+      },
+      "right": {
+        "available": 11,
+        "restoring": 7,
+        "opposing": 2,
+        "silent": 2,
+        "score": 3
+      }
+    }
+  ],
+  "selected_vnc_log_gain": 0.0,
+  "body_trials": [
+    {
+      "condition": "intact",
+      "seconds": 4.0,
+      "push_uN": 3.0,
+      "push_interval_s": [
+        2.0,
+        2.1
+      ],
+      "sensory_log_gain": 0.0,
+      "descending_drive": 0.0,
+      "initial_state": {
+        "qpos_sha256": "95ff38dfbc6bb86b1fd00a1d72a5a73b442894d2985ffe1914048b2253d152b7",
+        "voltage_sha256": "93b241752cdb29a9a71284a75bf89d93f359202c98043ead6cc4a90af89a59ec",
+        "tick_index": 0
+      },
+      "vnc_log_gain": 0.0,
+      "motor_log_gain": -2.0,
+      "wall_seconds": 19.064167291973718,
+      "neural_ticks": 3840,
+      "neurons": 166700,
+      "edges": 25582938,
+      "graph_sha256": "2be8452f9f4c02d26b71a821277b1e6513cdefbecf32b735c2dba3af62f6dbab",
+      "execution": {
+        "device": "mps",
+        "precision": "torch.float16",
+        "neural_dt_ms": 1.0416666666666667,
+        "timing_rounding": "ceil",
+        "effective_delay_ms": 2.0833333333333335,
+        "effective_refractory_ms": 3.125,
+        "kernel": "metal-active-rows-f16-v1-mark4",
+        "weight_precision": "torch.float16",
+        "experimental": true,
+        "history": [],
+        "note": "Experimental FP16 state, weights and arithmetic; rounding changes firing and is not reference-equivalent. All neurons, edges and ticks retained. Coarse neural clock: delays and refractory durations round up; spike timing and behavior change."
+      },
+      "physiology": {
+        "dt_ms": 1.0416666666666667,
+        "membrane_ms": 20.0,
+        "synapse_ms": 5.0,
+        "refractory_ms": 2.2,
+        "gain": 0.275,
+        "glutamate_sign": -1.0,
+        "unknown_sign": 0.0,
+        "histamine_sign": -1.0,
+        "profile": "shiu-2024",
+        "delay_ms": 1.8,
+        "timing_rounding": "ceil"
+      },
+      "body_parameters": {
+        "mass_scale": 1.0,
+        "strength_scale": 0.5,
+        "friction": 1.0,
+        "limit_mode": "baseline",
+        "appendage_model": "peripheral-v1",
+        "elasticity_profile": "stance-elastic-v1"
+      },
+      "sensory_settings": {
+        "vision_model": "compound-retina-v1",
+        "proprioception_model": "feco-opponent-v1",
+        "contact_model": "tarsal-contact-v1",
+        "spatial_model": "geometry-v3",
+        "vision_enabled": false,
+        "hearing_enabled": false,
+        "wind_enabled": false,
+        "touch_enabled": true,
+        "proprioception_enabled": true,
+        "illumination": 1.0,
+        "sound_amplitude": 0.8,
+        "sound_frequency": 250.0,
+        "wind_speed": 20.0,
+        "wind_direction": 0.0,
+        "stimulus_position": [
+          4,
+          2,
+          1.5
+        ]
+      },
+      "bridge_parameters": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -2.0
+      ],
+      "command_hz": 60,
+      "coupling": "pipelined",
+      "metrics": {
+        "feet_supported_fraction": 0.9857142857142858,
+        "post_push_supported_fraction": 0.9826086956521739,
+        "support_recovery_s": 6.217248937900877e-15,
+        "maximum_tilt_deg": 5.005007012512244,
+        "maximum_other_support_uN": 0.0,
+        "net_xy_mm": 0.09529707605893709,
+        "loaded_foot_travel_mm": [
+          0.1844033375425239,
+          0.6888741895588278,
+          2.6850444046876816,
+          0.1788106401620011,
+          0.46514515537105317,
+          2.4240120582231097
+        ],
+        "candidate_swing_counts": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "mean_muscle_activation": 0.007590562285796937,
+        "walking_validated": false,
+        "interpretation": "Swing candidates require unload, clearance and displaced landing; these thresholds are engineering diagnostics, not biological gait validation. Loaded-foot travel includes contact deformation and sliding."
+      },
+      "name": "body-strength-0.5"
+    },
+    {
+      "condition": "intact",
+      "seconds": 4.0,
+      "push_uN": 3.0,
+      "push_interval_s": [
+        2.0,
+        2.1
+      ],
+      "sensory_log_gain": 0.0,
+      "descending_drive": 0.0,
+      "initial_state": {
+        "qpos_sha256": "95ff38dfbc6bb86b1fd00a1d72a5a73b442894d2985ffe1914048b2253d152b7",
+        "voltage_sha256": "93b241752cdb29a9a71284a75bf89d93f359202c98043ead6cc4a90af89a59ec",
+        "tick_index": 0
+      },
+      "vnc_log_gain": 0.0,
+      "motor_log_gain": -2.0,
+      "wall_seconds": 17.00708104192745,
+      "neural_ticks": 3840,
+      "neurons": 166700,
+      "edges": 25582938,
+      "graph_sha256": "2be8452f9f4c02d26b71a821277b1e6513cdefbecf32b735c2dba3af62f6dbab",
+      "execution": {
+        "device": "mps",
+        "precision": "torch.float16",
+        "neural_dt_ms": 1.0416666666666667,
+        "timing_rounding": "ceil",
+        "effective_delay_ms": 2.0833333333333335,
+        "effective_refractory_ms": 3.125,
+        "kernel": "metal-active-rows-f16-v1-mark4",
+        "weight_precision": "torch.float16",
+        "experimental": true,
+        "history": [],
+        "note": "Experimental FP16 state, weights and arithmetic; rounding changes firing and is not reference-equivalent. All neurons, edges and ticks retained. Coarse neural clock: delays and refractory durations round up; spike timing and behavior change."
+      },
+      "physiology": {
+        "dt_ms": 1.0416666666666667,
+        "membrane_ms": 20.0,
+        "synapse_ms": 5.0,
+        "refractory_ms": 2.2,
+        "gain": 0.275,
+        "glutamate_sign": -1.0,
+        "unknown_sign": 0.0,
+        "histamine_sign": -1.0,
+        "profile": "shiu-2024",
+        "delay_ms": 1.8,
+        "timing_rounding": "ceil"
+      },
+      "body_parameters": {
+        "mass_scale": 1.0,
+        "strength_scale": 0.75,
+        "friction": 1.0,
+        "limit_mode": "baseline",
+        "appendage_model": "peripheral-v1",
+        "elasticity_profile": "stance-elastic-v1"
+      },
+      "sensory_settings": {
+        "vision_model": "compound-retina-v1",
+        "proprioception_model": "feco-opponent-v1",
+        "contact_model": "tarsal-contact-v1",
+        "spatial_model": "geometry-v3",
+        "vision_enabled": false,
+        "hearing_enabled": false,
+        "wind_enabled": false,
+        "touch_enabled": true,
+        "proprioception_enabled": true,
+        "illumination": 1.0,
+        "sound_amplitude": 0.8,
+        "sound_frequency": 250.0,
+        "wind_speed": 20.0,
+        "wind_direction": 0.0,
+        "stimulus_position": [
+          4,
+          2,
+          1.5
+        ]
+      },
+      "bridge_parameters": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -2.0
+      ],
+      "command_hz": 60,
+      "coupling": "pipelined",
+      "metrics": {
+        "feet_supported_fraction": 0.9904761904761905,
+        "post_push_supported_fraction": 0.9826086956521739,
+        "support_recovery_s": 0.05000000000011129,
+        "maximum_tilt_deg": 7.403197933897137,
+        "maximum_other_support_uN": 0.0,
+        "net_xy_mm": 0.21067013286558262,
+        "loaded_foot_travel_mm": [
+          0.3402437183543816,
+          1.3559376922201827,
+          3.697866498207649,
+          0.2737783079230441,
+          0.6818210287409167,
+          3.8394518272697145
+        ],
+        "candidate_swing_counts": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "mean_muscle_activation": 0.007584809804927914,
+        "walking_validated": false,
+        "interpretation": "Swing candidates require unload, clearance and displaced landing; these thresholds are engineering diagnostics, not biological gait validation. Loaded-foot travel includes contact deformation and sliding."
+      },
+      "name": "body-strength-0.75"
+    },
+    {
+      "condition": "intact",
+      "seconds": 4.0,
+      "push_uN": 3.0,
+      "push_interval_s": [
+        2.0,
+        2.1
+      ],
+      "sensory_log_gain": 0.0,
+      "descending_drive": 0.0,
+      "initial_state": {
+        "qpos_sha256": "95ff38dfbc6bb86b1fd00a1d72a5a73b442894d2985ffe1914048b2253d152b7",
+        "voltage_sha256": "93b241752cdb29a9a71284a75bf89d93f359202c98043ead6cc4a90af89a59ec",
+        "tick_index": 0
+      },
+      "vnc_log_gain": 0.0,
+      "motor_log_gain": -2.0,
+      "wall_seconds": 17.069553416920826,
+      "neural_ticks": 3840,
+      "neurons": 166700,
+      "edges": 25582938,
+      "graph_sha256": "2be8452f9f4c02d26b71a821277b1e6513cdefbecf32b735c2dba3af62f6dbab",
+      "execution": {
+        "device": "mps",
+        "precision": "torch.float16",
+        "neural_dt_ms": 1.0416666666666667,
+        "timing_rounding": "ceil",
+        "effective_delay_ms": 2.0833333333333335,
+        "effective_refractory_ms": 3.125,
+        "kernel": "metal-active-rows-f16-v1-mark4",
+        "weight_precision": "torch.float16",
+        "experimental": true,
+        "history": [],
+        "note": "Experimental FP16 state, weights and arithmetic; rounding changes firing and is not reference-equivalent. All neurons, edges and ticks retained. Coarse neural clock: delays and refractory durations round up; spike timing and behavior change."
+      },
+      "physiology": {
+        "dt_ms": 1.0416666666666667,
+        "membrane_ms": 20.0,
+        "synapse_ms": 5.0,
+        "refractory_ms": 2.2,
+        "gain": 0.275,
+        "glutamate_sign": -1.0,
+        "unknown_sign": 0.0,
+        "histamine_sign": -1.0,
+        "profile": "shiu-2024",
+        "delay_ms": 1.8,
+        "timing_rounding": "ceil"
+      },
+      "body_parameters": {
+        "mass_scale": 1.0,
+        "strength_scale": 1.0,
+        "friction": 1.0,
+        "limit_mode": "baseline",
+        "appendage_model": "peripheral-v1",
+        "elasticity_profile": "stance-elastic-v1"
+      },
+      "sensory_settings": {
+        "vision_model": "compound-retina-v1",
+        "proprioception_model": "feco-opponent-v1",
+        "contact_model": "tarsal-contact-v1",
+        "spatial_model": "geometry-v3",
+        "vision_enabled": false,
+        "hearing_enabled": false,
+        "wind_enabled": false,
+        "touch_enabled": true,
+        "proprioception_enabled": true,
+        "illumination": 1.0,
+        "sound_amplitude": 0.8,
+        "sound_frequency": 250.0,
+        "wind_speed": 20.0,
+        "wind_direction": 0.0,
+        "stimulus_position": [
+          4,
+          2,
+          1.5
+        ]
+      },
+      "bridge_parameters": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -2.0
+      ],
+      "command_hz": 60,
+      "coupling": "pipelined",
+      "metrics": {
+        "feet_supported_fraction": 0.9619047619047619,
+        "post_push_supported_fraction": 0.9826086956521739,
+        "support_recovery_s": 6.217248937900877e-15,
+        "maximum_tilt_deg": 7.7008805701982945,
+        "maximum_other_support_uN": 0.0,
+        "net_xy_mm": 0.37494257239711165,
+        "loaded_foot_travel_mm": [
+          0.5659288967104605,
+          2.3452310505604776,
+          4.6294064971506215,
+          0.2944798113850707,
+          1.0537697194964493,
+          4.460996443640115
+        ],
+        "candidate_swing_counts": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "mean_muscle_activation": 0.008307210521424392,
+        "walking_validated": false,
+        "interpretation": "Swing candidates require unload, clearance and displaced landing; these thresholds are engineering diagnostics, not biological gait validation. Loaded-foot travel includes contact deformation and sliding."
+      },
+      "name": "body-strength-1.0"
+    },
+    {
+      "condition": "intact",
+      "seconds": 4.0,
+      "push_uN": 3.0,
+      "push_interval_s": [
+        2.0,
+        2.1
+      ],
+      "sensory_log_gain": 0.0,
+      "descending_drive": 0.0,
+      "initial_state": {
+        "qpos_sha256": "95ff38dfbc6bb86b1fd00a1d72a5a73b442894d2985ffe1914048b2253d152b7",
+        "voltage_sha256": "93b241752cdb29a9a71284a75bf89d93f359202c98043ead6cc4a90af89a59ec",
+        "tick_index": 0
+      },
+      "vnc_log_gain": 0.0,
+      "motor_log_gain": -2.0,
+      "wall_seconds": 17.43649320793338,
+      "neural_ticks": 3840,
+      "neurons": 166700,
+      "edges": 25582938,
+      "graph_sha256": "2be8452f9f4c02d26b71a821277b1e6513cdefbecf32b735c2dba3af62f6dbab",
+      "execution": {
+        "device": "mps",
+        "precision": "torch.float16",
+        "neural_dt_ms": 1.0416666666666667,
+        "timing_rounding": "ceil",
+        "effective_delay_ms": 2.0833333333333335,
+        "effective_refractory_ms": 3.125,
+        "kernel": "metal-active-rows-f16-v1-mark4",
+        "weight_precision": "torch.float16",
+        "experimental": true,
+        "history": [],
+        "note": "Experimental FP16 state, weights and arithmetic; rounding changes firing and is not reference-equivalent. All neurons, edges and ticks retained. Coarse neural clock: delays and refractory durations round up; spike timing and behavior change."
+      },
+      "physiology": {
+        "dt_ms": 1.0416666666666667,
+        "membrane_ms": 20.0,
+        "synapse_ms": 5.0,
+        "refractory_ms": 2.2,
+        "gain": 0.275,
+        "glutamate_sign": -1.0,
+        "unknown_sign": 0.0,
+        "histamine_sign": -1.0,
+        "profile": "shiu-2024",
+        "delay_ms": 1.8,
+        "timing_rounding": "ceil"
+      },
+      "body_parameters": {
+        "mass_scale": 1.0,
+        "strength_scale": 1.25,
+        "friction": 1.0,
+        "limit_mode": "baseline",
+        "appendage_model": "peripheral-v1",
+        "elasticity_profile": "stance-elastic-v1"
+      },
+      "sensory_settings": {
+        "vision_model": "compound-retina-v1",
+        "proprioception_model": "feco-opponent-v1",
+        "contact_model": "tarsal-contact-v1",
+        "spatial_model": "geometry-v3",
+        "vision_enabled": false,
+        "hearing_enabled": false,
+        "wind_enabled": false,
+        "touch_enabled": true,
+        "proprioception_enabled": true,
+        "illumination": 1.0,
+        "sound_amplitude": 0.8,
+        "sound_frequency": 250.0,
+        "wind_speed": 20.0,
+        "wind_direction": 0.0,
+        "stimulus_position": [
+          4,
+          2,
+          1.5
+        ]
+      },
+      "bridge_parameters": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -2.0
+      ],
+      "command_hz": 60,
+      "coupling": "pipelined",
+      "metrics": {
+        "feet_supported_fraction": 0.9857142857142858,
+        "post_push_supported_fraction": 0.9739130434782609,
+        "support_recovery_s": 6.217248937900877e-15,
+        "maximum_tilt_deg": 8.652777744918286,
+        "maximum_other_support_uN": 0.0,
+        "net_xy_mm": 0.43098411989011376,
+        "loaded_foot_travel_mm": [
+          0.6203131729595833,
+          2.992353137781435,
+          4.381608526001748,
+          0.2674506972535664,
+          1.3896004014902548,
+          4.112904897065994
+        ],
+        "candidate_swing_counts": [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "mean_muscle_activation": 0.0034022368315730577,
+        "walking_validated": false,
+        "interpretation": "Swing candidates require unload, clearance and displaced landing; these thresholds are engineering diagnostics, not biological gait validation. Loaded-foot travel includes contact deformation and sliding."
+      },
+      "name": "body-strength-1.25"
+    },
+    {
+      "condition": "intact",
+      "seconds": 4.0,
+      "push_uN": -3.0,
+      "push_interval_s": [
+        2.0,
+        2.1
+      ],
+      "sensory_log_gain": 0.0,
+      "descending_drive": 0.0,
+      "initial_state": {
+        "qpos_sha256": "95ff38dfbc6bb86b1fd00a1d72a5a73b442894d2985ffe1914048b2253d152b7",
+        "voltage_sha256": "93b241752cdb29a9a71284a75bf89d93f359202c98043ead6cc4a90af89a59ec",
+        "tick_index": 0
+      },
+      "vnc_log_gain": 0.0,
+      "motor_log_gain": -2.0,
+      "wall_seconds": 16.379908625036478,
+      "neural_ticks": 3840,
+      "neurons": 166700,
+      "edges": 25582938,
+      "graph_sha256": "2be8452f9f4c02d26b71a821277b1e6513cdefbecf32b735c2dba3af62f6dbab",
+      "execution": {
+        "device": "mps",
+        "precision": "torch.float16",
+        "neural_dt_ms": 1.0416666666666667,
+        "timing_rounding": "ceil",
+        "effective_delay_ms": 2.0833333333333335,
+        "effective_refractory_ms": 3.125,
+        "kernel": "metal-active-rows-f16-v1-mark4",
+        "weight_precision": "torch.float16",
+        "experimental": true,
+        "history": [],
+        "note": "Experimental FP16 state, weights and arithmetic; rounding changes firing and is not reference-equivalent. All neurons, edges and ticks retained. Coarse neural clock: delays and refractory durations round up; spike timing and behavior change."
+      },
+      "physiology": {
+        "dt_ms": 1.0416666666666667,
+        "membrane_ms": 20.0,
+        "synapse_ms": 5.0,
+        "refractory_ms": 2.2,
+        "gain": 0.275,
+        "glutamate_sign": -1.0,
+        "unknown_sign": 0.0,
+        "histamine_sign": -1.0,
+        "profile": "shiu-2024",
+        "delay_ms": 1.8,
+        "timing_rounding": "ceil"
+      },
+      "body_parameters": {
+        "mass_scale": 1.0,
+        "strength_scale": 1.0,
+        "friction": 1.0,
+        "limit_mode": "baseline",
+        "appendage_model": "peripheral-v1",
+        "elasticity_profile": "stance-elastic-v1"
+      },
+      "sensory_settings": {
+        "vision_model": "compound-retina-v1",
+        "proprioception_model": "feco-opponent-v1",
+        "contact_model": "tarsal-contact-v1",
+        "spatial_model": "geometry-v3",
+        "vision_enabled": false,
+        "hearing_enabled": false,
+        "wind_enabled": false,
+        "touch_enabled": true,
+        "proprioception_enabled": true,
+        "illumination": 1.0,
+        "sound_amplitude": 0.8,
+        "sound_frequency": 250.0,
+        "wind_speed": 20.0,
+        "wind_direction": 0.0,
+        "stimulus_position": [
+          4,
+          2,
+          1.5
+        ]
+      },
+      "bridge_parameters": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -2.0
+      ],
+      "command_hz": 60,
+      "coupling": "pipelined",
+      "metrics": {
+        "feet_supported_fraction": 0.9523809523809523,
+        "post_push_supported_fraction": 0.9652173913043478,
+        "support_recovery_s": 0.016666666666707908,
+        "maximum_tilt_deg": 7.7008805701982945,
+        "maximum_other_support_uN": 0.0,
+        "net_xy_mm": 0.29333458122998485,
+        "loaded_foot_travel_mm": [
+          0.5679981296551164,
+          2.734556705275519,
+          3.9036915995628805,
+          0.2815929895035164,
+          0.8735477199490876,
+          3.8848868011978914
+        ],
+        "candidate_swing_counts": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "mean_muscle_activation": 0.008211814667141326,
+        "walking_validated": false,
+        "interpretation": "Swing candidates require unload, clearance and displaced landing; these thresholds are engineering diagnostics, not biological gait validation. Loaded-foot travel includes contact deformation and sliding."
+      },
+      "name": "heldout-baseline"
+    },
+    {
+      "condition": "intact",
+      "seconds": 4.0,
+      "push_uN": -3.0,
+      "push_interval_s": [
+        2.0,
+        2.1
+      ],
+      "sensory_log_gain": 0.0,
+      "descending_drive": 0.0,
+      "initial_state": {
+        "qpos_sha256": "95ff38dfbc6bb86b1fd00a1d72a5a73b442894d2985ffe1914048b2253d152b7",
+        "voltage_sha256": "93b241752cdb29a9a71284a75bf89d93f359202c98043ead6cc4a90af89a59ec",
+        "tick_index": 0
+      },
+      "vnc_log_gain": 0.0,
+      "motor_log_gain": -2.0,
+      "wall_seconds": 18.499468416906893,
+      "neural_ticks": 3840,
+      "neurons": 166700,
+      "edges": 25582938,
+      "graph_sha256": "2be8452f9f4c02d26b71a821277b1e6513cdefbecf32b735c2dba3af62f6dbab",
+      "execution": {
+        "device": "mps",
+        "precision": "torch.float16",
+        "neural_dt_ms": 1.0416666666666667,
+        "timing_rounding": "ceil",
+        "effective_delay_ms": 2.0833333333333335,
+        "effective_refractory_ms": 3.125,
+        "kernel": "metal-active-rows-f16-v1-mark4",
+        "weight_precision": "torch.float16",
+        "experimental": true,
+        "history": [],
+        "note": "Experimental FP16 state, weights and arithmetic; rounding changes firing and is not reference-equivalent. All neurons, edges and ticks retained. Coarse neural clock: delays and refractory durations round up; spike timing and behavior change."
+      },
+      "physiology": {
+        "dt_ms": 1.0416666666666667,
+        "membrane_ms": 20.0,
+        "synapse_ms": 5.0,
+        "refractory_ms": 2.2,
+        "gain": 0.275,
+        "glutamate_sign": -1.0,
+        "unknown_sign": 0.0,
+        "histamine_sign": -1.0,
+        "profile": "shiu-2024",
+        "delay_ms": 1.8,
+        "timing_rounding": "ceil"
+      },
+      "body_parameters": {
+        "mass_scale": 1.0,
+        "strength_scale": 0.75,
+        "friction": 1.0,
+        "limit_mode": "baseline",
+        "appendage_model": "peripheral-v1",
+        "elasticity_profile": "stance-elastic-v1"
+      },
+      "sensory_settings": {
+        "vision_model": "compound-retina-v1",
+        "proprioception_model": "feco-opponent-v1",
+        "contact_model": "tarsal-contact-v1",
+        "spatial_model": "geometry-v3",
+        "vision_enabled": false,
+        "hearing_enabled": false,
+        "wind_enabled": false,
+        "touch_enabled": true,
+        "proprioception_enabled": true,
+        "illumination": 1.0,
+        "sound_amplitude": 0.8,
+        "sound_frequency": 250.0,
+        "wind_speed": 20.0,
+        "wind_direction": 0.0,
+        "stimulus_position": [
+          4,
+          2,
+          1.5
+        ]
+      },
+      "bridge_parameters": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -2.0
+      ],
+      "command_hz": 60,
+      "coupling": "pipelined",
+      "metrics": {
+        "feet_supported_fraction": 0.9238095238095239,
+        "post_push_supported_fraction": 0.8695652173913043,
+        "support_recovery_s": null,
+        "maximum_tilt_deg": 6.223240280898376,
+        "maximum_other_support_uN": 0.0,
+        "net_xy_mm": 0.1722326091471393,
+        "loaded_foot_travel_mm": [
+          0.40004429373482464,
+          1.3084708850587103,
+          3.7648158006007906,
+          0.3023046018054151,
+          0.671125233408555,
+          3.708194385093945
+        ],
+        "candidate_swing_counts": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "mean_muscle_activation": 0.007642311287637773,
+        "walking_validated": false,
+        "interpretation": "Swing candidates require unload, clearance and displaced landing; these thresholds are engineering diagnostics, not biological gait validation. Loaded-foot travel includes contact deformation and sliding."
+      },
+      "name": "heldout-candidate"
+    },
+    {
+      "condition": "motor_disconnected",
+      "seconds": 4.0,
+      "push_uN": -3.0,
+      "push_interval_s": [
+        2.0,
+        2.1
+      ],
+      "sensory_log_gain": 0.0,
+      "descending_drive": 0.0,
+      "initial_state": {
+        "qpos_sha256": "95ff38dfbc6bb86b1fd00a1d72a5a73b442894d2985ffe1914048b2253d152b7",
+        "voltage_sha256": "93b241752cdb29a9a71284a75bf89d93f359202c98043ead6cc4a90af89a59ec",
+        "tick_index": 0
+      },
+      "vnc_log_gain": 0.0,
+      "motor_log_gain": -2.0,
+      "wall_seconds": 17.287596750073135,
+      "neural_ticks": 3840,
+      "neurons": 166700,
+      "edges": 25582938,
+      "graph_sha256": "2be8452f9f4c02d26b71a821277b1e6513cdefbecf32b735c2dba3af62f6dbab",
+      "execution": {
+        "device": "mps",
+        "precision": "torch.float16",
+        "neural_dt_ms": 1.0416666666666667,
+        "timing_rounding": "ceil",
+        "effective_delay_ms": 2.0833333333333335,
+        "effective_refractory_ms": 3.125,
+        "kernel": "metal-active-rows-f16-v1-mark4",
+        "weight_precision": "torch.float16",
+        "experimental": true,
+        "history": [],
+        "note": "Experimental FP16 state, weights and arithmetic; rounding changes firing and is not reference-equivalent. All neurons, edges and ticks retained. Coarse neural clock: delays and refractory durations round up; spike timing and behavior change."
+      },
+      "physiology": {
+        "dt_ms": 1.0416666666666667,
+        "membrane_ms": 20.0,
+        "synapse_ms": 5.0,
+        "refractory_ms": 2.2,
+        "gain": 0.275,
+        "glutamate_sign": -1.0,
+        "unknown_sign": 0.0,
+        "histamine_sign": -1.0,
+        "profile": "shiu-2024",
+        "delay_ms": 1.8,
+        "timing_rounding": "ceil"
+      },
+      "body_parameters": {
+        "mass_scale": 1.0,
+        "strength_scale": 0.75,
+        "friction": 1.0,
+        "limit_mode": "baseline",
+        "appendage_model": "peripheral-v1",
+        "elasticity_profile": "stance-elastic-v1"
+      },
+      "sensory_settings": {
+        "vision_model": "compound-retina-v1",
+        "proprioception_model": "feco-opponent-v1",
+        "contact_model": "tarsal-contact-v1",
+        "spatial_model": "geometry-v3",
+        "vision_enabled": false,
+        "hearing_enabled": false,
+        "wind_enabled": false,
+        "touch_enabled": true,
+        "proprioception_enabled": true,
+        "illumination": 1.0,
+        "sound_amplitude": 0.8,
+        "sound_frequency": 250.0,
+        "wind_speed": 20.0,
+        "wind_direction": 0.0,
+        "stimulus_position": [
+          4,
+          2,
+          1.5
+        ]
+      },
+      "bridge_parameters": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -2.0
+      ],
+      "command_hz": 60,
+      "coupling": "pipelined",
+      "metrics": {
+        "feet_supported_fraction": 0.9904761904761905,
+        "post_push_supported_fraction": 0.9826086956521739,
+        "support_recovery_s": 0.10000000000021636,
+        "maximum_tilt_deg": 3.7427113722460517,
+        "maximum_other_support_uN": 0.0,
+        "net_xy_mm": 0.05235466998310137,
+        "loaded_foot_travel_mm": [
+          0.0796472153185053,
+          0.12242352150915366,
+          1.7413682974044487,
+          0.09720128162500825,
+          0.20997197706886742,
+          0.9470757950141616
+        ],
+        "candidate_swing_counts": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "mean_muscle_activation": 0.0,
+        "walking_validated": false,
+        "interpretation": "Swing candidates require unload, clearance and displaced landing; these thresholds are engineering diagnostics, not biological gait validation. Loaded-foot travel includes contact deformation and sliding."
+      },
+      "name": "heldout-disconnected"
+    },
+    {
+      "condition": "intact",
+      "seconds": 4.0,
+      "push_uN": -3.0,
+      "push_interval_s": [
+        2.0,
+        2.1
+      ],
+      "sensory_log_gain": 0.0,
+      "descending_drive": 0.0,
+      "initial_state": {
+        "qpos_sha256": "95ff38dfbc6bb86b1fd00a1d72a5a73b442894d2985ffe1914048b2253d152b7",
+        "voltage_sha256": "93b241752cdb29a9a71284a75bf89d93f359202c98043ead6cc4a90af89a59ec",
+        "tick_index": 0
+      },
+      "vnc_log_gain": 0.0,
+      "motor_log_gain": -2.0,
+      "wall_seconds": 18.570200165966526,
+      "neural_ticks": 3840,
+      "neurons": 166700,
+      "edges": 25582938,
+      "graph_sha256": "2be8452f9f4c02d26b71a821277b1e6513cdefbecf32b735c2dba3af62f6dbab",
+      "execution": {
+        "device": "mps",
+        "precision": "torch.float16",
+        "neural_dt_ms": 1.0416666666666667,
+        "timing_rounding": "ceil",
+        "effective_delay_ms": 2.0833333333333335,
+        "effective_refractory_ms": 3.125,
+        "kernel": "metal-active-rows-f16-v1-mark4",
+        "weight_precision": "torch.float16",
+        "experimental": true,
+        "history": [],
+        "note": "Experimental FP16 state, weights and arithmetic; rounding changes firing and is not reference-equivalent. All neurons, edges and ticks retained. Coarse neural clock: delays and refractory durations round up; spike timing and behavior change."
+      },
+      "physiology": {
+        "dt_ms": 1.0416666666666667,
+        "membrane_ms": 20.0,
+        "synapse_ms": 5.0,
+        "refractory_ms": 2.2,
+        "gain": 0.275,
+        "glutamate_sign": -1.0,
+        "unknown_sign": 0.0,
+        "histamine_sign": -1.0,
+        "profile": "shiu-2024",
+        "delay_ms": 1.8,
+        "timing_rounding": "ceil"
+      },
+      "body_parameters": {
+        "mass_scale": 1.0,
+        "strength_scale": 0.5,
+        "friction": 1.0,
+        "limit_mode": "baseline",
+        "appendage_model": "peripheral-v1",
+        "elasticity_profile": "stance-elastic-v1"
+      },
+      "sensory_settings": {
+        "vision_model": "compound-retina-v1",
+        "proprioception_model": "feco-opponent-v1",
+        "contact_model": "tarsal-contact-v1",
+        "spatial_model": "geometry-v3",
+        "vision_enabled": false,
+        "hearing_enabled": false,
+        "wind_enabled": false,
+        "touch_enabled": true,
+        "proprioception_enabled": true,
+        "illumination": 1.0,
+        "sound_amplitude": 0.8,
+        "sound_frequency": 250.0,
+        "wind_speed": 20.0,
+        "wind_direction": 0.0,
+        "stimulus_position": [
+          4,
+          2,
+          1.5
+        ]
+      },
+      "bridge_parameters": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -2.0
+      ],
+      "command_hz": 60,
+      "coupling": "pipelined",
+      "metrics": {
+        "feet_supported_fraction": 0.9571428571428572,
+        "post_push_supported_fraction": 0.9391304347826087,
+        "support_recovery_s": 6.217248937900877e-15,
+        "maximum_tilt_deg": 5.005007012512244,
+        "maximum_other_support_uN": 0.0,
+        "net_xy_mm": 0.07714765738754256,
+        "loaded_foot_travel_mm": [
+          0.1642551383133816,
+          0.5949174911335796,
+          2.631179253409955,
+          0.18434647582117353,
+          0.5196477000693198,
+          2.2511672608562496
+        ],
+        "candidate_swing_counts": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "mean_muscle_activation": 0.00760756769384816,
+        "walking_validated": false,
+        "interpretation": "Swing candidates require unload, clearance and displaced landing; these thresholds are engineering diagnostics, not biological gait validation. Loaded-foot travel includes contact deformation and sliding."
+      },
+      "name": "confirm-strength-0.5-push--3.0"
+    },
+    {
+      "condition": "intact",
+      "seconds": 4.0,
+      "push_uN": -6.0,
+      "push_interval_s": [
+        2.0,
+        2.1
+      ],
+      "sensory_log_gain": 0.0,
+      "descending_drive": 0.0,
+      "initial_state": {
+        "qpos_sha256": "95ff38dfbc6bb86b1fd00a1d72a5a73b442894d2985ffe1914048b2253d152b7",
+        "voltage_sha256": "93b241752cdb29a9a71284a75bf89d93f359202c98043ead6cc4a90af89a59ec",
+        "tick_index": 0
+      },
+      "vnc_log_gain": 0.0,
+      "motor_log_gain": -2.0,
+      "wall_seconds": 17.68386837502476,
+      "neural_ticks": 3840,
+      "neurons": 166700,
+      "edges": 25582938,
+      "graph_sha256": "2be8452f9f4c02d26b71a821277b1e6513cdefbecf32b735c2dba3af62f6dbab",
+      "execution": {
+        "device": "mps",
+        "precision": "torch.float16",
+        "neural_dt_ms": 1.0416666666666667,
+        "timing_rounding": "ceil",
+        "effective_delay_ms": 2.0833333333333335,
+        "effective_refractory_ms": 3.125,
+        "kernel": "metal-active-rows-f16-v1-mark4",
+        "weight_precision": "torch.float16",
+        "experimental": true,
+        "history": [],
+        "note": "Experimental FP16 state, weights and arithmetic; rounding changes firing and is not reference-equivalent. All neurons, edges and ticks retained. Coarse neural clock: delays and refractory durations round up; spike timing and behavior change."
+      },
+      "physiology": {
+        "dt_ms": 1.0416666666666667,
+        "membrane_ms": 20.0,
+        "synapse_ms": 5.0,
+        "refractory_ms": 2.2,
+        "gain": 0.275,
+        "glutamate_sign": -1.0,
+        "unknown_sign": 0.0,
+        "histamine_sign": -1.0,
+        "profile": "shiu-2024",
+        "delay_ms": 1.8,
+        "timing_rounding": "ceil"
+      },
+      "body_parameters": {
+        "mass_scale": 1.0,
+        "strength_scale": 0.5,
+        "friction": 1.0,
+        "limit_mode": "baseline",
+        "appendage_model": "peripheral-v1",
+        "elasticity_profile": "stance-elastic-v1"
+      },
+      "sensory_settings": {
+        "vision_model": "compound-retina-v1",
+        "proprioception_model": "feco-opponent-v1",
+        "contact_model": "tarsal-contact-v1",
+        "spatial_model": "geometry-v3",
+        "vision_enabled": false,
+        "hearing_enabled": false,
+        "wind_enabled": false,
+        "touch_enabled": true,
+        "proprioception_enabled": true,
+        "illumination": 1.0,
+        "sound_amplitude": 0.8,
+        "sound_frequency": 250.0,
+        "wind_speed": 20.0,
+        "wind_direction": 0.0,
+        "stimulus_position": [
+          4,
+          2,
+          1.5
+        ]
+      },
+      "bridge_parameters": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -2.0
+      ],
+      "command_hz": 60,
+      "coupling": "pipelined",
+      "metrics": {
+        "feet_supported_fraction": 0.9571428571428572,
+        "post_push_supported_fraction": 0.9304347826086956,
+        "support_recovery_s": 6.217248937900877e-15,
+        "maximum_tilt_deg": 5.005007012512244,
+        "maximum_other_support_uN": 0.0,
+        "net_xy_mm": 0.12145329627440091,
+        "loaded_foot_travel_mm": [
+          0.4151981654513558,
+          0.8924960664498672,
+          2.9082586917797166,
+          0.31471532355917564,
+          0.7451934039869794,
+          2.5517631528016183
+        ],
+        "candidate_swing_counts": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "mean_muscle_activation": 0.007650381391849372,
+        "walking_validated": false,
+        "interpretation": "Swing candidates require unload, clearance and displaced landing; these thresholds are engineering diagnostics, not biological gait validation. Loaded-foot travel includes contact deformation and sliding."
+      },
+      "name": "confirm-strength-0.5-push--6.0"
+    },
+    {
+      "condition": "intact",
+      "seconds": 4.0,
+      "push_uN": 6.0,
+      "push_interval_s": [
+        2.0,
+        2.1
+      ],
+      "sensory_log_gain": 0.0,
+      "descending_drive": 0.0,
+      "initial_state": {
+        "qpos_sha256": "95ff38dfbc6bb86b1fd00a1d72a5a73b442894d2985ffe1914048b2253d152b7",
+        "voltage_sha256": "93b241752cdb29a9a71284a75bf89d93f359202c98043ead6cc4a90af89a59ec",
+        "tick_index": 0
+      },
+      "vnc_log_gain": 0.0,
+      "motor_log_gain": -2.0,
+      "wall_seconds": 17.51938908302691,
+      "neural_ticks": 3840,
+      "neurons": 166700,
+      "edges": 25582938,
+      "graph_sha256": "2be8452f9f4c02d26b71a821277b1e6513cdefbecf32b735c2dba3af62f6dbab",
+      "execution": {
+        "device": "mps",
+        "precision": "torch.float16",
+        "neural_dt_ms": 1.0416666666666667,
+        "timing_rounding": "ceil",
+        "effective_delay_ms": 2.0833333333333335,
+        "effective_refractory_ms": 3.125,
+        "kernel": "metal-active-rows-f16-v1-mark4",
+        "weight_precision": "torch.float16",
+        "experimental": true,
+        "history": [],
+        "note": "Experimental FP16 state, weights and arithmetic; rounding changes firing and is not reference-equivalent. All neurons, edges and ticks retained. Coarse neural clock: delays and refractory durations round up; spike timing and behavior change."
+      },
+      "physiology": {
+        "dt_ms": 1.0416666666666667,
+        "membrane_ms": 20.0,
+        "synapse_ms": 5.0,
+        "refractory_ms": 2.2,
+        "gain": 0.275,
+        "glutamate_sign": -1.0,
+        "unknown_sign": 0.0,
+        "histamine_sign": -1.0,
+        "profile": "shiu-2024",
+        "delay_ms": 1.8,
+        "timing_rounding": "ceil"
+      },
+      "body_parameters": {
+        "mass_scale": 1.0,
+        "strength_scale": 0.5,
+        "friction": 1.0,
+        "limit_mode": "baseline",
+        "appendage_model": "peripheral-v1",
+        "elasticity_profile": "stance-elastic-v1"
+      },
+      "sensory_settings": {
+        "vision_model": "compound-retina-v1",
+        "proprioception_model": "feco-opponent-v1",
+        "contact_model": "tarsal-contact-v1",
+        "spatial_model": "geometry-v3",
+        "vision_enabled": false,
+        "hearing_enabled": false,
+        "wind_enabled": false,
+        "touch_enabled": true,
+        "proprioception_enabled": true,
+        "illumination": 1.0,
+        "sound_amplitude": 0.8,
+        "sound_frequency": 250.0,
+        "wind_speed": 20.0,
+        "wind_direction": 0.0,
+        "stimulus_position": [
+          4,
+          2,
+          1.5
+        ]
+      },
+      "bridge_parameters": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -2.0
+      ],
+      "command_hz": 60,
+      "coupling": "pipelined",
+      "metrics": {
+        "feet_supported_fraction": 0.9809523809523809,
+        "post_push_supported_fraction": 0.9739130434782609,
+        "support_recovery_s": 6.217248937900877e-15,
+        "maximum_tilt_deg": 5.005007012512244,
+        "maximum_other_support_uN": 0.0,
+        "net_xy_mm": 0.3501765747397588,
+        "loaded_foot_travel_mm": [
+          0.43623610606084234,
+          1.0285197706664844,
+          3.236113526436214,
+          0.48306386330260676,
+          0.8421551537750033,
+          2.78672592306783
+        ],
+        "candidate_swing_counts": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "mean_muscle_activation": 0.007746165820088223,
+        "walking_validated": false,
+        "interpretation": "Swing candidates require unload, clearance and displaced landing; these thresholds are engineering diagnostics, not biological gait validation. Loaded-foot travel includes contact deformation and sliding."
+      },
+      "name": "confirm-strength-0.5-push-6.0"
+    },
+    {
+      "condition": "intact",
+      "seconds": 4.0,
+      "push_uN": -6.0,
+      "push_interval_s": [
+        2.0,
+        2.1
+      ],
+      "sensory_log_gain": 0.0,
+      "descending_drive": 0.0,
+      "initial_state": {
+        "qpos_sha256": "95ff38dfbc6bb86b1fd00a1d72a5a73b442894d2985ffe1914048b2253d152b7",
+        "voltage_sha256": "93b241752cdb29a9a71284a75bf89d93f359202c98043ead6cc4a90af89a59ec",
+        "tick_index": 0
+      },
+      "vnc_log_gain": 0.0,
+      "motor_log_gain": -2.0,
+      "wall_seconds": 16.815532041015103,
+      "neural_ticks": 3840,
+      "neurons": 166700,
+      "edges": 25582938,
+      "graph_sha256": "2be8452f9f4c02d26b71a821277b1e6513cdefbecf32b735c2dba3af62f6dbab",
+      "execution": {
+        "device": "mps",
+        "precision": "torch.float16",
+        "neural_dt_ms": 1.0416666666666667,
+        "timing_rounding": "ceil",
+        "effective_delay_ms": 2.0833333333333335,
+        "effective_refractory_ms": 3.125,
+        "kernel": "metal-active-rows-f16-v1-mark4",
+        "weight_precision": "torch.float16",
+        "experimental": true,
+        "history": [],
+        "note": "Experimental FP16 state, weights and arithmetic; rounding changes firing and is not reference-equivalent. All neurons, edges and ticks retained. Coarse neural clock: delays and refractory durations round up; spike timing and behavior change."
+      },
+      "physiology": {
+        "dt_ms": 1.0416666666666667,
+        "membrane_ms": 20.0,
+        "synapse_ms": 5.0,
+        "refractory_ms": 2.2,
+        "gain": 0.275,
+        "glutamate_sign": -1.0,
+        "unknown_sign": 0.0,
+        "histamine_sign": -1.0,
+        "profile": "shiu-2024",
+        "delay_ms": 1.8,
+        "timing_rounding": "ceil"
+      },
+      "body_parameters": {
+        "mass_scale": 1.0,
+        "strength_scale": 1.0,
+        "friction": 1.0,
+        "limit_mode": "baseline",
+        "appendage_model": "peripheral-v1",
+        "elasticity_profile": "stance-elastic-v1"
+      },
+      "sensory_settings": {
+        "vision_model": "compound-retina-v1",
+        "proprioception_model": "feco-opponent-v1",
+        "contact_model": "tarsal-contact-v1",
+        "spatial_model": "geometry-v3",
+        "vision_enabled": false,
+        "hearing_enabled": false,
+        "wind_enabled": false,
+        "touch_enabled": true,
+        "proprioception_enabled": true,
+        "illumination": 1.0,
+        "sound_amplitude": 0.8,
+        "sound_frequency": 250.0,
+        "wind_speed": 20.0,
+        "wind_direction": 0.0,
+        "stimulus_position": [
+          4,
+          2,
+          1.5
+        ]
+      },
+      "bridge_parameters": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -2.0
+      ],
+      "command_hz": 60,
+      "coupling": "pipelined",
+      "metrics": {
+        "feet_supported_fraction": 0.9619047619047619,
+        "post_push_supported_fraction": 0.9826086956521739,
+        "support_recovery_s": 6.217248937900877e-15,
+        "maximum_tilt_deg": 10.929434237192481,
+        "maximum_other_support_uN": 0.0,
+        "net_xy_mm": 0.6907593658124126,
+        "loaded_foot_travel_mm": [
+          1.5925236004241774,
+          2.3060291980389427,
+          4.772412933081791,
+          0.9599593686511723,
+          1.9686692618031536,
+          4.206287466413528
+        ],
+        "candidate_swing_counts": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "mean_muscle_activation": 0.0081916526788669,
+        "walking_validated": false,
+        "interpretation": "Swing candidates require unload, clearance and displaced landing; these thresholds are engineering diagnostics, not biological gait validation. Loaded-foot travel includes contact deformation and sliding."
+      },
+      "name": "confirm-strength-1.0-push--6.0"
+    },
+    {
+      "condition": "intact",
+      "seconds": 4.0,
+      "push_uN": 6.0,
+      "push_interval_s": [
+        2.0,
+        2.1
+      ],
+      "sensory_log_gain": 0.0,
+      "descending_drive": 0.0,
+      "initial_state": {
+        "qpos_sha256": "95ff38dfbc6bb86b1fd00a1d72a5a73b442894d2985ffe1914048b2253d152b7",
+        "voltage_sha256": "93b241752cdb29a9a71284a75bf89d93f359202c98043ead6cc4a90af89a59ec",
+        "tick_index": 0
+      },
+      "vnc_log_gain": 0.0,
+      "motor_log_gain": -2.0,
+      "wall_seconds": 17.012141624931246,
+      "neural_ticks": 3840,
+      "neurons": 166700,
+      "edges": 25582938,
+      "graph_sha256": "2be8452f9f4c02d26b71a821277b1e6513cdefbecf32b735c2dba3af62f6dbab",
+      "execution": {
+        "device": "mps",
+        "precision": "torch.float16",
+        "neural_dt_ms": 1.0416666666666667,
+        "timing_rounding": "ceil",
+        "effective_delay_ms": 2.0833333333333335,
+        "effective_refractory_ms": 3.125,
+        "kernel": "metal-active-rows-f16-v1-mark4",
+        "weight_precision": "torch.float16",
+        "experimental": true,
+        "history": [],
+        "note": "Experimental FP16 state, weights and arithmetic; rounding changes firing and is not reference-equivalent. All neurons, edges and ticks retained. Coarse neural clock: delays and refractory durations round up; spike timing and behavior change."
+      },
+      "physiology": {
+        "dt_ms": 1.0416666666666667,
+        "membrane_ms": 20.0,
+        "synapse_ms": 5.0,
+        "refractory_ms": 2.2,
+        "gain": 0.275,
+        "glutamate_sign": -1.0,
+        "unknown_sign": 0.0,
+        "histamine_sign": -1.0,
+        "profile": "shiu-2024",
+        "delay_ms": 1.8,
+        "timing_rounding": "ceil"
+      },
+      "body_parameters": {
+        "mass_scale": 1.0,
+        "strength_scale": 1.0,
+        "friction": 1.0,
+        "limit_mode": "baseline",
+        "appendage_model": "peripheral-v1",
+        "elasticity_profile": "stance-elastic-v1"
+      },
+      "sensory_settings": {
+        "vision_model": "compound-retina-v1",
+        "proprioception_model": "feco-opponent-v1",
+        "contact_model": "tarsal-contact-v1",
+        "spatial_model": "geometry-v3",
+        "vision_enabled": false,
+        "hearing_enabled": false,
+        "wind_enabled": false,
+        "touch_enabled": true,
+        "proprioception_enabled": true,
+        "illumination": 1.0,
+        "sound_amplitude": 0.8,
+        "sound_frequency": 250.0,
+        "wind_speed": 20.0,
+        "wind_direction": 0.0,
+        "stimulus_position": [
+          4,
+          2,
+          1.5
+        ]
+      },
+      "bridge_parameters": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -2.0
+      ],
+      "command_hz": 60,
+      "coupling": "pipelined",
+      "metrics": {
+        "feet_supported_fraction": 0.9666666666666667,
+        "post_push_supported_fraction": 0.991304347826087,
+        "support_recovery_s": 6.217248937900877e-15,
+        "maximum_tilt_deg": 7.797929830054002,
+        "maximum_other_support_uN": 0.0,
+        "net_xy_mm": 0.713421790875785,
+        "loaded_foot_travel_mm": [
+          0.8711092601010569,
+          2.8070277333072724,
+          4.399931345282864,
+          0.6424198142685474,
+          1.6472674945000187,
+          4.729102529727254
+        ],
+        "candidate_swing_counts": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "mean_muscle_activation": 0.008281330197089758,
+        "walking_validated": false,
+        "interpretation": "Swing candidates require unload, clearance and displaced landing; these thresholds are engineering diagnostics, not biological gait validation. Loaded-foot travel includes contact deformation and sliding."
+      },
+      "name": "confirm-strength-1.0-push-6.0"
+    }
+  ],
+  "comparisons": {
+    "75_percent_opposite": {
+      "checks": {
+        "muscles_active": true,
+        "support_retained": false,
+        "post_push_support_retained": false,
+        "tilt_not_worse": true,
+        "loaded_foot_motion_not_worse": true,
+        "body_contact_not_worse": true,
+        "recovery_retained": false
+      },
+      "passes": false,
+      "meaningful_improvement": true
+    },
+    "50_percent_positive": {
+      "checks": {
+        "muscles_active": true,
+        "support_retained": true,
+        "post_push_support_retained": true,
+        "tilt_not_worse": true,
+        "loaded_foot_motion_not_worse": true,
+        "body_contact_not_worse": true,
+        "recovery_retained": true
+      },
+      "passes": true,
+      "meaningful_improvement": true
+    },
+    "50_percent_opposite": {
+      "checks": {
+        "muscles_active": true,
+        "support_retained": true,
+        "post_push_support_retained": false,
+        "tilt_not_worse": true,
+        "loaded_foot_motion_not_worse": true,
+        "body_contact_not_worse": true,
+        "recovery_retained": true
+      },
+      "passes": false,
+      "meaningful_improvement": true
+    },
+    "50_percent_stronger_positive": {
+      "checks": {
+        "muscles_active": true,
+        "support_retained": true,
+        "post_push_support_retained": true,
+        "tilt_not_worse": true,
+        "loaded_foot_motion_not_worse": true,
+        "body_contact_not_worse": true,
+        "recovery_retained": true
+      },
+      "passes": true,
+      "meaningful_improvement": true
+    },
+    "50_percent_stronger_opposite": {
+      "checks": {
+        "muscles_active": true,
+        "support_retained": true,
+        "post_push_support_retained": false,
+        "tilt_not_worse": true,
+        "loaded_foot_motion_not_worse": true,
+        "body_contact_not_worse": true,
+        "recovery_retained": true
+      },
+      "passes": false,
+      "meaningful_improvement": true
+    }
+  },
+  "applied_to_live": false,
+  "accepted_replacement": null
+}

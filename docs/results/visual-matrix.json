@@ -1,0 +1,60 @@
+{
+  "scope": "Compare compound-eye quadrature and receptor matrix processing on CPU/MPS.\n\nRay intersections remain MuJoCo CPU work. Includes CPU->GPU radiance transfer and\nGPU->CPU receptor readback, because these are required by the current sensor API.\n",
+  "max_abs_error": 1.1526908805237213e-07,
+  "trials": [
+    {
+      "trial": 0,
+      "mode": "cpu",
+      "mean_ms": 0.14181334001477808
+    },
+    {
+      "trial": 0,
+      "mode": "gpu_matrix",
+      "mean_ms": 1.4090462500462309
+    },
+    {
+      "trial": 1,
+      "mode": "gpu_matrix",
+      "mean_ms": 1.33125708962325
+    },
+    {
+      "trial": 1,
+      "mode": "cpu",
+      "mean_ms": 0.14321167021989822
+    },
+    {
+      "trial": 2,
+      "mode": "cpu",
+      "mean_ms": 0.1367408299120143
+    },
+    {
+      "trial": 2,
+      "mode": "gpu_matrix",
+      "mean_ms": 1.3608908304013312
+    },
+    {
+      "trial": 3,
+      "mode": "gpu_matrix",
+      "mean_ms": 1.3871141703566536
+    },
+    {
+      "trial": 3,
+      "mode": "cpu",
+      "mean_ms": 0.1415566698415205
+    },
+    {
+      "trial": 4,
+      "mode": "cpu",
+      "mean_ms": 0.13772833975963295
+    },
+    {
+      "trial": 4,
+      "mode": "gpu_matrix",
+      "mean_ms": 1.450609999592416
+    }
+  ],
+  "median_ms": {
+    "cpu": 0.1415566698415205,
+    "gpu_matrix": 1.3871141703566536
+  }
+}

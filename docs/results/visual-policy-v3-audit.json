@@ -1,0 +1,46 @@
+{
+  "checkpoint": "policy-1789419860934720000.pt",
+  "device": "mps",
+  "examples": 50,
+  "normal_mse": 0.00042107362300157546,
+  "blank_eyes_mse": 0.00042117282282561064,
+  "swapped_gesture_histories_mse": 0.000421089839655906,
+  "blank_relative_change_percent": 0.023558783693933272,
+  "swapped_relative_change_percent": 0.0038512634001897084,
+  "closed_loop": {
+    "point": {
+      "pose_reached": false,
+      "foot_heights_mm": [
+        0.02838104383679415,
+        0.03482370900727202,
+        0.04660554707597503,
+        0.029046016981059044,
+        0.03770856219555157,
+        0.04909794582112714
+      ],
+      "raised_legs": [
+        0
+      ],
+      "support_feet_near_floor": true,
+      "body_height_mm": 1.0251664855214746,
+      "upright": 0.9881424858281694
+    },
+    "point_right": {
+      "pose_reached": false,
+      "foot_heights_mm": [
+        0.02794236602476368,
+        0.03481725373213427,
+        0.05170149170418046,
+        0.02901337059068978,
+        0.037715650386268465,
+        0.04910479929200055
+      ],
+      "raised_legs": [
+        3
+      ],
+      "support_feet_near_floor": true,
+      "body_height_mm": 1.0247698377750747,
+      "upright": 0.9880682119107878
+    }
+  }
+}

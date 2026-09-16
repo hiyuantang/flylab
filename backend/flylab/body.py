@@ -40,11 +40,14 @@ class BodyParameters:
     friction: float = 1.
     limit_mode: str = 'baseline'
     appendage_model: str = 'baseline'
+    elasticity_profile: str = 'baseline'
 
     def __post_init__(self):
+        if self.elasticity_profile not in {'baseline', 'stance-elastic-v1'}:
+            raise ValueError('Unknown joint elasticity profile')
         if not all(np.isfinite(x) and .05 <= x <= 4 for x in [self.mass_scale, self.strength_scale, self.friction]):
             raise ValueError('Body scales and friction must be finite and within [0.05, 4]')
-        if self.appendage_model not in {'baseline', 'pretarsal-v1', 'peripheral-v1'}:
+        if self.appendage_model not in {'baseline', 'pretarsal-v1', 'peripheral-v1', 'peripheral-v2'}:
             raise ValueError('Unknown appendage model')
         if self.limit_mode not in {'baseline', 'reference_envelope'}:
             raise ValueError('Unknown joint limit mode')
@@ -198,6 +201,9 @@ def make_xml(parameters=BodyParameters(), scene_id='lab'):
                 for axis in axes:
                     sign = -1 if name.startswith("r") and axis != "pitch" else 1
                     rest = neutral_angle(name, axis)
+                    elastic_rest = rest
+                    if not passive and parameters.elasticity_profile == 'stance-elastic-v1':
+                        elastic_rest = reference_angles(np.full(6, np.pi))[LEGS.index(leg), ACTIVE_DOF.index((link, axis))]
                     span = .7 if passive else 1.4
                     limits = [rest - span, rest + span]
                     if not passive and parameters.limit_mode == 'reference_envelope':
@@ -206,7 +212,7 @@ def make_xml(parameters=BodyParameters(), scene_id='lab'):
                     ET.SubElement(body, "joint", name=joint_name(name, axis), type="hinge",
                                   axis=vector(np.array(AXES[axis]) * sign),
                                   range=vector(limits),
-                                  springref=str(rest), stiffness="7.5" if passive else ".05",
+                                  springref=str(elastic_rest), stiffness="7.5" if passive else ("20" if parameters.elasticity_profile == 'stance-elastic-v1' else ".05"),
                                   damping=".01" if passive else ".06", armature="1e-6")
                 if link == "tarsus5":
                     ET.SubElement(body, "site", name=f"{leg}_foot", pos="0 0 -.085", size=".025")
@@ -236,11 +242,14 @@ def make_xml(parameters=BodyParameters(), scene_id='lab'):
                 ET.SubElement(actuators, "muscle", name=f"{name}_{suffix}", joint=name,
                               gear=str(sign * MOMENT_ARM), lengthrange="-.4 .4",
                               force=str(MAX_FORCE * parameters.strength_scale), timeconst=".002 .004", fpmax=".00001")
-    if parameters.appendage_model in {"pretarsal-v1", "peripheral-v1"}:
+    if parameters.appendage_model in {"pretarsal-v1", "peripheral-v1", "peripheral-v2"}:
         from .pretarsus import add_pretarsi
         add_pretarsi(root, bodies, LEGS, parameters)
     if parameters.appendage_model == "peripheral-v1":
         from .peripheral_mechanics import add_mechanics
+        add_mechanics(root, bodies, parameters)
+    elif parameters.appendage_model == "peripheral-v2":
+        from .extended_mechanics import add_mechanics
         add_mechanics(root, bodies, parameters)
     return ET.tostring(root, encoding="unicode")
 
@@ -356,9 +365,22 @@ class FlyBody:
         excitation = np.asarray(excitation, dtype=float)
         if excitation.shape != (self.model.nu,) or not np.isfinite(excitation).all():
             raise ValueError(f"Expected {self.model.nu} finite muscle excitations")
+        if not math.isfinite(dt) or dt <= 0:
+            raise ValueError('Physical interval must be positive and finite')
         self.data.ctrl[:] = np.clip(excitation, 0, 1)
-        for _ in range(round(dt / self.model.opt.timestep)):
+        h = self.model.opt.timestep
+        steps = math.floor(dt / h + 1e-9)
+        for _ in range(steps):
             mujoco.mj_step(self.model, self.data)
+        # Finish a non-integer interval (e.g. 1/60 s) exactly, with a smaller
+        # final step. Retain velocity/activation; never force constant motion.
+        remainder = dt - steps * h
+        if remainder > 1e-12:
+            try:
+                self.model.opt.timestep = remainder
+                mujoco.mj_step(self.model, self.data)
+            finally:
+                self.model.opt.timestep = h
         mujoco.mj_forward(self.model, self.data)
         if not np.isfinite(self.data.qpos).all():
             raise RuntimeError("Body simulation became non-finite")
@@ -385,15 +407,19 @@ class FlyBody:
             name = self.model.joint(j).name
             if name.endswith('_pretarsus_flexion'):
                 ids.add(j)
-        if self.parameters.appendage_model == 'peripheral-v1':
+        if self.parameters.appendage_model in {'peripheral-v1', 'peripheral-v2'}:
             from .peripheral_mechanics import MUSCLES
+            if self.parameters.appendage_model == 'peripheral-v2':
+                from .extended_mechanics import MUSCLES
             ids.update(self.model.joint(name).id for muscle in MUSCLES for name, _ in muscle.joints)
         return ids
 
     def peripheral_snapshot(self):
-        if self.parameters.appendage_model != 'peripheral-v1':
+        if self.parameters.appendage_model not in {'peripheral-v1', 'peripheral-v2'}:
             return []
         from .peripheral_mechanics import MUSCLES
+        if self.parameters.appendage_model == 'peripheral-v2':
+            from .extended_mechanics import MUSCLES
         return [{'name': m.name, 'target': m.target, 'region': m.subclass, 'side': m.side,
                  'activation': float(self.data.act[90+i]), 'force_uN': float(abs(self.data.actuator_force[90+i])),
                  'length_mm': float(self.data.actuator_length[90+i]), 'force_parameter_uN': m.force*self.parameters.strength_scale,
@@ -402,6 +428,7 @@ class FlyBody:
 
     def additional_geometry(self, muscles):
         return [{'name': name, 'position': self.data.xpos[index].tolist(),
+                 'parent': self.model.body(int(self.model.body_parentid[index])).name,
                  'quaternion': self.data.xquat[index].tolist(), 'capsules': [[0, 0, 0, .055, 0, 0, .025]],
                  'activation': max((m['activation'] for m in muscles if m['side'].lower() == name[0] and m['target'] in {'m6', 'm7'}), default=0.)}
                 for name, index in self.body_ids.items() if name.endswith('_labellum')]
@@ -424,6 +451,11 @@ class FlyBody:
                 'provenance': 'Main-body masses and geometry: pinned female FlyGym rig. Added pretarsal and peripheral geometry, masses, transmissions and forces are uncalibrated approximations. No adhesion, fluid transport, asynchronous flight muscles or aerodynamics. Strength, springs, damping and baseline limits: assumptions. Reference envelope: observed gait extrema plus 0.35 rad margin, not anatomical maximum range.'}
 
     def foot_feedback(self):
+        """Normal contact load on tarsal/pretarsal segments only, in µN."""
+        return np.asarray(self.support_snapshot()['foot_normal_uN'])
+
+    def legacy_leg_feedback(self):
+        """Historical all-leg contact signal, retained for exact old checkpoints."""
         forces = np.zeros(6)
         contact_force = np.zeros(6)
         # Contact indices are distinct from constraint addresses.
@@ -438,15 +470,60 @@ class FlyBody:
                 forces[LEGS.index(name[:2].upper())] += max(0., contact_force[0])
         return forces
 
+    def support_snapshot(self):
+        """Resolve world contact forces; orientation alone is not standing.
+
+        Tarsi 1–5 and pretarsi constitute the foot. Other contacts (including
+        proximal legs) are reported separately. Vertical load includes friction
+        and uses the force on the fly, regardless of MuJoCo geom ordering.
+        """
+        m, d = self.model, self.data
+        normal, vertical = np.zeros(6), np.zeros(6)
+        other, total = {}, np.zeros(3)
+        force = np.zeros(6)
+        for index, contact in enumerate(d.contact):
+            a, b = m.geom_bodyid[contact.geom1], m.geom_bodyid[contact.geom2]
+            if (a == 0) == (b == 0):
+                continue
+            geom = int(contact.geom2 if a == 0 else contact.geom1)
+            name = m.body(int(m.geom_bodyid[geom])).name
+            mujoco.mj_contactForce(m, d, index, force)
+            world = contact.frame.reshape(3, 3).T @ force[:3]
+            if b == 0:
+                world = -world
+            total += world
+            leg = name[:2].upper()
+            if leg in LEGS and ('_tarsus' in name or '_pretarsus' in name):
+                i = LEGS.index(leg)
+                normal[i] += max(0., force[0])
+                vertical[i] += world[2]
+            elif force[0] > .001:
+                other[name] = other.get(name, 0.) + float(world[2])
+        weight = float(m.body_mass.sum() * np.linalg.norm(m.opt.gravity))
+        upright = float(d.xmat[self.body_ids['c_thorax']].reshape(3, 3)[2, 2])
+        feet = int(np.count_nonzero(vertical > .02))
+        fraction = float(vertical.sum() / weight) if weight else 0.
+        other_load = float(sum(max(0., x) for x in other.values()))
+        # Instantaneous diagnostic, not a claim of stability or neural causation.
+        supported = feet >= 3 and .8 <= fraction <= 1.2 and other_load < .05 * weight and upright > np.cos(np.pi / 6)
+        return {'foot_normal_uN': normal.tolist(), 'foot_vertical_uN': vertical.tolist(),
+                'elasticity_profile': self.parameters.elasticity_profile,
+                'weight_uN': weight, 'feet_support_fraction': fraction,
+                'other_vertical_uN': other_load, 'other_contacts': other,
+                'world_force_uN': total.tolist(), 'supporting_feet': feet,
+                'feet_supported': bool(supported)}
+
     def pretarsal_snapshot(self):
         from .pretarsus import CLAW_CAPSULES
         return [{"name": name, "position": self.data.xpos[index].tolist(),
+                 "parent": self.model.body(int(self.model.body_parentid[index])).name,
                  "quaternion": self.data.xquat[index].tolist(), "capsules": CLAW_CAPSULES,
                  "activation": float(self.data.act[84 + LEGS.index(name[:2].upper())])}
                 for name, index in self.body_ids.items() if name.endswith("_pretarsus")]
 
     def snapshot(self):
-        forces = self.foot_feedback()
+        support = self.support_snapshot()
+        forces = np.asarray(support['foot_normal_uN'])
         peripheral = self.peripheral_snapshot()
         grouped_activation = self.data.act[:84].reshape(6, 7, 2).mean(axis=1)
         grouped_force = np.abs(self.data.actuator_force[:84]).reshape(6, 7, 2).sum(axis=1)
@@ -458,6 +535,7 @@ class FlyBody:
             "pretarsi": self.pretarsal_snapshot(),
             "additional_geometry": self.additional_geometry(peripheral), "peripheral_muscles": peripheral,
             "feet": self.data.site_xpos[self.foot_ids].tolist(),
+            "foot_parents": [self.model.body(int(self.model.site_bodyid[i])).name for i in self.foot_ids],
             "foot_forces": forces.tolist(), "foot_contacts": (forces > .02).tolist(),
             "joints": self.data.qpos[7:].tolist(), "joint_velocities": self.data.qvel[6:].tolist(),
             "position": self.data.qpos[:3].tolist(), "velocity": self.data.qvel[:3].tolist(),
@@ -465,6 +543,7 @@ class FlyBody:
             "activation": grouped_activation.ravel().tolist(), "force": grouped_force.ravel().tolist(),
             "muscle_activation": self.data.act.tolist(), "muscle_force": np.abs(self.data.actuator_force).tolist(),
             "contacts": int(self.data.ncon), "upright": float(rotation[2, 2]),
+            "support": support,
             "heading": float(math.atan2(rotation[1, 0], rotation[0, 0])),
             "anatomy": {"name": "NeuroMechFly articulated body", "segments": len(self.names),
                         "joints": self.model.njnt - 1, "actuated_joints": len(self.actuated_joint_ids()), "muscles": self.model.nu,

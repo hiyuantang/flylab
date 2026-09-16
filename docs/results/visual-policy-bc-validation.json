@@ -1,0 +1,1449 @@
+{
+  "checkpoint": "policy-1789445040153777000.pt",
+  "checkpoint_sha256": "d28301c266a90c0ffff7e4ce313ef6ac485332f3db1779fbe30e5fd3a1163f14",
+  "device": "mps",
+  "precision": "float32",
+  "parameters": 1386708,
+  "training": {
+    "id": "policy-1789445040153777000.pt",
+    "chart_id": "policy-chart-1789445040152325000",
+    "chart_name": "Pointing \u00b7 behavior cloning",
+    "parent": null,
+    "version": 1,
+    "name": "v1 \u00b7 behavior cloning \u00b7 60 epochs",
+    "controller_kind": "transformer",
+    "rank": 0,
+    "iterations": 60,
+    "horizon": 25,
+    "batch_size": 32,
+    "learning_rate": 0.0003,
+    "seed": 42,
+    "created_at": "2026-09-15T04:04:00.153787+00:00",
+    "proportions": {
+      "palm": 0.0,
+      "fist": 0.0,
+      "point": 50.0,
+      "point_right": 50.0,
+      "point_both": 0.0
+    },
+    "optimizer_start": "Fresh Adam; random full weights",
+    "training_recipe": "action-chunk-bc-v1",
+    "loss_metric": "action_mae",
+    "demonstrations_per_gesture": 16,
+    "validation_episodes": 4,
+    "rollout_episodes": 4,
+    "evaluation_interval": 10,
+    "resume_from": null,
+    "parent_global_step": 0,
+    "parent_learning_rate": null,
+    "rng_start": "Restarted sample stream with requested seed",
+    "training_state_version": 1,
+    "runtime_versions": {
+      "torch": "2.14.0",
+      "numpy": "2.5.3"
+    },
+    "early_stopping": false,
+    "early_stopping_patience": 10,
+    "target_version": "routed-muscle-reference-v3",
+    "policy_sha256": "6fd24934635849412c98f51027c809b26966ca2a6f593d65532f8131404bd889",
+    "behavior_validated": true,
+    "execution": {
+      "device": "mps",
+      "precision": "float32",
+      "gradient_precision": "float32"
+    },
+    "batch_mode": "parallel",
+    "trainable_parameters": 1386708,
+    "schema": {
+      "version": "sensor-action-transformer-v1",
+      "sensors": [
+        {
+          "name": "left_eye",
+          "samples": 857,
+          "channels": 1,
+          "tokens": 64,
+          "geometry": "left"
+        },
+        {
+          "name": "right_eye",
+          "samples": 852,
+          "channels": 1,
+          "tokens": 64,
+          "geometry": "right"
+        }
+      ],
+      "actions": [
+        "lf_coxa_yaw_positive",
+        "lf_coxa_yaw_negative",
+        "lf_coxa_pitch_positive",
+        "lf_coxa_pitch_negative",
+        "lf_coxa_roll_positive",
+        "lf_coxa_roll_negative",
+        "lf_trochanterfemur_pitch_positive",
+        "lf_trochanterfemur_pitch_negative",
+        "lf_trochanterfemur_roll_positive",
+        "lf_trochanterfemur_roll_negative",
+        "lf_tibia_pitch_positive",
+        "lf_tibia_pitch_negative",
+        "lf_tarsus1_pitch_positive",
+        "lf_tarsus1_pitch_negative",
+        "lm_coxa_yaw_positive",
+        "lm_coxa_yaw_negative",
+        "lm_coxa_pitch_positive",
+        "lm_coxa_pitch_negative",
+        "lm_coxa_roll_positive",
+        "lm_coxa_roll_negative",
+        "lm_trochanterfemur_pitch_positive",
+        "lm_trochanterfemur_pitch_negative",
+        "lm_trochanterfemur_roll_positive",
+        "lm_trochanterfemur_roll_negative",
+        "lm_tibia_pitch_positive",
+        "lm_tibia_pitch_negative",
+        "lm_tarsus1_pitch_positive",
+        "lm_tarsus1_pitch_negative",
+        "lh_coxa_yaw_positive",
+        "lh_coxa_yaw_negative",
+        "lh_coxa_pitch_positive",
+        "lh_coxa_pitch_negative",
+        "lh_coxa_roll_positive",
+        "lh_coxa_roll_negative",
+        "lh_trochanterfemur_pitch_positive",
+        "lh_trochanterfemur_pitch_negative",
+        "lh_trochanterfemur_roll_positive",
+        "lh_trochanterfemur_roll_negative",
+        "lh_tibia_pitch_positive",
+        "lh_tibia_pitch_negative",
+        "lh_tarsus1_pitch_positive",
+        "lh_tarsus1_pitch_negative",
+        "rf_coxa_yaw_positive",
+        "rf_coxa_yaw_negative",
+        "rf_coxa_pitch_positive",
+        "rf_coxa_pitch_negative",
+        "rf_coxa_roll_positive",
+        "rf_coxa_roll_negative",
+        "rf_trochanterfemur_pitch_positive",
+        "rf_trochanterfemur_pitch_negative",
+        "rf_trochanterfemur_roll_positive",
+        "rf_trochanterfemur_roll_negative",
+        "rf_tibia_pitch_positive",
+        "rf_tibia_pitch_negative",
+        "rf_tarsus1_pitch_positive",
+        "rf_tarsus1_pitch_negative",
+        "rm_coxa_yaw_positive",
+        "rm_coxa_yaw_negative",
+        "rm_coxa_pitch_positive",
+        "rm_coxa_pitch_negative",
+        "rm_coxa_roll_positive",
+        "rm_coxa_roll_negative",
+        "rm_trochanterfemur_pitch_positive",
+        "rm_trochanterfemur_pitch_negative",
+        "rm_trochanterfemur_roll_positive",
+        "rm_trochanterfemur_roll_negative",
+        "rm_tibia_pitch_positive",
+        "rm_tibia_pitch_negative",
+        "rm_tarsus1_pitch_positive",
+        "rm_tarsus1_pitch_negative",
+        "rh_coxa_yaw_positive",
+        "rh_coxa_yaw_negative",
+        "rh_coxa_pitch_positive",
+        "rh_coxa_pitch_negative",
+        "rh_coxa_roll_positive",
+        "rh_coxa_roll_negative",
+        "rh_trochanterfemur_pitch_positive",
+        "rh_trochanterfemur_pitch_negative",
+        "rh_trochanterfemur_roll_positive",
+        "rh_trochanterfemur_roll_negative",
+        "rh_tibia_pitch_positive",
+        "rh_tibia_pitch_negative",
+        "rh_tarsus1_pitch_positive",
+        "rh_tarsus1_pitch_negative"
+      ],
+      "config": {
+        "history": 8,
+        "chunk": 5,
+        "width": 128,
+        "layers": 4,
+        "heads": 4
+      },
+      "command_seconds": 0.02
+    },
+    "training_sha256": "486502e470c0c1481e9cf68dff9b2ba31e9d3713369169d4e3413a226186b494",
+    "dataset_key": "2d2e7dbd1d043a58d322e8391816160bfd0c200b00e0dfc8d5bf207d6dc4bd68",
+    "validation_signature": "0a15dbae1c14ff4bfff6a211f46793dda08993bede9f2c0045bb63c404a86434",
+    "training_windows": 800,
+    "validation_windows": 200,
+    "validation_split": "Separate placement seeds; complete trajectories stay in one split",
+    "completed_iterations": 60,
+    "best_iteration": 50,
+    "global_step": 1500,
+    "completed_epochs": 60,
+    "best_global_step": 1250,
+    "final_loss": 0.0009364618827416764,
+    "selected_evaluation": {
+      "success_rate": 1.0,
+      "successes": 8,
+      "episodes": 8,
+      "by_gesture": {
+        "point": {
+          "successes": 4,
+          "episodes": 4
+        },
+        "point_right": {
+          "successes": 4,
+          "episodes": 4
+        }
+      },
+      "trials": [
+        {
+          "gesture": "point",
+          "seed": 8042,
+          "success": true,
+          "successful_frames": 25,
+          "frames": 25,
+          "final": {
+            "pose_reached": true,
+            "foot_heights_mm": [
+              0.556494245832268,
+              0.03597700886424938,
+              0.03539906230143614,
+              0.023774263174251277,
+              0.03906227976969984,
+              0.048397101615280894
+            ],
+            "raised_legs": [
+              0
+            ],
+            "support_feet_near_floor": true,
+            "body_height_mm": 1.1722518357798948,
+            "upright": 0.997691728321753
+          }
+        },
+        {
+          "gesture": "point",
+          "seed": 8043,
+          "success": true,
+          "successful_frames": 25,
+          "frames": 25,
+          "final": {
+            "pose_reached": true,
+            "foot_heights_mm": [
+              0.5571749175471159,
+              0.036222580624855366,
+              0.04303510074333195,
+              0.02360628421995417,
+              0.03888313145362983,
+              0.04848460363672847
+            ],
+            "raised_legs": [
+              0
+            ],
+            "support_feet_near_floor": true,
+            "body_height_mm": 1.1723124838093482,
+            "upright": 0.9977560277283657
+          }
+        },
+        {
+          "gesture": "point",
+          "seed": 8044,
+          "success": true,
+          "successful_frames": 25,
+          "frames": 25,
+          "final": {
+            "pose_reached": true,
+            "foot_heights_mm": [
+              0.5559115450177773,
+              0.036905058237802546,
+              0.04913406350895067,
+              0.02336399944990724,
+              0.03873292543627883,
+              0.04874704835265464
+            ],
+            "raised_legs": [
+              0
+            ],
+            "support_feet_near_floor": true,
+            "body_height_mm": 1.1717727473356971,
+            "upright": 0.9977196827513577
+          }
+        },
+        {
+          "gesture": "point",
+          "seed": 8045,
+          "success": true,
+          "successful_frames": 25,
+          "frames": 25,
+          "final": {
+            "pose_reached": true,
+            "foot_heights_mm": [
+              0.5561776940018546,
+              0.036166435770325724,
+              0.03537640126624057,
+              0.023652153715421228,
+              0.03907315055949291,
+              0.048628308532154975
+            ],
+            "raised_legs": [
+              0
+            ],
+            "support_feet_near_floor": true,
+            "body_height_mm": 1.1725989943321526,
+            "upright": 0.997665751630611
+          }
+        },
+        {
+          "gesture": "point_right",
+          "seed": 8042,
+          "success": true,
+          "successful_frames": 25,
+          "frames": 25,
+          "final": {
+            "pose_reached": true,
+            "foot_heights_mm": [
+              0.027040077486618293,
+              0.04001575319713396,
+              0.053016013915946035,
+              0.6990827756215681,
+              0.03841917176357621,
+              0.04642226348311908
+            ],
+            "raised_legs": [
+              3
+            ],
+            "support_feet_near_floor": true,
+            "body_height_mm": 1.2120875948783254,
+            "upright": 0.9995434240497441
+          }
+        },
+        {
+          "gesture": "point_right",
+          "seed": 8043,
+          "success": true,
+          "successful_frames": 25,
+          "frames": 25,
+          "final": {
+            "pose_reached": true,
+            "foot_heights_mm": [
+              0.02707396096252896,
+              0.040111333623367135,
+              0.05461145895928384,
+              0.6991348871997107,
+              0.038375078827119796,
+              0.04641477195247279
+            ],
+            "raised_legs": [
+              3
+            ],
+            "support_feet_near_floor": true,
+            "body_height_mm": 1.2121495786304206,
+            "upright": 0.9995481538802826
+          }
+        },
+        {
+          "gesture": "point_right",
+          "seed": 8044,
+          "success": true,
+          "successful_frames": 25,
+          "frames": 25,
+          "final": {
+            "pose_reached": true,
+            "foot_heights_mm": [
+              0.027049818224577322,
+              0.03994345128268729,
+              0.05311832217786385,
+              0.6983707439229787,
+              0.0385025940890559,
+              0.04641030401743442
+            ],
+            "raised_legs": [
+              3
+            ],
+            "support_feet_near_floor": true,
+            "body_height_mm": 1.2120035570771999,
+            "upright": 0.9995468644087806
+          }
+        },
+        {
+          "gesture": "point_right",
+          "seed": 8045,
+          "success": true,
+          "successful_frames": 25,
+          "frames": 25,
+          "final": {
+            "pose_reached": true,
+            "foot_heights_mm": [
+              0.027052319837092144,
+              0.039944982709828554,
+              0.05312754110658672,
+              0.6986611433550832,
+              0.03850219092287147,
+              0.04641094147530678
+            ],
+            "raised_legs": [
+              3
+            ],
+            "support_feet_near_floor": true,
+            "body_height_mm": 1.2120761395963828,
+            "upright": 0.9995483045213596
+          }
+        }
+      ],
+      "criterion": "Pose and support criteria held for the final five 20 ms steps",
+      "simulated_seconds_per_episode": 0.5
+    },
+    "wall_seconds": 295.9728035409935,
+    "bytes": 34482529
+  },
+  "test": {
+    "success_rate": 1.0,
+    "successes": 16,
+    "episodes": 16,
+    "by_gesture": {
+      "point": {
+        "successes": 8,
+        "episodes": 8
+      },
+      "point_right": {
+        "successes": 8,
+        "episodes": 8
+      }
+    },
+    "trials": [
+      {
+        "gesture": "point",
+        "seed": 16000,
+        "success": true,
+        "successful_frames": 50,
+        "frames": 50,
+        "final": {
+          "pose_reached": true,
+          "foot_heights_mm": [
+            0.48831606012153045,
+            0.03629314904298954,
+            0.05123375950260302,
+            0.024948070404254973,
+            0.04046804805266445,
+            0.04832648995605256
+          ],
+          "raised_legs": [
+            0
+          ],
+          "support_feet_near_floor": true,
+          "body_height_mm": 1.155338298516178,
+          "upright": 0.9941668587713056
+        }
+      },
+      {
+        "gesture": "point",
+        "seed": 16001,
+        "success": true,
+        "successful_frames": 50,
+        "frames": 50,
+        "final": {
+          "pose_reached": true,
+          "foot_heights_mm": [
+            0.4888140248736691,
+            0.03659115574087372,
+            0.05257425225523115,
+            0.02484717911610868,
+            0.040290058382732925,
+            0.04825529662288236
+          ],
+          "raised_legs": [
+            0
+          ],
+          "support_feet_near_floor": true,
+          "body_height_mm": 1.1555043724890528,
+          "upright": 0.9941814406069002
+        }
+      },
+      {
+        "gesture": "point",
+        "seed": 16002,
+        "success": true,
+        "successful_frames": 50,
+        "frames": 50,
+        "final": {
+          "pose_reached": true,
+          "foot_heights_mm": [
+            0.4898568984258125,
+            0.035896513603623496,
+            0.034250730789278316,
+            0.025191046143890568,
+            0.04072274059933384,
+            0.04874143589169493
+          ],
+          "raised_legs": [
+            0
+          ],
+          "support_feet_near_floor": true,
+          "body_height_mm": 1.1558296262774848,
+          "upright": 0.9941467442562515
+        }
+      },
+      {
+        "gesture": "point",
+        "seed": 16003,
+        "success": true,
+        "successful_frames": 50,
+        "frames": 50,
+        "final": {
+          "pose_reached": true,
+          "foot_heights_mm": [
+            0.4889166574289939,
+            0.03567376977873411,
+            0.03651226319899027,
+            0.025472486996226392,
+            0.04110029431624937,
+            0.04844510380035314
+          ],
+          "raised_legs": [
+            0
+          ],
+          "support_feet_near_floor": true,
+          "body_height_mm": 1.1565879231995073,
+          "upright": 0.9940305199104609
+        }
+      },
+      {
+        "gesture": "point",
+        "seed": 16004,
+        "success": true,
+        "successful_frames": 50,
+        "frames": 50,
+        "final": {
+          "pose_reached": true,
+          "foot_heights_mm": [
+            0.48897792093897446,
+            0.0361729804418331,
+            0.03826461554318852,
+            0.02518027600484721,
+            0.040752706705320454,
+            0.048509696875810256
+          ],
+          "raised_legs": [
+            0
+          ],
+          "support_feet_near_floor": true,
+          "body_height_mm": 1.156135960733342,
+          "upright": 0.994061406138377
+        }
+      },
+      {
+        "gesture": "point",
+        "seed": 16005,
+        "success": true,
+        "successful_frames": 50,
+        "frames": 50,
+        "final": {
+          "pose_reached": true,
+          "foot_heights_mm": [
+            0.48958264870012014,
+            0.036213007135481944,
+            0.039134849683204735,
+            0.025148263620799145,
+            0.04068734915083662,
+            0.048499607622234764
+          ],
+          "raised_legs": [
+            0
+          ],
+          "support_feet_near_floor": true,
+          "body_height_mm": 1.1562385352137337,
+          "upright": 0.994109303400867
+        }
+      },
+      {
+        "gesture": "point",
+        "seed": 16006,
+        "success": true,
+        "successful_frames": 50,
+        "frames": 50,
+        "final": {
+          "pose_reached": true,
+          "foot_heights_mm": [
+            0.48540694158560094,
+            0.03572112292119895,
+            0.03848791390104394,
+            0.02539624358143735,
+            0.04108556791036577,
+            0.04840292394370499
+          ],
+          "raised_legs": [
+            0
+          ],
+          "support_feet_near_floor": true,
+          "body_height_mm": 1.1549292626002292,
+          "upright": 0.9938985183838243
+        }
+      },
+      {
+        "gesture": "point",
+        "seed": 16007,
+        "success": true,
+        "successful_frames": 50,
+        "frames": 50,
+        "final": {
+          "pose_reached": true,
+          "foot_heights_mm": [
+            0.48895104887376384,
+            0.03599611739958636,
+            0.033379274652239325,
+            0.025000917565432816,
+            0.04091345788185588,
+            0.04869658623859581
+          ],
+          "raised_legs": [
+            0
+          ],
+          "support_feet_near_floor": true,
+          "body_height_mm": 1.1557787336664949,
+          "upright": 0.9940993048083762
+        }
+      },
+      {
+        "gesture": "point_right",
+        "seed": 16000,
+        "success": true,
+        "successful_frames": 50,
+        "frames": 50,
+        "final": {
+          "pose_reached": true,
+          "foot_heights_mm": [
+            0.02702246888919583,
+            0.04004868052456107,
+            0.04944319624008462,
+            0.6996628918738141,
+            0.03841774895134958,
+            0.04664967019843586
+          ],
+          "raised_legs": [
+            3
+          ],
+          "support_feet_near_floor": true,
+          "body_height_mm": 1.2099583285525128,
+          "upright": 0.9996089524661683
+        }
+      },
+      {
+        "gesture": "point_right",
+        "seed": 16001,
+        "success": true,
+        "successful_frames": 50,
+        "frames": 50,
+        "final": {
+          "pose_reached": true,
+          "foot_heights_mm": [
+            0.027034217413673615,
+            0.040123149399539,
+            0.05076871256913351,
+            0.6998178925841483,
+            0.0384068778826191,
+            0.04664792536441508
+          ],
+          "raised_legs": [
+            3
+          ],
+          "support_feet_near_floor": true,
+          "body_height_mm": 1.209985742760766,
+          "upright": 0.9996085762612692
+        }
+      },
+      {
+        "gesture": "point_right",
+        "seed": 16002,
+        "success": true,
+        "successful_frames": 50,
+        "frames": 50,
+        "final": {
+          "pose_reached": true,
+          "foot_heights_mm": [
+            0.027021892566381905,
+            0.04004849287419055,
+            0.049440318433779926,
+            0.699620251423912,
+            0.038418035680643725,
+            0.04664834177058033
+          ],
+          "raised_legs": [
+            3
+          ],
+          "support_feet_near_floor": true,
+          "body_height_mm": 1.2099439702057802,
+          "upright": 0.9996083238776964
+        }
+      },
+      {
+        "gesture": "point_right",
+        "seed": 16003,
+        "success": true,
+        "successful_frames": 50,
+        "frames": 50,
+        "final": {
+          "pose_reached": true,
+          "foot_heights_mm": [
+            0.02702157865715677,
+            0.040048316248350146,
+            0.049440140479574665,
+            0.6996163450179604,
+            0.038418250359260095,
+            0.046647911526869104
+          ],
+          "raised_legs": [
+            3
+          ],
+          "support_feet_near_floor": true,
+          "body_height_mm": 1.2099361620464253,
+          "upright": 0.9996081772829528
+        }
+      },
+      {
+        "gesture": "point_right",
+        "seed": 16004,
+        "success": true,
+        "successful_frames": 50,
+        "frames": 50,
+        "final": {
+          "pose_reached": true,
+          "foot_heights_mm": [
+            0.02699457590129161,
+            0.03992513192584769,
+            0.047090429306711395,
+            0.6992015457964224,
+            0.03845733946066397,
+            0.04664384659727923
+          ],
+          "raised_legs": [
+            3
+          ],
+          "support_feet_near_floor": true,
+          "body_height_mm": 1.2098585560936477,
+          "upright": 0.9996047668096367
+        }
+      },
+      {
+        "gesture": "point_right",
+        "seed": 16005,
+        "success": true,
+        "successful_frames": 50,
+        "frames": 50,
+        "final": {
+          "pose_reached": true,
+          "foot_heights_mm": [
+            0.027027800456607978,
+            0.04008674695640903,
+            0.05012013265505314,
+            0.6996877344325356,
+            0.03841033226494518,
+            0.04664782355945829
+          ],
+          "raised_legs": [
+            3
+          ],
+          "support_feet_near_floor": true,
+          "body_height_mm": 1.209945450401503,
+          "upright": 0.9996083888703933
+        }
+      },
+      {
+        "gesture": "point_right",
+        "seed": 16006,
+        "success": true,
+        "successful_frames": 50,
+        "frames": 50,
+        "final": {
+          "pose_reached": true,
+          "foot_heights_mm": [
+            0.02700214174787296,
+            0.03996504944452281,
+            0.047803959966757355,
+            0.699127251963136,
+            0.03843935628546452,
+            0.046645843784767924
+          ],
+          "raised_legs": [
+            3
+          ],
+          "support_feet_near_floor": true,
+          "body_height_mm": 1.2098260524363713,
+          "upright": 0.999605355769877
+        }
+      },
+      {
+        "gesture": "point_right",
+        "seed": 16007,
+        "success": true,
+        "successful_frames": 50,
+        "frames": 50,
+        "final": {
+          "pose_reached": true,
+          "foot_heights_mm": [
+            0.027010506015285263,
+            0.04000544653320576,
+            0.04852519708715151,
+            0.699133730047245,
+            0.038423894892182384,
+            0.04664800805420359
+          ],
+          "raised_legs": [
+            3
+          ],
+          "support_feet_near_floor": true,
+          "body_height_mm": 1.2098352105724794,
+          "upright": 0.9996065161549409
+        }
+      }
+    ],
+    "criterion": "Pose and support criteria held for the final five 20 ms steps",
+    "simulated_seconds_per_episode": 1.0
+  },
+  "vision_ablation_action_mae": {
+    "normal": 0.0009364618827416764,
+    "blank": 0.008719664573183527,
+    "swapped": 0.01658547884258239
+  },
+  "history": [
+    {
+      "iteration": 1,
+      "global_step": 25,
+      "loss": 0.048226843288411265,
+      "validation_loss": 0.0271853625409953,
+      "gradient_norm": 0.07608817517757416,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 2,
+      "global_step": 50,
+      "loss": 0.019539937150219212,
+      "validation_loss": 0.013984065877435647,
+      "gradient_norm": 0.08614771068096161,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 3,
+      "global_step": 75,
+      "loss": 0.012039966324506246,
+      "validation_loss": 0.01091626869595569,
+      "gradient_norm": 0.07448463886976242,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 4,
+      "global_step": 100,
+      "loss": 0.010473900526235608,
+      "validation_loss": 0.010021564985989877,
+      "gradient_norm": 0.0707048773765564,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 5,
+      "global_step": 125,
+      "loss": 0.00985699774262131,
+      "validation_loss": 0.009642311473093603,
+      "gradient_norm": 0.060476187616586685,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 6,
+      "global_step": 150,
+      "loss": 0.009532466367312262,
+      "validation_loss": 0.00930896176673148,
+      "gradient_norm": 0.06721200048923492,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 7,
+      "global_step": 175,
+      "loss": 0.009258132875623668,
+      "validation_loss": 0.009131201411313985,
+      "gradient_norm": 0.05546841770410538,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 8,
+      "global_step": 200,
+      "loss": 0.009117509755204716,
+      "validation_loss": 0.00895671595049941,
+      "gradient_norm": 0.05558129400014877,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 9,
+      "global_step": 225,
+      "loss": 0.008999937510563303,
+      "validation_loss": 0.008894945768153539,
+      "gradient_norm": 0.05951971188187599,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 10,
+      "global_step": 250,
+      "loss": 0.00891135012928356,
+      "validation_loss": 0.008780430445609532,
+      "gradient_norm": 0.06541708111763,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": 0.0
+    },
+    {
+      "iteration": 11,
+      "global_step": 275,
+      "loss": 0.008782397011932714,
+      "validation_loss": 0.00875052746952228,
+      "gradient_norm": 0.0605396032333374,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 12,
+      "global_step": 300,
+      "loss": 0.008732266521395143,
+      "validation_loss": 0.008640290339193914,
+      "gradient_norm": 0.05827631428837776,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 13,
+      "global_step": 325,
+      "loss": 0.00872450508607511,
+      "validation_loss": 0.008685352219997541,
+      "gradient_norm": 0.06315107643604279,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 14,
+      "global_step": 350,
+      "loss": 0.00867061189973079,
+      "validation_loss": 0.008630014935751324,
+      "gradient_norm": 0.06455099582672119,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 15,
+      "global_step": 375,
+      "loss": 0.008641630658910245,
+      "validation_loss": 0.008564641820671766,
+      "gradient_norm": 0.053005948662757874,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 16,
+      "global_step": 400,
+      "loss": 0.008573408123692903,
+      "validation_loss": 0.00853881397810967,
+      "gradient_norm": 0.06527972966432571,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 17,
+      "global_step": 425,
+      "loss": 0.00856129623008082,
+      "validation_loss": 0.008543312326883492,
+      "gradient_norm": 0.063585564494133,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 18,
+      "global_step": 450,
+      "loss": 0.008539843885987268,
+      "validation_loss": 0.008525808270939666,
+      "gradient_norm": 0.05250205844640732,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 19,
+      "global_step": 475,
+      "loss": 0.008461105264976378,
+      "validation_loss": 0.007906993314542848,
+      "gradient_norm": 0.06053262948989868,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 20,
+      "global_step": 500,
+      "loss": 0.005586846191410744,
+      "validation_loss": 0.00299807965664355,
+      "gradient_norm": 0.09177931398153305,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": 1.0
+    },
+    {
+      "iteration": 21,
+      "global_step": 525,
+      "loss": 0.002070942268746085,
+      "validation_loss": 0.0014508181294608537,
+      "gradient_norm": 0.08629405498504639,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 22,
+      "global_step": 550,
+      "loss": 0.0013530741791170009,
+      "validation_loss": 0.0013114722564553274,
+      "gradient_norm": 0.07922039926052094,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 23,
+      "global_step": 575,
+      "loss": 0.0012100945090977526,
+      "validation_loss": 0.0011269084422130381,
+      "gradient_norm": 0.07669990509748459,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 24,
+      "global_step": 600,
+      "loss": 0.001171485403851282,
+      "validation_loss": 0.0010993298150740725,
+      "gradient_norm": 0.08505567908287048,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 25,
+      "global_step": 625,
+      "loss": 0.001091420897991275,
+      "validation_loss": 0.0013299680444027256,
+      "gradient_norm": 0.08490387350320816,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 26,
+      "global_step": 650,
+      "loss": 0.0011679839893907267,
+      "validation_loss": 0.0010738374283233577,
+      "gradient_norm": 0.08852241933345795,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 27,
+      "global_step": 675,
+      "loss": 0.0010836919150555649,
+      "validation_loss": 0.0010714359516935908,
+      "gradient_norm": 0.08010067790746689,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 28,
+      "global_step": 700,
+      "loss": 0.0011511083235824988,
+      "validation_loss": 0.0013460387550446246,
+      "gradient_norm": 0.09010951220989227,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 29,
+      "global_step": 725,
+      "loss": 0.001109660384052246,
+      "validation_loss": 0.0011363364515684384,
+      "gradient_norm": 0.08151503652334213,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 30,
+      "global_step": 750,
+      "loss": 0.0010722779488075858,
+      "validation_loss": 0.0010715032163400042,
+      "gradient_norm": 0.0809965431690216,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": 1.0
+    },
+    {
+      "iteration": 31,
+      "global_step": 775,
+      "loss": 0.001031948015667655,
+      "validation_loss": 0.0010818085609808686,
+      "gradient_norm": 0.09362874180078506,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 32,
+      "global_step": 800,
+      "loss": 0.0010482091043978352,
+      "validation_loss": 0.0009901478963160037,
+      "gradient_norm": 0.09591957181692123,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 33,
+      "global_step": 825,
+      "loss": 0.0010548917246721787,
+      "validation_loss": 0.0009931693993680908,
+      "gradient_norm": 0.07816875725984573,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 34,
+      "global_step": 850,
+      "loss": 0.0010209342837934736,
+      "validation_loss": 0.000975952595067413,
+      "gradient_norm": 0.09238564223051071,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 35,
+      "global_step": 875,
+      "loss": 0.0009763773938491636,
+      "validation_loss": 0.0010365995081171961,
+      "gradient_norm": 0.08150235563516617,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 36,
+      "global_step": 900,
+      "loss": 0.0009824923652638022,
+      "validation_loss": 0.0009618564338028511,
+      "gradient_norm": 0.08981408178806305,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 37,
+      "global_step": 925,
+      "loss": 0.0009777152901970902,
+      "validation_loss": 0.0009743345207939653,
+      "gradient_norm": 0.08442503213882446,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 38,
+      "global_step": 950,
+      "loss": 0.0009445741046004949,
+      "validation_loss": 0.0009718211510082018,
+      "gradient_norm": 0.09545255452394485,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 39,
+      "global_step": 975,
+      "loss": 0.0009790481560902782,
+      "validation_loss": 0.000945890809500428,
+      "gradient_norm": 0.08911477029323578,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 40,
+      "global_step": 1000,
+      "loss": 0.0009567168644381404,
+      "validation_loss": 0.0009662177946428646,
+      "gradient_norm": 0.08255450427532196,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": 1.0
+    },
+    {
+      "iteration": 41,
+      "global_step": 1025,
+      "loss": 0.0009306938710600978,
+      "validation_loss": 0.0009387597481532873,
+      "gradient_norm": 0.09179553389549255,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 42,
+      "global_step": 1050,
+      "loss": 0.0009876180203244314,
+      "validation_loss": 0.001016219688766717,
+      "gradient_norm": 0.08210667222738266,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 43,
+      "global_step": 1075,
+      "loss": 0.000991140597255688,
+      "validation_loss": 0.0009799248092230814,
+      "gradient_norm": 0.07434149086475372,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 44,
+      "global_step": 1100,
+      "loss": 0.0009657242956840808,
+      "validation_loss": 0.000946682249259143,
+      "gradient_norm": 0.08696345239877701,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 45,
+      "global_step": 1125,
+      "loss": 0.0009482426909412227,
+      "validation_loss": 0.0009592205239206795,
+      "gradient_norm": 0.09203211963176727,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 46,
+      "global_step": 1150,
+      "loss": 0.0009635947528611565,
+      "validation_loss": 0.000992011668922319,
+      "gradient_norm": 0.0786781907081604,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 47,
+      "global_step": 1175,
+      "loss": 0.000976035390530065,
+      "validation_loss": 0.0009670248090633718,
+      "gradient_norm": 0.08574718236923218,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 48,
+      "global_step": 1200,
+      "loss": 0.0009404659986340329,
+      "validation_loss": 0.0009382100685362947,
+      "gradient_norm": 0.0896836668252945,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 49,
+      "global_step": 1225,
+      "loss": 0.0009729227336482955,
+      "validation_loss": 0.0009482358091981555,
+      "gradient_norm": 0.09120707213878632,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 50,
+      "global_step": 1250,
+      "loss": 0.001000939544278283,
+      "validation_loss": 0.0009364618827416764,
+      "gradient_norm": 0.0893920511007309,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": 1.0
+    },
+    {
+      "iteration": 51,
+      "global_step": 1275,
+      "loss": 0.0009635692803504239,
+      "validation_loss": 0.000936930167802569,
+      "gradient_norm": 0.09158466756343842,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 52,
+      "global_step": 1300,
+      "loss": 0.000933336140698647,
+      "validation_loss": 0.0009121710729390463,
+      "gradient_norm": 0.08282095938920975,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 53,
+      "global_step": 1325,
+      "loss": 0.00091081493407293,
+      "validation_loss": 0.0009220410578089524,
+      "gradient_norm": 0.09518275409936905,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 54,
+      "global_step": 1350,
+      "loss": 0.0009522292708108738,
+      "validation_loss": 0.0009797510213937367,
+      "gradient_norm": 0.0976574495434761,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 55,
+      "global_step": 1375,
+      "loss": 0.0009535740035378536,
+      "validation_loss": 0.0009505237663372258,
+      "gradient_norm": 0.07872426509857178,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 56,
+      "global_step": 1400,
+      "loss": 0.0009436583589179107,
+      "validation_loss": 0.0009483670168581581,
+      "gradient_norm": 0.08351351320743561,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 57,
+      "global_step": 1425,
+      "loss": 0.000910980445943373,
+      "validation_loss": 0.0009074546279684316,
+      "gradient_norm": 0.09160657227039337,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 58,
+      "global_step": 1450,
+      "loss": 0.0009148001674791727,
+      "validation_loss": 0.0009319729468425858,
+      "gradient_norm": 0.09683927148580551,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 59,
+      "global_step": 1475,
+      "loss": 0.0009176298709739374,
+      "validation_loss": 0.000971220934487697,
+      "gradient_norm": 0.08250723779201508,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": null
+    },
+    {
+      "iteration": 60,
+      "global_step": 1500,
+      "loss": 0.0010017616346253224,
+      "validation_loss": 0.0010082305152141287,
+      "gradient_norm": 0.09156797081232071,
+      "sample_losses": [],
+      "update_accepted": true,
+      "rollout_success_rate": 1.0
+    }
+  ],
+  "live_experiment_snapshot": {
+    "checkpoint": "policy-1789445040153777000.pt",
+    "time": 29.68,
+    "running": false,
+    "feet_mm": [
+      [
+        1.3892585131010209,
+        1.2032056748693598,
+        0.35440214652969876
+      ],
+      [
+        -0.061781080064024226,
+        1.9134571419868087,
+        0.036451792536492555
+      ],
+      [
+        -0.8577344112362456,
+        1.9884944125706594,
+        0.036934401303566206
+      ],
+      [
+        1.255298675527046,
+        -0.9074737648280864,
+        0.02525477965591797
+      ],
+      [
+        -0.36300005927953094,
+        -1.3212615789826891,
+        0.04154956745279584
+      ],
+      [
+        -1.7940272343293864,
+        -0.5110837329183161,
+        0.05075049606784217
+      ]
+    ],
+    "upright": 0.987456457292307,
+    "position_mm": [
+      0.6047568701064647,
+      0.29159735443780976,
+      1.0736171514679576
+    ]
+  }
+}

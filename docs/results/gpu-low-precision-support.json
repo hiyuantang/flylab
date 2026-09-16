@@ -1,0 +1,25 @@
+{
+  "created_utc": "2026-09-13T00:21:19.435436+00:00",
+  "torch": "2.14.0",
+  "mps_available": true,
+  "probes": {
+    "float16": {
+      "allocation": true,
+      "multiply": true,
+      "values": [
+        1.0,
+        4.0
+      ]
+    },
+    "float8_e4m3fn": {
+      "allocation": true,
+      "multiply": false,
+      "error": "Undefined type Float8_e4m3fn"
+    },
+    "float8_e5m2": {
+      "allocation": true,
+      "multiply": false,
+      "error": "Undefined type Float8_e5m2"
+    }
+  }
+}

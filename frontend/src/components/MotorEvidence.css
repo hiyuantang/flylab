@@ -1,0 +1,18 @@
+.motor-evidence input {
+  border: 1px solid #3b5263;
+  border-radius: 5px;
+  background: #152631;
+  color: #dbeaf4;
+  padding: 10px;
+  font: inherit;
+}
+
+.motor-evidence-sources {
+  padding-right: 18px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.motor-evidence-record summary {
+  overflow-wrap: anywhere;
+}

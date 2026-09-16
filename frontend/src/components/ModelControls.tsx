@@ -1,6 +1,9 @@
+import NumberInput from "./NumberInput";
 import Select from "./Select";
 import { useEffect, useState } from "react";
 import { request, downloadJSON } from "../lib/api";
+import { MotorEvidence } from "./MotorEvidence";
+import type { MotorMappingRecord } from "../lib/types";
 type Mechanics = {
   parameters: {
     mass_scale: number;
@@ -39,19 +42,14 @@ type Mapping = {
     string,
     { total: number; mapped: number; unmapped: number }
   >;
-  unmapped: {
-    body_id: number;
-    type: string | null;
-    body_region: string;
-    reason: string;
-  }[];
+  unmapped: MotorMappingRecord[];
   mapped_motor_neurons: number;
   unmapped_motor_neurons: number;
   actuated_channels: number;
   total_channels: number;
   limitations: string;
   unassigned_region_neurons: number;
-  mapping: { body_id: number; type: string; leg: string; joint: string }[];
+  mapping: MotorMappingRecord[];
   physiology: {
     physiology: {
       gain: number;
@@ -62,7 +60,17 @@ type Mapping = {
   };
 };
 type Execution = {
-  current: { device: "cpu" | "mps"; precision: string; note: string } | null;
+  current: {
+    device: "cpu" | "mps";
+    precision: string;
+    note: string;
+    neural_dt_ms: number;
+    effective_delay_ms: number;
+    effective_refractory_ms: number;
+    muscle_command_hz: 50 | 60;
+    coupling_mode: "serial" | "pipelined";
+    command_delay_ms: number;
+  } | null;
   available: { cpu: boolean; mps: boolean };
   scope: string;
 };
@@ -105,10 +113,25 @@ export function ModelControls({ onError }: { onError: (s: string) => void }) {
       active = false;
     };
   }, [onError]);
-  const switchDevice = async (device: "cpu" | "mps") => {
+  const switchDevice = async (
+    device: "cpu" | "mps",
+    neural_dt_ms?: number,
+    muscle_command_hz?: 50 | 60,
+    precision?: "float16" | "float32" | "float64",
+    coupling_mode?: "serial" | "pipelined",
+  ) => {
     setBusy(true);
     try {
-      setExecution(await request<Execution>("/execution", { device }));
+      setExecution(
+        await request<Execution>("/execution", {
+          device,
+          neural_dt_ms,
+          precision,
+          coupling_mode,
+          muscle_command_hz:
+            muscle_command_hz ?? (neural_dt_ms ? 50 : undefined),
+        }),
+      );
     } catch (e) {
       onError((e as Error).message);
     } finally {
@@ -133,7 +156,7 @@ export function ModelControls({ onError }: { onError: (s: string) => void }) {
     try {
       setMapping(
         await request<Mapping>("/connectome/mapping", {
-          profile: "muscle-routing-v4",
+          profile: "muscle-routing-v5",
         }),
       );
       setMechanics(await request<Mechanics>("/mechanics"));
@@ -184,16 +207,137 @@ export function ModelControls({ onError }: { onError: (s: string) => void }) {
               disabled={
                 busy ||
                 !execution.available.mps ||
-                execution.current.device === "mps"
+                execution.current.precision === "torch.float32"
               }
-              onClick={() => switchDevice("mps")}
+              onClick={() =>
+                switchDevice("mps", undefined, undefined, "float32")
+              }
             >
               Use Apple GPU · float32 experimental
+            </button>
+            <button
+              disabled={
+                busy ||
+                !execution.available.mps ||
+                execution.current.precision === "torch.float16"
+              }
+              onClick={() =>
+                switchDevice("mps", undefined, undefined, "float16")
+              }
+            >
+              Use Apple GPU · optimized float16
             </button>
           </div>
           <p className="body-copy">
             Switching pauses the simulation, saves a backup, and transfers every
             neuron and pending spike without resetting time. {execution.scope}
+          </p>
+          <div className="panel-heading">
+            <h3>Brain and body execution</h3>
+          </div>
+          <p className="body-copy">
+            {execution.current.coupling_mode === "pipelined"
+              ? `Overlapping · ${execution.current.command_delay_ms.toFixed(1)} ms added command delay`
+              : "Serial · brain completes before physics starts"}
+          </p>
+          <div className="lab-controls">
+            <button
+              disabled={busy || execution.current.coupling_mode === "serial"}
+              onClick={() =>
+                switchDevice(
+                  execution.current!.device,
+                  undefined,
+                  undefined,
+                  undefined,
+                  "serial",
+                )
+              }
+            >
+              Serial
+            </button>
+            <button
+              disabled={busy || execution.current.coupling_mode === "pipelined"}
+              onClick={() =>
+                switchDevice(
+                  execution.current!.device,
+                  undefined,
+                  undefined,
+                  undefined,
+                  "pipelined",
+                )
+              }
+            >
+              Overlap brain &amp; body
+            </button>
+          </div>
+          <p className="body-copy">
+            Overlap advances physics using the previous muscle command while the
+            brain computes the next one. Both clocks meet at each cycle
+            boundary; every neural and physics step is retained. Switching holds
+            the current muscle excitation for the first cycle. This added delay
+            changes the model's dynamics; it is not a measured biological delay.
+          </p>
+          <div className="panel-heading">
+            <h3>Sensory and muscle command rate</h3>
+          </div>
+          <p className="body-copy">
+            {execution.current.muscle_command_hz} Hz · activation is held
+            between commands; muscle forces and velocity continue through
+            physics substeps.
+          </p>
+          <div className="lab-controls">
+            <button
+              disabled={busy || execution.current.muscle_command_hz === 60}
+              onClick={() =>
+                switchDevice(execution.current!.device, undefined, 60)
+              }
+            >
+              60 Hz commands · 960 Hz brain
+            </button>
+            <button
+              disabled={busy || execution.current.muscle_command_hz === 50}
+              onClick={() =>
+                switchDevice(execution.current!.device, undefined, 50)
+              }
+            >
+              50 Hz commands · 1,000 Hz brain
+            </button>
+          </div>
+          <p className="body-copy">
+            At 60 Hz, each command spans 16 brain updates. The display smoothly
+            interpolates computed poses at your screen refresh rate, with a
+            small playback delay. Slow computation appears as slow motion.
+          </p>
+          <div className="panel-heading">
+            <h3>Neural update interval</h3>
+          </div>
+          <p className="body-copy">
+            {execution.current.neural_dt_ms.toLocaleString(undefined, {
+              maximumFractionDigits: 3,
+            })}{" "}
+            ms · {(1000 / execution.current.neural_dt_ms).toLocaleString()}{" "}
+            updates per simulated second
+          </p>
+          <div className="lab-controls">
+            <button
+              disabled={busy || execution.current.neural_dt_ms === 0.1}
+              onClick={() => switchDevice(execution.current!.device, 0.1)}
+            >
+              0.1 ms · reference timing
+            </button>
+            <button
+              disabled={busy || execution.current.neural_dt_ms === 1}
+              onClick={() => switchDevice(execution.current!.device, 1)}
+            >
+              1 ms · faster approximation
+            </button>
+          </div>
+          <p className="body-copy">
+            Signal delay: {execution.current.effective_delay_ms.toFixed(3)} ms.
+            Default refractory period:{" "}
+            {execution.current.effective_refractory_ms.toFixed(3)} ms. The
+            coarser clock rounds event times up and changes firing behavior. All
+            neurons and connections remain. Real-time speed is not guaranteed.
           </p>
           {!execution.available.mps && (
             <p className="body-copy">
@@ -235,10 +379,10 @@ export function ModelControls({ onError }: { onError: (s: string) => void }) {
             <div className="lab-controls">
               <label>
                 Efficacy per synapse (mV)
-                <input
+                <NumberInput
                   aria-label="Synaptic gain"
                   step="0.025"
-                  type="number"
+
                   min="0"
                   max="100"
                   value={gain}
@@ -247,9 +391,9 @@ export function ModelControls({ onError }: { onError: (s: string) => void }) {
               </label>
               <label>
                 Membrane decay (ms)
-                <input
+                <NumberInput
                   aria-label="Membrane decay"
-                  type="number"
+
                   min="1"
                   max="100"
                   value={membrane}
@@ -258,9 +402,9 @@ export function ModelControls({ onError }: { onError: (s: string) => void }) {
               </label>
               <label>
                 Synaptic decay (ms)
-                <input
+                <NumberInput
                   aria-label="Synaptic decay"
-                  type="number"
+
                   min="1"
                   max="100"
                   value={synapse}
@@ -328,9 +472,9 @@ export function ModelControls({ onError }: { onError: (s: string) => void }) {
               approximation; asynchronous flight and fluid ingestion are not
               simulated.
             </p>
-            {mapping.mapping_profile !== "muscle-routing-v4" && (
+            {mapping.mapping_profile !== "muscle-routing-v5" && (
               <button disabled={busy} onClick={applyMapping}>
-                Add named peripheral muscles · preserve neural state
+                Add supported & tentative motor routes · preserve neural state
               </button>
             )}
             <div className="lab-table-scroll">
@@ -383,7 +527,7 @@ export function ModelControls({ onError }: { onError: (s: string) => void }) {
                   <tbody>
                     {mapping.unmapped
                       .filter((m) =>
-                        `${m.body_id} ${m.type ?? ""} ${m.body_region} ${m.reason.replaceAll("_", " ")}`
+                        `${m.body_id} ${m.type ?? ""} ${m.body_region} ${(m.reason ?? "").replaceAll("_", " ")}`
                           .toLowerCase()
                           .includes(motorQuery.toLowerCase()),
                       )
@@ -392,36 +536,16 @@ export function ModelControls({ onError }: { onError: (s: string) => void }) {
                           <td>{m.body_id}</td>
                           <td>{m.type ?? "Unidentified"}</td>
                           <td>{m.body_region}</td>
-                          <td>{m.reason.replaceAll("_", " ")}</td>
+                          <td>{(m.reason ?? "").replaceAll("_", " ")}</td>
                         </tr>
                       ))}
                   </tbody>
                 </table>
               </div>
             </details>
-            <details>
-              <summary>Inspect annotated muscle targets</summary>
-              <div className="lab-table-scroll">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Neuron ID</th>
-                      <th>Annotated target</th>
-                      <th>Model joint</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {mapping.mapping.map((m) => (
-                      <tr key={m.body_id}>
-                        <td>{m.body_id}</td>
-                        <td>{m.type}</td>
-                        <td>{m.joint}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </details>
+            <MotorEvidence
+              records={[...mapping.mapping, ...mapping.unmapped]}
+            />
             <button
               onClick={() =>
                 downloadJSON("malecns-muscle-mapping.json", mapping)
@@ -458,9 +582,9 @@ export function ModelControls({ onError }: { onError: (s: string) => void }) {
                       friction: "Ground friction",
                     }[key]
                   }
-                  <input
+                  <NumberInput
                     aria-label={key}
-                    type="number"
+
                     min="0.1"
                     max="3"
                     step="0.1"

@@ -1,3 +1,4 @@
+import NumberInput from "./NumberInput";
 import { useEffect, useState } from "react";
 import {
   ArrowRight,
@@ -78,9 +79,9 @@ export function Training({
         <label htmlFor="episodes">
           Training updates <span className="muted">32 trials per update</span>
         </label>
-        <input
+        <NumberInput
           id="episodes"
-          type="number"
+
           min="10"
           max="1000"
           value={episodes}
@@ -88,9 +89,9 @@ export function Training({
           onChange={(e) => setEpisodes(+e.target.value)}
         />
         <label htmlFor="seed">Random seed</label>
-        <input
+        <NumberInput
           id="seed"
-          type="number"
+
           min="0"
           max="2147483647"
           value={seed}

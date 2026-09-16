@@ -1,7 +1,16 @@
+import NumberInput from "./NumberInput";
+import { useViewState, oneOf } from "../lib/viewState";
 import Select from "./Select";
+import { createPortal } from "react-dom";
+import { Maximize2, X } from "lucide-react";
 import { CompoundEye } from "./CompoundEye";
-import { useEffect, useState } from "react";
-import type { Command, SensoryFrame, SensorySettings } from "../lib/types";
+import { useEffect, useState, useRef } from "react";
+import type {
+  Command,
+  SensoryFrame,
+  SensorySettings,
+  BodyPose,
+} from "../lib/types";
 
 function Signals({
   label,
@@ -45,11 +54,11 @@ export function Senses({
   controller: string;
 }) {
   const [draft, setDraft] = useState<SensorySettings>(frame.settings);
-  const [channel, setChannel] = useState("R1-R6");
-  const compound = frame.vision.model === "compound-retina-v1";
+  const compound = frame.vision.model.startsWith("compound-retina-");
+  const settingsKey = JSON.stringify(frame.settings);
   useEffect(() => {
     setDraft(frame.settings);
-  }, [frame.settings.vision_model]);
+  }, [settingsKey]);
   const update = <K extends keyof SensorySettings>(
     key: K,
     value: SensorySettings[K],
@@ -59,7 +68,7 @@ export function Senses({
     ["hearing_enabled", "Hearing"],
     ["wind_enabled", "Wind / gravity"],
     ["touch_enabled", "Touch"],
-    ["proprioception_enabled", "Joint position"],
+    ["proprioception_enabled", "Leg feedback"],
   ] as const;
   const controls = [
     ["illumination", "Light level", 0, 1, 0.1],
@@ -82,90 +91,24 @@ export function Senses({
     <section className="panel senses-panel">
       <div className="panel-heading">
         <div>
-          <h2>What the fly senses</h2>
+          <h2>Sensory inputs & environment</h2>
           <p>Live inputs at the current pose · {frame.time.toFixed(2)} s</p>
         </div>
-        <span className="model-tag">Experimental sensors</span>
+        <span className="model-tag">
+          {frame.settings.spatial_model === "geometry-v3"
+            ? "Spatial sensors v3 · experimental"
+            : "Legacy spatial sensors"}
+        </span>
       </div>
+      {frame.settings.spatial_model !== "geometry-v3" && (
+        <button
+          disabled={disabled}
+          onClick={() => void command("spatial_upgrade")}
+        >
+          Upgrade spatial sensors · preserve current state
+        </button>
+      )}
       <div className="senses-readout">
-        <div>
-          {compound && (
-            <label className="retina-channel">
-              Visible-band response{" "}
-              <Select
-                aria-label="Retinal response channel"
-                value={channel}
-                onChange={(value) => setChannel(value)}
-                options={[
-                  { value: "R1-R6", label: "R1–R6 · broad visible" },
-                  { value: "R8p", label: "R8p · blue proxy" },
-                  { value: "R8y", label: "R8y · green proxy" },
-                ]}
-              />
-            </label>
-          )}
-          {!compound && controller === "connectome" && (
-            <button
-              disabled={disabled}
-              onClick={() => command("vision_upgrade")}
-            >
-              Use compound eyes · preserve neural state
-            </button>
-          )}
-          <div className="eye-pair">
-            {compound
-              ? frame.vision.eyes.map((eye, side) => (
-                  <CompoundEye
-                    key={side}
-                    eye={eye}
-                    side={side}
-                    channel={channel}
-                  />
-                ))
-              : frame.vision.pixels.map((rows, eye) => (
-                  <figure key={eye}>
-                    <figcaption>
-                      {eye === 0 ? "Left" : "Right"} eye{" "}
-                      <span>
-                        {frame.settings.vision_enabled
-                          ? "16 × 8 samples"
-                          : "disabled"}
-                      </span>
-                    </figcaption>
-                    <svg
-                      viewBox={`0 0 ${frame.vision.width} ${frame.vision.height}`}
-                      role="img"
-                      aria-label={`${eye === 0 ? "Left" : "Right"} eye grayscale view`}
-                      shapeRendering="crispEdges"
-                    >
-                      {rows.flatMap((row, y) =>
-                        row.map((value, x) => (
-                          <rect
-                            key={`${x}-${y}`}
-                            x={x}
-                            y={y}
-                            width={1}
-                            height={1}
-                            fill={`rgb(${Math.round(value * 255)} ${Math.round(value * 255)} ${Math.round(value * 255)})`}
-                          />
-                        )),
-                      )}
-                    </svg>
-                    <small>
-                      Brightness {frame.vision.mean[eye].toFixed(2)}
-                    </small>
-                  </figure>
-                ))}
-          </div>
-          <p className="body-copy">
-            {frame.scene_id === "lab"
-              ? "Head-mounted rays sample the floor, grid and dark virtual cue (no cue collider)."
-              : "Head-mounted rays sample the same furniture, plants and surfaces used by collision physics."}{" "}
-            {compound
-              ? "Measured eye directions from Zhao et al. (2025); assumed head alignment and optical acceptance width. Dots show angular samples, not separate camera images. RGB materials provide visible-band proxies; UV, polarization and ocelli are not simulated."
-              : "Eye optics, color and self-occlusion are simplified."}
-          </p>
-        </div>
         <div className="sensory-meters">
           <Signals label="Odor" values={frame.odor} names={["L", "R"]} />
           <Signals
@@ -184,10 +127,21 @@ export function Senses({
             names={["LF", "LM", "LH", "RF", "RM", "RH"]}
           />
           <Signals
-            label="Joint position"
-            values={frame.proprioception}
+            label={frame.legs ? "Tibia extension" : "Joint position"}
+            values={
+              frame.legs ? frame.legs.signals.extended : frame.proprioception
+            }
             names={["LF", "LM", "LH", "RF", "RM", "RH"]}
           />
+          {frame.legs &&
+            ["extending", "flexing"].map((channel) => (
+              <Signals
+                key={channel}
+                label={`Tibia ${channel}`}
+                values={frame.legs!.signals[channel]}
+                names={["LF", "LM", "LH", "RF", "RM", "RH"]}
+              />
+            ))}
         </div>
       </div>
       <p className="body-copy">
@@ -199,7 +153,7 @@ export function Senses({
             ? "Sensors are observable here, but the posture baseline uses joint feedback rather than a neural controller."
             : "The synthetic circuit receives eye brightness and antennal signals through an engineering encoder. Joint feedback also supports its gait controller."}
       </p>
-      <details className="sense-settings">
+      <details className="sense-settings" open>
         <summary>Configure sensory environment</summary>
         <fieldset disabled={disabled}>
           <legend>Sensory channels</legend>
@@ -215,56 +169,83 @@ export function Senses({
               </label>
             ))}
           </div>
-          <div className="lab-form">
-            {controls.map(([key, label, min, max, step]) => (
-              <label key={key}>
-                {label}
-                <input
-                  aria-label={label}
-                  type="number"
-                  value={Number.isFinite(draft[key]) ? draft[key] : ""}
-                  min={min}
-                  max={max}
-                  step={step}
-                  onChange={(e) => update(key, e.target.valueAsNumber)}
-                />
-              </label>
+          <div className="sensory-form-groups">
+            {[
+              { title: "Lighting", fields: controls.slice(0, 1) },
+              { title: "Sound", fields: controls.slice(1, 3) },
+              { title: "Wind", fields: controls.slice(3, 5) },
+            ].map(({ title, fields }) => (
+              <div
+                className="sensory-form-group"
+                role="group"
+                aria-label={title}
+                key={title}
+              >
+                <h3>{title}</h3>
+                <div className="lab-form">
+                  {fields.map(([key, label, min, max, step]) => (
+                    <label key={key}>
+                      {label}
+                      <NumberInput
+                        aria-label={label}
+
+                        value={Number.isFinite(draft[key]) ? draft[key] : ""}
+                        min={min}
+                        max={max}
+                        step={step}
+                        onChange={(e) => update(key, e.target.valueAsNumber)}
+                      />
+                    </label>
+                  ))}
+                </div>
+              </div>
             ))}
-            {["X", "Y", "Height"].map((axis, i) => (
-              <label key={axis}>
-                Source {axis} (mm)
-                <input
-                  aria-label={`Source ${axis} (mm)`}
-                  type="number"
-                  value={
-                    Number.isFinite(draft.stimulus_position[i])
-                      ? draft.stimulus_position[i]
-                      : ""
-                  }
-                  min={i === 2 ? 0.7 : -10000}
-                  max={i === 2 ? 5000 : 10000}
-                  step={0.5}
-                  onChange={(e) => {
-                    const p = [...draft.stimulus_position] as [
-                      number,
-                      number,
-                      number,
-                    ];
-                    p[i] = e.target.valueAsNumber;
-                    update("stimulus_position", p);
-                  }}
-                />
-              </label>
-            ))}
+            <div
+              className="sensory-form-group"
+              role="group"
+              aria-label="Source position"
+            >
+              <h3>Source position</h3>
+              <div className="lab-form">
+                {["X", "Y", "Height"].map((axis, i) => (
+                  <label key={axis}>
+                    Source {axis} (mm)
+                    <NumberInput
+                      aria-label={`Source ${axis} (mm)`}
+
+                      value={
+                        Number.isFinite(draft.stimulus_position[i])
+                          ? draft.stimulus_position[i]
+                          : ""
+                      }
+                      min={i === 2 ? 0.7 : -10000}
+                      max={i === 2 ? 5000 : 10000}
+                      step={0.5}
+                      onChange={(e) => {
+                        const p = [...draft.stimulus_position] as [
+                          number,
+                          number,
+                          number,
+                        ];
+                        p[i] = e.target.valueAsNumber;
+                        update("stimulus_position", p);
+                      }}
+                    />
+                  </label>
+                ))}
+              </div>
+            </div>
           </div>
           <p className="body-copy">
             {frame.scene_id === "lab"
               ? "The dark cue also marks the virtual sound source."
               : "Source coordinates locate a virtual tone in this scene."}{" "}
             Sound uses an assumed frequency-tuned amplitude envelope; wind is an
-            antennal deflection proxy. Apply resets the experiment. Physical
-            training captures these settings; odor controls remain above the
-            arena.
+            antennal deflection proxy with assumed directional tuning. Spatial
+            v3 samples odor in 3D, includes local receptor velocity in airflow,
+            and distinguishes inversion from upright. Apply resets the
+            experiment. Physical training captures these settings; odor controls
+            are in the workbench settings.
           </p>
           <button
             disabled={!valid}
@@ -275,5 +256,150 @@ export function Senses({
         </fieldset>
       </details>
     </section>
+  );
+}
+
+export function VisionReadout({
+  frame,
+  command,
+  disabled,
+  controller,
+}: {
+  bodies: BodyPose[];
+  frame: SensoryFrame;
+  command: Command;
+  disabled: boolean;
+  controller: string;
+}) {
+  const [expanded, setExpanded] = useViewState("vision.expanded", false);
+  const dialog = useRef<HTMLDialogElement>(null);
+  useEffect(() => {
+    if (expanded) dialog.current?.showModal();
+  }, [expanded]);
+  const [channel, setChannel] = useViewState(
+    "vision.channel",
+    "R1-R6",
+    oneOf(["R1-R6", "R8p", "R8y"]),
+  );
+  const compound = frame.vision.model.startsWith("compound-retina-");
+  const content = (
+    <section className="panel vision-overview" aria-label="Compound eye vision">
+      <div className="vision-heading">
+        <div className="vision-title">
+          <h2>Vision</h2>
+          <p>
+            {frame.settings.vision_enabled
+              ? "Live retinal input"
+              : "Vision disabled · zero input"}{" "}
+            · {frame.time.toFixed(2)} s
+          </p>
+        </div>
+        <div className="vision-controls">
+          {compound && (
+            <label className="retina-channel">
+              Response channel
+              <Select
+                aria-label="Retinal response channel"
+                value={channel}
+                onChange={setChannel}
+                options={[
+                  { value: "R1-R6", label: "R1–R6 · broad visible" },
+                  { value: "R8p", label: "R8p · blue proxy" },
+                  { value: "R8y", label: "R8y · green proxy" },
+                ]}
+              />
+            </label>
+          )}
+          <button
+            className="vision-expand"
+            aria-label={expanded ? "Close enlarged vision" : "Enlarge vision"}
+            onClick={() => setExpanded(!expanded)}
+          >
+            {expanded ? <X size={16} /> : <Maximize2 size={16} />}
+          </button>
+        </div>
+      </div>
+      <div className="vision-content">
+        {!compound && controller === "connectome" && (
+          <button disabled={disabled} onClick={() => command("vision_upgrade")}>
+            Use compound eyes · preserve neural state
+          </button>
+        )}
+        <div className="eye-pair">
+          {compound
+            ? frame.vision.eyes.map((eye, side) => (
+                <CompoundEye
+                  key={side}
+                  eye={eye}
+                  side={side}
+                  channel={channel}
+                  model={frame.vision.model}
+                />
+              ))
+            : frame.vision.pixels.map((rows, eye) => (
+                <figure key={eye}>
+                  <figcaption>
+                    {eye === 0 ? "Left" : "Right"} eye{" "}
+                    <span>
+                      {frame.settings.vision_enabled
+                        ? "16 × 8 samples"
+                        : "disabled"}
+                    </span>
+                  </figcaption>
+                  <svg
+                    viewBox={`0 0 ${frame.vision.width} ${frame.vision.height}`}
+                    role="img"
+                    aria-label={`${eye === 0 ? "Left" : "Right"} eye grayscale view`}
+                    shapeRendering="crispEdges"
+                  >
+                    {rows.flatMap((row, y) =>
+                      row.map((value, x) => (
+                        <rect
+                          key={`${x}-${y}`}
+                          x={x}
+                          y={y}
+                          width={1}
+                          height={1}
+                          fill={`rgb(${Math.round(value * 255)} ${Math.round(value * 255)} ${Math.round(value * 255)})`}
+                        />
+                      )),
+                    )}
+                  </svg>
+                  <small>Brightness {frame.vision.mean[eye].toFixed(2)}</small>
+                </figure>
+              ))}
+        </div>
+      </div>
+      <details className="vision-notes">
+        <summary>Optics & assumptions</summary>
+        <p className="body-copy">
+          {frame.vision.optics}{" "}
+          {compound &&
+            "Brightness shows the live input, arranged on the curved eye surface. The nine display points are spread around their shared sampling origin for inspection. Ocelli are not simulated."}
+        </p>
+      </details>
+    </section>
+  );
+  return expanded ? (
+    <>
+      <section className="panel vision-placeholder">
+        <h2>Vision</h2>
+        <p>Compound eyes open in enlarged view.</p>
+      </section>
+      {createPortal(
+        <dialog
+          className="vision-dialog"
+          ref={dialog}
+          aria-label="Enlarged compound eyes"
+          onCancel={() => setExpanded(false)}
+          onClose={() => setExpanded(false)}
+        >
+          {content}
+        </dialog>,
+        document.body,
+      )}
+    </>
+  ) : (
+    content
   );
 }

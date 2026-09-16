@@ -1,3 +1,4 @@
+import NumberInput from "./NumberInput";
 import Select from "./Select";
 import { useCallback, useEffect, useState } from "react";
 import { Play, Square, Download, Activity } from "lucide-react";
@@ -147,9 +148,9 @@ export function PhysicalLab({
         </label>
         <label>
           Generations
-          <input
+          <NumberInput
             aria-label="Physical generations"
-            type="number"
+
             min="1"
             max="100"
             value={generations}
@@ -159,9 +160,9 @@ export function PhysicalLab({
         </label>
         <label>
           Steps per rollout
-          <input
+          <NumberInput
             aria-label="Physical horizon"
-            type="number"
+
             min="5"
             max="500"
             value={horizon}

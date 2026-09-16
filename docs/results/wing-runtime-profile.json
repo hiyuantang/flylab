@@ -1,0 +1,116 @@
+{
+  "platform": "macOS-27.0-arm64-arm-64bit",
+  "model": {
+    "version": "wing-fluid-rig-v2",
+    "settings": {
+      "air_density": 1.225e-06,
+      "air_viscosity": 1.81e-05,
+      "wind": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "timestep": 5e-05,
+      "fluid_coefficients": [
+        1.0,
+        0.5,
+        1.5,
+        1.7,
+        1.0
+      ],
+      "servo_stiffness": 100.0,
+      "servo_damping": 0.01,
+      "torque_limit": 30.0,
+      "tethered": true,
+      "initial_height": 10.0,
+      "stroke_plane_pitch": 0.07913470832840196
+    },
+    "mujoco": "3.13.0",
+    "units": "mm, g, s; microNewtons; microNewton-mm; microWatts",
+    "controller": "Bounded engineering wing servos, not asynchronous muscles",
+    "fluid": "Native MuJoCo ellipsoid wings + inertia-based body drag; no resolved wake or flexible wings",
+    "body_count": 85,
+    "muscle_count": 196
+  },
+  "dofs": 104,
+  "simulated_seconds": 0.08,
+  "physics_steps": 1600,
+  "wall_seconds": 1.519377749999876,
+  "timers": {
+    "step": {
+      "seconds": 1.3548880639973504,
+      "calls": 1600
+    },
+    "forward": {
+      "seconds": 0.3266415570146784,
+      "calls": 1615
+    },
+    "position": {
+      "seconds": 0.176781521005344,
+      "calls": 1615
+    },
+    "velocity": {
+      "seconds": 0.02990680200840025,
+      "calls": 1615
+    },
+    "actuation": {
+      "seconds": 0.010815761996531684,
+      "calls": 1615
+    },
+    "constraint": {
+      "seconds": 0.10428650001401256,
+      "calls": 1615
+    },
+    "advance": {
+      "seconds": 1.0313336960034576,
+      "calls": 1600
+    },
+    "pos_kinematics": {
+      "seconds": 0.016716345014634676,
+      "calls": 1615
+    },
+    "pos_inertia": {
+      "seconds": 0.011568630995602569,
+      "calls": 1615
+    },
+    "pos_collision": {
+      "seconds": 0.12583231700796804,
+      "calls": 1615
+    },
+    "pos_make": {
+      "seconds": 0.00810103200453026,
+      "calls": 1615
+    },
+    "pos_project": {
+      "seconds": 0.012553391000167946,
+      "calls": 1615
+    },
+    "col_broadphase": {
+      "seconds": 0.03117900000769662,
+      "calls": 1615
+    },
+    "col_narrowphase": {
+      "seconds": 0.09383948301121545,
+      "calls": 1615
+    }
+  },
+  "means": {
+    "mean_force_uN": [
+      -0.0006476834228590799,
+      -7.288116525409029e-05,
+      10.380880113935884
+    ],
+    "mean_torque_uN_mm": [
+      -0.025762704171333865,
+      0.0032988200692601875,
+      -3.7955531592010874e-05
+    ],
+    "mean_servo_power_uW": 60.273494781493895,
+    "averaging_interval_s": [
+      0.03999999999999935,
+      0.07999999999999935
+    ],
+    "averaging_cycles": 11
+  },
+  "interpretation": "Timers are nested and must not be summed. Includes Python timer callback overhead. Advance is the native integration stage, including velocity-dependent force derivatives and solve."
+}
